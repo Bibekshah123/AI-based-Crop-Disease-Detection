@@ -1,0 +1,72 @@
+{
+  "Apple Black rot": {
+    "cause": "Fungal disease caused by Botryosphaeria obtusa.",
+    "symptoms": "Brown leaf spots with purple borders and rotting fruit.",
+    "treatment": "Remove infected leaves and consult an agricultural officer before applying fungicide.",
+    "prevention": "Prune trees properly and maintain orchard hygiene.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Apple healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Corn Common rust": {
+    "cause": "Fungal disease caused by Puccinia sorghi.",
+    "symptoms": "Small reddish-brown spots on leaves.",
+    "treatment": "Remove infected leaves and consult an expert before using fungicide.",
+    "prevention": "Use resistant varieties and rotate crops.",
+    "disclaimer": "Consult an agricultural expert before treatment."
+  },
+  "Corn Northern Leaf Blight": {
+    "cause": "Fungal disease caused by Exserohilum turcicum.",
+    "symptoms": "Long grayish-green spots on leaves.",
+    "treatment": "Remove infected leaves and consult an expert.",
+    "prevention": "Use resistant varieties and crop rotation.",
+    "disclaimer": "Consult an agricultural expert before treatment."
+  },
+  "Potato Early blight": {
+    "cause": "Fungal disease caused by Alternaria solani.",
+    "symptoms": "Brown circular spots with concentric rings.",
+    "treatment": "Remove infected leaves and consult an officer before applying fungicide.",
+    "prevention": "Rotate crops and maintain field hygiene.",
+    "disclaimer": "Consult an agricultural expert before treatment."
+  },
+  "Potato Late blight": {
+    "cause": "Fungal-like disease caused by Phytophthora infestans.",
+    "symptoms": "Dark brown spots on leaves and stems.",
+    "treatment": "Remove infected leaves and consult an officer before applying fungicide.",
+    "prevention": "Avoid excess moisture and improve air circulation.",
+    "disclaimer": "Consult an agricultural expert before treatment."
+  },
+  "Potato healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Tomato Early blight": {
+    "cause": "Fungal disease caused by Alternaria solani.",
+    "symptoms": "Brown spots with concentric rings on lower leaves.",
+    "treatment": "Remove infected leaves and consult an expert before applying fungicide.",
+    "prevention": "Avoid overhead irrigation and rotate crops.",
+    "disclaimer": "Consult an agricultural expert before treatment."
+  },
+  "Tomato Late blight": {
+    "cause": "Fungal-like disease caused by Phytophthora infestans.",
+    "symptoms": "Large dark lesions on leaves and stems.",
+    "treatment": "Remove infected leaves and consult an expert before applying fungicide.",
+    "prevention": "Improve spacing and avoid wet foliage.",
+    "disclaimer": "Consult an agricultural expert before treatment."
+  },
+  "Tomato healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  }
+}
