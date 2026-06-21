@@ -1,9 +1,23 @@
 {
+  "Apple Apple scab": {
+    "cause": "Fungal disease caused by Venturia inaequalis.",
+    "symptoms": "Olive-green to brown spots on leaves, leaves may curl and drop prematurely.",
+    "treatment": "Remove infected leaves and apply appropriate fungicide. Consult an agricultural expert.",
+    "prevention": "Plant resistant varieties and apply dormant sprays in early spring.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
   "Apple Black rot": {
     "cause": "Fungal disease caused by Botryosphaeria obtusa.",
     "symptoms": "Brown leaf spots with purple borders and rotting fruit.",
     "treatment": "Remove infected leaves and consult an agricultural officer before applying fungicide.",
     "prevention": "Prune trees properly and maintain orchard hygiene.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Apple Cedar apple rust": {
+    "cause": "Fungal disease caused by Gymnosporangium juniperi-virginianae.",
+    "symptoms": "Bright yellow-orange spots on leaves, forming cup-like structures.",
+    "treatment": "Remove infected leaves and apply fungicide. Consult an agricultural expert.",
+    "prevention": "Avoid planting near juniper trees and use resistant varieties.",
     "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
   },
   "Apple healthy": {
@@ -13,19 +27,124 @@
     "prevention": "Continue regular monitoring.",
     "disclaimer": "AI result should be verified if symptoms appear later."
   },
-  "Corn Common rust": {
+  "Blueberry healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring and maintain proper soil pH (4.5-5.5).",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Cherry (including sour) Powdery mildew": {
+    "cause": "Fungal disease caused by Podosphaera clandestina.",
+    "symptoms": "White powdery coating on leaves, stunted growth and leaf distortion.",
+    "treatment": "Apply fungicide and remove infected plant parts. Consult an agricultural expert.",
+    "prevention": "Ensure good air circulation and avoid overhead irrigation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Cherry (including sour) healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Coffee Rust": {
+    "cause": "Fungal disease caused by Hemileia vastatrix.",
+    "symptoms": "Yellow-orange powdery spots on the underside of leaves leading to defoliation.",
+    "treatment": "Apply fungicides and remove severely infected leaves. Consult an agricultural expert.",
+    "prevention": "Plant resistant varieties and maintain proper shade management.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Corn (maize) Cercospora leaf spot Gray leaf spot": {
+    "cause": "Fungal disease caused by Cercospora zeae-maydis.",
+    "symptoms": "Rectangular gray to tan lesions on leaves, reducing photosynthetic area.",
+    "treatment": "Apply fungicide at early symptom stage. Consult an agricultural expert.",
+    "prevention": "Use resistant hybrids and practice crop rotation with non-host crops.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Corn (maize) Common rust": {
     "cause": "Fungal disease caused by Puccinia sorghi.",
     "symptoms": "Small reddish-brown spots on leaves.",
     "treatment": "Remove infected leaves and consult an expert before using fungicide.",
     "prevention": "Use resistant varieties and rotate crops.",
     "disclaimer": "Consult an agricultural expert before treatment."
   },
-  "Corn Northern Leaf Blight": {
+  "Corn (maize) Northern Leaf Blight": {
     "cause": "Fungal disease caused by Exserohilum turcicum.",
     "symptoms": "Long grayish-green spots on leaves.",
     "treatment": "Remove infected leaves and consult an expert.",
     "prevention": "Use resistant varieties and crop rotation.",
     "disclaimer": "Consult an agricultural expert before treatment."
+  },
+  "Corn (maize) healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Grape Black rot": {
+    "cause": "Fungal disease caused by Guignardia bidwellii.",
+    "symptoms": "Circular brown spots on leaves with black margins, fruit rot.",
+    "treatment": "Remove infected plant parts and apply fungicide. Consult an agricultural expert.",
+    "prevention": "Prune for air circulation and apply preventive fungicides during wet weather.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Grape Esca (Black Measles)": {
+    "cause": "Fungal disease complex caused by Phaeomoniella chlamydospora and others.",
+    "symptoms": "Reddish-brown leaf spots with dark margins, streaking on stems.",
+    "treatment": "No effective cure. Remove infected vines and replant. Consult an agricultural expert.",
+    "prevention": "Use certified disease-free planting material and avoid wounding vines.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Grape Leaf blight (Isariopsis Leaf Spot)": {
+    "cause": "Fungal disease caused by Isariopsis clavispora.",
+    "symptoms": "Irregular brown spots on leaves that may merge causing leaf blight.",
+    "treatment": "Apply fungicide and remove infected leaves. Consult an agricultural expert.",
+    "prevention": "Ensure good air circulation and practice proper vineyard sanitation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Grape healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Orange Haunglongbing (Citrus greening)": {
+    "cause": "Bacterial disease caused by Candidatus Liberibacter spp., spread by psyllids.",
+    "symptoms": "Yellow mottling on leaves, misshapen bitter fruit, premature fruit drop.",
+    "treatment": "No cure. Remove infected trees immediately to prevent spread. Consult an agricultural expert.",
+    "prevention": "Control psyllid populations with insecticides and use certified disease-free seedlings.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Peach Bacterial spot": {
+    "cause": "Bacterial disease caused by Xanthomonas arboricola pv. pruni.",
+    "symptoms": "Dark water-soaked spots on leaves that turn purple-black, fruit lesions.",
+    "treatment": "Apply copper-based bactericides. Consult an agricultural expert.",
+    "prevention": "Plant resistant varieties and avoid overhead irrigation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Peach healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Pepper, bell Bacterial spot": {
+    "cause": "Bacterial disease caused by Xanthomonas campestris pv. vesicatoria.",
+    "symptoms": "Water-soaked spots on leaves that turn brown with yellow halos.",
+    "treatment": "Remove infected plants and apply copper-based sprays. Consult an agricultural expert.",
+    "prevention": "Use disease-free seeds and practice crop rotation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Pepper, bell healthy": {
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
   },
   "Potato Early blight": {
     "cause": "Fungal disease caused by Alternaria solani.",
@@ -42,27 +161,6 @@
     "disclaimer": "Consult an agricultural expert before treatment."
   },
   "Potato healthy": {
-    "cause": "No visible disease detected.",
-    "symptoms": "Leaf appears healthy.",
-    "treatment": "No treatment required.",
-    "prevention": "Continue regular monitoring.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
-  },
-  "Tomato Early blight": {
-    "cause": "Fungal disease caused by Alternaria solani.",
-    "symptoms": "Brown spots with concentric rings on lower leaves.",
-    "treatment": "Remove infected leaves and consult an expert before applying fungicide.",
-    "prevention": "Avoid overhead irrigation and rotate crops.",
-    "disclaimer": "Consult an agricultural expert before treatment."
-  },
-  "Tomato Late blight": {
-    "cause": "Fungal-like disease caused by Phytophthora infestans.",
-    "symptoms": "Large dark lesions on leaves and stems.",
-    "treatment": "Remove infected leaves and consult an expert before applying fungicide.",
-    "prevention": "Improve spacing and avoid wet foliage.",
-    "disclaimer": "Consult an agricultural expert before treatment."
-  },
-  "Tomato healthy": {
     "cause": "No visible disease detected.",
     "symptoms": "Leaf appears healthy.",
     "treatment": "No treatment required.",
