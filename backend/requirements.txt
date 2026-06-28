@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+python-multipart
+tensorflow
+numpy
+pillow
+opencv-python
+python-jose[cryptography]
+bcrypt
+python-dotenv
+pydantic
+psycopg2-binary

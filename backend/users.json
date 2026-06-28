@@ -1,0 +1,12 @@
+{
+  "bibek": {
+    "email": "bibek@gmail.com",
+    "password": "$2b$12$t0tNfzAxNARm01WQwEwTaOpJG9aYMqsvr3EDKT031gU4djGx3o4vK",
+    "created_at": "2026-06-25T05:06:11.919993"
+  },
+  "test": {
+    "email": "t@t.com",
+    "password": "$2b$12$eM7QX0ncmDsIaUI/k3lspegW4AGJPjg/N7i.r9eXwS5sEBH8XPWhO",
+    "created_at": "2026-06-26T06:42:48.341761"
+  }
+}
