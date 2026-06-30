@@ -59,7 +59,7 @@ def load_crop_model(model_path, class_names):
     outputs = tf.keras.layers.Dense(num_classes, activation="softmax", name="dense_output")(x)
 
     model = tf.keras.Model(inputs, outputs)
-    model.load_weights("updated-model/model.weights.h5")
+    model.load_weights(os.path.join(model_path, "model.weights.h5"))
     
     return model
 
@@ -349,6 +349,23 @@ def health_check():
     }
 
 
+def _to_native(obj):
+    """Recursively convert numpy types to native Python for JSON serialization."""
+    if isinstance(obj, (np.bool_,)):
+        return bool(obj)
+    if isinstance(obj, (np.integer,)):
+        return int(obj)
+    if isinstance(obj, (np.floating,)):
+        return float(obj)
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    if isinstance(obj, dict):
+        return {k: _to_native(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_to_native(v) for v in obj]
+    return obj
+
+
 @app.post("/predict")
 async def predict(
     file: UploadFile = File(...),
@@ -380,10 +397,11 @@ async def predict(
             "disclaimer": "AI result should be verified if symptoms appear later.",
             "gradcam_image": None
         }
+        result = _to_native(result)
         db_save_prediction(username, result, thumbnail)
         return result
 
-    predictions = model.predict(img_array)[0]
+    predictions = model.predict(img_array, verbose=0)[0]
 
     top_index = int(np.argmax(predictions))
 
@@ -414,9 +432,9 @@ async def predict(
     entropy = -np.sum(probs * np.log(probs)) / np.log(len(probs))
 
     is_unknown_input = (
-        confidence < 0.50
-        or (confidence < 0.65 and confidence_margin < 10)
-        or (entropy > 0.85)
+        confidence < 0.30
+        or (confidence < 0.50 and confidence_margin < 5)
+        or (entropy > 0.90)
     )
 
     if is_unknown_input:
@@ -498,5 +516,6 @@ async def predict(
         ),
         "gradcam_image": gradcam_image
     }
+    result = _to_native(result)
     db_save_prediction(username, result, thumbnail)
     return result

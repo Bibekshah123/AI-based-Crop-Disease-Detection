@@ -1,5 +1,6 @@
 import os
 import json
+import numpy as np
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from datetime import datetime
@@ -97,6 +98,18 @@ def get_all_users():
         conn.close()
 
 
+def _to_native(v):
+    """Convert numpy types to native Python types for psycopg2 compatibility."""
+    if isinstance(v, (np.bool_,)):
+        return bool(v)
+    if isinstance(v, (np.integer,)):
+        return int(v)
+    if isinstance(v, (np.floating,)):
+        return float(v)
+    if isinstance(v, np.ndarray):
+        return v.tolist()
+    return v
+
 def save_prediction(username, data, thumbnail_b64):
     conn = get_conn()
     try:
@@ -109,24 +122,24 @@ def save_prediction(username, data, thumbnail_b64):
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, (
             username,
-            data["disease"],
-            data.get("disease_np", data["disease"]),
-            data["confidence"],
-            data.get("crop_type", ""),
-            data["is_unknown"],
-            data["not_leaf"],
-            data["message"],
-            data.get("cause", ""),
-            data.get("cause_np", ""),
-            data.get("symptoms", ""),
-            data.get("symptoms_np", ""),
-            data.get("treatment", ""),
-            data.get("treatment_np", ""),
-            data.get("prevention", ""),
-            data.get("prevention_np", ""),
-            json.dumps(data.get("top_5_predictions", [])),
-            data.get("gradcam_image", ""),
-            thumbnail_b64,
+            _to_native(data["disease"]),
+            _to_native(data.get("disease_np", data["disease"])),
+            _to_native(data["confidence"]),
+            _to_native(data.get("crop_type", "")),
+            _to_native(data["is_unknown"]),
+            _to_native(data["not_leaf"]),
+            _to_native(data["message"]),
+            _to_native(data.get("cause", "")),
+            _to_native(data.get("cause_np", "")),
+            _to_native(data.get("symptoms", "")),
+            _to_native(data.get("symptoms_np", "")),
+            _to_native(data.get("treatment", "")),
+            _to_native(data.get("treatment_np", "")),
+            _to_native(data.get("prevention", "")),
+            _to_native(data.get("prevention_np", "")),
+            _to_native(json.dumps(data.get("top_5_predictions", []))),
+            _to_native(data.get("gradcam_image", "")),
+            _to_native(thumbnail_b64),
         ))
         conn.commit()
     finally:
