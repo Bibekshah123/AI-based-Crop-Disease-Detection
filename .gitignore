@@ -221,6 +221,7 @@ __marimo__/
 /Dataset
 /Dataset.zip
 /Dataset-1.zip
+/FYP-dataset-updated.zip
 
 # Large model files (>100MB) — download via script
 backend/updated-model/model.weights.h5
