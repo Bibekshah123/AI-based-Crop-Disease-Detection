@@ -404,11 +404,20 @@ async def predict(
 
     confidence = float(predictions[top_index])
 
-    # Unknown detection: low confidence + small margin between top predictions
+    # Unknown detection: low confidence + margin + entropy
     sorted_preds = np.sort(predictions)[::-1]
     top1, top2 = float(sorted_preds[0]), float(sorted_preds[1]) if len(sorted_preds) > 1 else 0
     confidence_margin = (top1 - top2) * 100
-    is_unknown_input = confidence < 0.50 or (confidence < 0.65 and confidence_margin < 10)
+
+    # Normalized entropy: 0 = model is certain, 1 = model is guessing uniformly
+    probs = np.clip(predictions, 1e-12, 1.0)
+    entropy = -np.sum(probs * np.log(probs)) / np.log(len(probs))
+
+    is_unknown_input = (
+        confidence < 0.50
+        or (confidence < 0.65 and confidence_margin < 10)
+        or (entropy > 0.85)
+    )
 
     if is_unknown_input:
         raw_class = "Unknown___Unknown"
@@ -470,6 +479,7 @@ async def predict(
         "is_unknown": is_unknown_input,
         "not_leaf": False,
         "confidence": confidence_pct,
+        "entropy": round(float(entropy), 4),
         "low_confidence": low_confidence,
         "message": message,
         "top_5_predictions": top_5_predictions,

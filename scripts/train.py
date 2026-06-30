@@ -16,7 +16,7 @@ from tensorflow.keras.optimizers.schedules import CosineDecay
 random.seed(42)
 tf.random.set_seed(42)
 
-DATASET_DIR = "Dataset"
+DATASET_DIR = "FYP-dataset-updated"
 OUTPUT_DIR = "backend"
 MODEL_WEIGHTS_DIR = os.path.join(OUTPUT_DIR, "fyp_efficientnet_b3_model")
 IMG_SIZE = (300, 300)
