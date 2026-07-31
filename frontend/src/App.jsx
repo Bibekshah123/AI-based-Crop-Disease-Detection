@@ -1,24 +1,25 @@
 import { useState, useRef, useCallback } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AuthProvider, useAuth } from "./AuthContext";
-import Login from "./Login";
-import Signup from "./Signup";
+// import { AuthProvider, useAuth } from "./AuthContext";  // auth commented out
+// import Login from "./Login";  // auth commented out
+// import Signup from "./Signup";  // auth commented out
 import History from "./History";
 import "./App.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "";
 
 const CROPS = [
-  { id: "Apple", label: "Apple", label_np: "स्याउ", color: "#dc2626" },
-  { id: "Banana", label: "Banana", label_np: "केरा", color: "#eab308" },
-  { id: "Citrus", label: "Citrus", label_np: "अन्जिर", color: "#f97316" },
-  { id: "Coffee", label: "Coffee", label_np: "कफी", color: "#78350f" },
-  { id: "Corn", label: "Corn", label_np: "मकै", color: "#a16207" },
-  { id: "Mango", label: "Mango", label_np: "आँप", color: "#f59e0b" },
-  { id: "Potato", label: "Potato", label_np: "आलु", color: "#92400e" },
-  { id: "Rice", label: "Rice", label_np: "धान", color: "#65a30d" },
-  { id: "Tomato", label: "Tomato", label_np: "टमाटर", color: "#ef4444" },
+  { id: "Apple", label: "Apple", color: "#dc2626" },
+  { id: "Banana", label: "Banana", color: "#eab308" },
+  { id: "Citrus", label: "Citrus", color: "#f97316" },
+  { id: "Cucumber", label: "Cucumber", color: "#16a34a" },
+  { id: "Grape", label: "Grape", color: "#7c3aed" },
+  { id: "Maize", label: "Maize", color: "#a16207" },
+  { id: "Mango", label: "Mango", color: "#f59e0b" },
+  { id: "Potato", label: "Potato", color: "#92400e" },
+  { id: "Rice", label: "Rice", color: "#65a30d" },
+  { id: "Tomato", label: "Tomato", color: "#ef4444" },
 ];
 
 const TEXTS = {
@@ -48,42 +49,10 @@ const TEXTS = {
     gradcam_hint: "Red areas show where the model focused",
     not_leaf: "Please upload a clear leaf image. The uploaded image does not appear to be a crop leaf.",
     remove: "Remove image",
-    np: "नेपाली",
-    en: "English",
     logout: "Logout",
     history: "History",
   },
-  np: {
-    hero_badge: "एआई-संचालित विश्लेषण",
-    hero_title_top: "क्रप रोग पत्ता लगाउने",
-    upload_title: "तस्वीर अपलोड गर्नुहोस्",
-    select_crop: "बाली चयन गर्नुहोस्",
-    upload_label: "पातको तस्वीर अपलोड गर्नुहोस्",
-    drop_title: "तस्वीर यहाँ छोड्नुहोस् वा क्लिक गर्नुहोस्",
-    drop_hint: "JPG, PNG, WEBP समर्थन गर्दछ",
-    detect: "रोग पत्ता लगाउनुहोस्",
-    analyzing: "विश्लेषण गर्दै...",
-    no_analysis_title: "कुनै विश्लेषण छैन",
-    no_analysis_text: "पातको तस्वीर अपलोड गर्नुहोस् र बाली चयन गर्नुहोस्।",
-    processing: "तस्वीर प्रशोधन गर्दै...",
-    high_confidence: "उच्च विश्वास",
-    medium_confidence: "मध्यम विश्वास",
-    low_confidence: "कम विश्वास",
-    confidence: "विश्वास स्तर",
-    cause: "कारण",
-    symptoms: "लक्षणहरू",
-    treatment: "उपचार",
-    prevention: "रोकथाम",
-    top_predictions: "शीर्ष अनुमानहरू",
-    gradcam_title: "ग्र्याड-क्याम हिटम्याप",
-    gradcam_hint: "रातो रङले मोडेलले ध्यान दिएको क्षेत्र देखाउँछ",
-    not_leaf: "कृपया स्पष्ट पातको तस्वीर अपलोड गर्नुहोस्। यो तस्वीर बालीको पात जस्तो देखिँदैन।",
-    remove: "तस्वीर हटाउनुहोस्",
-    np: "नेपाली",
-    en: "English",
-    logout: "लग आउट",
-    history: "इतिहास",
-  },
+  // np: { ... },  // Nepali — commented out for now
 };
 
 const CONFIDENCE_COLORS = {
@@ -106,19 +75,12 @@ function MainApp() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
-  const [lang, setLang] = useState(() => {
-    const saved = localStorage.getItem("lang");
-    return saved === "np" ? "np" : "en";
-  });
+  const [lang] = useState("en");  // Nepali commented out: const [lang, setLang] = useState("en");
   const fileInputRef = useRef(null);
-  const { user, logout } = useAuth();
+  // const { user, logout } = useAuth();  // auth commented out
   const t = TEXTS[lang];
 
-  const toggleLang = () => {
-    const next = lang === "en" ? "np" : "en";
-    setLang(next);
-    localStorage.setItem("lang", next);
-  };
+  // const toggleLang = () => { ... };  // Nepali commented out
 
   const handleFile = useCallback((selected) => {
     if (!selected) return;
@@ -160,12 +122,7 @@ function MainApp() {
       });
       setResult(response.data);
     } catch (error) {
-      if (error.response?.status === 401) {
-        logout();
-        navigate("/login");
-      } else {
-        alert("Prediction failed.");
-      }
+      alert("Prediction failed.");
     } finally {
       setLoading(false);
     }
@@ -176,8 +133,8 @@ function MainApp() {
   const colors = CONFIDENCE_COLORS[level];
 
   const np = (key, fallback) => {
-    if (lang !== "np") return null;
-    return result?.[key] || fallback || null;
+    // Nepali commented out — always return English
+    return null;
   };
 
   return (
@@ -186,12 +143,9 @@ function MainApp() {
         <span className="hero-badge">{t.hero_badge}</span>
         <h1 className="hero-title">{t.hero_title_top}</h1>
         <div className="hero-top">
-          <span className="hero-username">{user?.username}</span>
           <button className="history-btn" onClick={() => navigate("/history")}>{t.history}</button>
-          <button className="lang-toggle" onClick={toggleLang}>
-            {lang === "en" ? "नेपाली" : "English"}
-          </button>
-          <button className="logout-btn" onClick={logout}>{t.logout}</button>
+          {/* <button className="lang-toggle" onClick={toggleLang}>{lang === "en" ? "नेपाली" : "English"}</button> */}
+          {/* <button className="logout-btn" onClick={logout}>{t.logout}</button>  auth commented out */}
         </div>
       </section>
 
@@ -213,7 +167,7 @@ function MainApp() {
                       }}
                       onClick={() => setCropType(crop.id)}
                     >
-                      <span className="crop-name">{lang === "np" ? crop.label_np : crop.label}</span>
+                      <span className="crop-name">{crop.label}</span>
                     </button>
                   ))}
                 </div>
@@ -376,7 +330,7 @@ function MainApp() {
                         {result.top_5_predictions?.map((item, i) => (
                           <div key={i} className="prediction-row">
                             <span className="prediction-rank">#{i + 1}</span>
-                            <span className="prediction-name">{lang === "np" ? (item.disease_np || item.disease) : item.disease}</span>
+                            <span className="prediction-name">{item.disease}</span>
                             <div className="prediction-bar-track">
                               <div className="prediction-bar-fill" style={{ width: `${item.confidence}%` }} />
                             </div>
@@ -413,40 +367,35 @@ function MainApp() {
   );
 }
 
-function AppInner() {
-  const { user, loading } = useAuth();
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  // Redirect auth pages away when logged in
-  const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
-
-  if (loading) {
-    return <div className="auth-loading">Loading...</div>;
-  }
-
-  if (!user && isAuthPage) {
-    if (location.pathname === "/signup") return <Signup onSwitch={() => navigate("/login")} />;
-    return <Login onSwitch={() => navigate("/signup")} />;
-  }
-
-  if (!user) {
-    return <Login onSwitch={() => navigate("/signup")} />;
-  }
-
-  return (
-    <Routes>
-      <Route path="/" element={<MainApp />} />
-      <Route path="/history" element={<History />} />
-      <Route path="*" element={<MainApp />} />
-    </Routes>
-  );
-}
+// Auth commented out — bypass login screen
+// function AppInner() {
+//   const { user, loading } = useAuth();
+//   const location = useLocation();
+//   const navigate = useNavigate();
+//   const isAuthPage = location.pathname === "/login" || location.pathname === "/signup";
+//   if (loading) return <div className="auth-loading">Loading...</div>;
+//   if (!user && isAuthPage) {
+//     if (location.pathname === "/signup") return <Signup onSwitch={() => navigate("/login")} />;
+//     return <Login onSwitch={() => navigate("/signup")} />;
+//   }
+//   if (!user) return <Login onSwitch={() => navigate("/signup")} />;
+//   return (
+//     <Routes>
+//       <Route path="/" element={<MainApp />} />
+//       <Route path="/history" element={<History />} />
+//       <Route path="*" element={<MainApp />} />
+//     </Routes>
+//   );
+// }
 
 export default function App() {
   return (
-    <AuthProvider>
-      <AppInner />
-    </AuthProvider>
+    // <AuthProvider>  // auth commented out
+      <Routes>
+        <Route path="/" element={<MainApp />} />
+        <Route path="/history" element={<History />} />
+        <Route path="*" element={<MainApp />} />
+      </Routes>
+    // </AuthProvider>
   );
 }

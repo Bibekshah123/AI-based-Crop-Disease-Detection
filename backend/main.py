@@ -4,6 +4,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from PIL import Image
 import tensorflow as tf
+from tensorflow.keras.applications import EfficientNetB2
 import numpy as np
 import json
 import io
@@ -17,10 +18,10 @@ from db import init_db, save_prediction as db_save_prediction, load_history, del
 # ============================
 # Configuration
 # ============================
-MODEL_PATH = "updated-model"
+MODEL_PATH = "best_model"
 CLASS_NAMES_PATH = "class_names.json"
 DISEASE_INFO_PATH = "disease_info.json"
-IMG_SIZE = (300, 300)
+IMG_SIZE = (224, 224)
 LOW_CONFIDENCE_THRESHOLD = 0.60
 
 # Set this based on your model:
@@ -45,21 +46,41 @@ def load_crop_model(model_path, class_names):
     """Recreate model architecture and load weights from extracted h5 file."""
     num_classes = len(class_names)
     
-    base_model = tf.keras.applications.EfficientNetB3(
-        input_shape=(300, 300, 3),
+    base_model = EfficientNetB2(
+        input_shape=(224, 224, 3),
         include_top=False,
         weights=None
     )
     
-    inputs = tf.keras.Input(shape=(300, 300, 3))
+    inputs = tf.keras.Input(shape=(224, 224, 3))
     x = base_model(inputs, training=False)
     x = tf.keras.layers.GlobalAveragePooling2D()(x)
-    x = tf.keras.layers.Dense(256, activation="relu", name="dense_hidden")(x)
-    x = tf.keras.layers.Dropout(0.3)(x)
+    x = tf.keras.layers.Dropout(0.5)(x)
+    x = tf.keras.layers.Dense(512, activation="relu", name="dense_hidden")(x)
+    x = tf.keras.layers.Dropout(0.5)(x)
     outputs = tf.keras.layers.Dense(num_classes, activation="softmax", name="dense_output")(x)
 
     model = tf.keras.Model(inputs, outputs)
-    model.load_weights(os.path.join(model_path, "model.weights.h5"))
+    
+    phase2_final_path = os.path.join(model_path, "best_model_phase2_final.weights.h5")
+    phase2_path = os.path.join(model_path, "best_model_phase2.weights.h5")
+    phase1_path = os.path.join(model_path, "best_model_phase1.weights.h5")
+    fallback_path = os.path.join(model_path, "model.weights.h5")
+
+    if os.path.exists(phase2_final_path):
+        print(f"Loading Phase 2 (final) weights: {phase2_final_path}")
+        model.load_weights(phase2_final_path)
+    elif os.path.exists(phase2_path):
+        print(f"Loading Phase 2 weights: {phase2_path}")
+        model.load_weights(phase2_path)
+    elif os.path.exists(phase1_path):
+        print(f"Loading Phase 1 weights: {phase1_path}")
+        model.load_weights(phase1_path)
+    elif os.path.exists(fallback_path):
+        print(f"Loading weights: {fallback_path}")
+        model.load_weights(fallback_path)
+    else:
+        raise FileNotFoundError(f"No weights found in {model_path}")
     
     return model
 
@@ -370,7 +391,7 @@ def _to_native(obj):
 async def predict(
     file: UploadFile = File(...),
     crop_type: str = Form(None),
-    username: str = Depends(get_current_user)
+    # username: str = Depends(get_current_user)  # auth commented out
 ):
     image_bytes = await file.read()
     img_array, original_image = preprocess_image(image_bytes)
@@ -398,7 +419,7 @@ async def predict(
             "gradcam_image": None
         }
         result = _to_native(result)
-        db_save_prediction(username, result, thumbnail)
+        # db_save_prediction(username, result, thumbnail)  # auth commented out
         return result
 
     predictions = model.predict(img_array, verbose=0)[0]
@@ -517,5 +538,5 @@ async def predict(
         "gradcam_image": gradcam_image
     }
     result = _to_native(result)
-    db_save_prediction(username, result, thumbnail)
+    # db_save_prediction(username, result, thumbnail)  # auth commented out
     return result

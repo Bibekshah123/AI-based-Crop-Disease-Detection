@@ -222,9 +222,22 @@ __marimo__/
 /Dataset.zip
 /Dataset-1.zip
 /FYP-dataset-updated.zip
+/Final-Dataset.zip
 
 # Large model files (>100MB) — download via script or Google Drive
 backend/updated-model/model.weights.h5
 backend/fyp_efficientnet_b3_model/
 backend/crop_disease_mobilenet_model_final.keras
 backend/MobileNetV2-model/*.h5
+backend/best_model/best_model.Phase2.h5
+# Trained model artefacts and checkpoints
+backend/best_model/
+*.weights.h5
+*.h5
+*.keras
+
+# Generated ML artefacts
+model_artifacts/
+checkpoints/
+__pycache__/
+*.pyc
