@@ -13,7 +13,7 @@ const CROPS = [
   { id: "Apple", label: "Apple", color: "#dc2626" },
   { id: "Banana", label: "Banana", color: "#eab308" },
   { id: "Citrus", label: "Citrus", color: "#f97316" },
-  { id: "Cucumber", label: "Cucumber", color: "#16a34a" },
+  { id: "Cucumber", label: "Cucumber", color: "#0891b2" },
   { id: "Grape", label: "Grape", color: "#7c3aed" },
   { id: "Maize", label: "Maize", color: "#a16207" },
   { id: "Mango", label: "Mango", color: "#f59e0b" },

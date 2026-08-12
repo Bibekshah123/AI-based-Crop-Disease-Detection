@@ -28,7 +28,7 @@ html, body, #root {
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: linear-gradient(135deg, #14532d 0%, #166534 100%);
+  background: linear-gradient(135deg, #171717 0%, #000000 100%);
   flex-shrink: 0;
   min-height: 56px;
 }
@@ -46,7 +46,7 @@ html, body, #root {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.1);
-  color: #bbf7d0;
+  color: #d4d4d4;
   font-size: 0.85rem;
   font-weight: 600;
   font-family: inherit;
@@ -62,7 +62,7 @@ html, body, #root {
   padding: 4px 12px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
-  color: #bbf7d0;
+  color: #d4d4d4;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -79,11 +79,11 @@ html, body, #root {
 }
 
 .text-green {
-  color: #4ade80;
+  color: #d4d4d4;
 }
 
 .hero-subtitle {
-  color: #bbf7d0;
+  color: #d4d4d4;
   font-size: 0.8rem;
   white-space: nowrap;
   overflow: hidden;
@@ -231,12 +231,12 @@ html, body, #root {
 }
 
 .crop-chip:hover {
-  background: #f0fdf4;
-  border-color: #bbf7d0;
+  background: #f5f5f5;
+  border-color: #d4d4d4;
 }
 
 .crop-chip.active {
-  background: #f0fdf4;
+  background: #f5f5f5;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -269,13 +269,13 @@ html, body, #root {
 }
 
 .drop-zone:hover {
-  border-color: #4ade80;
-  background: #f0fdf4;
+  border-color: #d4d4d4;
+  background: #f5f5f5;
 }
 
 .drop-zone.drag-over {
-  border-color: #22c55e;
-  background: #f0fdf4;
+  border-color: #000000;
+  background: #f5f5f5;
   transform: scale(1.015);
 }
 
@@ -354,7 +354,7 @@ html, body, #root {
   font-family: inherit;
   cursor: pointer;
   transition: all 0.15s;
-  background: #16a34a;
+  background: #171717;
   color: white;
   display: flex;
   align-items: center;
@@ -363,9 +363,9 @@ html, body, #root {
 }
 
 .detect-btn:hover:not(:disabled) {
-  background: #15803d;
+  background: #000000;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .detect-btn:disabled {
@@ -446,7 +446,7 @@ html, body, #root {
 
 .loading-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4ade80, #16a34a);
+  background: linear-gradient(90deg, #525252, #171717);
   border-radius: 999px;
   animation: progress 8s ease forwards;
 }
@@ -476,7 +476,7 @@ html, body, #root {
 }
 
 .result-header {
-  border-left: 4px solid #22c55e;
+  border-left: 4px solid #111827;
   padding: 16px 20px;
   display: flex;
   align-items: center;
@@ -585,8 +585,8 @@ html, body, #root {
    Description
    ============================================ */
 .description-card {
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  background: #f5f5f5;
+  border: 1px solid #e5e7eb;
   padding: 14px 18px;
 }
 
@@ -649,7 +649,7 @@ html, body, #root {
 .cause-icon { background: #fef3c7; color: #d97706; }
 .symptom-icon { background: #fce7f3; color: #db2777; }
 .treatment-icon { background: #dbeafe; color: #2563eb; }
-.prevention-icon { background: #dcfce7; color: #16a34a; }
+.prevention-icon { background: #e5e7eb; color: #111827; }
 
 /* ============================================
    Visual Section
@@ -711,8 +711,8 @@ html, body, #root {
 }
 
 .prediction-row:first-child .prediction-rank {
-  background: #dcfce7;
-  color: #16a34a;
+  background: #e5e7eb;
+  color: #111827;
 }
 
 .prediction-name {
@@ -737,7 +737,7 @@ html, body, #root {
 
 .prediction-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4ade80, #16a34a);
+  background: linear-gradient(90deg, #525252, #171717);
   border-radius: 999px;
   transition: width 0.8s ease;
 }
@@ -752,7 +752,7 @@ html, body, #root {
 }
 
 .prediction-row:first-child .prediction-conf {
-  color: #16a34a;
+  color: #111827;
 }
 
 .gradcam-section {
@@ -847,7 +847,7 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #14532d, #166534);
+  background: linear-gradient(135deg, #171717, #000000);
   padding: 20px;
 }
 
@@ -883,12 +883,12 @@ html, body, #root {
 }
 
 .auth-tab.active {
-  background: #16a34a;
+  background: #171717;
   color: white;
 }
 
 .auth-tab:hover:not(.active) {
-  background: #f0fdf4;
+  background: #f5f5f5;
 }
 
 .auth-fields {
@@ -910,8 +910,8 @@ html, body, #root {
 }
 
 .auth-input:focus {
-  border-color: #16a34a;
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+  border-color: #171717;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
 }
 
 .auth-error {
@@ -927,7 +927,7 @@ html, body, #root {
   padding: 12px;
   border: none;
   border-radius: 8px;
-  background: #16a34a;
+  background: #171717;
   color: white;
   font-size: 1rem;
   font-weight: 700;
@@ -937,7 +937,7 @@ html, body, #root {
 }
 
 .auth-submit:hover:not(:disabled) {
-  background: #15803d;
+  background: #000000;
 }
 
 .auth-submit:disabled {
@@ -949,7 +949,7 @@ html, body, #root {
    Hero Auth Elements
    ============================================ */
 .hero-username {
-  color: #bbf7d0;
+  color: #d4d4d4;
   font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
@@ -977,7 +977,7 @@ html, body, #root {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.1);
-  color: #bbf7d0;
+  color: #d4d4d4;
   font-size: 0.85rem;
   font-weight: 600;
   font-family: inherit;
@@ -1004,7 +1004,7 @@ html, body, #root {
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: linear-gradient(135deg, #14532d, #166534);
+  background: linear-gradient(135deg, #171717, #000000);
   color: white;
   flex-shrink: 0;
 }
@@ -1037,7 +1037,7 @@ html, body, #root {
 
 .history-count {
   font-size: 0.8rem;
-  color: #bbf7d0;
+  color: #d4d4d4;
   white-space: nowrap;
 }
 
@@ -1046,7 +1046,7 @@ html, body, #root {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.1);
-  color: #bbf7d0;
+  color: #d4d4d4;
   font-size: 0.85rem;
   font-weight: 600;
   font-family: inherit;
@@ -1275,7 +1275,7 @@ html, body, #root {
 
 .history-pred-bar div {
   height: 100%;
-  background: linear-gradient(90deg, #4ade80, #16a34a);
+  background: linear-gradient(90deg, #525252, #171717);
   border-radius: 999px;
 }
 
