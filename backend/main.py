@@ -95,8 +95,15 @@ with open(DISEASE_INFO_PATH, "r") as f:
 
 model = load_crop_model(MODEL_PATH, class_names)
 
-# Initialize database tables
-init_db()
+# Initialize database tables (optional — auth/history is disabled by default,
+# and /predict does not use the DB, so a missing/unreachable Postgres must not
+# stop the server from starting).
+try:
+    init_db()
+    print("Database connected and initialized.")
+except Exception as e:
+    print(f"WARNING: database unavailable ({e}). "
+          "Auth/history endpoints will not work, but /predict is fine.")
 
 
 # ============================
