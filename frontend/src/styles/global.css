@@ -1,0 +1,238 @@
+/* ==========================================================================
+   Global base styles
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading);
+  color: var(--color-text);
+  background: var(--color-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  font-weight: 650;
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-lg); }
+
+p { color: var(--color-text); }
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
+/* Visible focus for keyboard users only */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: -3rem;
+  z-index: 100;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  transition: top var(--transition);
+}
+.skip-link:focus {
+  top: var(--space-3);
+  text-decoration: none;
+}
+
+/* Screen-reader-only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Layout helpers */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+.container-narrow {
+  max-width: var(--container-narrow);
+}
+
+/* Shared button system --------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch);
+  padding: 0 var(--space-5);
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-size: var(--text-base);
+  font-weight: 600;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  text-decoration: none;
+}
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-primary-dark);
+  border-color: var(--color-border);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  text-decoration: none;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  text-decoration: none;
+}
+.btn-block {
+  width: 100%;
+}
+
+/* Form controls ---------------------------------------------------------- */
+.field-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: var(--touch);
+  padding: var(--space-3) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font-size: var(--text-base);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.input:focus-visible,
+.select:focus-visible,
+.textarea:focus-visible {
+  border-color: var(--color-primary);
+}
+
+/* Cards + surfaces ------------------------------------------------------- */
+.surface {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* Status note blocks ----------------------------------------------------- */
+.note {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+}
+.note-warning {
+  background: var(--color-warning-bg);
+  border-color: #efdcae;
+  color: #7a5514;
+}
+.note-error {
+  background: var(--color-error-bg);
+  border-color: #f3c9c6;
+  color: var(--color-error);
+}
+.note-info {
+  background: var(--color-green-soft);
+  border-color: var(--color-primary-tint);
+  color: var(--color-primary-dark);
+}
+
+/* Reduced motion --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

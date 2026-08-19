@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -26,7 +26,7 @@
         "android.permission.SYSTEM_ALERT_WINDOW"
       ],
       "adaptiveIcon": {
-        "backgroundColor": "#0a0a0a",
+        "backgroundColor": "#EEF5EF",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"

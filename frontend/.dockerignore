@@ -1,0 +1,17 @@
+# Never copy host build artifacts / deps into the image — they are rebuilt
+# inside the container. Host node_modules are built for a different libc
+# (glibc) than the Alpine build stage (musl) and would break native binaries.
+node_modules
+dist
+coverage
+
+# Local env + editor + VCS noise
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+*.log
+.DS_Store
+.vscode
+.idea

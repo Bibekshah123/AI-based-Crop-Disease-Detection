@@ -1,0 +1,116 @@
+/* Status badge ----------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.tone_success {
+  background: var(--color-green-soft);
+  color: var(--color-success);
+  border-color: var(--color-primary-tint);
+}
+.tone_warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+  border-color: #efdcae;
+}
+.tone_error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  border-color: #f3c9c6;
+}
+.tone_neutral {
+  background: var(--color-surface-hover);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+/* Confidence meter ------------------------------------------------------- */
+.meter {
+  width: 100%;
+}
+.meterHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+.meterLabel {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.meterValue {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+.track {
+  height: 8px;
+  background: var(--color-surface-hover);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 400ms ease;
+}
+.fill_success { background: var(--color-success); }
+.fill_warning { background: var(--color-warning); }
+.fill_error { background: var(--color-error); }
+.fill_neutral { background: var(--color-text-muted); }
+
+/* Spinner ---------------------------------------------------------------- */
+.spinner {
+  display: inline-flex;
+  align-items: center;
+}
+.spinnerRing {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: ui-spin 0.7s linear infinite;
+}
+@keyframes ui-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Empty state ------------------------------------------------------------ */
+.empty {
+  text-align: center;
+  padding: var(--space-7) var(--space-4);
+}
+.emptyTitle {
+  font-size: var(--text-lg);
+}
+.emptyText {
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+  max-width: 40ch;
+  margin-inline: auto;
+}
+
+/* Error state ------------------------------------------------------------ */
+.errorBox {
+  flex-direction: column;
+}
+.errorTitle {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+.errorMsg {
+  color: inherit;
+  margin-bottom: var(--space-3);
+}

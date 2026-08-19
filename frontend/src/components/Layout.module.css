@@ -1,0 +1,125 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--header-h);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: var(--text-lg);
+}
+.brand:hover { text-decoration: none; }
+.brandName { letter-spacing: -0.01em; }
+
+.menuBtn {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch);
+  height: var(--touch);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.nav {
+  display: none;
+}
+
+/* Mobile: expanded menu drops below the bar */
+.navOpen {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-4) var(--space-4);
+  gap: var(--space-1);
+  box-shadow: var(--shadow-md);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius);
+  color: var(--color-text-muted);
+  font-weight: 550;
+  font-size: var(--text-base);
+}
+.link:hover {
+  text-decoration: none;
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+.linkActive {
+  color: var(--color-primary-dark);
+  background: var(--color-green-soft);
+}
+.linkCta {
+  color: var(--color-primary);
+  font-weight: 650;
+}
+.navDivider {
+  display: none;
+}
+
+.main {
+  flex: 1;
+}
+
+.footer {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: var(--space-6) 0;
+  margin-top: var(--space-8);
+}
+.footText {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  max-width: 60ch;
+}
+.footLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+}
+
+/* Desktop */
+@media (min-width: 760px) {
+  .menuBtn { display: none; }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    margin-left: auto;
+  }
+  .navDivider {
+    display: block;
+    width: 1px;
+    height: 24px;
+    background: var(--color-border);
+    margin: 0 var(--space-2);
+  }
+}

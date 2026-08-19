@@ -1,0 +1,123 @@
+// Bilingual UI strings. Static labels live here; disease/guidance text comes
+// from the backend (EN + Nepali `*_np` fields) via normalize().
+export const STRINGS = {
+  en: {
+    brand: "CropSense",
+    subtitle: "Crop disease detection",
+    selectCrop: "Select the crop",
+    cropRequired: "Required",
+    takePhoto: "Take photo",
+    gallery: "Upload image",
+    replace: "Replace",
+    remove: "Remove",
+    analyze: "Analyze leaf",
+    analyzing: "Analyzing leaf…",
+    guidanceTitle: "For the clearest result",
+    guidance: [
+      "Use one visible leaf",
+      "Keep the affected area in focus",
+      "Use even, natural lighting",
+      "Avoid overlapping leaves",
+      "Avoid distant or blurry photos",
+    ],
+    possibleMatch: "Possible match",
+    statusLabel: {
+      high: "High confidence",
+      moderate: "Moderate confidence",
+      uncertain: "Uncertain result",
+    },
+    confidence: "Confidence",
+    uncertainTitle: "This result is uncertain.",
+    uncertainBody:
+      "Try uploading another clear, well-lit photo of a single affected leaf. For anything important, confirm with a local agricultural expert before treating the crop.",
+    refNote:
+      "The guidance below is general reference for this possible match — not a confirmed diagnosis.",
+    visual: "Visual explanation",
+    yourPhoto: "Your photo",
+    modelAttention: "Model attention",
+    gradcamNote:
+      "Highlighted areas show which parts of the image influenced the model most. This visual explanation does not confirm the diagnosis.",
+    symptoms: "Symptoms",
+    cause: "Cause",
+    management: "General management",
+    prevention: "Prevention",
+    other: "Other possibilities",
+    feedbackQ: "Was this result helpful?",
+    helpful: "Yes, helpful",
+    wrong: "Report wrong result",
+    feedbackDone: "Thanks — your feedback was saved.",
+    checkAnother: "Check another leaf",
+    pickCropFirst: "Please select a crop first.",
+    addPhoto: "Please add a leaf photo.",
+    notLeaf:
+      "This image does not appear to be a leaf. Please add a clear photo of a single leaf.",
+    connErr:
+      "Could not reach the server. Check that the backend is running and the API URL is correct.",
+  },
+  np: {
+    brand: "CropSense",
+    subtitle: "बाली रोग पहिचान",
+    selectCrop: "बाली छान्नुहोस्",
+    cropRequired: "आवश्यक",
+    takePhoto: "फोटो खिच्नुहोस्",
+    gallery: "फोटो अपलोड",
+    replace: "बदल्नुहोस्",
+    remove: "हटाउनुहोस्",
+    analyze: "पात विश्लेषण",
+    analyzing: "पात विश्लेषण गर्दै…",
+    guidanceTitle: "स्पष्ट नतिजाका लागि",
+    guidance: [
+      "एउटै पात देखिने गरी राख्नुहोस्",
+      "प्रभावित भाग फोकसमा राख्नुहोस्",
+      "समान उज्यालो प्रयोग गर्नुहोस्",
+      "पातहरू खप्टिन नदिनुहोस्",
+      "टाढा वा धमिलो फोटो नराख्नुहोस्",
+    ],
+    possibleMatch: "सम्भावित मिलान",
+    statusLabel: {
+      high: "उच्च विश्वास",
+      moderate: "मध्यम विश्वास",
+      uncertain: "अनिश्चित नतिजा",
+    },
+    confidence: "विश्वास स्तर",
+    uncertainTitle: "यो नतिजा अनिश्चित छ।",
+    uncertainBody:
+      "एउटै प्रभावित पातको अर्को स्पष्ट, राम्रो उज्यालो भएको फोटो अपलोड गर्नुहोस्। महत्त्वपूर्ण कुरामा उपचार गर्नुअघि स्थानीय कृषि विज्ञसँग पुष्टि गर्नुहोस्।",
+    refNote:
+      "तलको मार्गदर्शन यो सम्भावित मिलानको सामान्य सन्दर्भ मात्र हो — पुष्टि भएको निदान होइन।",
+    visual: "दृश्य व्याख्या",
+    yourPhoto: "तपाईंको फोटो",
+    modelAttention: "मोडेलको ध्यान",
+    gradcamNote:
+      "हाइलाइट गरिएका भागहरूले मोडेललाई सबैभन्दा बढी प्रभाव पारेका ठाउँ देखाउँछन्। यो दृश्य व्याख्याले निदान पुष्टि गर्दैन।",
+    symptoms: "लक्षणहरू",
+    cause: "कारण",
+    management: "सामान्य व्यवस्थापन",
+    prevention: "रोकथाम",
+    other: "अन्य सम्भावनाहरू",
+    feedbackQ: "यो नतिजा उपयोगी थियो?",
+    helpful: "उपयोगी",
+    wrong: "गलत नतिजा रिपोर्ट",
+    feedbackDone: "धन्यवाद — तपाईंको प्रतिक्रिया सुरक्षित भयो।",
+    checkAnother: "अर्को पात जाँच्नुहोस्",
+    pickCropFirst: "पहिले बाली छान्नुहोस्।",
+    addPhoto: "पातको फोटो थप्नुहोस्।",
+    notLeaf:
+      "यो फोटो पात जस्तो देखिँदैन। कृपया एउटै पातको स्पष्ट फोटो थप्नुहोस्।",
+    connErr:
+      "सर्भरसँग जडान भएन। ब्याकएन्ड चलिरहेको छ र API URL सही छ भनी जाँच्नुहोस्।",
+  },
+};
+
+export const CROPS = [
+  "Apple",
+  "Banana",
+  "Citrus",
+  "Cucumber",
+  "Grape",
+  "Maize",
+  "Mango",
+  "Potato",
+  "Rice",
+  "Tomato",
+];

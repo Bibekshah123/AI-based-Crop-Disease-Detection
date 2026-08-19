@@ -1,6 +1,12 @@
 # CropSense AI — Crop Disease Detection System
 
-A full-stack, AI-powered web application that identifies crop diseases from a photo of a leaf. Upload (or drag-and-drop) an image, and the system predicts the disease with a confidence score, generates a **Grad-CAM heatmap** for explainability, verifies the image actually looks like a leaf, flags out-of-distribution ("unknown") inputs, and returns bilingual (English + Nepali) treatment and prevention guidance.
+An AI-powered system that identifies crop diseases from a photo of a leaf. Add a leaf image, and it predicts a **possible** disease with a confidence level, generates a **Grad-CAM heatmap** for explainability, verifies the image actually looks like a leaf, flags out-of-distribution ("unknown") inputs, and returns bilingual (English + Nepali) crop-care guidance.
+
+The project ships **three parts** that all talk to the same FastAPI backend:
+
+- **Web app** — a React (Vite) single-page app, redesigned as a calm, mobile-first agricultural decision-support tool.
+- **Mobile app** — a React Native (Expo) client for taking leaf photos on a phone.
+- **Backend + model** — FastAPI serving an EfficientNetB2 model, with PostgreSQL for optional accounts.
 
 Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah123/AI-based-Crop-Disease-Detection>
 
@@ -14,6 +20,8 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 - [Project Structure](#project-structure)
 - [Quick Start (Docker)](#quick-start-docker)
 - [Local Development (without Docker)](#local-development-without-docker)
+- [Web App (Frontend)](#web-app-frontend)
+- [Mobile App](#mobile-app)
 - [How a Prediction Works](#how-a-prediction-works)
 - [API Reference](#api-reference)
 - [The Model](#the-model)
@@ -21,8 +29,9 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 - [Database](#database)
 - [Authentication & History](#authentication--history)
 - [Environment Variables](#environment-variables)
+- [Testing](#testing)
 - [Training Your Own Model](#training-your-own-model)
-- [Testing Images Offline](#testing-images-offline)
+- [Deployment](#deployment)
 - [Known Limitations](#known-limitations)
 - [License](#license)
 
@@ -31,17 +40,19 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 ## Highlights
 
 - **Disease Detection** — Classifies leaf images into **52 disease / healthy / unknown categories** across **10 crops**.
-- **Confidence Score** — Reports softmax confidence for the top prediction, with a **low-confidence warning** below 60%.
-- **Grad-CAM Heatmap** — Visual explanation overlaying the regions of the leaf the model focused on.
+- **Responsible Confidence** — Reports softmax confidence and a clear status: **High / Moderate / Uncertain**. Results are always framed as a *possible* match, never a guarantee.
+- **Grad-CAM Heatmap** — Visual explanation overlaying the regions of the leaf the model focused on, shown side-by-side with your photo.
 - **Leaf Pre-check** — Rejects images that don't look like a leaf (HSV colour masking + edge/contrast/aspect heuristics) before wasting a prediction.
-- **Unknown / Out-of-Distribution Detection** — Flags inputs the model shouldn't confidently classify, using a combination of **confidence threshold, top-1/top-2 margin, and prediction entropy**.
+- **Unknown / Out-of-Distribution Detection** — Flags inputs the model shouldn't confidently classify, using **confidence threshold, top-1/top-2 margin, and prediction entropy**.
 - **Crop-Mismatch Check** — Warns when the predicted crop doesn't match the crop you selected.
-- **Top-5 Predictions** — Shows alternative classifications with confidences, plus full raw per-class probabilities.
+- **Top Alternatives** — Shows the runner-up classifications with confidences, plus full raw per-class probabilities in the API.
 - **Bilingual Content** — Every result ships English and Nepali (`*_np`) fields (disease name, description, cause, symptoms, treatment, prevention).
-- **Treatment Guidance** — Cause, symptoms, treatment, and prevention pulled from a curated knowledge base (`disease_info.json`).
-- **Clean, Professional UI** — Modern React single-page app with a black/charcoal theme, drag-and-drop upload, and image preview.
-- **Prediction History & Auth** — JWT auth, bcrypt password hashing, and per-user prediction history backed by PostgreSQL (scaffolded — see [note](#authentication--history)).
-- **One-Command Deploy** — `docker compose up --build` brings up the whole stack (DB, API, frontend, DB admin GUI).
+- **Disease Library** — Browsable reference of every crop/disease the model knows, built from the same curated knowledge base.
+- **Local-First History** — Every check is saved in the browser (no login/DB needed), with filters and a detail view.
+- **Mobile App** — React Native (Expo) client with camera capture, crop selector, and an English/Nepali toggle.
+- **Calm, Original UI** — Mobile-first, accessible, agricultural design system (no marketing fluff, no fake stats).
+- **Optional Accounts** — JWT auth + bcrypt + PostgreSQL are implemented; the app works fully **without** signing in.
+- **One-Command Deploy** — `docker compose up --build` brings up the whole stack (DB, API, web app, DB admin GUI).
 
 ---
 
@@ -49,7 +60,8 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 19 + Vite 8, React Router 7, Axios (served by Nginx in production) |
+| Web app | React 19 + Vite 8, React Router 7, Axios, CSS Modules + design tokens (Nginx in production) |
+| Mobile app | React Native + **Expo (SDK 54)**, expo-image-picker, Axios |
 | Backend | FastAPI (Python 3.10), Uvicorn |
 | Model | **EfficientNetB2** transfer learning (TensorFlow / Keras) |
 | Image Processing | OpenCV, Pillow, NumPy |
@@ -57,6 +69,7 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 | Auth | JWT (`python-jose`), bcrypt |
 | Database | PostgreSQL 16 |
 | DB Admin | Adminer |
+| Frontend tests | Vitest + React Testing Library |
 | Containerization | Docker, Docker Compose |
 
 ---
@@ -64,13 +77,14 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 ## Architecture
 
 ```
-                    ┌─────────────────────────────────────────────┐
-                    │                   Browser                    │
-                    │        React SPA (Vite build, port 3000)     │
-                    └───────────────────────┬─────────────────────┘
-                                            │  HTTP (multipart image + crop_type)
-                             /predict, /health, /auth/*  (proxied by Nginx)
-                                            ▼
+        ┌──────────────────────┐     ┌──────────────────────┐
+        │   Web app (browser)  │     │  Mobile app (phone)  │
+        │  React SPA, port 3000│     │  React Native / Expo │
+        └───────────┬──────────┘     └───────────┬──────────┘
+                    │        multipart image + crop_type      │
+                    │   /predict, /health, /auth/*            │
+                    └───────────────┬────────────────────────┘
+                                    ▼
                     ┌─────────────────────────────────────────────┐
                     │            FastAPI backend (port 8000)       │
                     │  • Leaf pre-check (OpenCV)                    │
@@ -87,7 +101,7 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
                                               Adminer GUI (port 8080)
 ```
 
-The frontend talks to the backend through relative paths (`/predict`, `/health`, `/auth/*`). In production **Nginx** proxies these to the backend container; in local dev **Vite's dev-server proxy** does the same (see `frontend/vite.config.js`).
+The web app talks to the backend through relative paths (`/predict`, `/health`, `/auth/*`). In production **Nginx** proxies these to the backend container; in local dev **Vite's dev-server proxy** does the same (see `frontend/vite.config.js`). To point at a hosted backend, set `VITE_API_BASE_URL`. The mobile app points at the backend via `EXPO_PUBLIC_API_URL` (or its `config.js` default).
 
 ---
 
@@ -111,21 +125,31 @@ The frontend talks to the backend through relative paths (`/predict`, `/health`,
 │       ├── best_model_phase2_final.weights.h5   # ← active EfficientNetB2 model (52 classes)
 │       ├── best_model_phase1.weights.h5         # Phase-1 (head-only) weights
 │       └── best_model_phase2.weights.h5         # legacy phase-2 weights
-├── frontend/
+├── frontend/                           # Web app (React + Vite)
 │   ├── Dockerfile                      # node build → nginx:alpine serve
-│   ├── nginx.conf                      # Proxies /predict, /health, /auth/* to backend
-│   ├── vite.config.js                  # Dev-server proxy config
+│   ├── .dockerignore                   # excludes host node_modules/dist from the image
+│   ├── nginx.conf                      # SPA fallback + proxies /predict,/health,/auth/*
+│   ├── vite.config.js                  # dev proxy + Vitest config
 │   ├── .env.example
-│   ├── index.html
-│   ├── package.json
 │   └── src/
-│       ├── main.jsx                    # Entry point
-│       ├── App.jsx                     # Main app (upload → predict → result card)
-│       ├── App.css                     # Component styles (black/charcoal theme)
-│       ├── index.css                   # Global styles & design tokens
-│       ├── History.jsx                 # Prediction history view
-│       ├── Login.jsx / Signup.jsx      # Auth screens
-│       └── AuthContext.jsx             # Auth state/provider
+│       ├── main.jsx                    # Entry: Router + Auth/Result providers + global CSS
+│       ├── App.jsx                     # Route table + shared Layout
+│       ├── styles/                     # tokens.css (design tokens) + global.css
+│       ├── lib/                        # api.js (service layer), normalize.js, history.js,
+│       │                               #   feedback.js, image.js, crops.js, useObjectUrl.js
+│       ├── context/                    # AuthContext.jsx, ResultContext.jsx
+│       ├── components/                 # Layout, ImagePicker, ResultView, ui, RequireAuth
+│       ├── pages/                      # Home, Diagnose, Result, History, HistoryDetail,
+│       │                               #   Library, LibraryDetail, Login, Register,
+│       │                               #   Profile, About, NotFound
+│       ├── data/diseases.json          # Disease library data (generated from disease_info.json)
+│       └── *.test.js(x), test/setup.js # Vitest + React Testing Library
+├── mobile/                             # Mobile app (React Native / Expo)
+│   ├── App.js                          # UI: crop selector, camera/gallery, EN/NP, results
+│   ├── api.js                          # predict() / health() → FastAPI
+│   ├── config.js                       # API_URL (EXPO_PUBLIC_API_URL override)
+│   ├── app.json / eas.json             # Expo + EAS build config
+│   └── README.md                       # Run + APK build instructions
 ├── scripts/
 │   ├── train_colab.ipynb               # EfficientNetB2 training notebook (Colab GPU)
 │   ├── train_colab_google.ipynb        # EfficientNetB2 notebook (Google Drive variant)
@@ -151,20 +175,22 @@ The frontend talks to the backend through relative paths (`/predict`, `/health`,
 ```bash
 git clone https://github.com/Bibekshah123/AI-based-Crop-Disease-Detection.git
 cd AI-based-Crop-Disease-Detection
-git lfs pull            # ensure backend/best_model/*.h5 are downloaded
-docker compose up --build
+git lfs pull                 # ensure backend/best_model/*.h5 are downloaded
+docker compose up --build    # always --build so you get the current frontend
 ```
 
 This starts four services:
 
 | Service | URL | Purpose |
 |---|---|---|
-| **Frontend** | <http://localhost:3000> | The web app |
+| **Web app** | <http://localhost:3000> | The React app |
 | **Backend API** | <http://localhost:8000> | FastAPI |
 | **Swagger UI** | <http://localhost:8000/docs> | Interactive API docs |
 | **Adminer** | <http://localhost:8080> | PostgreSQL admin GUI |
 
 Stop everything with `docker compose down` (add `-v` to also wipe the database volume).
+
+> **Always use `--build` (or `docker compose build --no-cache frontend`).** Plain `docker compose up` reuses the previously built image, so you can end up staring at an old version of the web app. The frontend `.dockerignore` keeps host `node_modules`/`dist` out of the image so the container builds cleanly on Alpine.
 
 ---
 
@@ -175,25 +201,95 @@ Stop everything with `docker compose down` (add `-v` to also wipe the database v
 cd backend
 python -m venv venv && source venv/bin/activate      # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
-> The backend loads weights from `backend/best_model/` at startup and initializes the database. For DB-backed features you'll need a running PostgreSQL matching the `DB_*` env vars; for plain predictions the model works without it.
+> The backend loads weights from `backend/best_model/` at startup. Database init is **non-fatal** — if PostgreSQL isn't reachable it logs a warning and keeps running, because `/predict` doesn't need the DB (only the optional auth/history endpoints do).
 
-**Frontend:**
+**Web app:**
 ```bash
 cd frontend
 npm install
-npm run dev            # http://localhost:5173, proxies API calls to :8000
+npm run dev            # http://localhost:5173 — proxies /predict,/health,/auth to :8000
+npm test               # run the Vitest suite
+npm run build          # production bundle → frontend/dist/
 ```
 
-Build a production bundle with `npm run build` (output in `frontend/dist/`).
+**Mobile app:** see [Mobile App](#mobile-app).
+
+---
+
+## Web App (Frontend)
+
+The web app is a mobile-first, accessible single-page app organized around a small set of pages:
+
+| Page | Route | Purpose |
+|---|---|---|
+| Home | `/` | Intro + the 3-step workflow |
+| Diagnose | `/diagnose` | Crop selector → camera/upload → analyze, with validation/loading/timeout/error states |
+| Result | `/result` | Possible match, confidence status, Grad-CAM comparison, guidance, alternatives, feedback |
+| History | `/history` · `/history/:id` | Local-first list with filters (crop/status/sort/search) + detail view |
+| Disease Library | `/library` · `/library/:id` | Reference data for every crop/disease |
+| Login / Register / Profile | `/login` `/register` `/profile` | Optional accounts |
+| About & Disclaimer | `/about` | What the tool does and how to use it responsibly |
+
+Design & engineering notes:
+
+- **Design system** — a token-based palette (`src/styles/tokens.css`) and CSS Modules per component; calm agricultural greens on a light ground, no gradients/glow/neon.
+- **Service layer** — all HTTP goes through `src/lib/api.js` (one Axios instance); no component hardcodes a host. Backend responses are normalized in one place (`src/lib/normalize.js`), which also derives the High/Moderate/Uncertain status.
+- **Local-first history & feedback** — checks and "was this helpful?" responses are stored in `localStorage` (`src/lib/history.js`, `src/lib/feedback.js`); no backend change required.
+- **Accessibility** — semantic landmarks, skip link, keyboard-operable controls, `aria-live` status, `role="alert"` errors, meaningful alt text, visible focus, `prefers-reduced-motion`, 44px touch targets, and status conveyed by text (not colour alone).
+
+---
+
+## Mobile App
+
+A React Native (Expo) thin client that reuses the same `/predict` endpoint — take/pick a leaf photo, get the disease, confidence, Grad-CAM, and guidance, with an English/Nepali toggle. It shares the web app's design and responsible wording (possible match, High/Moderate/Uncertain, Grad-CAM comparison, feedback).
+
+### Start the dev server (test on a real phone)
+
+**Prerequisites:** Node.js, the **Expo Go** app on your phone, and the phone on the **same Wi‑Fi** as your computer.
+
+```bash
+cd mobile
+npm install
+
+# 1) Find your computer's Wi-Fi IP (the interface the phone can reach):
+ip -4 -o addr show scope global | awk '{print $2, $4}'   # Linux
+#   e.g. wlp0s20f3 192.168.77.106/24   → use 192.168.77.106
+# macOS/Windows: `ipconfig getifaddr en0` / `ipconfig`
+
+# 2) Make sure the backend is running and bound to all interfaces:
+#      (in another terminal)  cd ../backend && uvicorn main:app --host 0.0.0.0 --port 8000
+
+# 3) Start Metro, pinned to that Wi-Fi IP, with the app pointed at the backend
+#    on the same network. Replace the IP with yours:
+REACT_NATIVE_PACKAGER_HOSTNAME=192.168.77.106 \
+EXPO_PUBLIC_API_URL=http://192.168.77.106:8000 \
+npx expo start
+```
+
+Then on your phone:
+- **Scan the QR code** shown in the terminal with Expo Go (Android) or the Camera app (iOS), **or**
+- open Expo Go → **Enter URL manually** → `exp://192.168.77.106:8081` (your IP, port 8081).
+
+The app loads and — because `EXPO_PUBLIC_API_URL` points at the backend on the same Wi‑Fi — predictions work without Tailscale. To reload after a change, shake the phone → **Reload**. Stop the server with **Ctrl+C**.
+
+> Simpler alternative: `npm start` alone also works if Metro auto-detects the right interface, but pinning `REACT_NATIVE_PACKAGER_HOSTNAME` avoids trouble when the machine has several networks (Wi‑Fi + Ethernet). If the phone can't share the Wi‑Fi, use `npx expo start --tunnel` (routes through Expo's servers; the backend must then be reachable via a public/Tailscale URL).
+
+### Build an installable APK
+
+```bash
+npx eas-cli build -p android --profile preview
+```
+
+See `mobile/README.md` for the full networking guide (LAN IP vs. Tailscale) and the EAS build flow.
 
 ---
 
 ## How a Prediction Works
 
-1. The user selects a crop and uploads a leaf image (drag-and-drop or file browse).
-2. The frontend `POST`s the image (and optional `crop_type`) to `/predict` as multipart form data.
+1. On **Diagnose**, the user selects a crop (required) and adds a leaf photo (camera or upload), then presses **Analyze leaf**.
+2. The client `POST`s the image (and `crop_type`) to `/predict` as multipart form data (with duplicate-submit prevention and a request timeout).
 3. The backend decodes the image, makes a thumbnail, and runs the **leaf pre-check** (`is_leaf_image`). If it fails, a "Not a Leaf" result is returned immediately.
 4. The image is preprocessed — converted to RGB, resized to **224×224**, and passed through EfficientNet's `preprocess_input`.
 5. **EfficientNetB2** produces a softmax distribution over the **52 classes**.
@@ -201,7 +297,7 @@ Build a production bundle with `npm run build` (output in `frontend/dist/`).
 7. **Crop-mismatch** is checked against the crop the user selected.
 8. A **Grad-CAM heatmap** is generated from the backbone's last convolutional layer and overlaid on the original image.
 9. Treatment/prevention info (EN + NP) is looked up from `disease_info.json`.
-10. A rich JSON payload is returned and rendered in the result card (disease, confidence bar, top-5, heatmap, guidance).
+10. The client normalizes the payload, derives a **High / Moderate / Uncertain** status, saves it to local history, and renders the **Result** page.
 
 ---
 
@@ -275,6 +371,8 @@ Base URL: `http://localhost:8000`
 1. **Phase 1 — feature extraction:** freeze the backbone, train only the new head.
 2. **Phase 2 — fine-tuning:** unfreeze and train the full network at a much lower learning rate.
 
+Both phases apply **class weighting** to counter class imbalance across crops.
+
 **Weight-loading priority** (`backend/best_model/`): `best_model_phase2_final.weights.h5` → `best_model_phase2.weights.h5` → `best_model_phase1.weights.h5` → `model.weights.h5`. The active deployed model is **`best_model_phase2_final.weights.h5`** (EfficientNetB2, 52 classes).
 
 The model reaches high validation accuracy on the curated dataset split; see the training notebook output for exact per-run metrics. (Real-world/field accuracy is lower than lab accuracy — see [Known Limitations](#known-limitations).)
@@ -325,9 +423,9 @@ PostgreSQL 16 runs in a Docker container with a persistent volume (`pgdata`). Ta
 
 ## Authentication & History
 
-The backend fully implements JWT-based auth (`python-jose`), bcrypt password hashing, and per-user prediction history in PostgreSQL.
-
-> **Current state:** the auth flow and history-saving are **commented out in the running app** — the login/signup UI is disabled in `frontend/src/App.jsx`, and `/predict` does not require a token or persist results. So out of the box the app runs **open** (no login needed). To enable auth, re-enable the commented `AuthProvider`/routes in the frontend and the `Depends(get_current_user)` / `db_save_prediction(...)` lines in `backend/main.py`.
+- **Prediction history** in the web app is **local-first**: every check is saved in the browser (`localStorage`) with a thumbnail and summary, so History works with **no login and no database**.
+- **Accounts are optional.** JWT auth (`python-jose`), bcrypt hashing, and the `/auth/*` endpoints are implemented, and the Login/Register/Profile pages are functional. Diagnosis, Result, History, and Library are all usable **without** signing in — only the Profile page requires an account.
+- **Server-side history** (`/auth/history`) exists in the backend but is only populated if you re-enable `db_save_prediction(...)` inside `/predict` (it's commented out by default), so the running app relies on local history.
 
 ---
 
@@ -335,7 +433,9 @@ The backend fully implements JWT-based auth (`python-jose`), bcrypt password has
 
 | Variable | Default | Used by | Description |
 |---|---|---|---|
-| `VITE_API_URL` | `""` (relative, proxied) | frontend | Backend base URL for API calls in dev |
+| `VITE_API_BASE_URL` | `""` (relative, proxied) | web app | Backend base URL. Empty in dev (Vite proxy); set to a full URL for a hosted backend. |
+| `VITE_API_URL` | — | web app | Legacy name, still honoured as a fallback if `VITE_API_BASE_URL` is unset. |
+| `EXPO_PUBLIC_API_URL` | see `mobile/config.js` | mobile app | Backend base URL compiled into the app. |
 | `DB_HOST` | `db` (compose) / `localhost` | backend | PostgreSQL host |
 | `DB_PORT` | `5432` | backend | PostgreSQL port |
 | `DB_NAME` | `crop_disease` | backend | Database name |
@@ -343,6 +443,29 @@ The backend fully implements JWT-based auth (`python-jose`), bcrypt password has
 | `DB_PASSWORD` | `app_password` | backend | Database password |
 | `JWT_SECRET` | `crop-disease-detection-secret-key-2024` | backend | JWT signing key — **override in production** |
 | `TF_CPP_MIN_LOG_LEVEL` | `2` | backend | TensorFlow log verbosity |
+
+---
+
+## Testing
+
+Frontend tests use **Vitest + React Testing Library** (jsdom):
+
+```bash
+cd frontend
+npm test               # run once
+npm run test:watch     # watch mode
+```
+
+Coverage focuses on the parts most worth protecting: the response **normalization / confidence-status** logic (`src/lib/normalize.test.js`), the **local history** store (`src/lib/history.test.js`), and a **ResultView** smoke test asserting the responsible wording, Grad-CAM note, uncertainty warning, and feedback controls.
+
+For quick backend checks without the web stack, use `backend/predict_test.py` — it runs the exact same model, weight-loading order, preprocessing, and confidence threshold as the API, with no web/auth/DB dependencies:
+
+```bash
+cd backend
+python predict_test.py ../test.jpg          # single image
+python predict_test.py /path/to/folder       # a whole folder
+python predict_test.py ../test.jpg --topk 5  # show top-K
+```
 
 ---
 
@@ -354,7 +477,7 @@ The backend fully implements JWT-based auth (`python-jose`), bcrypt password has
 2. Open [`scripts/train_colab.ipynb`](scripts/train_colab.ipynb) in Colab.
 3. **Runtime → Change runtime type → T4 GPU**.
 4. Point the dataset path in the notebook at your Drive file.
-5. Run all cells. The notebook trains **EfficientNetB2 @ 224×224** with the two-phase schedule and exports `.weights.h5` + `class_names.json`.
+5. Run all cells. The notebook trains **EfficientNetB2 @ 224×224** with the two-phase schedule (and class weighting) and exports `.weights.h5` + `class_names.json`.
 6. Copy the exported weights into `backend/best_model/` (as `best_model_phase2_final.weights.h5`) and update `backend/class_names.json` if the class set changed.
 
 `scripts/train_colab_google.ipynb` is a Google-Drive-oriented variant of the same B2 pipeline.
@@ -363,27 +486,25 @@ The backend fully implements JWT-based auth (`python-jose`), bcrypt password has
 
 ---
 
-## Testing Images Offline
+## Deployment
 
-`backend/predict_test.py` runs the exact same model, weight-loading order, preprocessing, class list, and confidence threshold as the API — but with no web/auth/DB dependencies (only `tensorflow`, `pillow`, `numpy`). Handy for quickly checking images from the command line:
+Because the backend loads TensorFlow + a ~100 MB model, it needs roughly **1.5–2 GB RAM** — most 512 MB free tiers will OOM. A workable free split:
 
-```bash
-cd backend
-python predict_test.py ../test.jpg                 # single image
-python predict_test.py /path/to/leaf1.jpg leaf2.png # multiple
-python predict_test.py /path/to/folder_of_images    # a whole folder
-python predict_test.py ../test.jpg --topk 5         # show top-K
-```
+- **Backend + model** → a Docker host with enough RAM (e.g. Hugging Face Spaces, Docker SDK — free CPU tier has ample RAM). The model weights ship inside the image via Git LFS.
+- **Database** → a managed Postgres (e.g. Neon/Supabase free tier). Optional — the app runs without it.
+- **Web app** → any static host (e.g. Vercel/Netlify), with `VITE_API_BASE_URL` set to the backend's public URL.
+- **Mobile app** → build an APK with EAS and set `EXPO_PUBLIC_API_URL` to the backend's public URL.
 
-It prints the top-1 prediction with an `OK` / `LOW CONFIDENCE` verdict plus the top-K list.
+The backend already sends permissive CORS (`allow_origins=["*"]`), so the hosted web and mobile clients can call it directly.
 
 ---
 
 ## Known Limitations
 
-- **Lab → field domain gap.** The model is trained largely on curated, clean-background leaf images. Real-world photos from the internet or a phone camera — with cluttered backgrounds, varied lighting, and multiple leaves — can be misclassified or flagged `Unknown`. Improving field generalization (leaf segmentation, domain-randomization augmentation, adding field datasets like PlantDoc) is a known area for future work.
+- **Lab → field domain gap.** The model is trained largely on curated, clean-background leaf images. Real-world photos — with cluttered backgrounds, varied lighting, and multiple leaves — can be misclassified or flagged `Unknown`. Improving field generalization (leaf segmentation, domain-randomization augmentation, adding field datasets like PlantDoc) is future work.
+- **Class imbalance.** Crops/classes with more training images can dominate; class weighting helps, but the strongest fix for the weakest classes is more data. Report **macro-F1** alongside accuracy.
 - **Guidance is advisory.** Treatment/prevention text is general reference information, not a substitute for an agronomist. Every result carries a disclaimer to consult an agricultural expert before acting.
-- **Auth/history disabled by default** in the running app (see the note above).
+- **Server-side history is off by default.** History is stored locally in the browser; enabling per-account server history requires re-enabling `db_save_prediction(...)` in the backend.
 
 ---
 

@@ -1,0 +1,138 @@
+.page {
+  padding-block: var(--space-6) var(--space-7);
+}
+.pageNarrow {
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+}
+
+/* Page heading block */
+.head {
+  margin-bottom: var(--space-5);
+}
+.title {
+  font-size: var(--text-2xl);
+}
+.lead {
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+  max-width: 60ch;
+}
+
+/* Home hero */
+.hero {
+  background: var(--color-green-soft);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: var(--space-7);
+}
+.heroTitle {
+  font-size: var(--text-3xl);
+  max-width: 16ch;
+  line-height: 1.15;
+}
+.heroText {
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  max-width: 56ch;
+  margin-top: var(--space-4);
+}
+.heroActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* Steps */
+.stepsSection {
+  padding-block: var(--space-7);
+}
+.stepsTitle {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-5);
+}
+.steps {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
+  counter-reset: step;
+  list-style: none;
+  padding: 0;
+}
+.step {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.stepNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+.stepText {
+  font-weight: 550;
+}
+
+/* Two-column workflow (Diagnose) */
+.workflow {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.panelTitle {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-4);
+}
+
+/* Crop selector */
+.cropGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  gap: var(--space-2);
+}
+.cropBtn {
+  min-height: var(--touch);
+  padding: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 550;
+  transition: border-color var(--transition), background var(--transition);
+}
+.cropBtn:hover {
+  background: var(--color-surface-hover);
+}
+.cropBtnActive {
+  border-color: var(--color-primary);
+  background: var(--color-green-soft);
+  color: var(--color-primary-dark);
+}
+.required {
+  color: var(--color-error);
+}
+.fieldGap {
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 760px) {
+  .heroActions { flex-direction: row; }
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .workflow { grid-template-columns: 1fr 1fr; }
+}

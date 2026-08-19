@@ -1,0 +1,56 @@
+.wrap {
+  max-width: 420px;
+  margin-inline: auto;
+}
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+.title {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-1);
+}
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-5);
+}
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+.error {
+  margin: 0;
+}
+.alt {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+.success {
+  margin-bottom: var(--space-4);
+}
+
+/* Profile */
+.rows {
+  display: grid;
+  gap: var(--space-1);
+  margin-bottom: var(--space-5);
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.rowLabel { color: var(--color-text-muted); font-size: var(--text-sm); }
+.rowValue { font-weight: 550; }
+.actions { display: grid; gap: var(--space-3); }

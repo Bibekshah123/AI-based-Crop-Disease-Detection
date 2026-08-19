@@ -80,13 +80,24 @@ host the backend somewhere public and use its **https** URL.
 
 ## Files
 
-| File        | What it does                                        |
-|-------------|-----------------------------------------------------|
-| `config.js` | The backend `API_URL` — the one thing you change.   |
-| `api.js`    | `predict()` / `health()` — talks to FastAPI.        |
-| `App.js`    | The whole UI: crop selector, camera/gallery, EN/NP toggle, results, Grad-CAM. |
+| File           | What it does                                                        |
+|----------------|---------------------------------------------------------------------|
+| `config.js`    | The backend `API_URL` — the one thing you change.                   |
+| `api.js`       | `predict()` / `health()` — talks to FastAPI.                        |
+| `App.js`       | Diagnose flow: crop selector (required), camera/upload, preview, photo guidance, Analyze, EN/NP toggle. |
+| `ResultView.js`| The result screen: possible match, confidence status, Grad-CAM comparison, guidance, alternatives, feedback. |
+| `normalize.js` | Turns the raw `/predict` response into a display shape and derives the High/Moderate/Uncertain status. |
+| `theme.js`     | Design tokens — the calm agricultural palette shared with the web app. |
+| `strings.js`   | Bilingual (EN/NP) UI labels + the crop list.                        |
+
+The design, wording, and result layout mirror the web app
+(`frontend/src/…`): a light agricultural theme, "possible match" framing,
+**High / Moderate / Uncertain** status (never a guaranteed diagnosis), a
+side-by-side *Your photo* vs *Model attention* Grad-CAM comparison, an
+uncertainty warning that recommends re-shooting and consulting an expert, and a
+local "was this helpful?" control.
 
 The response fields (`disease`, `confidence`, `gradcam_image`,
-`top_5_predictions`, `symptoms`, `treatment`, `is_unknown`, `crop_mismatch`,
-`low_confidence`, and their `*_np` Nepali variants) come straight from
-`backend/main.py`.
+`top_5_predictions`, `symptoms`, `cause`, `treatment`, `prevention`,
+`is_unknown`, `not_leaf`, `crop_mismatch`, `low_confidence`, and their `*_np`
+Nepali variants) come straight from `backend/main.py`.
