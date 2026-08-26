@@ -224,6 +224,10 @@ __marimo__/
 /FYP-dataset-updated.zip
 /Final-Dataset.zip
 
+# Real field images (downloaded/cleaned locally — not tracked)
+/field_data/
+/field_data.zip
+
 # Large model files (>100MB) — download via script or Google Drive
 backend/updated-model/model.weights.h5
 backend/fyp_efficientnet_b3_model/

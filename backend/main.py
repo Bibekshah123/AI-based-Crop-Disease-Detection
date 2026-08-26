@@ -23,6 +23,10 @@ CLASS_NAMES_PATH = "class_names.json"
 DISEASE_INFO_PATH = "disease_info.json"
 IMG_SIZE = (224, 224)
 LOW_CONFIDENCE_THRESHOLD = 0.60
+# Isolate the leaf from a busy field photo before classifying, so the model
+# (trained on clean lab leaves) sees a lab-like centred leaf. Set LEAF_CROP=0
+# to disable.
+LEAF_CROP = os.getenv("LEAF_CROP", "1") == "1"
 
 # Set this based on your model:
 # "mobilenetv2" or "efficientnet"
@@ -239,10 +243,68 @@ def make_thumbnail(image, size=(160, 120)):
     return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode("utf-8")
 
 
+def crop_to_leaf(pil_image):
+    """Isolate the leaf region from a busy field photo so the model sees a
+    lab-like centred leaf instead of soil, sky, and neighbouring plants.
+
+    Builds a foreground mask from Excess-Green (healthy tissue) OR high
+    saturation (yellow/brown diseased tissue), takes the largest blob, and
+    crops to its padded bounding box. Every failure path returns the ORIGINAL
+    image unchanged, so clean lab photos and unreliable masks are never mangled.
+    """
+    try:
+        rgb = np.array(pil_image)
+        if rgb.ndim != 3 or rgb.shape[2] != 3:
+            return pil_image
+        h, w = rgb.shape[:2]
+        R = rgb[:, :, 0].astype(np.int32)
+        G = rgb[:, :, 1].astype(np.int32)
+        B = rgb[:, :, 2].astype(np.int32)
+
+        exg = 2 * G - R - B                       # green vegetation
+        hsv = cv2.cvtColor(rgb, cv2.COLOR_RGB2HSV)
+        H, S, V = hsv[:, :, 0], hsv[:, :, 1], hsv[:, :, 2]
+        green = exg > 15
+        # Bright yellow/orange diseased tissue. Deliberately narrow so dull brown
+        # soil (which shares the hue) is NOT swept in as foreground.
+        disease = (H >= 15) & (H <= 45) & (S > 110) & (V > 90)
+        mask = ((green | disease)).astype(np.uint8) * 255
+
+        kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        if not contours:
+            return pil_image
+        largest = max(contours, key=cv2.contourArea)
+        area_frac = cv2.contourArea(largest) / float(h * w)
+
+        # Leaf already fills the frame (lab photo) or mask is too small/large
+        # to trust -> leave the image alone.
+        if area_frac < 0.05 or area_frac > 0.90:
+            return pil_image
+
+        x, y, bw, bh = cv2.boundingRect(largest)
+        pad_x, pad_y = int(bw * 0.10), int(bh * 0.10)
+        x0, y0 = max(0, x - pad_x), max(0, y - pad_y)
+        x1, y1 = min(w, x + bw + pad_x), min(h, y + bh + pad_y)
+
+        # Reject absurdly thin crops.
+        if (x1 - x0) < w * 0.15 or (y1 - y0) < h * 0.15:
+            return pil_image
+
+        return pil_image.crop((x0, y0, x1, y1))
+    except Exception:
+        return pil_image
+
+
 def preprocess_image(image_bytes):
     """Convert uploaded image to model-ready format."""
     image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-    original_image = image.copy()
+    if LEAF_CROP:
+        image = crop_to_leaf(image)               # focus on the leaf, not the scene
+    original_image = image.copy()                 # Grad-CAM aligns to the cropped view
     image = image.resize(IMG_SIZE)
 
     image_array = np.array(image)

@@ -2,7 +2,7 @@
  "cells": [
   {
    "cell_type": "markdown",
-   "source": "# Crop Disease Detection — Training on New Dataset\nEfficientNetB2 with 224x224 input, class imbalance handling via oversampling + class weights, stratified split, advanced augmentation, label smoothing, and per-class metrics.\n\n**Kaggle: Add Data → Upload → select your `dataset.zip`**\n**Runtime → Accelerator → GPU T4 x2**\n\n## Key features:\n- **Auto-detects classes** — reads class folders from any dataset, works for any number of classes\n- **224x224 input** — standard EfficientNetB2 input size, all raw images resized automatically\n- **Class imbalance handling** — oversamples minority classes to median*1.2 + inverse-frequency class weights\n- **Stratified 70/15/15 split** — preserves rare class distribution in all three sets\n- **Unknown class** — real non-plant images, Gaussian noise, and leaf-like textures\n- **Strong augmentation** — rotation, shift, zoom, shear, brightness, flip\n- **Dropout 0.5 + L2 regularization** — prevents overfitting\n- **Label smoothing (0.1)** — prevents overconfidence\n- **Cosine decay LR** — smooth fine-tuning schedule\n- **Per-class metrics** — precision, recall, F1 for every class\n- **Model checkpoint** — saves best weights, not last",
+   "source": "# Crop Disease Detection \u2014 Training on New Dataset\nEfficientNetB2 with 224x224 input, class imbalance handling via oversampling + class weights, stratified split, advanced augmentation, label smoothing, and per-class metrics.\n\n**Kaggle: Add Data \u2192 Upload \u2192 select your `dataset.zip`**\n**Runtime \u2192 Accelerator \u2192 GPU T4 x2**\n\n## Key features:\n- **Auto-detects classes** \u2014 reads class folders from any dataset, works for any number of classes\n- **224x224 input** \u2014 standard EfficientNetB2 input size, all raw images resized automatically\n- **Class imbalance handling** \u2014 oversamples minority classes to median*1.2 + inverse-frequency class weights\n- **Stratified 70/15/15 split** \u2014 preserves rare class distribution in all three sets\n- **Unknown class** \u2014 real non-plant images, Gaussian noise, and leaf-like textures\n- **Strong augmentation** \u2014 rotation, shift, zoom, shear, brightness, flip\n- **Dropout 0.5 + L2 regularization** \u2014 prevents overfitting\n- **Label smoothing (0.1)** \u2014 prevents overconfidence\n- **Cosine decay LR** \u2014 smooth fine-tuning schedule\n- **Per-class metrics** \u2014 precision, recall, F1 for every class\n- **Model checkpoint** \u2014 saves best weights, not last",
    "metadata": {}
   },
   {
@@ -23,14 +23,14 @@
    "cell_type": "markdown",
    "source": [
     "## 2. Dataset Path (Kaggle)\n",
-    "Upload your `dataset.zip` as a Kaggle Dataset via **Add Data → Upload**.\n",
+    "Upload your `dataset.zip` as a Kaggle Dataset via **Add Data \u2192 Upload**.\n",
     "Kaggle automatically extracts it to `/kaggle/input/`. The notebook auto-detects the dataset folder."
    ],
    "metadata": {}
   },
   {
    "cell_type": "code",
-   "source": "# Detect Kaggle dataset path and copy to writable working directory\nKAGGLE_INPUT = '/kaggle/input'\nWORK_DIR = 'crop-dataset'\n\n# --- Explicit dataset path -------------------------------------------------\n# Folder that DIRECTLY contains the class folders (Apple__Black_Rot, ... ).\n# For this project the Kaggle dataset is  raw-dataset/Dataset/<48 class folders>.\n# Set to None to fall back to auto-detection.\nDATASET_PATH = '/kaggle/input/raw-dataset/Dataset'\n# ---------------------------------------------------------------------------\n\nsrc_dir = None\n\nif DATASET_PATH and os.path.isdir(DATASET_PATH):\n    src_dir = DATASET_PATH\n    n_cls = len([d for d in os.listdir(src_dir)\n                 if os.path.isdir(os.path.join(src_dir, d)) and not d.startswith(('__', '.'))])\n    print(f'Using explicit DATASET_PATH: {src_dir}  ({n_cls} class folders)')\nelif DATASET_PATH:\n    print(f'WARNING: DATASET_PATH \"{DATASET_PATH}\" not found — falling back to auto-detect.')\n\nif src_dir is None and os.path.exists(KAGGLE_INPUT):\n    items = os.listdir(KAGGLE_INPUT)\n    print('Kaggle input dirs:', items)\n    if not items:\n        raise RuntimeError('No dataset found in /kaggle/input/')\n\n    # The uploaded dataset folder (first item in Kaggle input)\n    dataset_root = os.path.join(KAGGLE_INPUT, items[0])\n    print(f'Dataset root: {dataset_root}')\n    print(f'Contents: {os.listdir(dataset_root)[:20]}...')\n\n    # Find the directory that contains class folders\n    # Class folders contain image files, not subdirectories\n    subdirs = sorted([\n        d for d in os.listdir(dataset_root)\n        if os.path.isdir(os.path.join(dataset_root, d)) and not d.startswith(('__', '.'))\n    ])\n\n    if len(subdirs) == 1:\n        # Single subfolder — likely a wrapper; check if it contains class folders\n        inner = os.path.join(dataset_root, subdirs[0])\n        inner_subdirs = [\n            d for d in os.listdir(inner)\n            if os.path.isdir(os.path.join(inner, d)) and not d.startswith(('__', '.'))\n        ]\n        if inner_subdirs:\n            src_dir = inner\n            print(f'Found wrapper folder \"{subdirs[0]}\" with {len(inner_subdirs)} class folders')\n        else:\n            # Wrapper contains images directly — it is the class folder\n            src_dir = dataset_root\n    elif len(subdirs) > 1:\n        # Multiple subdirectories — they ARE the class folders\n        src_dir = dataset_root\n        print(f'Dataset contains {len(subdirs)} class folders directly')\n    else:\n        src_dir = dataset_root\n        print(f'No subdirectories found, using dataset root directly')\n\n    print(f'Source dataset: {src_dir}')\n\nif src_dir is not None:\n    # Copy to writable working directory (Kaggle input is read-only)\n    if not os.path.exists(WORK_DIR):\n        print(f'Copying dataset to {WORK_DIR}...')\n        shutil.copytree(src_dir, WORK_DIR)\n        print('Copy complete')\n    else:\n        print(f'{WORK_DIR} already exists')\nelse:\n    print('Not running on Kaggle. Place your dataset folder in the working directory.')\n\nDATASET_DIR = WORK_DIR\nprint(f'DATASET_DIR = {DATASET_DIR}')\nprint(f'Class folders: {sorted([d for d in os.listdir(DATASET_DIR) if os.path.isdir(os.path.join(DATASET_DIR, d))])}')",
+   "source": "# Detect Kaggle dataset path and copy to writable working directory\nKAGGLE_INPUT = '/kaggle/input'\nWORK_DIR = 'crop-dataset'\n\n# --- Explicit dataset path -------------------------------------------------\n# Folder that DIRECTLY contains the class folders (Apple__Black_Rot, ... ).\n# For this project the Kaggle dataset is  raw-dataset/Dataset/<48 class folders>.\n# Set to None to fall back to auto-detection.\nDATASET_PATH = '/kaggle/input/raw-dataset/Dataset'\n# ---------------------------------------------------------------------------\n\nsrc_dir = None\n\nif DATASET_PATH and os.path.isdir(DATASET_PATH):\n    src_dir = DATASET_PATH\n    n_cls = len([d for d in os.listdir(src_dir)\n                 if os.path.isdir(os.path.join(src_dir, d)) and not d.startswith(('__', '.'))])\n    print(f'Using explicit DATASET_PATH: {src_dir}  ({n_cls} class folders)')\nelif DATASET_PATH:\n    print(f'WARNING: DATASET_PATH \"{DATASET_PATH}\" not found \u2014 falling back to auto-detect.')\n\nif src_dir is None and os.path.exists(KAGGLE_INPUT):\n    items = os.listdir(KAGGLE_INPUT)\n    print('Kaggle input dirs:', items)\n    if not items:\n        raise RuntimeError('No dataset found in /kaggle/input/')\n\n    # The uploaded dataset folder (first item in Kaggle input)\n    dataset_root = os.path.join(KAGGLE_INPUT, items[0])\n    print(f'Dataset root: {dataset_root}')\n    print(f'Contents: {os.listdir(dataset_root)[:20]}...')\n\n    # Find the directory that contains class folders\n    # Class folders contain image files, not subdirectories\n    subdirs = sorted([\n        d for d in os.listdir(dataset_root)\n        if os.path.isdir(os.path.join(dataset_root, d)) and not d.startswith(('__', '.'))\n    ])\n\n    if len(subdirs) == 1:\n        # Single subfolder \u2014 likely a wrapper; check if it contains class folders\n        inner = os.path.join(dataset_root, subdirs[0])\n        inner_subdirs = [\n            d for d in os.listdir(inner)\n            if os.path.isdir(os.path.join(inner, d)) and not d.startswith(('__', '.'))\n        ]\n        if inner_subdirs:\n            src_dir = inner\n            print(f'Found wrapper folder \"{subdirs[0]}\" with {len(inner_subdirs)} class folders')\n        else:\n            # Wrapper contains images directly \u2014 it is the class folder\n            src_dir = dataset_root\n    elif len(subdirs) > 1:\n        # Multiple subdirectories \u2014 they ARE the class folders\n        src_dir = dataset_root\n        print(f'Dataset contains {len(subdirs)} class folders directly')\n    else:\n        src_dir = dataset_root\n        print(f'No subdirectories found, using dataset root directly')\n\n    print(f'Source dataset: {src_dir}')\n\nif src_dir is not None:\n    # Copy to writable working directory (Kaggle input is read-only)\n    if not os.path.exists(WORK_DIR):\n        print(f'Copying dataset to {WORK_DIR}...')\n        shutil.copytree(src_dir, WORK_DIR)\n        print('Copy complete')\n    else:\n        print(f'{WORK_DIR} already exists')\nelse:\n    print('Not running on Kaggle. Place your dataset folder in the working directory.')\n\nDATASET_DIR = WORK_DIR\nprint(f'DATASET_DIR = {DATASET_DIR}')\nprint(f'Class folders: {sorted([d for d in os.listdir(DATASET_DIR) if os.path.isdir(os.path.join(DATASET_DIR, d))])}')",
    "metadata": {},
    "execution_count": null,
    "outputs": []
@@ -45,7 +45,7 @@
   },
   {
    "cell_type": "code",
-   "source": "import requests\nOUT_DIR = os.path.join(WORK_DIR, 'Unknown___Unknown')\nos.makedirs(OUT_DIR, exist_ok=True)\n\nTARGET = 500\nexisting = [f for f in os.listdir(OUT_DIR) if f.endswith(('.jpg', '.jpeg', '.png'))]\n\nif len(existing) < 200:\n    # NOTE: the old source.unsplash.com/random endpoint was retired and now errors.\n    # Lorem Picsum (https://picsum.photos) still serves random real-world photos.\n    # A per-image seed guarantees a different photo and avoids CDN caching collisions.\n    downloaded, errors = 0, 0\n    for i in range(TARGET * 3):\n        if downloaded >= TARGET:\n            break\n        try:\n            url = f'https://picsum.photos/seed/unknown{i}/300/300'\n            r = requests.get(url, timeout=10, allow_redirects=True)\n            if r.status_code == 200 and len(r.content) > 1000:\n                with open(os.path.join(OUT_DIR, f'picsum_{downloaded:04d}.jpg'), 'wb') as f:\n                    f.write(r.content)\n                downloaded += 1\n                if downloaded % 50 == 0:\n                    print(f'Downloaded {downloaded}/{TARGET}...')\n            else:\n                errors += 1\n        except Exception:\n            errors += 1\n        if errors > 150:\n            print('Too many download errors — stopping; synthetic fallback will fill in.')\n            break\n    print(f'Downloaded {downloaded} real non-plant images (errors: {errors})')\n\n    have = len([f for f in os.listdir(OUT_DIR) if f.endswith(('.jpg', '.jpeg', '.png'))])\n    if have < 50:\n        # No internet / API down: fall back to synthetic noise so the class still exists.\n        print('WARNING: too few images downloaded. Falling back to synthetic noise.')\n        rng = random.Random(42)\n        while len([f for f in os.listdir(OUT_DIR) if f.endswith(('.jpg', '.jpeg', '.png'))]) < 300:\n            arr = np.random.randint(0, 256, (224, 224, 3), dtype=np.uint8)\n            Image.fromarray(arr).save(os.path.join(OUT_DIR, f'synth_{rng.randint(0, 99999):05d}.jpg'))\n        print('Fallback synthetic images generated')\nelse:\n    print(f'Unknown images already exist ({len(existing)} files)')",
+   "source": "import requests\nOUT_DIR = os.path.join(WORK_DIR, 'Unknown___Unknown')\nos.makedirs(OUT_DIR, exist_ok=True)\n\nTARGET = 500\nexisting = [f for f in os.listdir(OUT_DIR) if f.endswith(('.jpg', '.jpeg', '.png'))]\n\nif len(existing) < 200:\n    # NOTE: the old source.unsplash.com/random endpoint was retired and now errors.\n    # Lorem Picsum (https://picsum.photos) still serves random real-world photos.\n    # A per-image seed guarantees a different photo and avoids CDN caching collisions.\n    downloaded, errors = 0, 0\n    for i in range(TARGET * 3):\n        if downloaded >= TARGET:\n            break\n        try:\n            url = f'https://picsum.photos/seed/unknown{i}/300/300'\n            r = requests.get(url, timeout=10, allow_redirects=True)\n            if r.status_code == 200 and len(r.content) > 1000:\n                with open(os.path.join(OUT_DIR, f'picsum_{downloaded:04d}.jpg'), 'wb') as f:\n                    f.write(r.content)\n                downloaded += 1\n                if downloaded % 50 == 0:\n                    print(f'Downloaded {downloaded}/{TARGET}...')\n            else:\n                errors += 1\n        except Exception:\n            errors += 1\n        if errors > 150:\n            print('Too many download errors \u2014 stopping; synthetic fallback will fill in.')\n            break\n    print(f'Downloaded {downloaded} real non-plant images (errors: {errors})')\n\n    have = len([f for f in os.listdir(OUT_DIR) if f.endswith(('.jpg', '.jpeg', '.png'))])\n    if have < 50:\n        # No internet / API down: fall back to synthetic noise so the class still exists.\n        print('WARNING: too few images downloaded. Falling back to synthetic noise.')\n        rng = random.Random(42)\n        while len([f for f in os.listdir(OUT_DIR) if f.endswith(('.jpg', '.jpeg', '.png'))]) < 300:\n            arr = np.random.randint(0, 256, (224, 224, 3), dtype=np.uint8)\n            Image.fromarray(arr).save(os.path.join(OUT_DIR, f'synth_{rng.randint(0, 99999):05d}.jpg'))\n        print('Fallback synthetic images generated')\nelse:\n    print(f'Unknown images already exist ({len(existing)} files)')",
    "metadata": {},
    "execution_count": null,
    "outputs": []
@@ -54,8 +54,8 @@
    "cell_type": "markdown",
    "source": [
     "## 4. Generate Synthetic Unknown Images (Gaussian Noise + Leaf-Like Textures)\n",
-    "Gaussian noise at 5 intensity levels teaches the model that random patterns → Unknown.\n",
-    "Leaf-like green/brown blobs teach the model that unfamiliar leaf-looking textures → Unknown.\n",
+    "Gaussian noise at 5 intensity levels teaches the model that random patterns \u2192 Unknown.\n",
+    "Leaf-like green/brown blobs teach the model that unfamiliar leaf-looking textures \u2192 Unknown.\n",
     "This prevents the model from confidently forcing a random or unseen-leaf image into one of the 41 known classes."
    ],
    "metadata": {}
@@ -182,33 +182,11 @@
     "# Mix in REAL FIELD images to close the lab->field domain gap.\n",
     "# Put field photos in field_data/<ClassName>/*.jpg using the SAME class folder\n",
     "# names as the lab dataset. They are split 70/15/15 like the lab data, and the\n",
-    "# field TEST portion is mirrored into data/field_test for a separate real-world\n",
-    "# score (see the field-only evaluation cell).\n",
-    "#\n",
-    "# Classes with very few field images (< FIELD_MIN_SPLIT) route ALL of them into\n",
-    "# training: those few real field scenes are too precious to spend on eval, and a\n",
-    "# field-only score on 1-2 images would be pure noise. They are still tested on\n",
-    "# their lab images in the normal test set.\n",
+    "# field TEST portion is also mirrored into data/field_test so you can measure\n",
+    "# real-world accuracy separately (see the field-only evaluation cell).\n",
     "# ---------------------------------------------------------------------------\n",
-    "# Locate field_data wherever it lives: current dir, the copied working dir, or\n",
-    "# an attached Kaggle dataset (/kaggle/input/<slug>/... ). Matches the first\n",
-    "# directory that actually contains our class subfolders.\n",
-    "def _find_field_dir():\n",
-    "    roots = ['field_data', os.path.join(WORK_DIR, 'field_data')]\n",
-    "    ki = '/kaggle/input'\n",
-    "    if os.path.isdir(ki):\n",
-    "        for d in os.listdir(ki):\n",
-    "            roots.append(os.path.join(ki, d, 'field_data'))\n",
-    "            roots.append(os.path.join(ki, d))\n",
-    "    for r in roots:\n",
-    "        if os.path.isdir(r) and any(os.path.isdir(os.path.join(r, c)) for c in classes):\n",
-    "            return r\n",
-    "    return 'field_data'\n",
-    "\n",
-    "FIELD_DIR = _find_field_dir()\n",
-    "FIELD_MIN_SPLIT = 20\n",
+    "FIELD_DIR = 'field_data'\n",
     "field_test_dir = os.path.join(base_dir, 'field_test')\n",
-    "print(f'Field images dir: {FIELD_DIR}  (exists: {os.path.isdir(FIELD_DIR)})')\n",
     "\n",
     "if os.path.isdir(FIELD_DIR):\n",
     "    print('\\nMerging real field images:')\n",
@@ -222,25 +200,19 @@
     "            continue\n",
     "        random.shuffle(fimgs)\n",
     "        nf = len(fimgs)\n",
-    "        if nf < FIELD_MIN_SPLIT:\n",
-    "            # too few to split -> put every real field image into training\n",
-    "            parts = [(os.path.join(train_dir, cls), fimgs)]\n",
-    "            split_note = f'{nf} tr (all -> train, too few to split)'\n",
-    "        else:\n",
-    "            n_tr = int(nf * 0.70); n_va = int(nf * 0.15)\n",
-    "            parts = [\n",
-    "                (os.path.join(train_dir, cls), fimgs[:n_tr]),\n",
-    "                (os.path.join(val_dir, cls),   fimgs[n_tr:n_tr + n_va]),\n",
-    "                (os.path.join(test_dir, cls),  fimgs[n_tr + n_va:]),\n",
-    "                (os.path.join(field_test_dir, cls), fimgs[n_tr + n_va:]),  # field-only mirror\n",
-    "            ]\n",
-    "            split_note = f'{n_tr} tr / {n_va} va / {nf - n_tr - n_va} te'\n",
+    "        n_tr = int(nf * 0.70); n_va = int(nf * 0.15)\n",
+    "        parts = [\n",
+    "            (os.path.join(train_dir, cls), fimgs[:n_tr]),\n",
+    "            (os.path.join(val_dir, cls),   fimgs[n_tr:n_tr + n_va]),\n",
+    "            (os.path.join(test_dir, cls),  fimgs[n_tr + n_va:]),\n",
+    "            (os.path.join(field_test_dir, cls), fimgs[n_tr + n_va:]),  # field-only mirror\n",
+    "        ]\n",
     "        for split_dir, split_imgs in parts:\n",
     "            os.makedirs(split_dir, exist_ok=True)\n",
     "            for img in split_imgs:\n",
     "                shutil.copy2(os.path.join(fsrc, img), os.path.join(split_dir, 'field_' + img))\n",
     "        total_field += nf\n",
-    "        print(f'  {cls:45s} +{nf:4d} field ({split_note})')\n",
+    "        print(f'  {cls:45s} +{nf:4d} field ({n_tr} tr / {n_va} va / {nf-n_tr-n_va} te)')\n",
     "    print(f'Merged {total_field} field images.')\n",
     "else:\n",
     "    print(f\"\\n[no field images] Create '{FIELD_DIR}/<ClassName>/*.jpg' to add real field \"\n",
@@ -475,7 +447,7 @@
    "source": [
     "## 12. Load Pre-Trained Weights\n",
     "If `best_model/best_model_phase2.weights.h5` exists (already fine-tuned), load it directly and skip both training phases.\n",
-    "Otherwise, falls back to Phase 1 training → Phase 2 fine-tuning."
+    "Otherwise, falls back to Phase 1 training \u2192 Phase 2 fine-tuning."
    ],
    "metadata": {}
   },
@@ -554,8 +526,8 @@
   {
    "cell_type": "markdown",
    "source": [
-    "## 13. Phase 2 — Fine-Tune Entire Model\n",
-    "Unfreeze backbone (freeze first 100 layers), cosine decay LR 1e-4 → 1e-6, label smoothing."
+    "## 13. Phase 2 \u2014 Fine-Tune Entire Model\n",
+    "Unfreeze backbone (freeze first 100 layers), cosine decay LR 1e-4 \u2192 1e-6, label smoothing."
    ],
    "metadata": {}
   },
@@ -606,7 +578,7 @@
   {
    "cell_type": "markdown",
    "source": [
-    "## 14. Evaluate on Test Set — Overall Metrics\n"
+    "## 14. Evaluate on Test Set \u2014 Overall Metrics\n"
    ],
    "metadata": {}
   },
@@ -633,7 +605,7 @@
    "cell_type": "markdown",
    "source": [
     "## 15. Per-Class Metrics\n",
-    "Precision, recall, F1-score for every disease class — identifies which classes need improvement."
+    "Precision, recall, F1-score for every disease class \u2014 identifies which classes need improvement."
    ],
    "metadata": {}
   },
@@ -730,7 +702,7 @@
    "cell_type": "markdown",
    "source": [
     "## 18. Training History Curves\n",
-    "Accuracy and loss plots for both training phases — useful for the project report."
+    "Accuracy and loss plots for both training phases \u2014 useful for the project report."
    ],
    "metadata": {}
   },
@@ -791,11 +763,11 @@
    "source": [
     "## Download Output\n",
     "Output files are in `model_output/`. From Kaggle:\n",
-    "1. Click the **Output** tab → **Download** button\n",
+    "1. Click the **Output** tab \u2192 **Download** button\n",
     "\n",
     "Copy these to your project:\n",
-    "- `best_model_phase2.weights.h5` → `backend/best_model/best_model_phase2.weights.h5`\n",
-    "- `class_names.json` → `backend/class_names.json`\n",
+    "- `best_model_phase2.weights.h5` \u2192 `backend/best_model/best_model_phase2.weights.h5`\n",
+    "- `class_names.json` \u2192 `backend/class_names.json`\n",
     "- Update `backend/disease_info.json` with info for all new classes"
    ],
    "metadata": {}
