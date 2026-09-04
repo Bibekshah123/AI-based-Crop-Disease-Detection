@@ -124,6 +124,24 @@
   background: var(--color-green-soft);
   color: var(--color-primary-dark);
 }
+.cropAny {
+  grid-column: 1 / -1;
+  font-weight: 500;
+  color: var(--color-text-muted, var(--color-text));
+  border-style: dashed;
+}
+.cropAnyActive {
+  border-style: solid;
+  border-color: var(--color-primary);
+  background: var(--color-green-soft);
+  color: var(--color-primary-dark);
+  font-weight: 550;
+}
+.cropHint {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted, inherit);
+}
 .required {
   color: var(--color-error);
 }

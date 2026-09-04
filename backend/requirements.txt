@@ -1,12 +1,16 @@
-fastapi
-uvicorn
-python-multipart
-tensorflow
-numpy
-pillow
-opencv-python
-python-jose[cryptography]
-bcrypt
-python-dotenv
-pydantic
-psycopg2-binary
+# Pinned to the versions this model was verified against. TensorFlow/Keras
+# especially: the Grad-CAM layer walk in main.py handles Keras 3's removal of
+# Layer.output_shape, and an unpinned upgrade on a Hugging Face rebuild would
+# silently disable the heatmap again.
+fastapi==0.141.1
+uvicorn==0.52.4
+python-multipart==0.0.32
+tensorflow==2.21.0
+numpy==2.2.6
+pillow==12.3.0
+opencv-python==5.0.0.93
+python-jose[cryptography]==3.5.0
+bcrypt==5.0.0
+python-dotenv==1.2.3
+pydantic==2.13.5
+psycopg2-binary==2.9.12

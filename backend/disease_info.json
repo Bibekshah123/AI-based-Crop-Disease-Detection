@@ -414,5 +414,33 @@
     "treatment": "Upload a clear image of a leaf from a supported crop. Consult an agricultural expert for further diagnosis.",
     "prevention": "Ensure good lighting and focus when taking photos. Only upload images of crop leaves.",
     "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Crop Not Supported": {
+    "disease_np": "यो बाली समर्थित छैन",
+    "description": "This leaf does not match any of the crops CropSense was trained on. It may be a crop this project does not cover, such as guava, papaya, coffee or tea.",
+    "description_np": "यो पात CropSense ले तालिम लिएका बालीहरूसँग मिल्दैन। यो अम्बा, मेवा, कफी वा चिया जस्तै यस परियोजनामा समावेश नभएको बाली हुन सक्छ।",
+    "cause": "The crop in this photo was not part of the training dataset, so the model has no disease classes for it.",
+    "cause_np": "यस फोटोको बाली तालिम डेटासेटमा समावेश नभएकाले मोडेलसँग यसका रोग वर्गहरू छैनन्।",
+    "symptoms": "The image looks like a leaf, but its shape, texture and colour do not match any supported crop.",
+    "symptoms_np": "तस्बिर पातजस्तै देखिन्छ, तर यसको आकार, बनोट र रङ कुनै पनि समर्थित बालीसँग मिल्दैन।",
+    "treatment": "No diagnosis can be given for an unsupported crop. Upload a leaf from one of the supported crops, or consult a local agricultural expert for this plant.",
+    "treatment_np": "समर्थित नभएको बालीको निदान दिन सकिँदैन। समर्थित बालीको पात अपलोड गर्नुहोस्, वा यस बिरुवाका लागि स्थानीय कृषि विज्ञको सल्लाह लिनुहोस्।",
+    "prevention": "Check the supported crop list before uploading. CropSense covers ten crops only.",
+    "prevention_np": "अपलोड गर्नु अघि समर्थित बालीको सूची हेर्नुहोस्। CropSense ले दस वटा बाली मात्र समेट्छ।",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Not Identified": {
+    "disease_np": "पहिचान हुन सकेन",
+    "description": "The leaf could not be identified confidently. This usually means the photo is blurry, too far away, poorly lit, or shows several overlapping leaves.",
+    "description_np": "पात निश्चित रूपमा पहिचान गर्न सकिएन। प्रायः यो फोटो धमिलो, धेरै टाढाबाट खिचिएको, अपुग उज्यालो, वा धेरै पात एकसाथ भएकाले हुन्छ।",
+    "cause": "The model's confidence was spread across many classes, so no single diagnosis is reliable.",
+    "cause_np": "मोडेलको विश्वास धेरै वर्गहरूमा छरिएकाले कुनै एउटा निदान भरपर्दो छैन।",
+    "symptoms": "No clear disease pattern could be read from this image.",
+    "symptoms_np": "यस तस्बिरबाट कुनै स्पष्ट रोगको ढाँचा पढ्न सकिएन।",
+    "treatment": "Retake the photo: one leaf, filling most of the frame, in even daylight, with the affected area in focus.",
+    "treatment_np": "फोटो पुनः खिच्नुहोस्: एउटै पात, फ्रेमको अधिकांश भाग ढाक्ने गरी, समान प्राकृतिक उज्यालोमा, प्रभावित भाग फोकसमा राखेर।",
+    "prevention": "Avoid shadows, glare, distant shots and busy backgrounds when photographing leaves.",
+    "prevention_np": "पातको फोटो खिच्दा छायाँ, चहक, टाढाको दृश्य र अस्तव्यस्त पृष्ठभूमिबाट जोगिनुहोस्।",
+    "disclaimer": "AI result should be verified if symptoms appear later."
   }
 }

@@ -171,3 +171,65 @@
   .compare { grid-template-columns: 1fr 1fr; }
   .guidanceGrid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ---- Recommended treatment ---------------------------------------------- */
+.treatLead {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted, inherit);
+}
+.treatList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.treatItem {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  background: var(--color-surface);
+}
+.treatHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.treatLeaf { font-size: 26px; line-height: 1; }
+.treatName {
+  margin: 0;
+  font-weight: 600;
+  font-size: var(--text-base, 1rem);
+}
+.treatKind {
+  margin: 2px 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted, inherit);
+  text-transform: capitalize;
+}
+.treatSpecs {
+  margin: 0 0 var(--space-2);
+  display: grid;
+  gap: 4px;
+  font-size: var(--text-sm);
+}
+.treatSpecs > div {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: var(--space-2);
+}
+.treatSpecs dt { color: var(--color-text-muted, inherit); }
+.treatSpecs dd { margin: 0; }
+.treatNote {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+.treatDisclaimer { margin-top: var(--space-4); }
+
+@media (max-width: 520px) {
+  .treatSpecs > div { grid-template-columns: 1fr; gap: 0; }
+  .treatSpecs dt { font-weight: 600; }
+}

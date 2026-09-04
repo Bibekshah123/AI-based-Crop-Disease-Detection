@@ -18,9 +18,25 @@ from db import init_db, save_prediction as db_save_prediction, load_history, del
 # ============================
 # Configuration
 # ============================
-MODEL_PATH = "best_model"
-CLASS_NAMES_PATH = "class_names.json"
+# Final trained model. class_names.json may or may not include the Unknown class
+# depending on the training run, so nothing here assumes its presence: unknown
+# inputs are caught by the not-a-leaf pre-check, the confidence/margin/entropy
+# heuristic, the open-set distance rule, AND -- when the class does exist -- the
+# model predicting UNKNOWN_CLASS directly.
+# final_field_Model is the Sep 2026 run: Phase 2 fine-tuned on the lab set PLUS
+# the ~1.6k real field photos. Final_Model is kept only as a fallback -- its
+# phase 2 output layer is still at Glorot init (untrained) and scores at chance.
+# Override with MODEL_PATH/CLASS_NAMES_PATH to fall back to an older run.
+MODEL_PATH = os.getenv("MODEL_PATH", "final_field_Model")
+CLASS_NAMES_PATH = os.getenv(
+    "CLASS_NAMES_PATH", os.path.join(MODEL_PATH, "class_names.json")
+)
 DISEASE_INFO_PATH = "disease_info.json"
+TREATMENTS_PATH = "treatments.json"
+
+# The catch-all class produced by the training notebook. Must match
+# UNKNOWN_CLASS in scripts/train_colab.ipynb section 15b.
+UNKNOWN_CLASS = "Unknown___Unknown"
 IMG_SIZE = (224, 224)
 LOW_CONFIDENCE_THRESHOLD = 0.60
 # Isolate the leaf from a busy field photo before classifying, so the model
@@ -85,8 +101,42 @@ def load_crop_model(model_path, class_names):
         model.load_weights(fallback_path)
     else:
         raise FileNotFoundError(f"No weights found in {model_path}")
-    
+
     return model
+
+
+def check_weights_match(weights_file, n_classes):
+    """The weights file and class_names.json are a matched pair produced by the
+    same training run. If the classifier head has a different number of outputs
+    than class_names.json has entries, load_weights fails with an opaque shape
+    error -- so surface the real cause up front."""
+    try:
+        import h5py
+        with h5py.File(weights_file, "r") as f:
+            found = []
+
+            def walk(g, path=""):
+                for k in g:
+                    item, cur = g[k], f"{path}/{k}"
+                    if isinstance(item, h5py.Dataset):
+                        # classifier kernel: 2-D and not inside the backbone
+                        if len(item.shape) == 2 and "functional" not in cur and "optimizer" not in cur:
+                            found.append(item.shape[-1])
+                    else:
+                        walk(item, cur)
+
+            walk(f)
+        if found and found[-1] != n_classes:
+            print(
+                f"\n*** WEIGHTS / CLASS-NAMES MISMATCH ***\n"
+                f"  {weights_file} was trained with {found[-1]} classes\n"
+                f"  class_names.json lists {n_classes} classes\n"
+                f"  These must come from the SAME training run. Re-download both\n"
+                f"  from the notebook, or set MODEL_PATH/CLASS_NAMES_PATH to an\n"
+                f"  older matching pair (e.g. MODEL_PATH=best_model).\n"
+            )
+    except ImportError:
+        pass  # h5py unavailable: fall through to Keras' own error
 
 # ============================
 # Load model and JSON files
@@ -97,7 +147,95 @@ with open(CLASS_NAMES_PATH, "r") as f:
 with open(DISEASE_INFO_PATH, "r") as f:
     disease_info = json.load(f)
 
+# Per-disease chemical/cultural control options. Optional: an older deployment
+# without the file still serves predictions, just with no treatment card.
+try:
+    with open(TREATMENTS_PATH, "r") as f:
+        treatments = json.load(f)
+    print(f"Loaded treatment options for {len(treatments)} diseases.")
+except FileNotFoundError:
+    treatments = {}
+    print(f"No {TREATMENTS_PATH} - predictions will carry no treatment recommendations.")
+
+# Shown with every recommendation. Pesticide registration differs by country and
+# the label on the bottle always overrides anything this app says.
+TREATMENT_DISCLAIMER = (
+    "Always read and follow the product label. Doses are general guidance - confirm "
+    "the rate, the pre-harvest interval and local registration with your agrovet or "
+    "agriculture office before spraying. Wear gloves, a mask and long sleeves."
+)
+TREATMENT_DISCLAIMER_NP = (
+    "सधैं औषधिको लेबल पढेर पालना गर्नुहोस्। यहाँ दिइएको मात्रा सामान्य निर्देशन मात्र हो - "
+    "छर्नु अघि मात्रा, बाली टिप्नु अघिको प्रतीक्षा अवधि र स्थानीय दर्ता आफ्नो कृषि पसल वा "
+    "कृषि कार्यालयसँग पक्का गर्नुहोस्। पन्जा, मास्क र लामो बाहुला लगाउनुहोस्।"
+)
+
+# The crops this model actually covers, derived from class_names so the user-facing
+# message can never drift from the trained classes.
+SUPPORTED_CROPS = sorted({c.split("__")[0] for c in class_names if c != UNKNOWN_CLASS})
+SUPPORTED_CROPS_TEXT = (
+    ", ".join(SUPPORTED_CROPS[:-1]) + " and " + SUPPORTED_CROPS[-1]
+    if len(SUPPORTED_CROPS) > 1 else (SUPPORTED_CROPS[0] if SUPPORTED_CROPS else "none")
+)
+
+# A confident prediction of the Unknown class means "this is a leaf, but not one
+# of our crops". Below this it is just an uncertain guess about a crop we do cover.
+UNSUPPORTED_CONFIDENCE = 0.50
+
+for _w in ("best_model_phase2_final.weights.h5", "best_model_phase2.weights.h5",
+           "best_model_phase1.weights.h5", "model.weights.h5"):
+    _p = os.path.join(MODEL_PATH, _w)
+    if os.path.exists(_p):
+        check_weights_match(_p, len(class_names))
+        break
+
 model = load_crop_model(MODEL_PATH, class_names)
+
+# ============================
+# Open-set rejection (untrained crops)
+# ============================
+# A 52-way softmax is closed-set: an untrained crop (guava, papaya, coffee...)
+# is always forced onto some trained class, often confidently, so confidence
+# thresholds alone cannot reject it. ood_stats.npz holds one L2-normalised
+# centroid per trained class in the penultimate feature space; an image whose
+# highest cosine similarity to any centroid falls below the calibrated
+# threshold is unfamiliar and is reported as Unknown. Produced by section 15c
+# of scripts/train_colab.ipynb and must come from the SAME training run as the
+# weights. If the file is absent the API still works, using the softmax
+# heuristic alone.
+OOD_STATS_PATH = os.path.join(MODEL_PATH, "ood_stats.npz")
+ood_centroids = None
+ood_threshold = None
+ood_model = None
+
+if os.path.exists(OOD_STATS_PATH):
+    try:
+        _stats = np.load(OOD_STATS_PATH, allow_pickle=False)
+        ood_centroids = _stats["centroids"].astype(np.float32)
+        ood_threshold = float(_stats["threshold"])
+        _layer = str(_stats["embed_layer"]) if "embed_layer" in _stats else "dense_hidden"
+        ood_model = tf.keras.Model(
+            model.input, [model.output, model.get_layer(_layer).output]
+        )
+        print(
+            f"Open-set rejection enabled: {ood_centroids.shape[0]} centroids, "
+            f"threshold {ood_threshold:.4f} (layer '{_layer}')"
+        )
+    except Exception as exc:
+        ood_centroids = ood_threshold = ood_model = None
+        print(f"WARNING: could not load {OOD_STATS_PATH} ({exc}). "
+              f"Untrained crops will only be caught by the softmax heuristic.")
+else:
+    print(f"No {OOD_STATS_PATH} - untrained crops are only caught by the softmax "
+          f"heuristic. Run section 15c of the training notebook to generate it.")
+
+
+def open_set_score(embedding):
+    """Highest cosine similarity between this embedding and any trained-class
+    centroid. Low means the image does not resemble any crop the model knows."""
+    e = np.asarray(embedding, dtype=np.float32).reshape(-1)
+    e = e / (np.linalg.norm(e) + 1e-9)
+    return float(np.max(ood_centroids @ e))
 
 # Initialize database tables (optional — auth/history is disabled by default,
 # and /predict does not use the DB, so a missing/unreachable Postgres must not
@@ -318,21 +456,36 @@ def preprocess_image(image_bytes):
     return image_array, original_image
 
 
+def _output_rank(layer):
+    """Rank of a layer's output shape, or None if it has no single output.
+
+    Keras 3 removed Layer.output_shape, so the Keras 2 spelling raises
+    AttributeError on every layer. That silently made find_last_conv_layer
+    return the base model wrapper instead of a conv layer, which disabled
+    Grad-CAM entirely."""
+    for attr in ("output", "output_shape"):
+        try:
+            value = getattr(layer, attr)
+            shape = value.shape if attr == "output" else value
+            return len(shape)
+        except Exception:
+            continue
+    return None
+
+
 def find_last_conv_layer(model):
     """Locate last convolutional layer for Grad-CAM."""
     for layer in reversed(model.layers):
         if hasattr(layer, 'layers'):
             for inner_layer in reversed(layer.layers):
-                try:
-                    if len(inner_layer.output_shape) == 4 and not isinstance(inner_layer, tf.keras.layers.InputLayer):
-                        return inner_layer.name
-                except Exception:
+                if isinstance(inner_layer, tf.keras.layers.InputLayer):
                     continue
-        try:
-            if len(layer.output_shape) == 4 and not isinstance(layer, tf.keras.layers.InputLayer):
-                return layer.name
-        except Exception:
+                if _output_rank(inner_layer) == 4:
+                    return inner_layer.name
+        if isinstance(layer, tf.keras.layers.InputLayer):
             continue
+        if _output_rank(layer) == 4:
+            return layer.name
     return None
 
 
@@ -391,12 +544,15 @@ def generate_gradcam(img_array, model, class_index):
         conv_outputs = conv_outputs[0]
         heatmap = conv_outputs @ pooled_grads[..., tf.newaxis]
         heatmap = tf.squeeze(heatmap)
-        heatmap = np.maximum(heatmap, 0)
-        
+        # np.maximum on a tensor already returns an ndarray, so do not call
+        # .numpy() on the result -- that raises AttributeError and the except
+        # below swallows it, silently disabling the heatmap.
+        heatmap = np.maximum(np.asarray(heatmap), 0)
+
         if np.max(heatmap) != 0:
             heatmap = heatmap / np.max(heatmap)
-        
-        return heatmap.numpy()
+
+        return heatmap
         
     except Exception as e:
         print(f"Grad-CAM generation failed: {e}")
@@ -470,11 +626,14 @@ async def predict(
     if not is_leaf_image(original_image):
         result = {
             "disease": "Not a Leaf",
-            "raw_class": "Unknown___Unknown",
+            "disease_np": "पात होइन",
+            "raw_class": UNKNOWN_CLASS,
             "crop_type": crop_type,
             "crop_mismatch": False,
             "is_unknown": True,
             "not_leaf": True,
+            "unknown_reason": "not_leaf",
+            "supported_crops": SUPPORTED_CROPS,
             "confidence": 0,
             "low_confidence": True,
             "message": "Please upload a clear leaf image. The uploaded image does not appear to be a crop leaf.",
@@ -491,7 +650,15 @@ async def predict(
         # db_save_prediction(username, result, thumbnail)  # auth commented out
         return result
 
-    predictions = model.predict(img_array, verbose=0)[0]
+    # One forward pass yields both the class probabilities and the penultimate
+    # embedding used for open-set rejection.
+    ood_score = None
+    if ood_model is not None:
+        _probs, _emb = ood_model.predict(img_array, verbose=0)
+        predictions = _probs[0]
+        ood_score = open_set_score(_emb[0])
+    else:
+        predictions = model.predict(img_array, verbose=0)[0]
 
     top_index = int(np.argmax(predictions))
 
@@ -521,15 +688,37 @@ async def predict(
     probs = np.clip(predictions, 1e-12, 1.0)
     entropy = -np.sum(probs * np.log(probs)) / np.log(len(probs))
 
+    # The softmax heuristic catches genuinely uncertain predictions. The
+    # feature-distance rule catches the case softmax cannot: a crop the model
+    # was never trained on, which it classifies confidently as something else.
+    unfamiliar = ood_score is not None and ood_score < ood_threshold
+
     is_unknown_input = (
-        confidence < 0.30
+        # The model itself picked the Unknown class. Without this the softmax
+        # heuristic never fires on a *confident* Unknown prediction, so the API
+        # reported is_unknown=False and the display name fell through to
+        # clean_label("Unknown___Unknown") == "Unknown Unknown", which is also
+        # missing from disease_info.json. Mirrors backend_decision() in the
+        # training notebook.
+        raw_class == UNKNOWN_CLASS
+        or confidence < 0.30
         or (confidence < 0.50 and confidence_margin < 5)
         or (entropy > 0.90)
+        or unfamiliar
     )
 
+    # Two very different situations land here and the user needs to know which:
+    #   unsupported_crop - it looks like a leaf, just not a crop this model covers
+    #   uncertain        - probably a supported crop, but the photo is unclear
+    # "Unknown" told the user neither of those things.
+    unknown_reason = None
     if is_unknown_input:
-        raw_class = "Unknown___Unknown"
-        disease_name = "Unknown"
+        unsupported = unfamiliar or (
+            raw_class == UNKNOWN_CLASS and confidence >= UNSUPPORTED_CONFIDENCE
+        )
+        unknown_reason = "unsupported_crop" if unsupported else "uncertain"
+        raw_class = UNKNOWN_CLASS
+        disease_name = "Crop Not Supported" if unsupported else "Not Identified"
 
     # Top 5 predictions
     top_5_indices = predictions.argsort()[-5:][::-1]
@@ -558,8 +747,13 @@ async def predict(
     confidence_pct = round(confidence * 100, 2)
     low_confidence = confidence < LOW_CONFIDENCE_THRESHOLD
 
-    if is_unknown_input:
-        message = "Please upload a clear leaf image. This image does not match any known crop disease."
+    if unknown_reason == "unsupported_crop":
+        message = (f"This crop is not covered by CropSense. The leaf does not match any of "
+                   f"the {len(SUPPORTED_CROPS)} crops this project was trained on: "
+                   f"{SUPPORTED_CROPS_TEXT}.")
+    elif unknown_reason == "uncertain":
+        message = ("This leaf could not be identified confidently. Take a closer, sharper "
+                   "photo of a single leaf in even daylight and try again.")
     elif crop_mismatch:
         message = f"This image appears to be a {pred_crop} leaf, not {crop_type}. Please upload a {crop_type} leaf for accurate results."
     elif low_confidence:
@@ -588,6 +782,13 @@ async def predict(
         "not_leaf": False,
         "confidence": confidence_pct,
         "entropy": round(float(entropy), 4),
+        "ood_score": round(ood_score, 4) if ood_score is not None else None,
+        "unfamiliar_crop": bool(unfamiliar),
+        "unknown_reason": unknown_reason,
+        "treatments": treatments.get(disease_name, []),
+        "treatment_disclaimer": TREATMENT_DISCLAIMER,
+        "treatment_disclaimer_np": TREATMENT_DISCLAIMER_NP,
+        "supported_crops": SUPPORTED_CROPS,
         "low_confidence": low_confidence,
         "message": message,
         "top_5_predictions": top_5_predictions,

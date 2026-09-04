@@ -2,3 +2,23 @@ __pycache__
 *.pyc
 .env
 model_extracted
+predict_test.py
+
+# Runtime uses final_field_Model/ only (the Sep 2026 lab+field fine-tune).
+# Exclude the superseded weight files from the earlier runs so the image stays
+# small. Final_Model stays in as the documented MODEL_PATH fallback.
+best_model/
+updated-model/
+fyp_efficientnet_b3_model/
+MobileNetV2-model/
+
+# Phase 1 is a training checkpoint only; serving loads phase 2.
+final_field_Model/best_model_phase1.weights.h5
+
+# Unzipped duplicate of ood_stats.npz - the loader reads the .npz itself.
+final_field_Model/ood_stats/
+
+# Training artefacts that are not needed to serve predictions.
+Final_Model/crop_model_final_output.zip
+Final_Model/confusion_matrix.png
+Final_Model/training_history.png

@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ImagePicker from "../components/ImagePicker";
 import { Spinner, ErrorState } from "../components/ui";
-import { CROPS } from "../lib/crops";
+import { CROPS, CROP_ANY } from "../lib/crops";
 import { predict, classifyError } from "../lib/api";
 import { normalizePrediction, toHistoryRecord } from "../lib/normalize";
 import { fileToDataUrl } from "../lib/image";
@@ -62,9 +62,13 @@ export default function Diagnose() {
     setApiError(null);
     setValidationError("");
 
+    // "Any crop" means the user does not know the crop: send no crop_type so the
+    // backend skips the crop-mismatch check instead of comparing against a sentinel.
+    const sentCrop = cropType === CROP_ANY ? null : cropType;
+
     try {
-      const raw = await predict(file, cropType);
-      const data = normalizePrediction(raw, { cropType });
+      const raw = await predict(file, sentCrop);
+      const data = normalizePrediction(raw, { cropType: sentCrop ?? "" });
       const [thumb, medium] = await Promise.all([
         fileToDataUrl(file, 160, 0.7).catch(() => null),
         fileToDataUrl(file, 720, 0.8).catch(() => null),
@@ -86,7 +90,7 @@ export default function Diagnose() {
     <div className={`container ${s.page}`}>
       <div className={s.head}>
         <h1 className={s.title}>Diagnose a leaf</h1>
-        <p className={s.lead}>Select the crop, add a clear photo of one affected leaf, then analyze.</p>
+        <p className={s.lead}>Select the crop (or choose "Any crop"), add a clear photo of one affected leaf, then analyze.</p>
       </div>
 
       <div className={s.workflow}>
@@ -110,8 +114,23 @@ export default function Diagnose() {
                   {c.label}
                 </button>
               ))}
+              <button
+                type="button"
+                role="radio"
+                aria-checked={cropType === CROP_ANY}
+                className={`${s.cropBtn} ${s.cropAny} ${cropType === CROP_ANY ? s.cropAnyActive : ""}`}
+                onClick={() => { setCropType(CROP_ANY); setValidationError(""); }}
+              >
+                Any crop — I&apos;m not sure
+              </button>
             </div>
           </fieldset>
+          {cropType === CROP_ANY && (
+            <p className={s.cropHint}>
+              The leaf will still be identified across all 10 supported crops. Only the
+              &ldquo;wrong crop selected&rdquo; warning is skipped.
+            </p>
+          )}
         </section>
 
         {/* Step 2: photo */}

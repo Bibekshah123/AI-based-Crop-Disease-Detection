@@ -240,6 +240,20 @@ backend/best_model/
 *.h5
 *.keras
 
+# ...except the weights actually served. Hugging Face Spaces deploys from git,
+# so a Space built without these starts fine and then fails on the first
+# /predict. Stored via LFS - see .gitattributes.
+!backend/final_field_Model/best_model_phase2.weights.h5
+
+# Training output archives / plots shipped alongside the final weights
+# (class_names.json in Final_Model IS tracked — it is small and required).
+backend/Final_Model/*.zip
+backend/Final_Model/*.png
+
+# Notebook backups made while editing
+scripts/*.bak
+scripts/*.bak_*
+
 # Generated ML artefacts
 model_artifacts/
 checkpoints/

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { StatusBadge, ConfidenceMeter } from "./ui";
 import { Status } from "../lib/normalize";
 import { Feedback, getFeedback, setFeedback } from "../lib/feedback";
+import TreatmentCard from "./TreatmentCard";
 import styles from "./ResultView.module.css";
 
 const GRADCAM_NOTE =
@@ -68,6 +69,15 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
         </div>
         {data.gradcam && <p className={styles.gradcamNote}>{GRADCAM_NOTE}</p>}
       </section>
+
+      {/* Recommended treatment ------------------------------------------ */}
+      {!uncertain && (
+        <TreatmentCard
+          treatments={data.treatments}
+          disclaimer={data.treatmentDisclaimer}
+          styles={styles}
+        />
+      )}
 
       {/* Guidance sections ---------------------------------------------- */}
       {sections.length > 0 && (
