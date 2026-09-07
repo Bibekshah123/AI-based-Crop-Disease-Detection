@@ -1,10 +1,21 @@
 import os
+import secrets
 import bcrypt
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from db import get_user, create_user, get_all_users
 
-SECRET_KEY = os.getenv("JWT_SECRET", "crop-disease-detection-secret-key-2024")
+# No hardcoded fallback: this file is public (the Hugging Face Space deploys
+# from a public repo), and a known signing key lets anyone mint a valid token
+# for any account. Falling back to a random per-process key instead keeps local
+# development working -- tokens simply stop being valid across a restart --
+# while making a misconfigured deployment fail closed rather than wide open.
+SECRET_KEY = os.getenv("JWT_SECRET")
+if not SECRET_KEY:
+    SECRET_KEY = secrets.token_urlsafe(48)
+    print("WARNING: JWT_SECRET is not set. Using a random key for this process; "
+          "logins will not survive a restart. Set JWT_SECRET in the deployment "
+          "environment (on Hugging Face: Settings -> Variables and secrets).")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
 

@@ -23,11 +23,14 @@ from db import init_db, save_prediction as db_save_prediction, load_history, del
 # inputs are caught by the not-a-leaf pre-check, the confidence/margin/entropy
 # heuristic, the open-set distance rule, AND -- when the class does exist -- the
 # model predicting UNKNOWN_CLASS directly.
-# final_field_Model is the Sep 2026 run: Phase 2 fine-tuned on the lab set PLUS
-# the ~1.6k real field photos. Final_Model is kept only as a fallback -- its
-# phase 2 output layer is still at Glorot init (untrained) and scores at chance.
-# Override with MODEL_PATH/CLASS_NAMES_PATH to fall back to an older run.
-MODEL_PATH = os.getenv("MODEL_PATH", "final_field_Model")
+# last_final_model is the newest run (Sep 6 2026): a partial Phase 2 fine-tune
+# on the lab set plus the real field photos, with more of the backbone frozen
+# than final_field_Model (435 vs 474 optimizer tensors). It ships no
+# ood_stats.npz, so open-set rejection below stays off until one is exported
+# from the SAME run -- centroids live in the penultimate feature space and do
+# not transfer between checkpoints. Override with MODEL_PATH/CLASS_NAMES_PATH
+# to fall back: final_field_Model is the previous run and does have centroids.
+MODEL_PATH = os.getenv("MODEL_PATH", "last_final_model")
 CLASS_NAMES_PATH = os.getenv(
     "CLASS_NAMES_PATH", os.path.join(MODEL_PATH, "class_names.json")
 )

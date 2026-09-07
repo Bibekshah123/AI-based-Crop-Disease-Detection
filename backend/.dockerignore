@@ -4,9 +4,9 @@ __pycache__
 model_extracted
 predict_test.py
 
-# Runtime uses final_field_Model/ only (the Sep 2026 lab+field fine-tune).
-# Exclude the superseded weight files from the earlier runs so the image stays
-# small. Final_Model stays in as the documented MODEL_PATH fallback.
+# Runtime uses last_final_model/ (the Sep 6 2026 partial fine-tune).
+# final_field_Model stays in: it is the documented MODEL_PATH fallback and the
+# only run that ships ood_stats.npz. Exclude the superseded runs entirely.
 best_model/
 updated-model/
 fyp_efficientnet_b3_model/
@@ -14,6 +14,7 @@ MobileNetV2-model/
 
 # Phase 1 is a training checkpoint only; serving loads phase 2.
 final_field_Model/best_model_phase1.weights.h5
+Final_Model/
 
 # Unzipped duplicate of ood_stats.npz - the loader reads the .npz itself.
 final_field_Model/ood_stats/

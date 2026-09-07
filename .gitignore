@@ -240,10 +240,10 @@ backend/best_model/
 *.h5
 *.keras
 
-# ...except the weights actually served. Hugging Face Spaces deploys from git,
-# so a Space built without these starts fine and then fails on the first
-# /predict. Stored via LFS - see .gitattributes.
-!backend/final_field_Model/best_model_phase2.weights.h5
+# No exceptions: weights stay out of this repo entirely. The Hugging Face Space
+# is a SEPARATE repo, populated by copying backend/ into a fresh clone, so it
+# still ships the .h5 it needs to serve -- see backend/README.md. Keeping them
+# out here means the only copies are this working tree and the Space.
 
 # Training output archives / plots shipped alongside the final weights
 # (class_names.json in Final_Model IS tracked — it is small and required).
@@ -259,3 +259,9 @@ model_artifacts/
 checkpoints/
 __pycache__/
 *.pyc
+# Local credential store from before Postgres - contains real bcrypt hashes.
+backend/users.json
+
+# Open-set centroids are a model artefact, matched to one weights file.
+backend/*/ood_stats.npz
+backend/*/ood_stats/

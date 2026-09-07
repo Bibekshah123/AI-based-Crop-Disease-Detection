@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, Text, Image, Pressable, StyleSheet } from "react-native";
 import { colors, tones, radius } from "./theme";
 import { Status } from "./normalize";
+import TreatmentCard from "./TreatmentCard";
 
 export default function ResultView({ data, image, t, onCheckAnother }) {
   const uncertain = data.status === Status.UNCERTAIN;
@@ -61,6 +62,17 @@ export default function ResultView({ data, image, t, onCheckAnother }) {
         </View>
         {!!data.gradcam && <Text style={styles.mutedNote}>{t.gradcamNote}</Text>}
       </View>
+
+      {/* Recommended treatment. Withheld on an uncertain result, as on web:
+          naming a pesticide for a diagnosis the model is unsure of is the one
+          wrong answer that costs a farmer money and a spray they cannot undo. */}
+      {!uncertain && (
+        <TreatmentCard
+          treatments={data.treatments}
+          disclaimer={data.treatmentDisclaimer}
+          t={t}
+        />
+      )}
 
       {/* Guidance */}
       {sections.length > 0 && (
