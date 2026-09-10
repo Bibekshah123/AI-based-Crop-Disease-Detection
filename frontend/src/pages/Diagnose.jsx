@@ -2,13 +2,14 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ImagePicker from "../components/ImagePicker";
 import { Spinner, ErrorState } from "../components/ui";
-import { CROPS, CROP_ANY } from "../lib/crops";
+import { CROPS, CROP_ANY, cropLabel } from "../lib/crops";
 import { predict, classifyError } from "../lib/api";
 import { normalizePrediction, toHistoryRecord } from "../lib/normalize";
 import { fileToDataUrl } from "../lib/image";
 import { saveHistory, makeId } from "../lib/history";
 import { useObjectUrl } from "../lib/useObjectUrl";
 import { useResult } from "../context/ResultContext";
+import { useLang } from "../context/LanguageContext";
 import s from "./pages.module.css";
 
 const MAX_BYTES = 12 * 1024 * 1024; // 12 MB
@@ -16,6 +17,7 @@ const MAX_BYTES = 12 * 1024 * 1024; // 12 MB
 export default function Diagnose() {
   const navigate = useNavigate();
   const { publish } = useResult();
+  const { lang, t } = useLang();
 
   const [cropType, setCropType] = useState("");
   const [file, setFile] = useState(null);
@@ -27,11 +29,11 @@ export default function Diagnose() {
 
   const selectFile = (f) => {
     if (!f.type?.startsWith("image/")) {
-      setValidationError("Please choose an image file.");
+      setValidationError(t.errPickImage);
       return;
     }
     if (f.size > MAX_BYTES) {
-      setValidationError("That image is larger than 12 MB. Please use a smaller photo.");
+      setValidationError(t.errTooLarge);
       return;
     }
     setValidationError("");
@@ -49,11 +51,11 @@ export default function Diagnose() {
   const analyze = async () => {
     if (submittingRef.current) return;
     if (!cropType) {
-      setValidationError("Please select a crop first.");
+      setValidationError(t.errPickCrop);
       return;
     }
     if (!file) {
-      setValidationError("Please add a leaf photo.");
+      setValidationError(t.errNoPhoto);
       return;
     }
 
@@ -68,7 +70,7 @@ export default function Diagnose() {
 
     try {
       const raw = await predict(file, sentCrop);
-      const data = normalizePrediction(raw, { cropType: sentCrop ?? "" });
+      const data = normalizePrediction(raw, { cropType: sentCrop ?? "", lang });
       const [thumb, medium] = await Promise.all([
         fileToDataUrl(file, 160, 0.7).catch(() => null),
         fileToDataUrl(file, 720, 0.8).catch(() => null),
@@ -89,19 +91,19 @@ export default function Diagnose() {
   return (
     <div className={`container ${s.page}`}>
       <div className={s.head}>
-        <h1 className={s.title}>Diagnose a leaf</h1>
-        <p className={s.lead}>Select the crop (or choose "Any crop"), add a clear photo of one affected leaf, then analyze.</p>
+        <h1 className={s.title}>{t.diagnoseTitle}</h1>
+        <p className={s.lead}>{t.diagnoseLead}</p>
       </div>
 
       <div className={s.workflow}>
         {/* Step 1: crop */}
         <section className={s.panel} aria-labelledby="crop-heading">
           <h2 id="crop-heading" className={s.panelTitle}>
-            1. Select the crop <span className={s.required} aria-hidden="true">*</span>
+            {t.stepSelectCrop} <span className={s.required} aria-hidden="true">*</span>
           </h2>
           <fieldset style={{ border: 0, padding: 0, margin: 0 }}>
-            <legend className="sr-only">Crop (required)</legend>
-            <div className={s.cropGrid} role="radiogroup" aria-label="Crop">
+            <legend className="sr-only">{t.cropRequired}</legend>
+            <div className={s.cropGrid} role="radiogroup" aria-label={t.cropRequired}>
               {CROPS.map((c) => (
                 <button
                   key={c.id}
@@ -111,7 +113,7 @@ export default function Diagnose() {
                   className={`${s.cropBtn} ${cropType === c.id ? s.cropBtnActive : ""}`}
                   onClick={() => { setCropType(c.id); setValidationError(""); }}
                 >
-                  {c.label}
+                  {cropLabel(c, lang)}
                 </button>
               ))}
               <button
@@ -121,21 +123,20 @@ export default function Diagnose() {
                 className={`${s.cropBtn} ${s.cropAny} ${cropType === CROP_ANY ? s.cropAnyActive : ""}`}
                 onClick={() => { setCropType(CROP_ANY); setValidationError(""); }}
               >
-                Any crop — I&apos;m not sure
+                {t.anyCrop}
               </button>
             </div>
           </fieldset>
           {cropType === CROP_ANY && (
             <p className={s.cropHint}>
-              The leaf will still be identified across all 10 supported crops. Only the
-              &ldquo;wrong crop selected&rdquo; warning is skipped.
+              {t.anyCropHint}
             </p>
           )}
         </section>
 
         {/* Step 2: photo */}
         <section className={s.panel} aria-labelledby="photo-heading">
-          <h2 id="photo-heading" className={s.panelTitle}>2. Add a leaf photo</h2>
+          <h2 id="photo-heading" className={s.panelTitle}>{t.stepAddPhoto}</h2>
           <ImagePicker
             preview={preview}
             fileName={file?.name}
@@ -155,16 +156,16 @@ export default function Diagnose() {
           >
             {submitting ? (
               <>
-                <Spinner label="Analyzing" /> Analyzing leaf…
+                <Spinner label={t.loading} /> {t.analyzing}
               </>
             ) : (
-              "Analyze leaf"
+              t.analyzeLeaf
             )}
           </button>
 
           {/* Live region for status + errors */}
           <div aria-live="polite" className="sr-only">
-            {submitting ? "Analyzing your leaf photo, please wait." : ""}
+            {submitting ? t.analyzingLive : ""}
           </div>
 
           {apiError && (
@@ -172,10 +173,10 @@ export default function Diagnose() {
               <ErrorState
                 title={
                   apiError.kind === "timeout"
-                    ? "The analysis timed out"
+                    ? t.errTimeoutTitle
                     : apiError.kind === "network"
-                    ? "Can't reach the server"
-                    : "Analysis failed"
+                    ? t.errNetworkTitle
+                    : t.errFailedTitle
                 }
                 message={apiError.message}
                 onRetry={analyze}

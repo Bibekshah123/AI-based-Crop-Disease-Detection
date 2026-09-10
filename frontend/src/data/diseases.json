@@ -11,7 +11,15 @@
     "symptoms": "Circular brown leaf spots with purple margins, dark brown rotting lesions on fruit with concentric rings.",
     "treatment": "Remove mummified fruit and cankered branches. Apply fungicide during the growing season.",
     "prevention": "Prune dead wood, remove fallen leaves, and apply dormant sprays before bud break.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "स्याउको कालो कुहिने रोग",
+    "name_np": "स्याउको कालो कुहिने रोग",
+    "description_np": "कालो कुहिने रोग Botryosphaeria obtusa नामक ढुसीबाट लाग्ने स्याउको रोग हो। यसले पातमा गोलो खैरो थोप्ला र फलमा गाढा खैरो कुहिएको घाउ बनाउँछ, जसको बीचमा प्रायः कालो बिन्दुहरू (पिक्निडिया) देखिन्छन्।",
+    "cause_np": "Botryosphaeria obtusa नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा प्याजी किनारा भएका गोलो खैरो थोप्ला, फलमा गाढा खैरो कुहिएको घाउ र त्यसमा गोलाकार घेराहरू देखिन्छन्।",
+    "treatment_np": "सुकेर झुन्डिएका फल र क्यान्करयुक्त हाँगा हटाउनुहोस्। बाली बढ्ने समयमा ढुसीनाशक औषधि छर्नुहोस्।",
+    "prevention_np": "मरेका हाँगा काटछाँट गर्नुहोस्, झरेका पात संकलन गरी नष्ट गर्नुहोस् र टुसा फुट्नु अघि सुप्तावस्थाको स्प्रे गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "apple-cedar-rust",
@@ -25,7 +33,15 @@
     "symptoms": "Bright orange-yellow spots on upper leaf surfaces, horn-like tubes on leaf undersides, deformed fruit.",
     "treatment": "Apply fungicide at pink bud stage. Remove nearby cedar trees if possible.",
     "prevention": "Remove juniper/cedar alternate hosts within 2 miles. Plant resistant apple varieties.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "स्याउको सिडार सिन्दुरे रोग",
+    "name_np": "स्याउको सिडार सिन्दुरे रोग",
+    "description_np": "सिडार सिन्दुरे रोग Gymnosporangium juniperi-virginianae नामक ढुसीबाट लाग्छ। यो रोग फैलिन स्याउ र सिडार/जुनिपर दुवै बिरुवा आवश्यक पर्छ। यसले स्याउको पातमा चम्किलो सुन्तला-पहेँलो थोप्ला बनाउँछ र फल बिग्रन्छ।",
+    "cause_np": "Gymnosporangium juniperi-virginianae नामक ढुसीबाट लाग्ने रोग (फैलिन सिडार बिरुवा आवश्यक पर्छ)।",
+    "symptoms_np": "पातको माथिल्लो सतहमा चम्किलो सुन्तला-पहेँलो थोप्ला, पातको तल्लो भागमा सिङजस्ता नली र बिग्रेको फल।",
+    "treatment_np": "कोपिला गुलाबी हुने अवस्थामा ढुसीनाशक औषधि छर्नुहोस्। सम्भव भए वरपरका सिडारका रूख हटाउनुहोस्।",
+    "prevention_np": "वरपर करिब ३ किलोमिटर भित्रका जुनिपर/सिडार बिरुवा हटाउनुहोस् र रोग प्रतिरोधी स्याउका जात रोप्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "apple-healthy",
@@ -39,7 +55,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "स्याउ — स्वस्थ",
+    "name_np": "स्याउ — स्वस्थ",
+    "description_np": "स्याउको पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र रोग लागेको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित रूपमा अनुगमन गरिरहनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "apple-scab",
@@ -53,7 +77,15 @@
     "symptoms": "Olive-green to brown spots on leaves causing curling and premature drop.",
     "treatment": "Remove infected leaves and apply fungicide. Consult an agricultural expert.",
     "prevention": "Plant resistant varieties and apply dormant sprays in early spring.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "स्याउको खपटे रोग",
+    "name_np": "स्याउको खपटे रोग",
+    "description_np": "स्याउको खपटे रोग Venturia inaequalis नामक ढुसीबाट लाग्ने सामान्य रोग हो। यसले पात र फलमा जैतुनी-हरियोदेखि खैरो थोप्ला बनाउँछ, जसले गर्दा पात समय अगावै झर्छ र फलमा दाग बस्छ।",
+    "cause_np": "Venturia inaequalis नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा जैतुनी-हरियोदेखि खैरो थोप्ला देखिन्छ, पात बटारिन्छ र समय अगावै झर्छ।",
+    "treatment_np": "संक्रमित पात हटाएर ढुसीनाशक औषधि छर्नुहोस्। कृषि विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "रोग प्रतिरोधी जात रोप्नुहोस् र वसन्तको सुरुमा सुप्तावस्थाको स्प्रे गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "banana-black-sigatoka",
@@ -67,7 +99,15 @@
     "symptoms": "Dark brown to black streaks and spots on leaves, premature leaf death, reduced fruit bunch weight.",
     "treatment": "Apply systemic fungicides on a regular schedule. Remove and destroy infected leaves.",
     "prevention": "Improve drainage, increase plant spacing, and apply preventive fungicide sprays.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "केराको कालो सिगाटोका",
+    "name_np": "केराको कालो सिगाटोका",
+    "description_np": "कालो सिगाटोका Mycosphaerella fijiensis नामक ढुसीबाट लाग्ने केराको गम्भीर पात धर्के रोग हो। यसले पातमा गाढा खैरोदेखि कालो धर्का बनाउँछ, जसले प्रकाश संश्लेषण घटाई उत्पादनमा ठूलो कमी ल्याउँछ।",
+    "cause_np": "Mycosphaerella fijiensis नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा गाढा खैरोदेखि कालो धर्का र थोप्ला, पात समय अगावै मर्ने र घरीको तौल घट्ने।",
+    "treatment_np": "नियमित तालिका बनाई प्रणालीगत ढुसीनाशक औषधि छर्नुहोस्। संक्रमित पात काटेर नष्ट गर्नुहोस्।",
+    "prevention_np": "पानीको निकास सुधार गर्नुहोस्, बिरुवाबीचको दूरी बढाउनुहोस् र रोकथामका लागि नियमित ढुसीनाशक छर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "banana-bract-mosaic-virus",
@@ -81,7 +121,15 @@
     "symptoms": "Mosaic mottling on bracts and leaves, streaking on pseudostems, distorted fruit shape.",
     "treatment": "No cure. Remove and destroy infected plants. Use virus-free planting material.",
     "prevention": "Plant certified disease-free suckers, control aphid vectors, and rogue out infected plants.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "केराको ब्र्याक्ट मोजाइक भाइरस",
+    "name_np": "केराको ब्र्याक्ट मोजाइक भाइरस",
+    "description_np": "केराको ब्र्याक्ट मोजाइक भाइरस (BBrMV) एक पोटीभाइरस हो, जसले ब्र्याक्ट, पात र थममा मोजाइक (धब्बेदार) ढाँचा बनाउँछ। संवेदनशील जातमा यसले उत्पादनमा ठूलो नोक्सान गराउँछ।",
+    "cause_np": "Banana Bract Mosaic Virus (BBrMV) भाइरसबाट लाग्ने रोग, जुन लाहीको माध्यमबाट सर्छ।",
+    "symptoms_np": "ब्र्याक्ट र पातमा धब्बेदार मोजाइक ढाँचा, थममा धर्का र फलको आकार बिग्रने।",
+    "treatment_np": "यसको कुनै औषधि छैन। संक्रमित बिरुवा उखेलेर नष्ट गर्नुहोस् र भाइरसमुक्त बिरुवा मात्र प्रयोग गर्नुहोस्।",
+    "prevention_np": "प्रमाणित रोगमुक्त सुकेर्नो रोप्नुहोस्, लाही नियन्त्रण गर्नुहोस् र संक्रमित बिरुवा तुरुन्तै हटाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "banana-healthy",
@@ -95,7 +143,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring and maintain proper soil nutrients.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "केरा — स्वस्थ",
+    "name_np": "केरा — स्वस्थ",
+    "description_np": "केराको पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र रोगको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित अनुगमन गर्नुहोस् र माटोमा आवश्यक पोषक तत्व कायम राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "banana-insect-pest",
@@ -109,7 +165,15 @@
     "symptoms": "Chewing marks, tunnels in pseudostem, leaf curling, silver streaks, or frass deposits.",
     "treatment": "Apply appropriate insecticide. Use pheromone traps for banana weevil. Consult an expert.",
     "prevention": "Monitor regularly, keep field clean, use clean planting material, and apply neem-based treatments.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "केरामा कीराको प्रकोप",
+    "name_np": "केरामा कीराको प्रकोप",
+    "description_np": "केराको पातमा केराको घुन, लाही वा थ्रिप्सजस्ता कीराले गरेको क्षति देखिन्छ। पात चपाएको दाग, सुरुङ, बटारिने वा रङ बदलिने जस्ता लक्षण देखा पर्छन्।",
+    "cause_np": "केराको घुन (Cosmopolites sordidus), लाही वा थ्रिप्स जस्ता कीराबाट हुने क्षति।",
+    "symptoms_np": "चपाएको दाग, थममा सुरुङ, पात बटारिने, चाँदी रङका धर्का वा कीराको फोहोर देखिने।",
+    "treatment_np": "उपयुक्त कीटनाशक औषधि प्रयोग गर्नुहोस्। केराको घुनका लागि फेरोमोन ट्र्याप राख्नुहोस्। विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "नियमित अनुगमन गर्नुहोस्, खेत सफा राख्नुहोस्, सफा बिरुवा प्रयोग गर्नुहोस् र नीमजन्य औषधि प्रयोग गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "banana-moko",
@@ -123,7 +187,15 @@
     "symptoms": "Yellowing and wilting of leaves, bacterial ooze from cut stems, premature fruit ripening.",
     "treatment": "No cure. Remove and destroy infected plants immediately. Sterilize cutting tools.",
     "prevention": "Use disease-free planting material, control water drainage, and avoid wounding plants.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "केराको मोको (ब्याक्टेरियल ओइलाउने रोग)",
+    "name_np": "केराको मोको (ब्याक्टेरियल ओइलाउने रोग)",
+    "description_np": "मोको रोग Ralstonia solanacearum नामक ब्याक्टेरियाबाट लाग्ने केराको ओइलाउने रोग हो। यसले पात छिट्टै ओइलाएर पहेँलो बनाउँछ र काटेको थमबाट ब्याक्टेरियाको लेस निस्कन्छ। यो रोग सङ्क्रमित औजार र कीराबाट सर्छ।",
+    "cause_np": "Ralstonia solanacearum नामक ब्याक्टेरियाबाट लाग्ने रोग।",
+    "symptoms_np": "पात पहेँलिने र ओइलाउने, काटेको थमबाट ब्याक्टेरियाको लेस निस्कने, फल समय अगावै पाक्ने।",
+    "treatment_np": "यसको कुनै औषधि छैन। संक्रमित बिरुवा तुरुन्तै उखेलेर नष्ट गर्नुहोस् र काट्ने औजार सफा गर्नुहोस्।",
+    "prevention_np": "रोगमुक्त बिरुवा प्रयोग गर्नुहोस्, पानीको निकास मिलाउनुहोस् र बिरुवामा घाउ नलाग्ने गरी काम गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "banana-panama",
@@ -137,7 +209,15 @@
     "symptoms": "Yellowing and wilting of lower leaves, vascular discoloration in the stem.",
     "treatment": "No effective cure. Remove infected plants immediately to prevent spread.",
     "prevention": "Use disease-free planting material and practice crop rotation.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "केराको पानामा रोग",
+    "name_np": "केराको पानामा रोग",
+    "description_np": "पानामा रोग Fusarium oxysporum f. sp. cubense नामक ढुसीबाट लाग्ने केराको अत्यन्त घातक ओइलाउने रोग हो। यसले पात पहेँलो बनाई ओइल्याउँछ र थमभित्रको नसा खैरो हुन्छ। यसको प्रभावकारी औषधि छैन।",
+    "cause_np": "Fusarium oxysporum f. sp. cubense (Tropical Race 4) नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "तल्लो भागका पात पहेँलिने र ओइलाउने, थमभित्रको नसामा खैरो दाग देखिने।",
+    "treatment_np": "प्रभावकारी औषधि छैन। रोग नफैलियोस् भन्नाका लागि संक्रमित बिरुवा तुरुन्तै हटाउनुहोस्।",
+    "prevention_np": "रोगमुक्त बिरुवा प्रयोग गर्नुहोस् र बाली चक्र अपनाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "banana-yellow-sigatoka",
@@ -151,7 +231,15 @@
     "symptoms": "Elongated dark streaks with yellow halos on leaves, premature leaf death.",
     "treatment": "Apply fungicide and remove severely infected leaves.",
     "prevention": "Improve air circulation, practice field sanitation, and apply preventive sprays.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "केराको पहेँलो सिगाटोका",
+    "name_np": "केराको पहेँलो सिगाटोका",
+    "description_np": "पहेँलो सिगाटोका Mycosphaerella musicola नामक ढुसीबाट लाग्ने केराको पात थोप्ले रोग हो। यसले पातमा पहेँलो घेरा भएका धर्का बनाउँछ, जसले प्रकाश संश्लेषण र उत्पादन घटाउँछ।",
+    "cause_np": "Mycosphaerella musicola नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा पहेँलो घेरा भएका लामा गाढा धर्का र पात समय अगावै मर्ने।",
+    "treatment_np": "ढुसीनाशक औषधि छर्नुहोस् र धेरै संक्रमित पात काटेर हटाउनुहोस्।",
+    "prevention_np": "हावा चल्ने व्यवस्था मिलाउनुहोस्, खेतको सरसफाइ गर्नुहोस् र रोकथामका लागि नियमित स्प्रे गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "citrus-canker",
@@ -165,7 +253,15 @@
     "symptoms": "Raised corky lesions on leaves, stems, and fruit with yellow halos.",
     "treatment": "Remove infected plant parts and apply copper-based bactericides.",
     "prevention": "Use disease-free seedlings and control citrus leaf miner populations.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "सुन्तलाजन्य फलको क्यान्कर",
+    "name_np": "सुन्तलाजन्य फलको क्यान्कर",
+    "description_np": "सिट्रस क्यान्कर Xanthomonas citri नामक ब्याक्टेरियाबाट लाग्ने अत्यन्त सर्ने रोग हो। यसले पात, हाँगा र फलमा उठेका खस्रा घाउ बनाउँछ र वरिपरि प्रायः पहेँलो घेरा देखिन्छ।",
+    "cause_np": "Xanthomonas citri subsp. citri नामक ब्याक्टेरियाबाट लाग्ने रोग।",
+    "symptoms_np": "पात, हाँगा र फलमा पहेँलो घेरा भएका उठेका खस्रा घाउ।",
+    "treatment_np": "संक्रमित भाग काटेर हटाउनुहोस् र तामायुक्त ब्याक्टेरियानाशक औषधि छर्नुहोस्।",
+    "prevention_np": "रोगमुक्त बेर्ना प्रयोग गर्नुहोस् र सिट्रस लिफ माइनर कीरा नियन्त्रण गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "citrus-greening",
@@ -179,7 +275,15 @@
     "symptoms": "Yellow mottling on leaves, misshapen fruit with bitter taste, premature drop.",
     "treatment": "No cure. Remove infected trees immediately to prevent spread.",
     "prevention": "Control psyllid populations and use certified disease-free seedlings.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "सिट्रस ग्रिनिङ (हुआङलोङबिङ)",
+    "name_np": "सिट्रस ग्रिनिङ (हुआङलोङबिङ)",
+    "description_np": "सिट्रस ग्रिनिङ सिलिड कीराबाट सर्ने घातक ब्याक्टेरियाजन्य रोग हो। यसले पातमा पहेँलो धब्बा बनाउँछ, फल बाङ्गोटिङ्गो र तीतो हुन्छ, र बिस्तारै रूख सुक्दै जान्छ। यसको कुनै औषधि छैन।",
+    "cause_np": "Candidatus Liberibacter asiaticus नामक ब्याक्टेरियाबाट लाग्ने रोग, जुन सिलिड कीराले सार्छ।",
+    "symptoms_np": "पातमा पहेँलो धब्बा, फलको आकार बिग्रने र स्वाद तीतो हुने, फल समय अगावै झर्ने।",
+    "treatment_np": "यसको कुनै औषधि छैन। रोग नफैलियोस् भन्नाका लागि संक्रमित रूख तुरुन्तै हटाउनुहोस्।",
+    "prevention_np": "सिलिड कीरा नियन्त्रण गर्नुहोस् र प्रमाणित रोगमुक्त बेर्ना मात्र प्रयोग गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "citrus-healthy",
@@ -193,7 +297,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring and maintain proper soil pH (6.0-7.0).",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "सुन्तलाजन्य फल — स्वस्थ",
+    "name_np": "सुन्तलाजन्य फल — स्वस्थ",
+    "description_np": "पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र क्यान्कर, ग्रिनिङ वा अन्य रोगको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित अनुगमन गर्नुहोस् र माटोको पी.एच. ६.० देखि ७.० बीचमा कायम राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "cucumber-downy-mildew",
@@ -207,7 +319,15 @@
     "symptoms": "Angular yellow-green spots on upper leaf surfaces, grayish-purple fuzz on leaf undersides.",
     "treatment": "Apply fungicide (chlorothalonil or metalaxyl-based). Remove infected leaves.",
     "prevention": "Ensure good air circulation, avoid overhead watering, and use resistant varieties.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "काँक्राको डाउनी मिल्ड्यु",
+    "name_np": "काँक्राको डाउनी मिल्ड्यु",
+    "description_np": "डाउनी मिल्ड्यु Pseudoperonospora cubensis बाट लाग्ने काँक्राको रोग हो। पातको माथिल्लो सतहमा कुनेदार पहेँलो-हरियो थोप्ला र तल्लो सतहमा खरानी-प्याजी रौँजस्तो ढुसी देखिन्छ, जसले पात मर्दै जान्छ।",
+    "cause_np": "Pseudoperonospora cubensis नामक ओमाइसिटबाट लाग्ने रोग।",
+    "symptoms_np": "पातको माथिल्लो सतहमा कुनेदार पहेँलो-हरियो थोप्ला, तल्लो सतहमा खरानी-प्याजी रौँजस्तो ढुसी।",
+    "treatment_np": "क्लोरोथालोनिल वा मेटालाक्जिलयुक्त ढुसीनाशक औषधि छर्नुहोस् र संक्रमित पात हटाउनुहोस्।",
+    "prevention_np": "हावा राम्ररी चल्ने व्यवस्था मिलाउनुहोस्, माथिबाट पानी नहाल्नुहोस् र प्रतिरोधी जात रोप्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "cucumber-healthy",
@@ -221,7 +341,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring and maintain balanced irrigation.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "काँक्रो — स्वस्थ",
+    "name_np": "काँक्रो — स्वस्थ",
+    "description_np": "काँक्राको पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र रोगको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित अनुगमन गर्नुहोस् र सन्तुलित सिँचाइ कायम राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "cucumber-powdery-mildew",
@@ -235,7 +363,15 @@
     "symptoms": "White powdery coating on upper leaf surfaces, yellowing and curling of severely affected leaves.",
     "treatment": "Apply sulfur-based or systemic fungicide. Remove heavily infected leaves.",
     "prevention": "Improve air circulation, avoid excess nitrogen, and plant resistant varieties.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "काँक्राको पाउडरी मिल्ड्यु (धुले ढुसी)",
+    "name_np": "काँक्राको पाउडरी मिल्ड्यु (धुले ढुसी)",
+    "description_np": "पाउडरी मिल्ड्यु Podosphaera xanthii नामक ढुसीबाट लाग्ने काँक्राको रोग हो। पात र हाँगामा सेतो धुलोजस्तो तह देखिन्छ, जसले प्रकाश संश्लेषण र उत्पादन घटाउँछ।",
+    "cause_np": "Podosphaera xanthii नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातको माथिल्लो सतहमा सेतो धुलोजस्तो तह, धेरै संक्रमित पात पहेँलिने र बटारिने।",
+    "treatment_np": "गन्धकयुक्त वा प्रणालीगत ढुसीनाशक औषधि छर्नुहोस् र धेरै संक्रमित पात हटाउनुहोस्।",
+    "prevention_np": "हावा चल्ने व्यवस्था मिलाउनुहोस्, नाइट्रोजन मल बढी नहाल्नुहोस् र प्रतिरोधी जात रोप्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "grape-black-measles",
@@ -249,7 +385,15 @@
     "symptoms": "Tan circular spots with dark borders on leaves, mummified dark berries.",
     "treatment": "Remove mummified berries and infected shoots. Apply fungicide at bloom.",
     "prevention": "Maintain good canopy management, remove debris, and apply dormant sprays.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "अंगुरको कालो दाने रोग",
+    "name_np": "अंगुरको कालो दाने रोग",
+    "description_np": "कालो दाने रोग Guignardia bidwellii नामक ढुसीबाट लाग्ने अंगुरको रोग हो। यसले पातमा गाढा किनारा भएका खैरो गोलो थोप्ला बनाउँछ र दाना सुकेर कठोर हुन्छ।",
+    "cause_np": "Guignardia bidwellii नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा गाढा किनारा भएका खैरो गोलो थोप्ला, दाना कालो भई सुकेर कठोर हुने।",
+    "treatment_np": "सुकेका दाना र संक्रमित मुन्टा हटाउनुहोस्। फूल फुल्ने बेला ढुसीनाशक औषधि छर्नुहोस्।",
+    "prevention_np": "हाँगाबिँगा मिलाएर व्यवस्थापन गर्नुहोस्, झरेका पात-दाना सफा गर्नुहोस् र सुप्तावस्थाको स्प्रे गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "grape-black-rot",
@@ -263,7 +407,15 @@
     "symptoms": "Brown square-shaped lesions on leaves, rapid fruit browning and mummification.",
     "treatment": "Prune infected material and apply protective fungicide sprays during growing season.",
     "prevention": "Remove fallen leaves and mummified fruit, improve air circulation in canopy.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "अंगुरको कालो कुहिने रोग",
+    "name_np": "अंगुरको कालो कुहिने रोग",
+    "description_np": "कालो कुहिने रोग Guignardia bidwellii नामक ढुसीबाट लाग्छ। यसले पातमा खैरो घाउ बनाउँछ र दाना छिटो कुहिएर कडा कालो सुकेको दानामा परिणत हुन्छ।",
+    "cause_np": "Guignardia bidwellii नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा चौकोस आकारका खैरो घाउ, दाना छिटो खैरो भई सुकेर कठोर हुने।",
+    "treatment_np": "संक्रमित भाग काटछाँट गर्नुहोस् र बाली बढ्ने समयभर सुरक्षात्मक ढुसीनाशक औषधि छर्नुहोस्।",
+    "prevention_np": "झरेका पात र सुकेका दाना हटाउनुहोस् र हाँगाबिँगाबीच हावा चल्ने व्यवस्था मिलाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "grape-healthy",
@@ -277,7 +429,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring and maintain proper canopy management.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "अंगुर — स्वस्थ",
+    "name_np": "अंगुर — स्वस्थ",
+    "description_np": "अंगुरको पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र रोगको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित अनुगमन गर्नुहोस् र हाँगाबिँगाको उचित व्यवस्थापन कायम राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "grape-leaf-blight",
@@ -291,7 +451,15 @@
     "symptoms": "Small dark spots with gray centers on leaves, premature defoliation.",
     "treatment": "Apply fungicide. Remove and destroy fallen leaves.",
     "prevention": "Maintain good vineyard hygiene, ensure adequate spacing for air flow.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "अंगुरको पात डढुवा",
+    "name_np": "अंगुरको पात डढुवा",
+    "description_np": "अंगुरको पात डढुवा Pseudocercospora vitis नामक ढुसीबाट लाग्ने रोग हो। यसले पातमा खरानी रङको बीच भएका साना गाढा थोप्ला बनाउँछ, जसले पात समय अगावै झर्छ र फलको गुणस्तर घट्छ।",
+    "cause_np": "Pseudocercospora vitis नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा खरानी रङको बीच भएका साना गाढा थोप्ला, पात समय अगावै झर्ने।",
+    "treatment_np": "ढुसीनाशक औषधि छर्नुहोस् र झरेका पात संकलन गरी नष्ट गर्नुहोस्।",
+    "prevention_np": "बगैंचाको सरसफाइ कायम राख्नुहोस् र हावा चल्न पर्याप्त दूरी राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "maize-common-rust",
@@ -305,7 +473,15 @@
     "symptoms": "Small reddish-brown pustules on both leaf surfaces.",
     "treatment": "Apply fungicide at early symptom stage. Consult an agricultural expert.",
     "prevention": "Use resistant hybrids and practice crop rotation.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "मकैको सामान्य सिन्दुरे रोग",
+    "name_np": "मकैको सामान्य सिन्दुरे रोग",
+    "description_np": "सामान्य सिन्दुरे रोग Puccinia sorghi नामक ढुसीबाट लाग्ने मकैको रोग हो। यसले पातका दुवै सतहमा साना रातो-खैरो फोका बनाउँछ, जसले गम्भीर अवस्थामा प्रकाश संश्लेषण र उत्पादन घटाउँछ।",
+    "cause_np": "Puccinia sorghi नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातका दुवै सतहमा साना रातो-खैरो फोका देखिने।",
+    "treatment_np": "लक्षण देखिनासाथ सुरुकै अवस्थामा ढुसीनाशक औषधि छर्नुहोस्। कृषि विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "प्रतिरोधी जात प्रयोग गर्नुहोस् र बाली चक्र अपनाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "maize-healthy",
@@ -319,7 +495,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "मकै — स्वस्थ",
+    "name_np": "मकै — स्वस्थ",
+    "description_np": "मकैको पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र सिन्दुरे, डढुवा वा अन्य रोगको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित रूपमा अनुगमन गरिरहनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "maize-northern-leaf-blight",
@@ -333,7 +517,15 @@
     "symptoms": "Long elliptical gray-green lesions on leaves.",
     "treatment": "Remove infected leaves and apply fungicide. Consult an agricultural expert.",
     "prevention": "Use resistant varieties and practice crop rotation.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "मकैको उत्तरी पात डढुवा",
+    "name_np": "मकैको उत्तरी पात डढुवा",
+    "description_np": "उत्तरी पात डढुवा Exserohilum turcicum नामक ढुसीबाट लाग्ने मकैको रोग हो। यसले पातमा लामा, अण्डाकार खरानी-हरियो घाउ बनाउँछ, जसले प्रकाश संश्लेषण क्षमता र उत्पादन घटाउँछ।",
+    "cause_np": "Exserohilum turcicum नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा लामा र अण्डाकार खरानी-हरियो घाउ देखिने।",
+    "treatment_np": "संक्रमित पात हटाएर ढुसीनाशक औषधि छर्नुहोस्। कृषि विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "प्रतिरोधी जात प्रयोग गर्नुहोस् र बाली चक्र अपनाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "mango-anthracnose",
@@ -347,7 +539,15 @@
     "symptoms": "Dark brown irregular spots on leaves, blossom blight, fruit rot.",
     "treatment": "Apply fungicide during flowering and fruit development. Consult an expert.",
     "prevention": "Prune for air circulation and avoid overhead irrigation.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आँपको एन्थ्राक्नोज",
+    "name_np": "आँपको एन्थ्राक्नोज",
+    "description_np": "एन्थ्राक्नोज Colletotrichum gloeosporioides नामक ढुसीबाट लाग्ने आँपको सामान्य रोग हो। यसले पातमा गाढा खैरो अनियमित थोप्ला बनाउँछ, फूल सुक्छ र फल कुहिन्छ — विशेष गरी ओसिलो मौसममा।",
+    "cause_np": "Colletotrichum gloeosporioides नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा गाढा खैरो अनियमित थोप्ला, फूल सुक्ने र फल कुहिने।",
+    "treatment_np": "फूल फुल्ने र फल लाग्ने समयमा ढुसीनाशक औषधि छर्नुहोस्। विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "हावा चल्ने गरी काटछाँट गर्नुहोस् र माथिबाट सिँचाइ नगर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "mango-bacterial-canker",
@@ -361,7 +561,15 @@
     "symptoms": "Raised black corky lesions on leaves, stems, and fruit. Leaf spots may crack and fall out.",
     "treatment": "Prune affected branches and apply copper-based bactericide sprays.",
     "prevention": "Use disease-free nursery stock, avoid overhead irrigation, and protect trees from wind damage.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आँपको ब्याक्टेरियल क्यान्कर (कालो थोप्ले रोग)",
+    "name_np": "आँपको ब्याक्टेरियल क्यान्कर (कालो थोप्ले रोग)",
+    "description_np": "आँपको ब्याक्टेरियल क्यान्कर Xanthomonas citri pv. mangiferaeindicae बाट लाग्छ। यसले पात, हाँगा र फलमा उठेका कालो खस्रा घाउ बनाउँछ, जसको किनारा प्रायः पानीले भिजेजस्तो देखिन्छ।",
+    "cause_np": "Xanthomonas citri pv. mangiferaeindicae नामक ब्याक्टेरियाबाट लाग्ने रोग।",
+    "symptoms_np": "पात, हाँगा र फलमा उठेका कालो खस्रा घाउ। पातका थोप्ला फुटेर प्वाल पर्न सक्छ।",
+    "treatment_np": "प्रभावित हाँगा काटछाँट गर्नुहोस् र तामायुक्त ब्याक्टेरियानाशक औषधि छर्नुहोस्।",
+    "prevention_np": "रोगमुक्त बेर्ना प्रयोग गर्नुहोस्, माथिबाट सिँचाइ नगर्नुहोस् र रूखलाई हावाबाट हुने क्षतिबाट जोगाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "mango-cutting-weevil",
@@ -375,7 +583,15 @@
     "symptoms": "Small holes in fruit skin, internal seed damage, premature fruit drop, frass inside fruit.",
     "treatment": "Bag individual fruits to prevent egg-laying. Remove and destroy fallen fruit.",
     "prevention": "Use clean planting material, bag developing fruits, and maintain orchard hygiene.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आँपको घुन (बियाँ काट्ने कीरा)",
+    "name_np": "आँपको घुन (बियाँ काट्ने कीरा)",
+    "description_np": "आँपको घुन (Sternochetus mangiferae) आँपको फल र बियाँभित्र प्वाल पारेर छिर्ने कीरा हो। यसको लार्भाले बियाँभित्रै खान्छ, जसले फल झर्छ र बियाँको उमार क्षमता घट्छ।",
+    "cause_np": "कीरा: Sternochetus mangiferae (आँपको बियाँ घुन)।",
+    "symptoms_np": "फलको बोक्रामा साना प्वाल, भित्री बियाँमा क्षति, फल समय अगावै झर्ने र फलभित्र कीराको फोहोर देखिने।",
+    "treatment_np": "फुल पार्नबाट रोक्न प्रत्येक फललाई झोलाले छोप्नुहोस्। झरेका फल संकलन गरी नष्ट गर्नुहोस्।",
+    "prevention_np": "सफा बिरुवा प्रयोग गर्नुहोस्, बढ्दै गरेका फल झोलाले छोप्नुहोस् र बगैंचाको सरसफाइ कायम राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "mango-die-back",
@@ -389,7 +605,15 @@
     "symptoms": "Progressive drying of twigs from tips, bark cracking, black gummy exudate on branches.",
     "treatment": "Prune dead branches well below the infection. Apply fungicide paste to cut ends.",
     "prevention": "Avoid wound creation during wet season, apply pruning sealant, and maintain tree health.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आँपको टुप्पो सुक्ने रोग (डाइब्याक)",
+    "name_np": "आँपको टुप्पो सुक्ने रोग (डाइब्याक)",
+    "description_np": "आँपको डाइब्याक Lasiodiplodia theobromae नामक ढुसीबाट लाग्छ। यसले हाँगाको टुप्पोबाट भित्रतिर क्रमशः सुक्दै जान्छ, जसले हाँगाबिँगा पातलो हुँदै गएर हाँगा नै मर्छ।",
+    "cause_np": "Lasiodiplodia theobromae नामक ढुसीबाट लाग्ने रोग, जुन प्रायः तनाव वा काटछाँटको घाउपछि देखिन्छ।",
+    "symptoms_np": "हाँगाको टुप्पोबाट क्रमशः सुक्दै जाने, बोक्रा फुट्ने र हाँगामा कालो टाँसिने लेस निस्कने।",
+    "treatment_np": "संक्रमित भागभन्दा धेरै तल सम्म मरेका हाँगा काट्नुहोस् र काटेको ठाउँमा ढुसीनाशक लेप लगाउनुहोस्।",
+    "prevention_np": "वर्षायाममा घाउ नबनाउनुहोस्, काटछाँटपछि सिलेन्ट लगाउनुहोस् र रूखको स्वास्थ्य कायम राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "mango-gall-midge",
@@ -403,7 +627,15 @@
     "symptoms": "Gall-like swellings on flowers, flower drop, distorted young fruits, reduced fruit set.",
     "treatment": "Apply dimethoate or monocrotophos during flowering. Consult an expert.",
     "prevention": "Spray during early flowering, maintain orchard hygiene, and remove infested flower panicles.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आँपको गल मिज",
+    "name_np": "आँपको गल मिज",
+    "description_np": "आँपको गल मिज (Erosomyia mangiferae) ले आँपको फूल र कलिलो फलमा आक्रमण गर्छ, जसले गाँठाजस्तो सुनिने बनाउँछ र फूल तथा फल झर्छ। धेरै प्रकोप भएमा सम्पूर्ण बाली नष्ट हुन सक्छ।",
+    "cause_np": "कीरा: Erosomyia mangiferae (आँपको गल मिज)।",
+    "symptoms_np": "फूलमा गाँठाजस्तो सुनिने, फूल झर्ने, कलिलो फलको आकार बिग्रने र फल कम लाग्ने।",
+    "treatment_np": "फूल फुल्ने बेला डाइमिथोएट वा मोनोक्रोटोफस औषधि छर्नुहोस्। विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "फूल फुल्न सुरु हुनासाथ स्प्रे गर्नुहोस्, बगैंचाको सरसफाइ गर्नुहोस् र प्रभावित फूलका झुप्पा हटाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "mango-healthy",
@@ -417,7 +649,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "आँप — स्वस्थ",
+    "name_np": "आँप — स्वस्थ",
+    "description_np": "आँपको पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र एन्थ्राक्नोज, पाउडरी मिल्ड्यु वा अन्य रोगको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित रूपमा अनुगमन गरिरहनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "mango-powdery-mildew",
@@ -431,7 +671,15 @@
     "symptoms": "White powdery coating on leaves, flowers, and young fruit.",
     "treatment": "Apply sulfur-based fungicides. Consult an agricultural expert.",
     "prevention": "Improve air circulation and avoid dense planting.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आँपको पाउडरी मिल्ड्यु (धुले ढुसी)",
+    "name_np": "आँपको पाउडरी मिल्ड्यु (धुले ढुसी)",
+    "description_np": "पाउडरी मिल्ड्यु Oidium mangiferae नामक ढुसीबाट लाग्ने आँपको रोग हो। पात, फूल र कलिलो फलमा सेतो धुलोजस्तो तह देखिन्छ, जसले फल लाग्ने दर र उत्पादन घटाउँछ।",
+    "cause_np": "Oidium mangiferae नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पात, फूल र कलिलो फलमा सेतो धुलोजस्तो तह देखिने।",
+    "treatment_np": "गन्धकयुक्त ढुसीनाशक औषधि छर्नुहोस्। कृषि विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "हावा चल्ने व्यवस्था मिलाउनुहोस् र बिरुवा धेरै घना नरोप्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "mango-sooty-mould",
@@ -445,7 +693,15 @@
     "symptoms": "Black sooty coating on leaf surfaces, stems, and fruit. Stunted growth in severe cases.",
     "treatment": "Control the underlying sap-sucking insects. Wash off mould with water spray.",
     "prevention": "Monitor and control aphids, scales, and mealybugs promptly. Maintain tree health.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आँपको कालो मोसो ढुसी",
+    "name_np": "आँपको कालो मोसो ढुसी",
+    "description_np": "मोसो ढुसी (Capnodium spp.) रस चुस्ने कीराले छाडेको मिठो रसमा उम्रने ढुसी हो। यसले पात र फलमा मोसोजस्तो कालो तह बनाउँछ, जसले प्रकाश संश्लेषण घटाउँछ।",
+    "cause_np": "लाही, स्केल वा मिलिबगले छाडेको मिठो रसमा उम्रने ढुसी।",
+    "symptoms_np": "पात, हाँगा र फलमा मोसोजस्तो कालो तह। धेरै भएमा बिरुवाको बढ्ने क्रम रोकिन्छ।",
+    "treatment_np": "मुख्य कारण रहेका रस चुस्ने कीरा नियन्त्रण गर्नुहोस् र पानीको फोहोराले ढुसी पखाल्नुहोस्।",
+    "prevention_np": "लाही, स्केल र मिलिबगको नियमित अनुगमन गरी तुरुन्तै नियन्त्रण गर्नुहोस् र रूखको स्वास्थ्य कायम राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "potato-early-blight",
@@ -459,7 +715,15 @@
     "symptoms": "Dark brown target-like concentric ring spots on older leaves, yellowing around lesions.",
     "treatment": "Apply fungicide (chlorothalonil or mancozeb-based). Remove infected leaves.",
     "prevention": "Rotate crops, avoid overhead irrigation, and maintain adequate plant nutrition.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आलुको अगौटे डढुवा",
+    "name_np": "आलुको अगौटे डढुवा",
+    "description_np": "अगौटे डढुवा Alternaria solani नामक ढुसीबाट लाग्ने आलुको रोग हो। यसले पहिले पुराना पातमा निशानाजस्ता गोलाकार घेरा भएका गाढा खैरो थोप्ला बनाउँछ, जसले प्रकाश संश्लेषण र कन्दाको उत्पादन घटाउँछ।",
+    "cause_np": "Alternaria solani नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पुराना पातमा निशानाजस्ता गोलाकार घेरा भएका गाढा खैरो थोप्ला र घाउ वरिपरि पहेँलिने।",
+    "treatment_np": "क्लोरोथालोनिल वा म्यान्कोजेबयुक्त ढुसीनाशक औषधि छर्नुहोस् र संक्रमित पात हटाउनुहोस्।",
+    "prevention_np": "बाली चक्र अपनाउनुहोस्, माथिबाट सिँचाइ नगर्नुहोस् र बिरुवालाई पर्याप्त पोषण दिनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "potato-healthy",
@@ -473,7 +737,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "आलु — स्वस्थ",
+    "name_np": "आलु — स्वस्थ",
+    "description_np": "आलुको पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र अगौटे वा पछौटे डढुवा तथा अन्य रोगको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित रूपमा अनुगमन गरिरहनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "potato-late-blight",
@@ -487,7 +759,15 @@
     "symptoms": "Dark brown water-soaked spots on leaves and stems, white mold under leaves.",
     "treatment": "Remove infected plants and apply fungicide immediately.",
     "prevention": "Avoid excess moisture and use resistant varieties.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "आलुको पछौटे डढुवा",
+    "name_np": "आलुको पछौटे डढुवा",
+    "description_np": "पछौटे डढुवा Phytophthora infestans बाट लाग्ने आलुको अत्यन्त घातक रोग हो। यसले पात र डाँठमा पानीले भिजेजस्ता गाढा दाग बनाउँछ र पातको तल सेतो ढुसी देखिन्छ। यसले छोटो समयमै पूरै खेत नष्ट पार्न सक्छ।",
+    "cause_np": "Phytophthora infestans नामक ओमाइसिटबाट लाग्ने रोग।",
+    "symptoms_np": "पात र डाँठमा पानीले भिजेजस्ता गाढा खैरो दाग, पातको तल सेतो ढुसी देखिने।",
+    "treatment_np": "संक्रमित बिरुवा हटाएर तुरुन्तै ढुसीनाशक औषधि छर्नुहोस्।",
+    "prevention_np": "खेतमा बढी ओसिलोपन हुन नदिनुहोस् र प्रतिरोधी जात प्रयोग गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "rice-bacterial-leaf-blight",
@@ -501,7 +781,15 @@
     "symptoms": "Water-soaked lesions on leaf margins that turn yellow to white.",
     "treatment": "Remove infected plants and apply copper-based bactericides.",
     "prevention": "Use resistant varieties and avoid excess nitrogen fertilizer.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "धानको ब्याक्टेरियल पात डढुवा",
+    "name_np": "धानको ब्याक्टेरियल पात डढुवा",
+    "description_np": "ब्याक्टेरियल पात डढुवा Xanthomonas oryzae बाट लाग्ने धानको गम्भीर रोग हो। यसले पातको किनारै किनार पानीले भिजेजस्ता घाउ बनाउँछ, जुन पछि पहेँलोबाट सेतो हुन्छ र उत्पादनमा ठूलो कमी ल्याउँछ।",
+    "cause_np": "Xanthomonas oryzae pv. oryzae नामक ब्याक्टेरियाबाट लाग्ने रोग।",
+    "symptoms_np": "पातको किनारमा पानीले भिजेजस्ता घाउ, जुन पछि पहेँलोबाट सेतो हुन्छ।",
+    "treatment_np": "संक्रमित बिरुवा हटाउनुहोस् र तामायुक्त ब्याक्टेरियानाशक औषधि छर्नुहोस्।",
+    "prevention_np": "प्रतिरोधी जात प्रयोग गर्नुहोस् र नाइट्रोजन मल आवश्यकताभन्दा बढी नहाल्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "rice-brown-spot",
@@ -515,7 +803,15 @@
     "symptoms": "Small circular brown spots with gray centers on leaves.",
     "treatment": "Apply fungicide and improve soil nutrient management. Consult an expert.",
     "prevention": "Use balanced fertilization and disease-free seeds.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "धानको खैरो थोप्ले रोग",
+    "name_np": "धानको खैरो थोप्ले रोग",
+    "description_np": "खैरो थोप्ले रोग Bipolaris oryzae नामक ढुसीबाट लाग्ने धानको रोग हो। यसले पातमा खरानी रङको बीच भएका साना गोलो खैरो थोप्ला बनाउँछ, जसले दानाको उत्पादन र गुणस्तर घटाउँछ।",
+    "cause_np": "Bipolaris oryzae (Cochliobolus miyabeanus) नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा खरानी रङको बीच भएका साना गोलो खैरो थोप्ला।",
+    "treatment_np": "ढुसीनाशक औषधि छर्नुहोस् र माटोको पोषक तत्व व्यवस्थापन सुधार गर्नुहोस्। विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "सन्तुलित मलखाद प्रयोग गर्नुहोस् र रोगमुक्त बीउ रोप्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "rice-leaf-blast",
@@ -529,7 +825,15 @@
     "symptoms": "Spindle-shaped gray-white lesions with brown borders on leaves, lesions merging to kill leaf tissue.",
     "treatment": "Apply tricyclazole or carbendazim-based fungicide. Maintain optimal water management.",
     "prevention": "Use resistant varieties, avoid excess nitrogen, and maintain proper water levels in field.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "धानको पात ब्लास्ट (मरुवा रोग)",
+    "name_np": "धानको पात ब्लास्ट (मरुवा रोग)",
+    "description_np": "पात ब्लास्ट Magnaporthe oryzae नामक ढुसीबाट लाग्ने धानको सबैभन्दा विनाशकारी रोग हो। यसले पातमा खैरो किनारा भएका तकुवाकार खरानी-सेतो घाउ बनाउँछ, जुन जोडिँदै गएर पूरै पात मार्न सक्छ।",
+    "cause_np": "Magnaporthe oryzae नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा खैरो किनारा भएका तकुवाकार खरानी-सेतो घाउ, जुन जोडिँदै गएर पातको तन्तु मार्छ।",
+    "treatment_np": "ट्राइसाइक्लाजोल वा कार्बेन्डाजिमयुक्त ढुसीनाशक औषधि छर्नुहोस् र खेतको पानी व्यवस्थापन मिलाउनुहोस्।",
+    "prevention_np": "प्रतिरोधी जात प्रयोग गर्नुहोस्, नाइट्रोजन बढी नहाल्नुहोस् र खेतमा उपयुक्त पानीको सतह कायम राख्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "rice-leaf-scald",
@@ -543,7 +847,15 @@
     "symptoms": "Long wavy-edged grayish-white lesions on leaves, leaf tip drying and shredding.",
     "treatment": "Apply fungicide and ensure proper water management.",
     "prevention": "Use disease-free seed, maintain balanced fertilization, and ensure proper field drainage.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "धानको पात डढेजस्तो रोग (लिफ स्काल्ड)",
+    "name_np": "धानको पात डढेजस्तो रोग (लिफ स्काल्ड)",
+    "description_np": "लिफ स्काल्ड Rhizoctonia oryzae-sativae नामक ढुसीबाट लाग्ने धानको रोग हो। यसले पातमा लहरिएको किनारा भएका लामा खरानी-सेतो घाउ बनाउँछ, जुन डढेजस्तो देखिन्छ र पात सुक्दै जान्छ।",
+    "cause_np": "Rhizoctonia oryzae-sativae नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा लहरिएको किनारा भएका लामा खरानी-सेतो घाउ, पातको टुप्पो सुक्ने र च्यातिने।",
+    "treatment_np": "ढुसीनाशक औषधि छर्नुहोस् र पानीको उचित व्यवस्थापन गर्नुहोस्।",
+    "prevention_np": "रोगमुक्त बीउ प्रयोग गर्नुहोस्, सन्तुलित मलखाद हाल्नुहोस् र खेतको पानी निकास मिलाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "rice-leaf-smut",
@@ -557,7 +869,15 @@
     "symptoms": "Small black angular spots on leaves, usually on older leaves.",
     "treatment": "Generally not destructive. Apply fungicide if severe. Consult an expert.",
     "prevention": "Maintain field hygiene and use resistant varieties.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "धानको पात कालो थोप्ले रोग (लिफ स्मट)",
+    "name_np": "धानको पात कालो थोप्ले रोग (लिफ स्मट)",
+    "description_np": "लिफ स्मट Entyloma oryzae नामक ढुसीबाट लाग्ने धानको सामान्य रोग हो। यसले पुराना पातमा साना कालो कुनेदार थोप्ला बनाउँछ। सामान्यतया यसले आर्थिक रूपमा ठूलो नोक्सान गर्दैन।",
+    "cause_np": "Entyloma oryzae नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा — विशेष गरी पुराना पातमा — साना कालो कुनेदार थोप्ला देखिने।",
+    "treatment_np": "सामान्यतया धेरै हानिकारक हुँदैन। धेरै फैलिएमा ढुसीनाशक औषधि छर्नुहोस्। विज्ञको सल्लाह लिनुहोस्।",
+    "prevention_np": "खेतको सरसफाइ कायम राख्नुहोस् र प्रतिरोधी जात प्रयोग गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "rice-narrow-brown-spot",
@@ -571,7 +891,15 @@
     "symptoms": "Narrow brown linear lesions (1-15 mm long) on leaf blades.",
     "treatment": "Apply fungicide if severe. Improve soil fertility and drainage.",
     "prevention": "Use balanced fertilization, maintain proper water levels, and use resistant varieties.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "धानको साँघुरो खैरो थोप्ले रोग",
+    "name_np": "धानको साँघुरो खैरो थोप्ले रोग",
+    "description_np": "साँघुरो खैरो थोप्ले रोग Cercospora janseana नामक ढुसीबाट लाग्ने धानको रोग हो। यसले पातमा साँघुरा र लामा खैरो धर्का बनाउँछ, जसले प्रकाश संश्लेषण हुने क्षेत्र घटाउँछ।",
+    "cause_np": "Cercospora janseana नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा १ देखि १५ मिलिमिटर लामा साँघुरा खैरो धर्का देखिने।",
+    "treatment_np": "धेरै फैलिएमा ढुसीनाशक औषधि छर्नुहोस्। माटोको उर्वरता र पानीको निकास सुधार गर्नुहोस्।",
+    "prevention_np": "सन्तुलित मलखाद प्रयोग गर्नुहोस्, खेतमा उपयुक्त पानीको सतह कायम राख्नुहोस् र प्रतिरोधी जात रोप्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-bacterial-spot",
@@ -585,7 +913,15 @@
     "symptoms": "Dark water-soaked spots on leaves with yellow halos, fruit lesions.",
     "treatment": "Remove infected plants and apply copper-based sprays.",
     "prevention": "Use disease-free seeds and avoid overhead irrigation.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको ब्याक्टेरियल थोप्ले रोग",
+    "name_np": "गोलभेँडाको ब्याक्टेरियल थोप्ले रोग",
+    "description_np": "ब्याक्टेरियल थोप्ले रोग Xanthomonas campestris बाट लाग्ने गोलभेँडाको रोग हो। यसले पात र फलमा पहेँलो घेरा भएका पानीले भिजेजस्ता गाढा थोप्ला बनाउँछ, जसले उत्पादन र बजार मूल्य घटाउँछ।",
+    "cause_np": "Xanthomonas campestris pv. vesicatoria नामक ब्याक्टेरियाबाट लाग्ने रोग।",
+    "symptoms_np": "पातमा पहेँलो घेरा भएका पानीले भिजेजस्ता गाढा थोप्ला र फलमा घाउ।",
+    "treatment_np": "संक्रमित बिरुवा हटाउनुहोस् र तामायुक्त औषधि छर्नुहोस्।",
+    "prevention_np": "रोगमुक्त बीउ प्रयोग गर्नुहोस् र माथिबाट सिँचाइ नगर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-early-blight",
@@ -599,7 +935,15 @@
     "symptoms": "Dark brown concentric ring spots (target pattern) on older leaves, stem lesions near soil.",
     "treatment": "Apply fungicide (chlorothalonil or mancozeb). Remove infected lower leaves.",
     "prevention": "Mulch around stems, avoid overhead watering, and rotate crops.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको अगौटे डढुवा",
+    "name_np": "गोलभेँडाको अगौटे डढुवा",
+    "description_np": "अगौटे डढुवा Alternaria solani नामक ढुसीबाट लाग्ने गोलभेँडाको रोग हो। यसले पुराना पात र डाँठमा निशानाजस्ता गोलाकार घेरा भएका गाढा खैरो थोप्ला बनाउँछ, जसले फलको उत्पादन घटाउँछ।",
+    "cause_np": "Alternaria solani नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पुराना पातमा निशानाजस्ता गोलाकार घेरा भएका गाढा खैरो थोप्ला र माटो नजिकैको डाँठमा घाउ।",
+    "treatment_np": "क्लोरोथालोनिल वा म्यान्कोजेब ढुसीनाशक औषधि छर्नुहोस् र संक्रमित तल्ला पात हटाउनुहोस्।",
+    "prevention_np": "डाँठ वरिपरि मल्चिङ गर्नुहोस्, माथिबाट पानी नहाल्नुहोस् र बाली चक्र अपनाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-healthy",
@@ -613,7 +957,15 @@
     "symptoms": "Leaf appears healthy with normal green color.",
     "treatment": "No treatment required.",
     "prevention": "Continue regular monitoring.",
-    "disclaimer": "AI result should be verified if symptoms appear later."
+    "disclaimer": "AI result should be verified if symptoms appear later.",
+    "disease_np": "गोलभेँडा — स्वस्थ",
+    "name_np": "गोलभेँडा — स्वस्थ",
+    "description_np": "गोलभेँडाको पात स्वस्थ देखिन्छ। सामान्य हरियो रङ छ र ब्याक्टेरियल थोप्ला, अगौटे वा पछौटे डढुवा तथा अन्य रोगको कुनै लक्षण देखिँदैन।",
+    "cause_np": "कुनै रोग देखिएन।",
+    "symptoms_np": "पात सामान्य हरियो रङको र स्वस्थ देखिन्छ।",
+    "treatment_np": "कुनै उपचार आवश्यक छैन।",
+    "prevention_np": "नियमित रूपमा अनुगमन गरिरहनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-late-blight",
@@ -627,7 +979,15 @@
     "symptoms": "Large dark lesions on leaves and stems, white mold in humid conditions.",
     "treatment": "Remove infected plants and apply fungicide immediately.",
     "prevention": "Improve spacing, avoid wet foliage, and use resistant varieties.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको पछौटे डढुवा",
+    "name_np": "गोलभेँडाको पछौटे डढुवा",
+    "description_np": "पछौटे डढुवा Phytophthora infestans बाट लाग्ने गोलभेँडाको अत्यन्त घातक रोग हो। यसले पात र डाँठमा ठूला गाढा घाउ बनाउँछ र ओसिलो मौसममा सेतो ढुसी देखिन्छ। यसले छोटो समयमै पूरै बिरुवा नष्ट पार्न सक्छ।",
+    "cause_np": "Phytophthora infestans नामक ओमाइसिटबाट लाग्ने रोग।",
+    "symptoms_np": "पात र डाँठमा ठूला गाढा घाउ, ओसिलो मौसममा सेतो ढुसी देखिने।",
+    "treatment_np": "संक्रमित बिरुवा हटाएर तुरुन्तै ढुसीनाशक औषधि छर्नुहोस्।",
+    "prevention_np": "बिरुवाबीच दूरी बढाउनुहोस्, पात ओसिलो नराख्नुहोस् र प्रतिरोधी जात प्रयोग गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-leaf-mold",
@@ -641,7 +1001,15 @@
     "symptoms": "Pale green-yellow spots on upper leaf surfaces, olive-brown velvety mold on leaf undersides.",
     "treatment": "Improve ventilation to reduce humidity. Apply fungicide if severe.",
     "prevention": "Maintain low humidity (<85%), increase air circulation, and remove affected leaves.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको पात ढुसी",
+    "name_np": "गोलभेँडाको पात ढुसी",
+    "description_np": "पात ढुसी Passalora fulva नामक ढुसीबाट लाग्ने गोलभेँडाको रोग हो। पातको माथिल्लो सतहमा फिका हरियोदेखि पहेँलो थोप्ला र तल्लो सतहमा जैतुनी-खैरो मखमली ढुसी देखिन्छ। यो मुख्यतया बढी आर्द्रतामा देखा पर्छ।",
+    "cause_np": "Passalora fulva (Fulvia fulva) नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पातको माथिल्लो सतहमा फिका हरियो-पहेँलो थोप्ला, तल्लो सतहमा जैतुनी-खैरो मखमली ढुसी।",
+    "treatment_np": "आर्द्रता घटाउन हावा चल्ने व्यवस्था सुधार गर्नुहोस्। धेरै फैलिएमा ढुसीनाशक औषधि छर्नुहोस्।",
+    "prevention_np": "आर्द्रता ८५ प्रतिशतभन्दा कम राख्नुहोस्, हावा चल्ने व्यवस्था बढाउनुहोस् र प्रभावित पात हटाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-mosaic-virus",
@@ -655,7 +1023,15 @@
     "symptoms": "Mosaic mottling on leaves, leaf curling and distortion, uneven ripening of fruit.",
     "treatment": "No cure. Remove and destroy infected plants. Disinfect tools with 10% bleach.",
     "prevention": "Use resistant varieties, disinfect tools and hands, and handle plants when dry.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको मोजाइक भाइरस",
+    "name_np": "गोलभेँडाको मोजाइक भाइरस",
+    "description_np": "गोलभेँडाको मोजाइक भाइरस (ToMV) निकै टिकाउ भाइरस हो, जसले पातमा धब्बेदार मोजाइक ढाँचा, पात बटारिने र फलको गुणस्तर घट्ने समस्या ल्याउँछ। यो सङ्क्रमित औजार, हात र बीउबाट सर्छ।",
+    "cause_np": "Tomato mosaic virus (ToMV) भाइरसबाट लाग्ने रोग, जुन छोएर वा औजारबाट सर्छ।",
+    "symptoms_np": "पातमा धब्बेदार मोजाइक ढाँचा, पात बटारिने र बिग्रने, फल असमान रूपमा पाक्ने।",
+    "treatment_np": "यसको कुनै औषधि छैन। संक्रमित बिरुवा उखेलेर नष्ट गर्नुहोस् र औजारलाई १० प्रतिशत ब्लिचले सफा गर्नुहोस्।",
+    "prevention_np": "प्रतिरोधी जात प्रयोग गर्नुहोस्, औजार र हात सफा गर्नुहोस् र बिरुवा सुख्खा हुँदा मात्र छुनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-septoria-leaf-spot",
@@ -669,7 +1045,15 @@
     "symptoms": "Small circular spots with dark borders and gray centers on lower leaves, tiny black dots in spots.",
     "treatment": "Remove infected lower leaves and apply fungicide (chlorothalonil-based).",
     "prevention": "Mulch to prevent soil splash, avoid overhead watering, and practice crop rotation.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको सेप्टोरिया पात थोप्ले रोग",
+    "name_np": "गोलभेँडाको सेप्टोरिया पात थोप्ले रोग",
+    "description_np": "सेप्टोरिया पात थोप्ले रोग Septoria lycopersici नामक ढुसीबाट लाग्छ। यसले तल्ला पातमा गाढा किनारा र खरानी बीच भएका साना गोलो थोप्ला बनाउँछ, जसभित्र साना कालो बिन्दु देखिन्छन्।",
+    "cause_np": "Septoria lycopersici नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "तल्ला पातमा गाढा किनारा र खरानी बीच भएका साना गोलो थोप्ला, थोप्लाभित्र साना कालो बिन्दु।",
+    "treatment_np": "संक्रमित तल्ला पात हटाउनुहोस् र क्लोरोथालोनिलयुक्त ढुसीनाशक औषधि छर्नुहोस्।",
+    "prevention_np": "माटोको छिटा नलागोस् भनी मल्चिङ गर्नुहोस्, माथिबाट पानी नहाल्नुहोस् र बाली चक्र अपनाउनुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-spider-mites",
@@ -683,7 +1067,15 @@
     "symptoms": "Fine white stippling on upper leaf surfaces, webbing on undersides, leaf yellowing and bronzing.",
     "treatment": "Apply miticide or insecticidal soap. Spray undersides of leaves thoroughly.",
     "prevention": "Maintain humidity, avoid dusty conditions, and introduce beneficial predatory mites.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको माकुरे माइट",
+    "name_np": "गोलभेँडाको माकुरे माइट",
+    "description_np": "माकुरे माइट (Tetranychus urticae) साना जीव हुन्, जसले गोलभेँडाको पातको तल्लो भागमा रस चुस्छन्। यसले पातमा साना सेता बिन्दु, पहेँलिने र जालो देखिन्छ। धेरै प्रकोप भएमा पात सबै झर्न सक्छ।",
+    "cause_np": "दुई थोप्ले माकुरे माइट (Tetranychus urticae) बाट हुने क्षति।",
+    "symptoms_np": "पातको माथिल्लो सतहमा मसिना सेता बिन्दु, तल्लो भागमा जालो, पात पहेँलिने र तामे रङको हुने।",
+    "treatment_np": "माइटनाशक औषधि वा कीटनाशक साबुन प्रयोग गर्नुहोस्। पातको तल्लो भागमा राम्ररी छर्नुहोस्।",
+    "prevention_np": "आर्द्रता कायम राख्नुहोस्, धुलो जम्न नदिनुहोस् र लाभदायक शिकारी माइट प्रयोग गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-target-spot",
@@ -697,7 +1089,15 @@
     "symptoms": "Brown spots with concentric rings on leaves, stems, and fruit. Premature leaf drop.",
     "treatment": "Apply fungicide (azoxystrobin or difenoconazole-based). Remove infected debris.",
     "prevention": "Practice crop rotation, improve air circulation, and avoid overhead irrigation.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको निशाना थोप्ले रोग",
+    "name_np": "गोलभेँडाको निशाना थोप्ले रोग",
+    "description_np": "निशाना थोप्ले रोग Corynespora cassiicola नामक ढुसीबाट लाग्ने गोलभेँडाको रोग हो। यसले पात, डाँठ र फलमा गोलाकार घेरा भएका खैरो थोप्ला बनाउँछ, जसले पात झर्छ र फल कुहिन्छ।",
+    "cause_np": "Corynespora cassiicola नामक ढुसीबाट लाग्ने रोग।",
+    "symptoms_np": "पात, डाँठ र फलमा गोलाकार घेरा भएका खैरो थोप्ला। पात समय अगावै झर्ने।",
+    "treatment_np": "एजोक्सिस्ट्रोबिन वा डाइफेनोकोनाजोलयुक्त ढुसीनाशक औषधि छर्नुहोस् र संक्रमित अवशेष हटाउनुहोस्।",
+    "prevention_np": "बाली चक्र अपनाउनुहोस्, हावा चल्ने व्यवस्था सुधार गर्नुहोस् र माथिबाट सिँचाइ नगर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   },
   {
     "id": "tomato-yellow-leaf-curl-virus",
@@ -711,6 +1111,14 @@
     "symptoms": "Upward leaf curling, yellowing of leaf margins, stunted growth, reduced fruit set.",
     "treatment": "No cure. Remove and destroy infected plants. Control whitefly populations.",
     "prevention": "Use resistant varieties, install yellow sticky traps, and control whitefly vectors.",
-    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment.",
+    "disease_np": "गोलभेँडाको पहेँलो पात बटारिने भाइरस",
+    "name_np": "गोलभेँडाको पहेँलो पात बटारिने भाइरस",
+    "description_np": "गोलभेँडाको पहेँलो पात बटारिने भाइरस (TYLCV) सेतो झिँगाबाट सर्ने जेमिनीभाइरस हो। यसले पात माथितिर बटारिने, पहेँलिने, बिरुवा नबढ्ने र उत्पादनमा ठूलो कमी ल्याउँछ।",
+    "cause_np": "Tomato yellow leaf curl virus (TYLCV) भाइरसबाट लाग्ने रोग, जुन सेतो झिँगा (Bemisia tabaci) ले सार्छ।",
+    "symptoms_np": "पात माथितिर बटारिने, पातको किनार पहेँलिने, बिरुवाको बढाइ रोकिने र फल कम लाग्ने।",
+    "treatment_np": "यसको कुनै औषधि छैन। संक्रमित बिरुवा उखेलेर नष्ट गर्नुहोस् र सेतो झिँगा नियन्त्रण गर्नुहोस्।",
+    "prevention_np": "प्रतिरोधी जात प्रयोग गर्नुहोस्, पहेँलो टाँसिने ट्र्याप राख्नुहोस् र सेतो झिँगा नियन्त्रण गर्नुहोस्।",
+    "disclaimer_np": "यो सामान्य जानकारी मात्र हो। उपचार गर्नु अघि कृषि विज्ञको सल्लाह लिनुहोस्।"
   }
 ]

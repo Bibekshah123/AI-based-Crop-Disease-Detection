@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/Layout";
-import RequireAuth from "./components/RequireAuth";
 import Home from "./pages/Home";
 import Diagnose from "./pages/Diagnose";
 import Result from "./pages/Result";
@@ -9,9 +8,6 @@ import History from "./pages/History";
 import HistoryDetail from "./pages/HistoryDetail";
 import Library from "./pages/Library";
 import LibraryDetail from "./pages/LibraryDetail";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Profile from "./pages/Profile";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
@@ -35,16 +31,6 @@ export default function App() {
         <Route path="/history/:id" element={<HistoryDetail />} />
         <Route path="/library" element={<Library />} />
         <Route path="/library/:id" element={<LibraryDetail />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/profile"
-          element={
-            <RequireAuth>
-              <Profile />
-            </RequireAuth>
-          }
-        />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

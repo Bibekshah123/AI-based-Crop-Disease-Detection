@@ -1,3 +1,4 @@
+import { useLang } from "../context/LanguageContext";
 import styles from "./ui.module.css";
 
 /* Status badge — always pairs colour with text (never colour alone). */
@@ -12,11 +13,12 @@ export function StatusBadge({ tone = "neutral", children }) {
 
 /* Confidence meter with visible numeric value + status text. */
 export function ConfidenceMeter({ value = 0, tone = "neutral", label }) {
+  const { t } = useLang();
   const pct = Math.max(0, Math.min(100, value));
   return (
     <div className={styles.meter}>
       <div className={styles.meterHead}>
-        <span className={styles.meterLabel}>Confidence</span>
+        <span className={styles.meterLabel}>{t.confidence}</span>
         <span className={styles.meterValue}>{pct}%</span>
       </div>
       <div
@@ -25,7 +27,7 @@ export function ConfidenceMeter({ value = 0, tone = "neutral", label }) {
         aria-valuenow={pct}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-label={label ? `Confidence: ${label}, ${pct} percent` : `Confidence ${pct} percent`}
+        aria-label={label ? `${t.confidence}: ${label}, ${pct}%` : `${t.confidence} ${pct}%`}
       >
         <div className={`${styles.fill} ${styles[`fill_${tone}`]}`} style={{ width: `${pct}%` }} />
       </div>

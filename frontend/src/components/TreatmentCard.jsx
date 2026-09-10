@@ -6,29 +6,36 @@
    legally sold pesticide packaging, so a farmer can check the bottle they are
    handed matches the hazard class shown here. */
 
+import { useLang } from "../context/LanguageContext";
+import FormulationIcon from "./FormulationIcon";
+import { FORM_SHAPE, SHAPE_KEYS } from "../lib/formulations";
+
 const BANDS = {
-  red:    { fill: "#c62828", label: "Highly hazardous",      advice: "Full protective clothing. Never spray in wind." },
-  yellow: { fill: "#f9a825", label: "Moderately hazardous",  advice: "Gloves, mask and long sleeves required." },
-  blue:   { fill: "#1565c0", label: "Slightly hazardous",    advice: "Gloves and a mask are still recommended." },
-  green:  { fill: "#2e7d32", label: "Unlikely to be hazardous", advice: "Low risk, but still wash hands after use." },
+  red:    { fill: "#c62828", labelKey: "bandIa",  adviceKey: "bandIaNote" },
+  yellow: { fill: "#f9a825", labelKey: "bandIi",  adviceKey: "bandIiNote" },
+  blue:   { fill: "#1565c0", labelKey: "bandIii", adviceKey: "bandIiiNote" },
+  green:  { fill: "#2e7d32", labelKey: "bandU",   adviceKey: "bandUNote" },
 };
 
-const FORMULATIONS = {
-  WP: "Wettable powder — mix with water",
-  SP: "Soluble powder — dissolves in water",
-  SC: "Suspension concentrate — shake before measuring",
-  EC: "Emulsifiable concentrate — oily liquid, measure carefully",
-  SL: "Soluble liquid — dissolves in water",
-  G:  "Granule — apply to the soil, do not dilute",
-  OL: "Oil formulation — spray in the evening",
+const FORM_KEYS = { WP: "formWP", SP: "formSP", SC: "formSC", EC: "formEC", SL: "formSL", G: "formG", OL: "formOL" };
+const KIND_KEYS = {
+  cultural: "kindCultural",
+  fungicide: "kindFungicide",
+  biological: "kindBiological",
+  disinfectant: "kindDisinfectant",
+  insecticide: "kindInsecticide",
+  biopesticide: "kindBiopesticide",
+  "fungicide/bactericide": "kindFungicideBactericide",
+  bactericide: "kindBactericide",
+  acaricide: "kindAcaricide",
 };
 
-function HazardBand({ band }) {
+function HazardBand({ band, L }) {
   const meta = BANDS[band];
   if (!meta) return null;
   return (
     <svg viewBox="0 0 24 24" width="34" height="34" role="img"
-         aria-label={`Hazard band: ${meta.label}`}>
+         aria-label={L[meta.labelKey]}>
       <title>{meta.label}</title>
       {/* The triangle is the shape used on the label itself */}
       <polygon points="12,3 22,20 2,20" fill={meta.fill} />
@@ -38,16 +45,13 @@ function HazardBand({ band }) {
 }
 
 export default function TreatmentCard({ treatments, disclaimer, styles }) {
+  const { t: L, lang } = useLang();
   if (!treatments?.length) return null;
 
   return (
     <section className={`surface ${styles.panel}`} aria-labelledby="treat-heading">
-      <h2 id="treat-heading" className={styles.sectionTitle}>Recommended treatment</h2>
-      <p className={styles.treatLead}>
-        Try the non-chemical step first — it costs nothing and leaves no residue. Take this
-        page to your agrovet and ask for the <strong>active ingredient</strong> named below,
-        not a brand.
-      </p>
+      <h2 id="treat-heading" className={styles.sectionTitle}>{L.recommendedTreatment}</h2>
+      <p className={styles.treatLead}>{L.treatLead}</p>
 
       <ol className={styles.treatList}>
         {treatments.map((t, i) => {
@@ -56,12 +60,12 @@ export default function TreatmentCard({ treatments, disclaimer, styles }) {
           return (
             <li key={i} className={styles.treatItem}>
               <div className={styles.treatHead}>
-                {chemical ? <HazardBand band={t.band} /> : <span className={styles.treatLeaf} aria-hidden="true">🌿</span>}
+                {chemical ? <HazardBand band={t.band} L={L} /> : <span className={styles.treatLeaf} aria-hidden="true">🌿</span>}
                 <div>
-                  <p className={styles.treatName}>{chemical ? t.active : "Cultural control"}</p>
+                  <p className={styles.treatName}>{chemical ? t.active : L.culturalControl}</p>
                   <p className={styles.treatKind}>
-                    {t.kind}
-                    {chemical && band && <> · <span style={{ color: band.fill }}>{band.label}</span></>}
+                    {L[KIND_KEYS[t.kind]] ?? t.kind}
+                    {chemical && band && <> · <span style={{ color: band.fill }}>{L[band.labelKey]}</span></>}
                   </p>
                 </div>
               </div>
@@ -69,19 +73,35 @@ export default function TreatmentCard({ treatments, disclaimer, styles }) {
               {chemical && (
                 <>
                   <dl className={styles.treatSpecs}>
-                    <div><dt>Dose</dt><dd>{t.dose}</dd></div>
-                    <div><dt>Formulation</dt><dd>{t.formulation} — {FORMULATIONS[t.formulation] ?? "see label"}</dd></div>
+                    <div><dt>{L.dose}</dt><dd>{lang === "np" && t.dose_np ? t.dose_np : t.dose}</dd></div>
+                    <div><dt>{L.formulation}</dt><dd>{L[FORM_KEYS[t.formulation]] ?? L.seeLabel}</dd></div>
                     {t.phi_days > 0 && (
-                      <div><dt>Wait before harvest</dt><dd>{t.phi_days} days</dd></div>
+                      <div><dt>{L.waitBeforeHarvest}</dt><dd>{t.phi_days} {L.days}</dd></div>
                     )}
                     {t.interval_days > 0 && (
-                      <div><dt>Repeat</dt><dd>every {t.interval_days} days if symptoms continue</dd></div>
+                      <div><dt>{L.repeat}</dt><dd>{L.repeatEvery(t.interval_days)}</dd></div>
                     )}
-                    {band && <div><dt>Safety</dt><dd>{band.advice}</dd></div>}
+                    {band && <div><dt>{L.safety}</dt><dd>{L[band.adviceKey]}</dd></div>}
                   </dl>
                 </>
               )}
-              <p className={styles.treatNote}>{t.note}</p>
+              {chemical && (
+                <div className={styles.buying}>
+                  <FormulationIcon formulation={t.formulation} title={L[SHAPE_KEYS[FORM_SHAPE[t.formulation]]] ?? ""} />
+                  <div className={styles.buyingText}>
+                    <p className={styles.buyingTitle}>{L.buyingIt}</p>
+                    <p className={styles.buyingBody}>
+                      {FORM_SHAPE[t.formulation]
+                        ? L.buyingItBody(t.active, t.formulation)
+                        : L.buyingItNoCode(t.active)}
+                    </p>
+                    {FORM_SHAPE[t.formulation] && (
+                      <p className={styles.buyingShape}>{L[SHAPE_KEYS[FORM_SHAPE[t.formulation]]]}</p>
+                    )}
+                  </div>
+                </div>
+              )}
+              <p className={styles.treatNote}>{lang === "np" && t.note_np ? t.note_np : t.note}</p>
             </li>
           );
         })}

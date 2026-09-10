@@ -9,7 +9,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Banana Healthy": [
@@ -22,7 +23,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Citrus Healthy": [
@@ -35,7 +37,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Cucumber Healthy": [
@@ -48,7 +51,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Grape Healthy": [
@@ -61,7 +65,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Maize Healthy": [
@@ -74,7 +79,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Mango Healthy": [
@@ -87,7 +93,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Potato Healthy": [
@@ -100,7 +107,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Tomato Healthy": [
@@ -113,7 +121,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No treatment needed. Keep monitoring weekly and maintain field hygiene.",
-      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।"
+      "note_np": "उपचार आवश्यक छैन। साप्ताहिक रूपमा अनुगमन गर्नुहोस् र खेतको सरसफाइ कायम राख्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Apple Scab": [
@@ -126,7 +135,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Rake up and burn fallen leaves in winter - the fungus overwinters on them.",
-      "note_np": "जाडोमा झरेका पात बटुलेर जलाउनुहोस् - ढुसी तिनैमा जाडो कटाउँछ।"
+      "note_np": "जाडोमा झरेका पात बटुलेर जलाउनुहोस् - ढुसी तिनैमा जाडो कटाउँछ।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -137,7 +147,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Myclobutanil 10% WP",
@@ -148,7 +159,8 @@
       "phi_days": 21,
       "interval_days": 14,
       "note": "Systemic - can stop an infection already started. Alternate with mancozeb so resistance does not build.",
-      "note_np": "प्रणालीगत - सुरु भइसकेको संक्रमण रोक्न सक्छ। प्रतिरोध नबढोस् भनी म्यान्कोजेबसँग फेरबदल गर्नुहोस्।"
+      "note_np": "प्रणालीगत - सुरु भइसकेको संक्रमण रोक्न सक्छ। प्रतिरोध नबढोस् भनी म्यान्कोजेबसँग फेरबदल गर्नुहोस्।",
+      "dose_np": "1 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Apple Black Rot": [
@@ -161,7 +173,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Prune out cankered branches and remove mummified fruit; burn the prunings.",
-      "note_np": "रोग लागेका हाँगा काट्नुहोस् र सुकेका फल हटाउनुहोस्; काटेका भाग जलाउनुहोस्।"
+      "note_np": "रोग लागेका हाँगा काट्नुहोस् र सुकेका फल हटाउनुहोस्; काटेका भाग जलाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -172,7 +185,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Thiophanate-methyl 70% WP",
@@ -183,7 +197,8 @@
       "phi_days": 14,
       "interval_days": 14,
       "note": "Apply from petal fall. Good on the canker stage.",
-      "note_np": "फूलको पंखुडी झरेपछि प्रयोग गर्नुहोस्। क्यान्करको अवस्थामा राम्रो काम गर्छ।"
+      "note_np": "फूलको पंखुडी झरेपछि प्रयोग गर्नुहोस्। क्यान्करको अवस्थामा राम्रो काम गर्छ।",
+      "dose_np": "1 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Apple Cedar Rust": [
@@ -196,7 +211,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Remove nearby juniper/cedar trees where possible - the fungus needs both hosts to complete its cycle.",
-      "note_np": "सम्भव भए नजिकका जुनिपर/देवदार रूख हटाउनुहोस् - ढुसीलाई चक्र पूरा गर्न दुवै बिरुवा चाहिन्छ।"
+      "note_np": "सम्भव भए नजिकका जुनिपर/देवदार रूख हटाउनुहोस् - ढुसीलाई चक्र पूरा गर्न दुवै बिरुवा चाहिन्छ।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -207,7 +223,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Myclobutanil 10% WP",
@@ -218,7 +235,8 @@
       "phi_days": 21,
       "interval_days": 14,
       "note": "Start at pink bud stage and repeat through wet spring weather.",
-      "note_np": "गुलाबी कोपिला अवस्थादेखि सुरु गरी वसन्तको ओसिलो मौसमभरि दोहोर्‍याउनुहोस्।"
+      "note_np": "गुलाबी कोपिला अवस्थादेखि सुरु गरी वसन्तको ओसिलो मौसमभरि दोहोर्‍याउनुहोस्।",
+      "dose_np": "1 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Banana Black Sigatoka": [
@@ -231,7 +249,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Cut and remove badly spotted leaves; improve drainage and spacing for airflow.",
-      "note_np": "धेरै दाग लागेका पात काटेर हटाउनुहोस्; निकास र दूरी सुधारेर हावा चल्न दिनुहोस्।"
+      "note_np": "धेरै दाग लागेका पात काटेर हटाउनुहोस्; निकास र दूरी सुधारेर हावा चल्न दिनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -242,7 +261,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Propiconazole 25% EC",
@@ -253,7 +273,8 @@
       "phi_days": 21,
       "interval_days": 21,
       "note": "Systemic. Add a mineral-oil sticker if recommended locally. Rotate with mancozeb.",
-      "note_np": "प्रणालीगत। स्थानीय सिफारिस भए खनिज तेल मिसाउनुहोस्। म्यान्कोजेबसँग फेरबदल गर्नुहोस्।"
+      "note_np": "प्रणालीगत। स्थानीय सिफारिस भए खनिज तेल मिसाउनुहोस्। म्यान्कोजेबसँग फेरबदल गर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Banana Yellow Sigatoka": [
@@ -266,7 +287,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Cut and remove badly spotted leaves; improve drainage and spacing for airflow.",
-      "note_np": "धेरै दाग लागेका पात काटेर हटाउनुहोस्; निकास र दूरी सुधारेर हावा चल्न दिनुहोस्।"
+      "note_np": "धेरै दाग लागेका पात काटेर हटाउनुहोस्; निकास र दूरी सुधारेर हावा चल्न दिनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -277,7 +299,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Propiconazole 25% EC",
@@ -288,7 +311,8 @@
       "phi_days": 21,
       "interval_days": 21,
       "note": "Systemic. Add a mineral-oil sticker if recommended locally. Rotate with mancozeb.",
-      "note_np": "प्रणालीगत। स्थानीय सिफारिस भए खनिज तेल मिसाउनुहोस्। म्यान्कोजेबसँग फेरबदल गर्नुहोस्।"
+      "note_np": "प्रणालीगत। स्थानीय सिफारिस भए खनिज तेल मिसाउनुहोस्। म्यान्कोजेबसँग फेरबदल गर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Banana Panama": [
@@ -301,7 +325,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No chemical cures Panama wilt. Dig out and burn affected mats, do not move soil or suckers to clean fields, and replant with a resistant variety.",
-      "note_np": "पानामा ओइलाउने रोगको कुनै रासायनिक उपचार छैन। संक्रमित बोट खनेर जलाउनुहोस्, माटो वा बच्चा सफा खेतमा नलैजानुहोस्, र प्रतिरोधी जात रोप्नुहोस्।"
+      "note_np": "पानामा ओइलाउने रोगको कुनै रासायनिक उपचार छैन। संक्रमित बोट खनेर जलाउनुहोस्, माटो वा बच्चा सफा खेतमा नलैजानुहोस्, र प्रतिरोधी जात रोप्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Trichoderma viride 1% WP",
@@ -312,7 +337,8 @@
       "phi_days": 0,
       "interval_days": 30,
       "note": "Soil drench that suppresses the fungus. Preventive for healthy mats, not a cure for infected ones.",
-      "note_np": "माटोमा हाल्ने जैविक उपचार जसले ढुसी दबाउँछ। स्वस्थ बोटका लागि रोकथाम हो, संक्रमितको उपचार होइन।"
+      "note_np": "माटोमा हाल्ने जैविक उपचार जसले ढुसी दबाउँछ। स्वस्थ बोटका लागि रोकथाम हो, संक्रमितको उपचार होइन।",
+      "dose_np": "5 ग्राम प्रति लिटर — बोटको फेदको माटो भिजाउनुहोस्"
     }
   ],
   "Banana Moko": [
@@ -325,7 +351,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Bacterial disease with no chemical cure. Destroy infected mats, disinfect every cutting tool between plants, and remove male buds with a de-budding tool to block insect spread.",
-      "note_np": "ब्याक्टेरियाजन्य रोग, रासायनिक उपचार छैन। संक्रमित बोट नष्ट गर्नुहोस्, प्रत्येक बोटपछि औजार सफा गर्नुहोस्, र कीराबाट सर्न नदिन भाले फूल हटाउनुहोस्।"
+      "note_np": "ब्याक्टेरियाजन्य रोग, रासायनिक उपचार छैन। संक्रमित बोट नष्ट गर्नुहोस्, प्रत्येक बोटपछि औजार सफा गर्नुहोस्, र कीराबाट सर्न नदिन भाले फूल हटाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Bleaching powder / sodium hypochlorite",
@@ -336,7 +363,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "For sterilising knives and spades between plants - not a foliar spray.",
-      "note_np": "बोट-बोटबीच चक्कु र कोदालो सफा गर्न - पातमा छर्ने होइन।"
+      "note_np": "बोट-बोटबीच चक्कु र कोदालो सफा गर्न - पातमा छर्ने होइन।",
+      "dose_np": "1% घोल — औजार डुबाउनका लागि"
     }
   ],
   "Banana Bract Mosaic Virus": [
@@ -349,7 +377,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Viral - no cure. Remove and burn infected plants, use virus-free tissue-culture suckers, and control the aphids that spread it.",
-      "note_np": "भाइरसजन्य - उपचार छैन। संक्रमित बिरुवा हटाएर जलाउनुहोस्, भाइरसमुक्त बच्चा प्रयोग गर्नुहोस्, र सार्ने लाहा कीरा नियन्त्रण गर्नुहोस्।"
+      "note_np": "भाइरसजन्य - उपचार छैन। संक्रमित बिरुवा हटाएर जलाउनुहोस्, भाइरसमुक्त बच्चा प्रयोग गर्नुहोस्, र सार्ने लाहा कीरा नियन्त्रण गर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Imidacloprid 17.8% SL",
@@ -360,7 +389,8 @@
       "phi_days": 40,
       "interval_days": 15,
       "note": "Controls the aphid vector, which slows spread. Does not treat the virus itself.",
-      "note_np": "भाइरस सार्ने लाहा कीरा नियन्त्रण गर्छ, जसले फैलावट सुस्त बनाउँछ। भाइरस आफैंको उपचार होइन।"
+      "note_np": "भाइरस सार्ने लाहा कीरा नियन्त्रण गर्छ, जसले फैलावट सुस्त बनाउँछ। भाइरस आफैंको उपचार होइन।",
+      "dose_np": "0.5 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Banana Insect Pest": [
@@ -373,7 +403,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Identify the pest first - weevil, aphid and thrips need different controls. Keep the mat clean and remove crop debris.",
-      "note_np": "पहिले कीरा पहिचान गर्नुहोस् - घुन, लाहा र थ्रिप्सलाई फरक उपचार चाहिन्छ। बोट वरिपरि सफा राख्नुहोस्।"
+      "note_np": "पहिले कीरा पहिचान गर्नुहोस् - घुन, लाहा र थ्रिप्सलाई फरक उपचार चाहिन्छ। बोट वरिपरि सफा राख्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Neem oil (azadirachtin 0.03%)",
@@ -384,7 +415,8 @@
       "phi_days": 0,
       "interval_days": 7,
       "note": "Organic option, safe close to harvest. Spray in the evening; repeat after rain.",
-      "note_np": "जैविक विकल्प, बाली टिप्ने बेलामा पनि सुरक्षित। साँझमा छर्नुहोस्; पानी परेपछि दोहोर्‍याउनुहोस्।"
+      "note_np": "जैविक विकल्प, बाली टिप्ने बेलामा पनि सुरक्षित। साँझमा छर्नुहोस्; पानी परेपछि दोहोर्‍याउनुहोस्।",
+      "dose_np": "5 मिलिलिटर प्रति लिटर पानीमा"
     },
     {
       "active": "Chlorpyriphos 20% EC",
@@ -395,7 +427,8 @@
       "phi_days": 21,
       "interval_days": 15,
       "note": "For corm weevil, apply around the base of the mat. Wear gloves and a mask - this is a moderately hazardous product.",
-      "note_np": "कन्दको घुनका लागि बोटको फेदमा प्रयोग गर्नुहोस्। पन्जा र मास्क लगाउनुहोस् - यो मध्यम जोखिमयुक्त हो।"
+      "note_np": "कन्दको घुनका लागि बोटको फेदमा प्रयोग गर्नुहोस्। पन्जा र मास्क लगाउनुहोस् - यो मध्यम जोखिमयुक्त हो।",
+      "dose_np": "2 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Citrus Canker": [
@@ -408,7 +441,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Prune out cankered twigs in dry weather and burn them. Plant windbreaks - wind-driven rain spreads the bacteria.",
-      "note_np": "सुख्खा मौसममा रोगी हाँगा काटेर जलाउनुहोस्। हावा रोक्ने बोट लगाउनुहोस् - हावासँगै आउने पानीले ब्याक्टेरिया फैलाउँछ।"
+      "note_np": "सुख्खा मौसममा रोगी हाँगा काटेर जलाउनुहोस्। हावा रोक्ने बोट लगाउनुहोस् - हावासँगै आउने पानीले ब्याक्टेरिया फैलाउँछ।",
+      "dose_np": "-"
     },
     {
       "active": "Copper oxychloride 50% WP",
@@ -419,7 +453,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Works on both fungi and bacteria. Do not spray in hot midday sun or on young foliage - it can scorch leaves.",
-      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।"
+      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Streptomycin sulphate 9% + Tetracycline 1% SP",
@@ -430,7 +465,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "Use sparingly and only with copper - over-use breeds antibiotic resistance. Check it is permitted locally.",
-      "note_np": "थोरै मात्र र तामासँग मात्र प्रयोग गर्नुहोस् - बढी प्रयोगले प्रतिरोध बढाउँछ। स्थानीय रूपमा अनुमति छ कि जाँच्नुहोस्।"
+      "note_np": "थोरै मात्र र तामासँग मात्र प्रयोग गर्नुहोस् - बढी प्रयोगले प्रतिरोध बढाउँछ। स्थानीय रूपमा अनुमति छ कि जाँच्नुहोस्।",
+      "dose_np": "0.5 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Citrus Greening": [
@@ -443,7 +479,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "No cure exists. Remove and burn infected trees immediately, and plant only certified disease-free saplings.",
-      "note_np": "कुनै उपचार छैन। संक्रमित रूख तुरुन्तै हटाएर जलाउनुहोस्, र प्रमाणित रोगमुक्त बिरुवा मात्र रोप्नुहोस्।"
+      "note_np": "कुनै उपचार छैन। संक्रमित रूख तुरुन्तै हटाएर जलाउनुहोस्, र प्रमाणित रोगमुक्त बिरुवा मात्र रोप्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Imidacloprid 17.8% SL",
@@ -454,7 +491,8 @@
       "phi_days": 40,
       "interval_days": 21,
       "note": "Controls the citrus psyllid that carries the bacterium. Vector control is the only practical management.",
-      "note_np": "रोग सार्ने सिट्रस साइलिड कीरा नियन्त्रण गर्छ। कीरा नियन्त्रण नै एक मात्र व्यावहारिक उपाय हो।"
+      "note_np": "रोग सार्ने सिट्रस साइलिड कीरा नियन्त्रण गर्छ। कीरा नियन्त्रण नै एक मात्र व्यावहारिक उपाय हो।",
+      "dose_np": "0.5 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Cucumber Downy Mildew": [
@@ -467,7 +505,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Trellis the vines and water at the base, never overhead - the spores need leaf wetness.",
-      "note_np": "लहरा माथि चढाउनुहोस् र फेदमा मात्र पानी दिनुहोस्, माथिबाट कहिल्यै नदिनुहोस् - बीजाणुलाई भिजेको पात चाहिन्छ।"
+      "note_np": "लहरा माथि चढाउनुहोस् र फेदमा मात्र पानी दिनुहोस्, माथिबाट कहिल्यै नदिनुहोस् - बीजाणुलाई भिजेको पात चाहिन्छ।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -478,7 +517,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Metalaxyl 8% + Mancozeb 64% WP",
@@ -489,7 +529,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Systemic + protectant mix, effective against downy mildew specifically. Limit to 3 sprays per season.",
-      "note_np": "प्रणालीगत र सुरक्षात्मक मिश्रण, डाउनी मिल्ड्युका लागि विशेष प्रभावकारी। सिजनमा ३ पटकभन्दा बढी नछर्नुहोस्।"
+      "note_np": "प्रणालीगत र सुरक्षात्मक मिश्रण, डाउनी मिल्ड्युका लागि विशेष प्रभावकारी। सिजनमा ३ पटकभन्दा बढी नछर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Cucumber Powdery Mildew": [
@@ -502,7 +543,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Space plants for airflow and remove the worst-affected older leaves.",
-      "note_np": "हावा चल्ने गरी दूरी राख्नुहोस् र बढी प्रभावित पुराना पात हटाउनुहोस्।"
+      "note_np": "हावा चल्ने गरी दूरी राख्नुहोस् र बढी प्रभावित पुराना पात हटाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Wettable sulphur 80% WP",
@@ -513,7 +555,8 @@
       "phi_days": 1,
       "interval_days": 10,
       "note": "Cheap, organic-acceptable and very effective on powdery mildew. Do not apply above 32 degrees C or within 2 weeks of an oil spray.",
-      "note_np": "सस्तो, जैविक खेतीमा स्वीकार्य र पाउडरी मिल्ड्युमा धेरै प्रभावकारी। ३२ डिग्रीभन्दा माथि वा तेल छरेको २ हप्ताभित्र प्रयोग नगर्नुहोस्।"
+      "note_np": "सस्तो, जैविक खेतीमा स्वीकार्य र पाउडरी मिल्ड्युमा धेरै प्रभावकारी। ३२ डिग्रीभन्दा माथि वा तेल छरेको २ हप्ताभित्र प्रयोग नगर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Neem oil (azadirachtin 0.03%)",
@@ -524,7 +567,8 @@
       "phi_days": 0,
       "interval_days": 7,
       "note": "Organic option, safe close to harvest. Spray in the evening; repeat after rain.",
-      "note_np": "जैविक विकल्प, बाली टिप्ने बेलामा पनि सुरक्षित। साँझमा छर्नुहोस्; पानी परेपछि दोहोर्‍याउनुहोस्।"
+      "note_np": "जैविक विकल्प, बाली टिप्ने बेलामा पनि सुरक्षित। साँझमा छर्नुहोस्; पानी परेपछि दोहोर्‍याउनुहोस्।",
+      "dose_np": "5 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Grape Black Rot": [
@@ -537,7 +581,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Remove mummified berries and infected canes during winter pruning - that is where the fungus overwinters.",
-      "note_np": "जाडोमा काँटछाँट गर्दा सुकेका दाना र रोगी हाँगा हटाउनुहोस् - ढुसी त्यहीँ जाडो कटाउँछ।"
+      "note_np": "जाडोमा काँटछाँट गर्दा सुकेका दाना र रोगी हाँगा हटाउनुहोस् - ढुसी त्यहीँ जाडो कटाउँछ।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -548,7 +593,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Myclobutanil 10% WP",
@@ -559,7 +605,8 @@
       "phi_days": 21,
       "interval_days": 14,
       "note": "Most important from just before bloom until 4-6 weeks after fruit set.",
-      "note_np": "फूल फुल्नु अघिदेखि फल लागेको ४-६ हप्तासम्म सबैभन्दा महत्त्वपूर्ण।"
+      "note_np": "फूल फुल्नु अघिदेखि फल लागेको ४-६ हप्तासम्म सबैभन्दा महत्त्वपूर्ण।",
+      "dose_np": "1 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Grape Black Measles": [
@@ -572,7 +619,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "A trunk disease (esca) - no spray reaches it. Prune late in dry weather, seal large cuts, and cut out dead wood.",
-      "note_np": "यो हाँगा/डाँठको रोग हो - छर्केर पुग्दैन। सुख्खा मौसममा ढिलो काँटछाँट गर्नुहोस्, ठूला काटेका ठाउँ टाल्नुहोस्, र सुकेको काठ हटाउनुहोस्।"
+      "note_np": "यो हाँगा/डाँठको रोग हो - छर्केर पुग्दैन। सुख्खा मौसममा ढिलो काँटछाँट गर्नुहोस्, ठूला काटेका ठाउँ टाल्नुहोस्, र सुकेको काठ हटाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Trichoderma harzianum 1% WP",
@@ -583,7 +631,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Protects pruning wounds, which is the main entry point. Preventive only.",
-      "note_np": "काटेको घाउ जोगाउँछ, जुन मुख्य प्रवेश बिन्दु हो। रोकथाम मात्र।"
+      "note_np": "काटेको घाउ जोगाउँछ, जुन मुख्य प्रवेश बिन्दु हो। रोकथाम मात्र।",
+      "dose_np": "ताजा काटेको घाउमा लेप लगाउनुहोस्"
     }
   ],
   "Grape Leaf Blight": [
@@ -596,7 +645,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Remove fallen leaves and improve canopy airflow.",
-      "note_np": "झरेका पात हटाउनुहोस् र लहराभित्र हावा चल्ने बनाउनुहोस्।"
+      "note_np": "झरेका पात हटाउनुहोस् र लहराभित्र हावा चल्ने बनाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -607,7 +657,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Copper oxychloride 50% WP",
@@ -618,7 +669,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Works on both fungi and bacteria. Do not spray in hot midday sun or on young foliage - it can scorch leaves.",
-      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।"
+      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Maize Common rust": [
@@ -631,7 +683,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Plant resistant hybrids - this is the cheapest control by far. Rust rarely justifies spraying in grain maize.",
-      "note_np": "प्रतिरोधी जात रोप्नुहोस् - यो सबैभन्दा सस्तो उपाय हो। दाना मकैमा प्रायः छर्न आवश्यक पर्दैन।"
+      "note_np": "प्रतिरोधी जात रोप्नुहोस् - यो सबैभन्दा सस्तो उपाय हो। दाना मकैमा प्रायः छर्न आवश्यक पर्दैन।",
+      "dose_np": "-"
     },
     {
       "active": "Propiconazole 25% EC",
@@ -642,7 +695,8 @@
       "phi_days": 30,
       "interval_days": 21,
       "note": "Only worth spraying on seed or sweet-corn crops, or if rust appears before tasselling.",
-      "note_np": "बीउ वा मीठो मकैमा, वा झुप्पा आउनु अघि रोग देखिएमा मात्र छर्न लायक हुन्छ।"
+      "note_np": "बीउ वा मीठो मकैमा, वा झुप्पा आउनु अघि रोग देखिएमा मात्र छर्न लायक हुन्छ।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Maize Northern Leaf Blight": [
@@ -655,7 +709,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Rotate away from maize for one season and plough in stubble - the fungus survives on crop residue.",
-      "note_np": "एक सिजन मकै बाहेक अर्को बाली लगाउनुहोस् र डाँठ माटोमा मिलाउनुहोस् - ढुसी बालीको अवशेषमा बाँच्छ।"
+      "note_np": "एक सिजन मकै बाहेक अर्को बाली लगाउनुहोस् र डाँठ माटोमा मिलाउनुहोस् - ढुसी बालीको अवशेषमा बाँच्छ।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -666,7 +721,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Azoxystrobin 23% SC",
@@ -677,7 +733,8 @@
       "phi_days": 21,
       "interval_days": 21,
       "note": "Apply at first lesions, before tasselling. Do not use more than twice in a season.",
-      "note_np": "पहिलो दाग देखिनासाथ, झुप्पा आउनु अघि छर्नुहोस्। सिजनमा दुई पटकभन्दा बढी प्रयोग नगर्नुहोस्।"
+      "note_np": "पहिलो दाग देखिनासाथ, झुप्पा आउनु अघि छर्नुहोस्। सिजनमा दुई पटकभन्दा बढी प्रयोग नगर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Mango Anthracnose": [
@@ -690,7 +747,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Prune for an open canopy and collect fallen fruit and leaves. Hot-water treat harvested fruit (52 C for 5 min) to stop post-harvest rot.",
-      "note_np": "हावा छिर्ने गरी काँटछाँट गर्नुहोस् र झरेका फल-पात बटुल्नुहोस्। टिपेको फल तातो पानीमा (५२ डिग्रीमा ५ मिनेट) उपचार गर्नुहोस्।"
+      "note_np": "हावा छिर्ने गरी काँटछाँट गर्नुहोस् र झरेका फल-पात बटुल्नुहोस्। टिपेको फल तातो पानीमा (५२ डिग्रीमा ५ मिनेट) उपचार गर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -701,7 +759,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Carbendazim 50% WP",
@@ -712,7 +771,8 @@
       "phi_days": 15,
       "interval_days": 15,
       "note": "Spray at flowering and again at fruit set. Alternate with mancozeb - resistance to carbendazim is common.",
-      "note_np": "फूल फुल्दा र फल लाग्दा छर्नुहोस्। म्यान्कोजेबसँग फेरबदल गर्नुहोस् - कार्बेन्डाजिमप्रति प्रतिरोध सामान्य छ।"
+      "note_np": "फूल फुल्दा र फल लाग्दा छर्नुहोस्। म्यान्कोजेबसँग फेरबदल गर्नुहोस् - कार्बेन्डाजिमप्रति प्रतिरोध सामान्य छ।",
+      "dose_np": "1 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Mango Powdery Mildew": [
@@ -725,7 +785,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Spray at panicle emergence. Stop once temperatures exceed 32 degrees C.",
-      "note_np": "फूलको झुप्पा निस्कँदा छर्नुहोस्। तापक्रम ३२ डिग्रीभन्दा माथि गएपछि रोक्नुहोस्।"
+      "note_np": "फूलको झुप्पा निस्कँदा छर्नुहोस्। तापक्रम ३२ डिग्रीभन्दा माथि गएपछि रोक्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Hexaconazole 5% EC",
@@ -736,7 +797,8 @@
       "phi_days": 21,
       "interval_days": 15,
       "note": "Systemic; use if sulphur alone is not holding the disease.",
-      "note_np": "प्रणालीगत; गन्धकले मात्र नियन्त्रण नभएमा प्रयोग गर्नुहोस्।"
+      "note_np": "प्रणालीगत; गन्धकले मात्र नियन्त्रण नभएमा प्रयोग गर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Mango Bacterial Canker": [
@@ -749,7 +811,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Prune out cankered shoots well below the lesion and burn them; disinfect the saw between cuts.",
-      "note_np": "रोगी हाँगा दागभन्दा तल काटेर जलाउनुहोस्; हरेक पटक करौती सफा गर्नुहोस्।"
+      "note_np": "रोगी हाँगा दागभन्दा तल काटेर जलाउनुहोस्; हरेक पटक करौती सफा गर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Copper oxychloride 50% WP",
@@ -760,7 +823,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Works on both fungi and bacteria. Do not spray in hot midday sun or on young foliage - it can scorch leaves.",
-      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।"
+      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Streptomycin sulphate 9% + Tetracycline 1% SP",
@@ -771,7 +835,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "Combine with copper. Check local registration before use.",
-      "note_np": "तामासँग मिलाएर प्रयोग गर्नुहोस्। प्रयोग अघि स्थानीय दर्ता जाँच्नुहोस्।"
+      "note_np": "तामासँग मिलाएर प्रयोग गर्नुहोस्। प्रयोग अघि स्थानीय दर्ता जाँच्नुहोस्।",
+      "dose_np": "0.5 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Mango Die Back": [
@@ -784,7 +849,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Cut affected branches 15 cm below the dead tissue and seal the cut with copper paste or Bordeaux paint.",
-      "note_np": "सुकेको भागभन्दा १५ सेमी तल हाँगा काट्नुहोस् र काटेको ठाउँमा तामाको लेप लगाउनुहोस्।"
+      "note_np": "सुकेको भागभन्दा १५ सेमी तल हाँगा काट्नुहोस् र काटेको ठाउँमा तामाको लेप लगाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Copper oxychloride 50% WP",
@@ -795,7 +861,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Works on both fungi and bacteria. Do not spray in hot midday sun or on young foliage - it can scorch leaves.",
-      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।"
+      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Carbendazim 50% WP",
@@ -806,7 +873,8 @@
       "phi_days": 15,
       "interval_days": 20,
       "note": "Spray the canopy after pruning to protect fresh wounds.",
-      "note_np": "काँटछाँटपछि नयाँ घाउ जोगाउन रूखभरि छर्नुहोस्।"
+      "note_np": "काँटछाँटपछि नयाँ घाउ जोगाउन रूखभरि छर्नुहोस्।",
+      "dose_np": "1 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Mango Sooty Mould": [
@@ -819,7 +887,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "The mould grows on honeydew from sucking insects - control the insects and the mould disappears. Wash leaves with 1% starch solution to lift the black film.",
-      "note_np": "यो कालो ढुसी रस चुस्ने कीराको मह-जस्तो पदार्थमा उम्रन्छ - कीरा नियन्त्रण गरे ढुसी हराउँछ। १% पिठोको घोलले पात धुनुहोस्।"
+      "note_np": "यो कालो ढुसी रस चुस्ने कीराको मह-जस्तो पदार्थमा उम्रन्छ - कीरा नियन्त्रण गरे ढुसी हराउँछ। १% पिठोको घोलले पात धुनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Neem oil (azadirachtin 0.03%)",
@@ -830,7 +899,8 @@
       "phi_days": 0,
       "interval_days": 7,
       "note": "Organic option, safe close to harvest. Spray in the evening; repeat after rain.",
-      "note_np": "जैविक विकल्प, बाली टिप्ने बेलामा पनि सुरक्षित। साँझमा छर्नुहोस्; पानी परेपछि दोहोर्‍याउनुहोस्।"
+      "note_np": "जैविक विकल्प, बाली टिप्ने बेलामा पनि सुरक्षित। साँझमा छर्नुहोस्; पानी परेपछि दोहोर्‍याउनुहोस्।",
+      "dose_np": "5 मिलिलिटर प्रति लिटर पानीमा"
     },
     {
       "active": "Imidacloprid 17.8% SL",
@@ -841,7 +911,8 @@
       "phi_days": 40,
       "interval_days": 21,
       "note": "Targets the hoppers and scale insects producing the honeydew.",
-      "note_np": "मह-जस्तो पदार्थ निकाल्ने फड्के र स्केल कीरालाई लक्षित गर्छ।"
+      "note_np": "मह-जस्तो पदार्थ निकाल्ने फड्के र स्केल कीरालाई लक्षित गर्छ।",
+      "dose_np": "0.5 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Mango Gall Midge": [
@@ -854,7 +925,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Plough the soil under the tree in winter to expose pupae, and collect and destroy galled leaves and flower stalks.",
-      "note_np": "जाडोमा रूखमुनिको माटो खनेर प्युपा बाहिर ल्याउनुहोस्, र गाँठो परेका पात र फूलका डाँठ नष्ट गर्नुहोस्।"
+      "note_np": "जाडोमा रूखमुनिको माटो खनेर प्युपा बाहिर ल्याउनुहोस्, र गाँठो परेका पात र फूलका डाँठ नष्ट गर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Dimethoate 30% EC",
@@ -865,7 +937,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "Spray at bud burst. Moderately hazardous - wear full protective clothing.",
-      "note_np": "कोपिला फुट्दा छर्नुहोस्। मध्यम जोखिमयुक्त - पूरा सुरक्षा पोशाक लगाउनुहोस्।"
+      "note_np": "कोपिला फुट्दा छर्नुहोस्। मध्यम जोखिमयुक्त - पूरा सुरक्षा पोशाक लगाउनुहोस्।",
+      "dose_np": "2 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Mango Cutting Weevil": [
@@ -878,7 +951,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Collect and destroy fallen shoots and fruit that contain grubs. Keep the orchard floor clean.",
-      "note_np": "किरा भएका झरेका टुसा र फल बटुलेर नष्ट गर्नुहोस्। बगैंचाको भुइँ सफा राख्नुहोस्।"
+      "note_np": "किरा भएका झरेका टुसा र फल बटुलेर नष्ट गर्नुहोस्। बगैंचाको भुइँ सफा राख्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Lambda-cyhalothrin 5% EC",
@@ -889,7 +963,8 @@
       "phi_days": 21,
       "interval_days": 15,
       "note": "HIGHLY HAZARDOUS - red band. Full PPE required, never spray in wind, and keep people and animals out of the orchard for 24 hours.",
-      "note_np": "अति जोखिमयुक्त - रातो पट्टी। पूर्ण सुरक्षा सामग्री अनिवार्य, हावा चलेको बेला नछर्नुहोस्, र २४ घण्टा मानिस-पशु टाढा राख्नुहोस्।"
+      "note_np": "अति जोखिमयुक्त - रातो पट्टी। पूर्ण सुरक्षा सामग्री अनिवार्य, हावा चलेको बेला नछर्नुहोस्, र २४ घण्टा मानिस-पशु टाढा राख्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Potato Late Blight": [
@@ -902,7 +977,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Destroy volunteer plants and cull piles, hill the soil well to protect tubers, and cut haulms 2 weeks before harvest.",
-      "note_np": "आफैं उम्रेका बोट र फालिएका आलु नष्ट गर्नुहोस्, कन्द जोगाउन माटो राम्ररी चढाउनुहोस्, र टिप्नुभन्दा २ हप्ता अघि डाँठ काट्नुहोस्।"
+      "note_np": "आफैं उम्रेका बोट र फालिएका आलु नष्ट गर्नुहोस्, कन्द जोगाउन माटो राम्ररी चढाउनुहोस्, र टिप्नुभन्दा २ हप्ता अघि डाँठ काट्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -913,7 +989,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Cymoxanil 8% + Mancozeb 64% WP",
@@ -924,7 +1001,8 @@
       "phi_days": 7,
       "interval_days": 7,
       "note": "Use this when blight is already present and weather stays cool and wet; mancozeb alone is preventive only.",
-      "note_np": "रोग देखिसकेको र चिसो-ओसिलो मौसम रहेको बेला प्रयोग गर्नुहोस्; म्यान्कोजेब मात्र रोकथामका लागि हो।"
+      "note_np": "रोग देखिसकेको र चिसो-ओसिलो मौसम रहेको बेला प्रयोग गर्नुहोस्; म्यान्कोजेब मात्र रोकथामका लागि हो।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Potato Early Blight": [
@@ -937,7 +1015,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Rotate with a non-solanaceous crop, and keep plants well fed - early blight hits stressed, nitrogen-poor plants hardest.",
-      "note_np": "आलु-गोलभेडा बाहेकको बाली फेरबदल गर्नुहोस्, र बोटलाई राम्रो मल दिनुहोस् - कमजोर बोटमा यो रोग बढी लाग्छ।"
+      "note_np": "आलु-गोलभेडा बाहेकको बाली फेरबदल गर्नुहोस्, र बोटलाई राम्रो मल दिनुहोस् - कमजोर बोटमा यो रोग बढी लाग्छ।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -948,7 +1027,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Azoxystrobin 23% SC",
@@ -959,7 +1039,8 @@
       "phi_days": 14,
       "interval_days": 14,
       "note": "Alternate with mancozeb. Do not apply more than twice consecutively.",
-      "note_np": "म्यान्कोजेबसँग फेरबदल गर्नुहोस्। लगातार दुई पटकभन्दा बढी प्रयोग नगर्नुहोस्।"
+      "note_np": "म्यान्कोजेबसँग फेरबदल गर्नुहोस्। लगातार दुई पटकभन्दा बढी प्रयोग नगर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Rice Leaf Blast": [
@@ -972,7 +1053,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Avoid excess nitrogen - lush growth is far more susceptible. Keep a thin film of water rather than letting the field dry out.",
-      "note_np": "अत्यधिक नाइट्रोजन नदिनुहोस् - बढी हरियो बोटमा रोग छिटो लाग्छ। खेत सुक्न नदिई पातलो पानी राख्नुहोस्।"
+      "note_np": "अत्यधिक नाइट्रोजन नदिनुहोस् - बढी हरियो बोटमा रोग छिटो लाग्छ। खेत सुक्न नदिई पातलो पानी राख्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Tricyclazole 75% WP",
@@ -983,7 +1065,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "The standard blast fungicide. Spray at boot leaf and again at heading.",
-      "note_np": "ब्लास्टका लागि मानक औषधि। गाभा अवस्था र बाला निस्कँदा छर्नुहोस्।"
+      "note_np": "ब्लास्टका लागि मानक औषधि। गाभा अवस्था र बाला निस्कँदा छर्नुहोस्।",
+      "dose_np": "0.6 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Isoprothiolane 40% EC",
@@ -994,7 +1077,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "Alternative to tricyclazole - rotate between them to slow resistance.",
-      "note_np": "ट्राइसाइक्लाजोलको विकल्प - प्रतिरोध सुस्त बनाउन फेरबदल गर्नुहोस्।"
+      "note_np": "ट्राइसाइक्लाजोलको विकल्प - प्रतिरोध सुस्त बनाउन फेरबदल गर्नुहोस्।",
+      "dose_np": "1.5 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Rice Bacterial Leaf Blight": [
@@ -1007,7 +1091,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Bacterial - fungicides do nothing. Drain the field, stop nitrogen top-dressing, and use resistant varieties next season.",
-      "note_np": "ब्याक्टेरियाजन्य - ढुसीनाशकले काम गर्दैन। खेतको पानी निकाल्नुहोस्, नाइट्रोजन थप्न रोक्नुहोस्, र अर्को सिजन प्रतिरोधी जात लगाउनुहोस्।"
+      "note_np": "ब्याक्टेरियाजन्य - ढुसीनाशकले काम गर्दैन। खेतको पानी निकाल्नुहोस्, नाइट्रोजन थप्न रोक्नुहोस्, र अर्को सिजन प्रतिरोधी जात लगाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Copper oxychloride 50% WP",
@@ -1018,7 +1103,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Works on both fungi and bacteria. Do not spray in hot midday sun or on young foliage - it can scorch leaves.",
-      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।"
+      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Streptomycin sulphate 9% + Tetracycline 1% SP",
@@ -1029,7 +1115,8 @@
       "phi_days": 30,
       "interval_days": 10,
       "note": "Only worth using early, on a young crop. Verify local registration first.",
-      "note_np": "कलिलो बालीमा सुरुमै मात्र प्रयोग गर्न लायक। पहिले स्थानीय दर्ता जाँच्नुहोस्।"
+      "note_np": "कलिलो बालीमा सुरुमै मात्र प्रयोग गर्न लायक। पहिले स्थानीय दर्ता जाँच्नुहोस्।",
+      "dose_np": "0.5 ग्राम प्रति लिटर + कपर अक्सिक्लोराइड 3 ग्राम प्रति लिटर"
     }
   ],
   "Rice Brown Spot": [
@@ -1042,7 +1129,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Brown spot is a hunger sign - it follows potassium and silicon deficiency and drought stress. Correct the soil first.",
-      "note_np": "ब्राउन स्पट पोषणको कमीको संकेत हो - पोटास र सिलिकनको अभाव तथा खडेरीपछि देखिन्छ। पहिले माटो सुधार गर्नुहोस्।"
+      "note_np": "ब्राउन स्पट पोषणको कमीको संकेत हो - पोटास र सिलिकनको अभाव तथा खडेरीपछि देखिन्छ। पहिले माटो सुधार गर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -1053,7 +1141,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Propiconazole 25% EC",
@@ -1064,7 +1153,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "Use if spotting spreads past the lower leaves. Correcting nutrition matters more.",
-      "note_np": "तल्ला पातभन्दा माथि फैलिए प्रयोग गर्नुहोस्। पोषण सुधार्नु बढी महत्त्वपूर्ण छ।"
+      "note_np": "तल्ला पातभन्दा माथि फैलिए प्रयोग गर्नुहोस्। पोषण सुधार्नु बढी महत्त्वपूर्ण छ।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Rice Leaf Scald": [
@@ -1077,7 +1167,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Remove infected stubble after harvest and avoid dense planting.",
-      "note_np": "बाली काटेपछि रोगी डाँठ हटाउनुहोस् र बाक्लो रोपाइ नगर्नुहोस्।"
+      "note_np": "बाली काटेपछि रोगी डाँठ हटाउनुहोस् र बाक्लो रोपाइ नगर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -1088,7 +1179,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Propiconazole 25% EC",
@@ -1099,7 +1191,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "Spray at early heading if the upper leaves are affected.",
-      "note_np": "माथिल्ला पात प्रभावित भए बाला निस्कने बेला छर्नुहोस्।"
+      "note_np": "माथिल्ला पात प्रभावित भए बाला निस्कने बेला छर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Rice Leaf smut": [
@@ -1112,7 +1205,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Usually minor and rarely worth spraying. Remove crop residue and balance nitrogen.",
-      "note_np": "प्रायः सामान्य हुन्छ र छर्न आवश्यक पर्दैन। बालीको अवशेष हटाउनुहोस् र नाइट्रोजन सन्तुलित गर्नुहोस्।"
+      "note_np": "प्रायः सामान्य हुन्छ र छर्न आवश्यक पर्दैन। बालीको अवशेष हटाउनुहोस् र नाइट्रोजन सन्तुलित गर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Propiconazole 25% EC",
@@ -1123,7 +1217,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "Only if infection is severe on the flag leaf.",
-      "note_np": "झन्डा पातमा गम्भीर संक्रमण भएमा मात्र।"
+      "note_np": "झन्डा पातमा गम्भीर संक्रमण भएमा मात्र।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Rice Narrow Brown Spot": [
@@ -1136,7 +1231,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Grow resistant varieties and keep potassium levels up.",
-      "note_np": "प्रतिरोधी जात लगाउनुहोस् र पोटासको मात्रा कायम राख्नुहोस्।"
+      "note_np": "प्रतिरोधी जात लगाउनुहोस् र पोटासको मात्रा कायम राख्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Propiconazole 25% EC",
@@ -1147,7 +1243,8 @@
       "phi_days": 30,
       "interval_days": 15,
       "note": "Spray at booting if it reaches the upper leaves.",
-      "note_np": "माथिल्ला पातसम्म पुगे गाभा अवस्थामा छर्नुहोस्।"
+      "note_np": "माथिल्ला पातसम्म पुगे गाभा अवस्थामा छर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Tomato Late blight": [
@@ -1160,7 +1257,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Remove and burn infected plants at once - late blight destroys a field in days in cool wet weather. Never compost them.",
-      "note_np": "संक्रमित बोट तुरुन्तै हटाएर जलाउनुहोस् - चिसो-ओसिलो मौसममा यो रोगले केही दिनमै खेत सखाप पार्छ। कम्पोस्टमा नहाल्नुहोस्।"
+      "note_np": "संक्रमित बोट तुरुन्तै हटाएर जलाउनुहोस् - चिसो-ओसिलो मौसममा यो रोगले केही दिनमै खेत सखाप पार्छ। कम्पोस्टमा नहाल्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -1171,7 +1269,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Cymoxanil 8% + Mancozeb 64% WP",
@@ -1182,7 +1281,8 @@
       "phi_days": 7,
       "interval_days": 7,
       "note": "Curative + protectant. Start at the first lesion and repeat weekly while wet weather lasts.",
-      "note_np": "उपचारात्मक र सुरक्षात्मक दुवै। पहिलो दाग देखिनासाथ सुरु गरी ओसिलो मौसमभरि साप्ताहिक दोहोर्‍याउनुहोस्।"
+      "note_np": "उपचारात्मक र सुरक्षात्मक दुवै। पहिलो दाग देखिनासाथ सुरु गरी ओसिलो मौसमभरि साप्ताहिक दोहोर्‍याउनुहोस्।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Tomato Early blight": [
@@ -1195,7 +1295,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Mulch to stop soil splashing onto lower leaves, stake the plants, and strip the lowest leaves.",
-      "note_np": "माटो पातमा नछ्याप्न मल्च गर्नुहोस्, बोटलाई टेको दिनुहोस्, र तल्ला पात हटाउनुहोस्।"
+      "note_np": "माटो पातमा नछ्याप्न मल्च गर्नुहोस्, बोटलाई टेको दिनुहोस्, र तल्ला पात हटाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -1206,7 +1307,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Azoxystrobin 23% SC",
@@ -1217,7 +1319,8 @@
       "phi_days": 7,
       "interval_days": 14,
       "note": "Alternate with mancozeb to avoid resistance.",
-      "note_np": "प्रतिरोधबाट जोगिन म्यान्कोजेबसँग फेरबदल गर्नुहोस्।"
+      "note_np": "प्रतिरोधबाट जोगिन म्यान्कोजेबसँग फेरबदल गर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Tomato Septoria Leaf Spot": [
@@ -1230,7 +1333,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Remove affected lower leaves as soon as spots appear and avoid overhead watering.",
-      "note_np": "दाग देखिनासाथ तल्ला पात हटाउनुहोस् र माथिबाट पानी नदिनुहोस्।"
+      "note_np": "दाग देखिनासाथ तल्ला पात हटाउनुहोस् र माथिबाट पानी नदिनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -1241,7 +1345,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Copper oxychloride 50% WP",
@@ -1252,7 +1357,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Works on both fungi and bacteria. Do not spray in hot midday sun or on young foliage - it can scorch leaves.",
-      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।"
+      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Tomato Target Spot": [
@@ -1265,7 +1371,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Improve airflow, remove crop debris, and rotate out of tomato for a season.",
-      "note_np": "हावा चल्ने बनाउनुहोस्, बालीको फोहोर हटाउनुहोस्, र एक सिजन गोलभेडा नलगाउनुहोस्।"
+      "note_np": "हावा चल्ने बनाउनुहोस्, बालीको फोहोर हटाउनुहोस्, र एक सिजन गोलभेडा नलगाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -1276,7 +1383,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Azoxystrobin 23% SC",
@@ -1287,7 +1395,8 @@
       "phi_days": 7,
       "interval_days": 14,
       "note": "Apply at first symptoms.",
-      "note_np": "पहिलो लक्षण देखिनासाथ प्रयोग गर्नुहोस्।"
+      "note_np": "पहिलो लक्षण देखिनासाथ प्रयोग गर्नुहोस्।",
+      "dose_np": "1 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Tomato Leaf Mold": [
@@ -1300,7 +1409,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Mainly a polytunnel problem. Ventilate hard, cut humidity below 85%, and space the plants.",
-      "note_np": "मुख्यतः टनेलभित्रको समस्या। राम्रोसँग हावा खेलाउनुहोस्, आर्द्रता ८५% भन्दा तल झार्नुहोस्, र दूरी बढाउनुहोस्।"
+      "note_np": "मुख्यतः टनेलभित्रको समस्या। राम्रोसँग हावा खेलाउनुहोस्, आर्द्रता ८५% भन्दा तल झार्नुहोस्, र दूरी बढाउनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Mancozeb 75% WP",
@@ -1311,7 +1421,8 @@
       "phi_days": 14,
       "interval_days": 10,
       "note": "Protectant only - it prevents new infection but cannot cure infected tissue. Spray before or at first symptoms.",
-      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।"
+      "note_np": "सुरक्षात्मक मात्र हो - नयाँ संक्रमण रोक्छ तर संक्रमित भागलाई निको पार्दैन। लक्षण देखिनु अघि वा सुरुमै छर्नुहोस्।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Chlorothalonil 75% WP",
@@ -1322,7 +1433,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Good protectant for leaf mould under cover.",
-      "note_np": "टनेलभित्रको लिफ मोल्डका लागि राम्रो सुरक्षात्मक औषधि।"
+      "note_np": "टनेलभित्रको लिफ मोल्डका लागि राम्रो सुरक्षात्मक औषधि।",
+      "dose_np": "2 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Tomato Bacterial Spot": [
@@ -1335,7 +1447,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Bacterial - use certified clean seed, rotate for 2 years, and never work among wet plants.",
-      "note_np": "ब्याक्टेरियाजन्य - प्रमाणित सफा बीउ प्रयोग गर्नुहोस्, २ वर्ष बाली फेरबदल गर्नुहोस्, र भिजेको बोटमा काम नगर्नुहोस्।"
+      "note_np": "ब्याक्टेरियाजन्य - प्रमाणित सफा बीउ प्रयोग गर्नुहोस्, २ वर्ष बाली फेरबदल गर्नुहोस्, र भिजेको बोटमा काम नगर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Copper oxychloride 50% WP",
@@ -1346,7 +1459,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Works on both fungi and bacteria. Do not spray in hot midday sun or on young foliage - it can scorch leaves.",
-      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।"
+      "note_np": "ढुसी र ब्याक्टेरिया दुवैमा काम गर्छ। मध्यदिनको चर्को घाम वा कलिलो पातमा नछर्नुहोस् - पात पोल्न सक्छ।",
+      "dose_np": "3 ग्राम प्रति लिटर पानीमा"
     },
     {
       "active": "Copper oxychloride 50% WP + Mancozeb 75% WP",
@@ -1357,7 +1471,8 @@
       "phi_days": 7,
       "interval_days": 7,
       "note": "The copper-mancozeb tank mix is more effective than copper alone.",
-      "note_np": "तामा र म्यान्कोजेब मिसाएर छर्दा तामा मात्रभन्दा बढी प्रभावकारी हुन्छ।"
+      "note_np": "तामा र म्यान्कोजेब मिसाएर छर्दा तामा मात्रभन्दा बढी प्रभावकारी हुन्छ।",
+      "dose_np": "3 ग्राम + 2 ग्राम प्रति लिटर पानीमा"
     }
   ],
   "Tomato Spider Mites": [
@@ -1370,7 +1485,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Mites explode in hot dry dust. Spray the crop with plain water, especially leaf undersides, and avoid broad-spectrum insecticides that kill predatory mites.",
-      "note_np": "गर्मी, सुख्खा र धुलोमा माकुरे कीरा बढ्छ। सादा पानी छर्नुहोस्, विशेषगरी पातको तल्लो भाग, र शिकारी कीरा मार्ने औषधि नछर्नुहोस्।"
+      "note_np": "गर्मी, सुख्खा र धुलोमा माकुरे कीरा बढ्छ। सादा पानी छर्नुहोस्, विशेषगरी पातको तल्लो भाग, र शिकारी कीरा मार्ने औषधि नछर्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Neem oil (azadirachtin 0.03%)",
@@ -1381,7 +1497,8 @@
       "phi_days": 0,
       "interval_days": 7,
       "note": "Organic option, safe close to harvest. Spray in the evening; repeat after rain.",
-      "note_np": "जैविक विकल्प, बाली टिप्ने बेलामा पनि सुरक्षित। साँझमा छर्नुहोस्; पानी परेपछि दोहोर्‍याउनुहोस्।"
+      "note_np": "जैविक विकल्प, बाली टिप्ने बेलामा पनि सुरक्षित। साँझमा छर्नुहोस्; पानी परेपछि दोहोर्‍याउनुहोस्।",
+      "dose_np": "5 मिलिलिटर प्रति लिटर पानीमा"
     },
     {
       "active": "Abamectin 1.9% EC",
@@ -1392,7 +1509,8 @@
       "phi_days": 7,
       "interval_days": 10,
       "note": "Spray the UNDERSIDE of leaves - that is where mites live. Rotate actives; mites develop resistance very fast.",
-      "note_np": "पातको तल्लो भागमा छर्नुहोस् - माकुरे कीरा त्यहीँ बस्छ। औषधि फेरबदल गर्नुहोस्; यसले छिट्टै प्रतिरोध विकास गर्छ।"
+      "note_np": "पातको तल्लो भागमा छर्नुहोस् - माकुरे कीरा त्यहीँ बस्छ। औषधि फेरबदल गर्नुहोस्; यसले छिट्टै प्रतिरोध विकास गर्छ।",
+      "dose_np": "0.5 मिलिलिटर प्रति लिटर पानीमा"
     }
   ],
   "Tomato Mosaic Virus": [
@@ -1405,7 +1523,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Viral - no cure. Pull out and burn infected plants, wash hands and tools with soap, and do not handle tobacco before touching plants.",
-      "note_np": "भाइरसजन्य - उपचार छैन। संक्रमित बोट उखेलेर जलाउनुहोस्, हात र औजार साबुनले धुनुहोस्, र बोट छुनु अघि सुर्ती नछुनुहोस्।"
+      "note_np": "भाइरसजन्य - उपचार छैन। संक्रमित बोट उखेलेर जलाउनुहोस्, हात र औजार साबुनले धुनुहोस्, र बोट छुनु अघि सुर्ती नछुनुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Use resistant varieties (Tm-2a gene) and certified seed next season.",
@@ -1416,7 +1535,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Use resistant varieties (Tm-2a gene) and certified seed next season.",
-      "note_np": "अर्को सिजन प्रतिरोधी जात र प्रमाणित बीउ प्रयोग गर्नुहोस्।"
+      "note_np": "अर्को सिजन प्रतिरोधी जात र प्रमाणित बीउ प्रयोग गर्नुहोस्।",
+      "dose_np": "-"
     }
   ],
   "Tomato Yellow Leaf Curl Virus": [
@@ -1429,7 +1549,8 @@
       "phi_days": 0,
       "interval_days": 0,
       "note": "Viral - no cure. Remove infected plants, use 50-mesh insect netting on nurseries, and put up yellow sticky traps.",
-      "note_np": "भाइरसजन्य - उपचार छैन। संक्रमित बोट हटाउनुहोस्, नर्सरीमा ५० मेशको जाली लगाउनुहोस्, र पहेंलो टाँसिने पासो राख्नुहोस्।"
+      "note_np": "भाइरसजन्य - उपचार छैन। संक्रमित बोट हटाउनुहोस्, नर्सरीमा ५० मेशको जाली लगाउनुहोस्, र पहेंलो टाँसिने पासो राख्नुहोस्।",
+      "dose_np": "-"
     },
     {
       "active": "Imidacloprid 17.8% SL",
@@ -1440,7 +1561,8 @@
       "phi_days": 40,
       "interval_days": 15,
       "note": "Controls the whitefly that spreads it. Rotate with a different insecticide group - whitefly resistance is widespread.",
-      "note_np": "यो सार्ने सेतो झिंगा नियन्त्रण गर्छ। फरक समूहको औषधिसँग फेरबदल गर्नुहोस् - सेतो झिंगामा प्रतिरोध व्यापक छ।"
+      "note_np": "यो सार्ने सेतो झिंगा नियन्त्रण गर्छ। फरक समूहको औषधिसँग फेरबदल गर्नुहोस् - सेतो झिंगामा प्रतिरोध व्यापक छ।",
+      "dose_np": "0.5 मिलिलिटर प्रति लिटर पानीमा"
     }
   ]
 }

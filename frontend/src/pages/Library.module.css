@@ -4,6 +4,9 @@
   gap: var(--space-3);
   margin-bottom: var(--space-4);
 }
+.filter {
+  display: block;
+}
 .count {
   font-size: var(--text-sm);
   color: var(--color-text-muted);

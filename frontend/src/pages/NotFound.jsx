@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
+import { useLang } from "../context/LanguageContext";
 import { EmptyState } from "../components/ui";
 import s from "./pages.module.css";
 
 export default function NotFound() {
+  const { t } = useLang();
   return (
     <div className={`container ${s.page}`}>
       <EmptyState
-        title="Page not found"
-        action={<Link to="/" className="btn btn-primary">Back to home</Link>}
+        title={t.notFound}
+        action={<Link to="/" className="btn btn-primary">{t.backHome}</Link>}
       >
-        The page you were looking for doesn&apos;t exist or has moved.
+        {t.notFoundBody}
       </EmptyState>
     </div>
   );

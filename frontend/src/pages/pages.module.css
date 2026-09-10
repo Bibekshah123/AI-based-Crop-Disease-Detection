@@ -1,5 +1,5 @@
 .page {
-  padding-block: var(--space-6) var(--space-7);
+  padding-block: var(--space-6);
 }
 .pageNarrow {
   max-width: var(--container-narrow);
@@ -86,9 +86,13 @@
   display: grid;
   gap: var(--space-5);
   grid-template-columns: 1fr;
-  align-items: start;
+  /* stretch, not start: side by side the two step panels should share a height
+     so the row reads as one unit. No effect in the single-column layout. */
+  align-items: stretch;
 }
 .panel {
+  display: flex;
+  flex-direction: column;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);

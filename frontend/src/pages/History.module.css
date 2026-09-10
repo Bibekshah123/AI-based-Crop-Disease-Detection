@@ -81,3 +81,41 @@
   }
   .actions .btn { flex: none; }
 }
+
+/* ---- Header row: title on the left, "Delete all" on the right ---- */
+.headRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+/* Clearing history is destructive and irreversible, so it asks first - inline
+   rather than window.confirm, so it can be styled, translated and tested. */
+.clearConfirm {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius);
+  background: var(--color-error-bg);
+  max-width: 24rem;
+}
+.clearConfirmText {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-text);
+}
+.clearConfirmBtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.dangerBtn {
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: #fff;
+}
+.dangerBtn:hover { filter: brightness(0.92); }

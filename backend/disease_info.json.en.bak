@@ -1,0 +1,446 @@
+{
+  "Apple Black Rot": {
+    "description": "Black rot is a fungal disease of apple caused by Botryosphaeria obtusa. It produces circular brown spots on leaves and dark brown rotting lesions on fruit, often with visible pycnidia (black dots) in the center.",
+    "cause": "Fungal disease caused by Botryosphaeria obtusa.",
+    "symptoms": "Circular brown leaf spots with purple margins, dark brown rotting lesions on fruit with concentric rings.",
+    "treatment": "Remove mummified fruit and cankered branches. Apply fungicide during the growing season.",
+    "prevention": "Prune dead wood, remove fallen leaves, and apply dormant sprays before bud break.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Apple Cedar Rust": {
+    "description": "Cedar rust is a fungal disease caused by Gymnosporangium juniperi-virginianae. It requires both apple and cedar/juniper hosts. It produces bright orange-yellow spots on apple leaves and deformed fruit.",
+    "cause": "Fungal disease caused by Gymnosporangium juniperi-virginianae (requires cedar alternate host).",
+    "symptoms": "Bright orange-yellow spots on upper leaf surfaces, horn-like tubes on leaf undersides, deformed fruit.",
+    "treatment": "Apply fungicide at pink bud stage. Remove nearby cedar trees if possible.",
+    "prevention": "Remove juniper/cedar alternate hosts within 2 miles. Plant resistant apple varieties.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Apple Healthy": {
+    "description": "The apple leaf appears healthy with normal green coloration and no visible signs of disease infection.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Apple Scab": {
+    "description": "Apple scab is a common fungal disease of apple trees caused by Venturia inaequalis. It produces olive-green to brown spots on leaves and fruit, leading to premature leaf drop and blemished apples.",
+    "cause": "Fungal disease caused by Venturia inaequalis.",
+    "symptoms": "Olive-green to brown spots on leaves causing curling and premature drop.",
+    "treatment": "Remove infected leaves and apply fungicide. Consult an agricultural expert.",
+    "prevention": "Plant resistant varieties and apply dormant sprays in early spring.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Banana Black Sigatoka": {
+    "description": "Black Sigatoka is a severe fungal leaf streak disease of banana caused by Mycosphaerella fijiensis. It causes dark brown to black streaks on leaves, reducing photosynthesis and fruit yield significantly.",
+    "cause": "Fungal disease caused by Mycosphaerella fijiensis.",
+    "symptoms": "Dark brown to black streaks and spots on leaves, premature leaf death, reduced fruit bunch weight.",
+    "treatment": "Apply systemic fungicides on a regular schedule. Remove and destroy infected leaves.",
+    "prevention": "Improve drainage, increase plant spacing, and apply preventive fungicide sprays.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Banana Bract Mosaic Virus": {
+    "description": "Banana Bract Mosaic Virus (BBrMV) is a potyvirus that causes mosaic patterns on bracts, leaves, and pseudostems. It can cause significant yield loss in susceptible cultivars.",
+    "cause": "Viral disease caused by Banana Bract Mosaic Virus (BBrMV), spread by aphids.",
+    "symptoms": "Mosaic mottling on bracts and leaves, streaking on pseudostems, distorted fruit shape.",
+    "treatment": "No cure. Remove and destroy infected plants. Use virus-free planting material.",
+    "prevention": "Plant certified disease-free suckers, control aphid vectors, and rogue out infected plants.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Banana Healthy": {
+    "description": "The banana leaf appears healthy with normal green coloration and no visible signs of disease.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring and maintain proper soil nutrients.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Banana Insect Pest": {
+    "description": "The banana leaf shows damage caused by insect pests such as banana weevils, aphids, or thrips. Symptoms include chewing marks, tunnels, curling, or discoloration from feeding damage.",
+    "cause": "Damage caused by insect pests including banana weevil (Cosmopolites sordidus), aphids, or thrips.",
+    "symptoms": "Chewing marks, tunnels in pseudostem, leaf curling, silver streaks, or frass deposits.",
+    "treatment": "Apply appropriate insecticide. Use pheromone traps for banana weevil. Consult an expert.",
+    "prevention": "Monitor regularly, keep field clean, use clean planting material, and apply neem-based treatments.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Banana Moko": {
+    "description": "Moko disease is a bacterial wilt of banana caused by Ralstonia solanacearum. It causes rapid wilting and yellowing of leaves, with bacterial ooze from cut pseudostem. It is spread by contaminated tools and insects.",
+    "cause": "Bacterial disease caused by Ralstonia solanacearum.",
+    "symptoms": "Yellowing and wilting of leaves, bacterial ooze from cut stems, premature fruit ripening.",
+    "treatment": "No cure. Remove and destroy infected plants immediately. Sterilize cutting tools.",
+    "prevention": "Use disease-free planting material, control water drainage, and avoid wounding plants.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Banana Panama": {
+    "description": "Panama disease is a devastating fungal wilt of banana caused by Fusarium oxysporum f. sp. cubense. It causes yellowing and wilting of leaves with vascular discoloration, and has no effective cure.",
+    "cause": "Fungal disease caused by Fusarium oxysporum f. sp. cubense (Tropical Race 4).",
+    "symptoms": "Yellowing and wilting of lower leaves, vascular discoloration in the stem.",
+    "treatment": "No effective cure. Remove infected plants immediately to prevent spread.",
+    "prevention": "Use disease-free planting material and practice crop rotation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Banana Yellow Sigatoka": {
+    "description": "Yellow Sigatoka is a fungal leaf spot disease of banana caused by Mycosphaerella musicola. It produces yellow-bordered streaks on leaves that reduce photosynthetic capacity and fruit yield.",
+    "cause": "Fungal disease caused by Mycosphaerella musicola.",
+    "symptoms": "Elongated dark streaks with yellow halos on leaves, premature leaf death.",
+    "treatment": "Apply fungicide and remove severely infected leaves.",
+    "prevention": "Improve air circulation, practice field sanitation, and apply preventive sprays.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Citrus Canker": {
+    "description": "Citrus canker is a highly contagious bacterial disease caused by Xanthomonas citri. It produces raised corky lesions on leaves, stems, and fruit, often with yellow halos.",
+    "cause": "Bacterial disease caused by Xanthomonas citri subsp. citri.",
+    "symptoms": "Raised corky lesions on leaves, stems, and fruit with yellow halos.",
+    "treatment": "Remove infected plant parts and apply copper-based bactericides.",
+    "prevention": "Use disease-free seedlings and control citrus leaf miner populations.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Citrus Greening": {
+    "description": "Citrus greening (Huanglongbing) is a fatal bacterial disease spread by psyllid insects. It causes yellow mottling of leaves, misshapen bitter fruit, and tree decline with no known cure.",
+    "cause": "Bacterial disease caused by Candidatus Liberibacter asiaticus, spread by psyllids.",
+    "symptoms": "Yellow mottling on leaves, misshapen fruit with bitter taste, premature drop.",
+    "treatment": "No cure. Remove infected trees immediately to prevent spread.",
+    "prevention": "Control psyllid populations and use certified disease-free seedlings.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Citrus Healthy": {
+    "description": "The citrus leaf appears healthy with normal green coloration and no visible signs of canker, greening, or other diseases.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring and maintain proper soil pH (6.0-7.0).",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Cucumber Downy Mildew": {
+    "description": "Downy mildew is a fungal-like disease of cucumber caused by Pseudoperonospora cubensis. It produces angular yellow-green spots on upper leaf surfaces with grayish-purple fuzz underneath, leading to leaf death.",
+    "cause": "Oomycete disease caused by Pseudoperonospora cubensis.",
+    "symptoms": "Angular yellow-green spots on upper leaf surfaces, grayish-purple fuzz on leaf undersides.",
+    "treatment": "Apply fungicide (chlorothalonil or metalaxyl-based). Remove infected leaves.",
+    "prevention": "Ensure good air circulation, avoid overhead watering, and use resistant varieties.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Cucumber Healthy": {
+    "description": "The cucumber leaf appears healthy with normal green coloration and no visible signs of disease.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring and maintain balanced irrigation.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Cucumber Powdery Mildew": {
+    "description": "Powdery mildew is a fungal disease of cucumber caused by Podosphaera xanthii (or Erysiphe cichoracearum). It appears as white powdery spots on leaves and stems, reducing photosynthesis and yield.",
+    "cause": "Fungal disease caused by Podosphaera xanthii.",
+    "symptoms": "White powdery coating on upper leaf surfaces, yellowing and curling of severely affected leaves.",
+    "treatment": "Apply sulfur-based or systemic fungicide. Remove heavily infected leaves.",
+    "prevention": "Improve air circulation, avoid excess nitrogen, and plant resistant varieties.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Grape Black Measles": {
+    "description": "Black measles (black rot) is a fungal disease of grape caused by Guignardia bidwellii. It produces tan circular spots with dark borders on leaves and mummified berries.",
+    "cause": "Fungal disease caused by Guignardia bidwellii.",
+    "symptoms": "Tan circular spots with dark borders on leaves, mummified dark berries.",
+    "treatment": "Remove mummified berries and infected shoots. Apply fungicide at bloom.",
+    "prevention": "Maintain good canopy management, remove debris, and apply dormant sprays.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Grape Black Rot": {
+    "description": "Black rot is a fungal disease of grape caused by Guignardia bidwellii. It causes brown lesions on leaves and rapid fruit rot, turning berries into hard black mummies.",
+    "cause": "Fungal disease caused by Guignardia bidwellii.",
+    "symptoms": "Brown square-shaped lesions on leaves, rapid fruit browning and mummification.",
+    "treatment": "Prune infected material and apply protective fungicide sprays during growing season.",
+    "prevention": "Remove fallen leaves and mummified fruit, improve air circulation in canopy.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Grape Healthy": {
+    "description": "The grape leaf appears healthy with normal green coloration and no visible signs of disease.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring and maintain proper canopy management.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Grape Leaf Blight": {
+    "description": "Grape leaf blight is a fungal disease caused by Pseudocercospora vitis (or Cercospora viticola). It produces small dark spots with gray centers on leaves, leading to premature leaf drop and reduced fruit quality.",
+    "cause": "Fungal disease caused by Pseudocercospora vitis.",
+    "symptoms": "Small dark spots with gray centers on leaves, premature defoliation.",
+    "treatment": "Apply fungicide. Remove and destroy fallen leaves.",
+    "prevention": "Maintain good vineyard hygiene, ensure adequate spacing for air flow.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Maize Common rust": {
+    "description": "Common rust is a fungal disease of maize caused by Puccinia sorghi. It produces small reddish-brown pustules on both leaf surfaces, reducing photosynthesis and yield in severe infections.",
+    "cause": "Fungal disease caused by Puccinia sorghi.",
+    "symptoms": "Small reddish-brown pustules on both leaf surfaces.",
+    "treatment": "Apply fungicide at early symptom stage. Consult an agricultural expert.",
+    "prevention": "Use resistant hybrids and practice crop rotation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Maize Healthy": {
+    "description": "The maize leaf appears healthy with normal green coloration and no visible signs of rust, blight, or other diseases.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Maize Northern Leaf Blight": {
+    "description": "Northern leaf blight is a fungal disease of maize caused by Exserohilum turcicum. It produces long, elliptical gray-green lesions on leaves that reduce photosynthetic capacity and yield.",
+    "cause": "Fungal disease caused by Exserohilum turcicum.",
+    "symptoms": "Long elliptical gray-green lesions on leaves.",
+    "treatment": "Remove infected leaves and apply fungicide. Consult an agricultural expert.",
+    "prevention": "Use resistant varieties and practice crop rotation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Mango Anthracnose": {
+    "description": "Anthracnose is a common fungal disease of mango caused by Colletotrichum gloeosporioides. It causes dark brown irregular spots on leaves, blossom blight, and fruit rot, especially in wet conditions.",
+    "cause": "Fungal disease caused by Colletotrichum gloeosporioides.",
+    "symptoms": "Dark brown irregular spots on leaves, blossom blight, fruit rot.",
+    "treatment": "Apply fungicide during flowering and fruit development. Consult an expert.",
+    "prevention": "Prune for air circulation and avoid overhead irrigation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Mango Bacterial Canker": {
+    "description": "Mango bacterial canker (bacterial black spot) is caused by Xanthomonas citri pv. mangiferaeindicae. It produces raised black corky lesions on leaves, stems, and fruit, often with water-soaked margins.",
+    "cause": "Bacterial disease caused by Xanthomonas citri pv. mangiferaeindicae.",
+    "symptoms": "Raised black corky lesions on leaves, stems, and fruit. Leaf spots may crack and fall out.",
+    "treatment": "Prune affected branches and apply copper-based bactericide sprays.",
+    "prevention": "Use disease-free nursery stock, avoid overhead irrigation, and protect trees from wind damage.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Mango Cutting Weevil": {
+    "description": "Mango cutting weevil (Sternochetus mangiferae) is a pest that bores into mango fruits and seeds. Larvae feed inside the seed, causing fruit drop and reduced germination of seeds.",
+    "cause": "Insect pest: Sternochetus mangiferae (mango seed weevil).",
+    "symptoms": "Small holes in fruit skin, internal seed damage, premature fruit drop, frass inside fruit.",
+    "treatment": "Bag individual fruits to prevent egg-laying. Remove and destroy fallen fruit.",
+    "prevention": "Use clean planting material, bag developing fruits, and maintain orchard hygiene.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Mango Die Back": {
+    "description": "Mango die back is caused by the fungus Lasiodiplodia theobromae. It causes progressive drying of twigs and branches from the tips inward, leading to canopy thinning and branch death.",
+    "cause": "Fungal disease caused by Lasiodiplodia theobromae, often following stress or pruning wounds.",
+    "symptoms": "Progressive drying of twigs from tips, bark cracking, black gummy exudate on branches.",
+    "treatment": "Prune dead branches well below the infection. Apply fungicide paste to cut ends.",
+    "prevention": "Avoid wound creation during wet season, apply pruning sealant, and maintain tree health.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Mango Gall Midge": {
+    "description": "Mango gall midge (Erosomyia mangiferae) infests mango flowers and young fruits, causing gall formation and flower/fruit drop. Severe infestations can cause complete crop loss.",
+    "cause": "Insect pest: Erosomyia mangiferae (mango gall midge).",
+    "symptoms": "Gall-like swellings on flowers, flower drop, distorted young fruits, reduced fruit set.",
+    "treatment": "Apply dimethoate or monocrotophos during flowering. Consult an expert.",
+    "prevention": "Spray during early flowering, maintain orchard hygiene, and remove infested flower panicles.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Mango Healthy": {
+    "description": "The mango leaf appears healthy with normal green coloration and no visible signs of anthracnose, powdery mildew, or other diseases.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Mango Powdery Mildew": {
+    "description": "Powdery mildew is a fungal disease of mango caused by Oidium mangiferae. It appears as a white powdery coating on leaves, flowers, and young fruit, reducing fruit set and yield.",
+    "cause": "Fungal disease caused by Oidium mangiferae.",
+    "symptoms": "White powdery coating on leaves, flowers, and young fruit.",
+    "treatment": "Apply sulfur-based fungicides. Consult an agricultural expert.",
+    "prevention": "Improve air circulation and avoid dense planting.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Mango Sooty Mould": {
+    "description": "Sooty mould is a fungal complex (Capnodium spp.) that grows on honeydew secreted by sap-sucking insects. It forms a black soot-like coating on leaves and fruit, reducing photosynthesis.",
+    "cause": "Fungal saprophyte growing on honeydew from aphids, scales, or mealybugs.",
+    "symptoms": "Black sooty coating on leaf surfaces, stems, and fruit. Stunted growth in severe cases.",
+    "treatment": "Control the underlying sap-sucking insects. Wash off mould with water spray.",
+    "prevention": "Monitor and control aphids, scales, and mealybugs promptly. Maintain tree health.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Potato Early Blight": {
+    "description": "Early blight is a fungal disease of potato caused by Alternaria solani. It produces dark brown concentric ring spots (target-like) on older leaves first, reducing photosynthesis and tuber yield.",
+    "cause": "Fungal disease caused by Alternaria solani.",
+    "symptoms": "Dark brown target-like concentric ring spots on older leaves, yellowing around lesions.",
+    "treatment": "Apply fungicide (chlorothalonil or mancozeb-based). Remove infected leaves.",
+    "prevention": "Rotate crops, avoid overhead irrigation, and maintain adequate plant nutrition.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Potato Healthy": {
+    "description": "The potato leaf appears healthy with normal green coloration and no visible signs of early blight, late blight, or other diseases.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Potato Late Blight": {
+    "description": "Late blight is a devastating disease of potato caused by Phytophthora infestans. It causes dark water-soaked spots on leaves and stems with white mold under leaves, and can destroy entire fields rapidly.",
+    "cause": "Oomycete disease caused by Phytophthora infestans.",
+    "symptoms": "Dark brown water-soaked spots on leaves and stems, white mold under leaves.",
+    "treatment": "Remove infected plants and apply fungicide immediately.",
+    "prevention": "Avoid excess moisture and use resistant varieties.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Rice Bacterial Leaf Blight": {
+    "description": "Bacterial leaf blight is a serious bacterial disease of rice caused by Xanthomonas oryzae. It produces water-soaked lesions along leaf margins that turn yellow to white, severely reducing yield.",
+    "cause": "Bacterial disease caused by Xanthomonas oryzae pv. oryzae.",
+    "symptoms": "Water-soaked lesions on leaf margins that turn yellow to white.",
+    "treatment": "Remove infected plants and apply copper-based bactericides.",
+    "prevention": "Use resistant varieties and avoid excess nitrogen fertilizer.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Rice Brown Spot": {
+    "description": "Brown spot is a fungal disease of rice caused by Bipolaris oryzae. It produces small circular brown spots with gray centers on leaves, reducing grain yield and quality.",
+    "cause": "Fungal disease caused by Bipolaris oryzae (Cochliobolus miyabeanus).",
+    "symptoms": "Small circular brown spots with gray centers on leaves.",
+    "treatment": "Apply fungicide and improve soil nutrient management. Consult an expert.",
+    "prevention": "Use balanced fertilization and disease-free seeds.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Rice Leaf Blast": {
+    "description": "Leaf blast is the most destructive fungal disease of rice caused by Magnaporthe oryzae (Pyricularia oryzae). It produces spindle-shaped gray-white lesions with brown borders on leaves, which can coalesce and kill entire leaves.",
+    "cause": "Fungal disease caused by Magnaporthe oryzae.",
+    "symptoms": "Spindle-shaped gray-white lesions with brown borders on leaves, lesions merging to kill leaf tissue.",
+    "treatment": "Apply tricyclazole or carbendazim-based fungicide. Maintain optimal water management.",
+    "prevention": "Use resistant varieties, avoid excess nitrogen, and maintain proper water levels in field.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Rice Leaf Scald": {
+    "description": "Leaf scald is a fungal disease of rice caused by Rhizoctonia oryzae-sativae. It produces long wavy-edged grayish-white lesions on leaves, resembling scorching, leading to leaf drying.",
+    "cause": "Fungal disease caused by Rhizoctonia oryzae-sativae.",
+    "symptoms": "Long wavy-edged grayish-white lesions on leaves, leaf tip drying and shredding.",
+    "treatment": "Apply fungicide and ensure proper water management.",
+    "prevention": "Use disease-free seed, maintain balanced fertilization, and ensure proper field drainage.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Rice Narrow Brown Spot": {
+    "description": "Narrow brown spot is a fungal disease of rice caused by Cercospora janseana (Salvinia rotundifolia). It produces narrow brown linear lesions on leaves, reducing photosynthetic area.",
+    "cause": "Fungal disease caused by Cercospora janseana.",
+    "symptoms": "Narrow brown linear lesions (1-15 mm long) on leaf blades.",
+    "treatment": "Apply fungicide if severe. Improve soil fertility and drainage.",
+    "prevention": "Use balanced fertilization, maintain proper water levels, and use resistant varieties.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Rice Leaf smut": {
+    "description": "Leaf smut is a minor fungal disease of rice caused by Entyloma oryzae. It produces small black angular spots on older leaves and is generally not economically damaging.",
+    "cause": "Fungal disease caused by Entyloma oryzae.",
+    "symptoms": "Small black angular spots on leaves, usually on older leaves.",
+    "treatment": "Generally not destructive. Apply fungicide if severe. Consult an expert.",
+    "prevention": "Maintain field hygiene and use resistant varieties.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Bacterial Spot": {
+    "description": "Bacterial spot is a bacterial disease of tomato caused by Xanthomonas campestris. It produces dark water-soaked spots with yellow halos on leaves and fruit, reducing yield and marketability.",
+    "cause": "Bacterial disease caused by Xanthomonas campestris pv. vesicatoria.",
+    "symptoms": "Dark water-soaked spots on leaves with yellow halos, fruit lesions.",
+    "treatment": "Remove infected plants and apply copper-based sprays.",
+    "prevention": "Use disease-free seeds and avoid overhead irrigation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Early blight": {
+    "description": "Early blight is a fungal disease of tomato caused by Alternaria solani. It produces dark brown target-like concentric ring spots on older leaves and stems, reducing fruit yield.",
+    "cause": "Fungal disease caused by Alternaria solani.",
+    "symptoms": "Dark brown concentric ring spots (target pattern) on older leaves, stem lesions near soil.",
+    "treatment": "Apply fungicide (chlorothalonil or mancozeb). Remove infected lower leaves.",
+    "prevention": "Mulch around stems, avoid overhead watering, and rotate crops.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Healthy": {
+    "description": "The tomato leaf appears healthy with normal green coloration and no visible signs of bacterial spot, early blight, late blight, or other diseases.",
+    "cause": "No visible disease detected.",
+    "symptoms": "Leaf appears healthy with normal green color.",
+    "treatment": "No treatment required.",
+    "prevention": "Continue regular monitoring.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Tomato Late blight": {
+    "description": "Late blight is a devastating disease of tomato caused by Phytophthora infestans. It produces large dark lesions on leaves and stems with white mold in humid conditions, and can destroy entire plants rapidly.",
+    "cause": "Oomycete disease caused by Phytophthora infestans.",
+    "symptoms": "Large dark lesions on leaves and stems, white mold in humid conditions.",
+    "treatment": "Remove infected plants and apply fungicide immediately.",
+    "prevention": "Improve spacing, avoid wet foliage, and use resistant varieties.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Leaf Mold": {
+    "description": "Leaf mold is a fungal disease of tomato caused by Passalora fulva (Fulvia fulva). It produces pale green to yellow spots on upper leaf surfaces with olive-green to brown velvety mold on undersides, mainly in high humidity.",
+    "cause": "Fungal disease caused by Passalora fulva (Fulvia fulva).",
+    "symptoms": "Pale green-yellow spots on upper leaf surfaces, olive-brown velvety mold on leaf undersides.",
+    "treatment": "Improve ventilation to reduce humidity. Apply fungicide if severe.",
+    "prevention": "Maintain low humidity (<85%), increase air circulation, and remove affected leaves.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Mosaic Virus": {
+    "description": "Tomato mosaic virus (ToMV) is a highly stable virus that causes mosaic mottling, leaf distortion, and reduced fruit quality. It is spread by contaminated tools, hands, and seed.",
+    "cause": "Viral disease caused by Tomato mosaic virus (ToMV), spread by mechanical contact.",
+    "symptoms": "Mosaic mottling on leaves, leaf curling and distortion, uneven ripening of fruit.",
+    "treatment": "No cure. Remove and destroy infected plants. Disinfect tools with 10% bleach.",
+    "prevention": "Use resistant varieties, disinfect tools and hands, and handle plants when dry.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Septoria Leaf Spot": {
+    "description": "Septoria leaf spot is a fungal disease of tomato caused by Septoria lycopersici. It produces small circular spots with dark borders and gray centers on lower leaves, with tiny black pycnidia visible.",
+    "cause": "Fungal disease caused by Septoria lycopersici.",
+    "symptoms": "Small circular spots with dark borders and gray centers on lower leaves, tiny black dots in spots.",
+    "treatment": "Remove infected lower leaves and apply fungicide (chlorothalonil-based).",
+    "prevention": "Mulch to prevent soil splash, avoid overhead watering, and practice crop rotation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Spider Mites": {
+    "description": "Spider mites (Tetranychus urticae) are tiny arachnids that feed on the undersides of tomato leaves, causing stippling, yellowing, and webbing. Severe infestations can defoliate plants.",
+    "cause": "Pest damage caused by two-spotted spider mite (Tetranychus urticae).",
+    "symptoms": "Fine white stippling on upper leaf surfaces, webbing on undersides, leaf yellowing and bronzing.",
+    "treatment": "Apply miticide or insecticidal soap. Spray undersides of leaves thoroughly.",
+    "prevention": "Maintain humidity, avoid dusty conditions, and introduce beneficial predatory mites.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Target Spot": {
+    "description": "Target spot is a fungal disease of tomato caused by Corynespora cassiicola. It produces brown spots with concentric rings on leaves, stems, and fruit, leading to defoliation and fruit rot.",
+    "cause": "Fungal disease caused by Corynespora cassiicola.",
+    "symptoms": "Brown spots with concentric rings on leaves, stems, and fruit. Premature leaf drop.",
+    "treatment": "Apply fungicide (azoxystrobin or difenoconazole-based). Remove infected debris.",
+    "prevention": "Practice crop rotation, improve air circulation, and avoid overhead irrigation.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Tomato Yellow Leaf Curl Virus": {
+    "description": "Tomato yellow leaf curl virus (TYLCV) is a geminivirus spread by whiteflies. It causes upward leaf curling, yellowing, stunting, and significant fruit yield loss.",
+    "cause": "Viral disease caused by Tomato yellow leaf curl virus (TYLCV), spread by whitefly (Bemisia tabaci).",
+    "symptoms": "Upward leaf curling, yellowing of leaf margins, stunted growth, reduced fruit set.",
+    "treatment": "No cure. Remove and destroy infected plants. Control whitefly populations.",
+    "prevention": "Use resistant varieties, install yellow sticky traps, and control whitefly vectors.",
+    "disclaimer": "This is general guidance only. Consult an agricultural expert before treatment."
+  },
+  "Unknown": {
+    "description": "The uploaded image does not match any known crop disease in the training dataset. This could be a non-leaf object, an unfamiliar disease, or a poor-quality photo. Please upload a clear image of a crop leaf.",
+    "cause": "The image does not match any known crop disease in the training dataset.",
+    "symptoms": "No recognizable disease symptoms detected. The image may be a non-leaf object, an unfamiliar disease, or a poor-quality photo.",
+    "treatment": "Upload a clear image of a leaf from a supported crop. Consult an agricultural expert for further diagnosis.",
+    "prevention": "Ensure good lighting and focus when taking photos. Only upload images of crop leaves.",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Crop Not Supported": {
+    "disease_np": "यो बाली समर्थित छैन",
+    "description": "This leaf does not match any of the crops CropSense was trained on. It may be a crop this project does not cover, such as guava, papaya, coffee or tea.",
+    "description_np": "यो पात CropSense ले तालिम लिएका बालीहरूसँग मिल्दैन। यो अम्बा, मेवा, कफी वा चिया जस्तै यस परियोजनामा समावेश नभएको बाली हुन सक्छ।",
+    "cause": "The crop in this photo was not part of the training dataset, so the model has no disease classes for it.",
+    "cause_np": "यस फोटोको बाली तालिम डेटासेटमा समावेश नभएकाले मोडेलसँग यसका रोग वर्गहरू छैनन्।",
+    "symptoms": "The image looks like a leaf, but its shape, texture and colour do not match any supported crop.",
+    "symptoms_np": "तस्बिर पातजस्तै देखिन्छ, तर यसको आकार, बनोट र रङ कुनै पनि समर्थित बालीसँग मिल्दैन।",
+    "treatment": "No diagnosis can be given for an unsupported crop. Upload a leaf from one of the supported crops, or consult a local agricultural expert for this plant.",
+    "treatment_np": "समर्थित नभएको बालीको निदान दिन सकिँदैन। समर्थित बालीको पात अपलोड गर्नुहोस्, वा यस बिरुवाका लागि स्थानीय कृषि विज्ञको सल्लाह लिनुहोस्।",
+    "prevention": "Check the supported crop list before uploading. CropSense covers ten crops only.",
+    "prevention_np": "अपलोड गर्नु अघि समर्थित बालीको सूची हेर्नुहोस्। CropSense ले दस वटा बाली मात्र समेट्छ।",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  },
+  "Not Identified": {
+    "disease_np": "पहिचान हुन सकेन",
+    "description": "The leaf could not be identified confidently. This usually means the photo is blurry, too far away, poorly lit, or shows several overlapping leaves.",
+    "description_np": "पात निश्चित रूपमा पहिचान गर्न सकिएन। प्रायः यो फोटो धमिलो, धेरै टाढाबाट खिचिएको, अपुग उज्यालो, वा धेरै पात एकसाथ भएकाले हुन्छ।",
+    "cause": "The model's confidence was spread across many classes, so no single diagnosis is reliable.",
+    "cause_np": "मोडेलको विश्वास धेरै वर्गहरूमा छरिएकाले कुनै एउटा निदान भरपर्दो छैन।",
+    "symptoms": "No clear disease pattern could be read from this image.",
+    "symptoms_np": "यस तस्बिरबाट कुनै स्पष्ट रोगको ढाँचा पढ्न सकिएन।",
+    "treatment": "Retake the photo: one leaf, filling most of the frame, in even daylight, with the affected area in focus.",
+    "treatment_np": "फोटो पुनः खिच्नुहोस्: एउटै पात, फ्रेमको अधिकांश भाग ढाक्ने गरी, समान प्राकृतिक उज्यालोमा, प्रभावित भाग फोकसमा राखेर।",
+    "prevention": "Avoid shadows, glare, distant shots and busy backgrounds when photographing leaves.",
+    "prevention_np": "पातको फोटो खिच्दा छायाँ, चहक, टाढाको दृश्य र अस्तव्यस्त पृष्ठभूमिबाट जोगिनुहोस्।",
+    "disclaimer": "AI result should be verified if symptoms appear later."
+  }
+}

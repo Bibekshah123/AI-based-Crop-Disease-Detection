@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useLang } from "../context/LanguageContext";
+import NepalFlag from "./NepalFlag";
 import styles from "./Layout.module.css";
 
 const NAV = [
-  { to: "/", label: "Home", end: true },
-  { to: "/diagnose", label: "Diagnose" },
-  { to: "/library", label: "Disease library" },
-  { to: "/history", label: "History" },
-  { to: "/about", label: "About" },
+  { to: "/", key: "navHome", end: true },
+  { to: "/diagnose", key: "navDiagnose" },
+  { to: "/library", key: "navLibrary" },
+  { to: "/history", key: "navHistory" },
+  { to: "/about", key: "navAbout" },
 ];
 
 function LeafMark() {
@@ -24,8 +25,8 @@ function LeafMark() {
 }
 
 export default function Layout({ children }) {
-  const { user } = useAuth();
   const [open, setOpen] = useState(false);
+  const { lang, toggle, t } = useLang();
 
   // Close the mobile menu whenever a link inside the nav is activated.
   const closeOnNavigate = (e) => {
@@ -34,13 +35,13 @@ export default function Layout({ children }) {
 
   return (
     <>
-      <a href="#main" className="skip-link">Skip to content</a>
+      <a href="#main" className="skip-link">{t.skipToContent}</a>
 
       <header className={styles.header}>
         <div className={`container ${styles.bar}`}>
-          <Link to="/" className={styles.brand} aria-label="CropSense home">
+          <Link to="/" className={styles.brand} aria-label={t.brand}>
             <LeafMark />
-            <span className={styles.brandName}>CropSense</span>
+            <span className={styles.brandName}>{t.brand}</span>
           </Link>
 
           <button
@@ -62,7 +63,7 @@ export default function Layout({ children }) {
           <nav
             id="primary-nav"
             className={`${styles.nav} ${open ? styles.navOpen : ""}`}
-            aria-label="Primary"
+            aria-label={t.navPrimary}
             onClick={closeOnNavigate}
           >
             {NAV.map((item) => (
@@ -72,19 +73,18 @@ export default function Layout({ children }) {
                 end={item.end}
                 className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ""}`}
               >
-                {item.label}
+                {t[item.key]}
               </NavLink>
             ))}
-            <span className={styles.navDivider} aria-hidden="true" />
-            {user ? (
-              <NavLink to="/profile" className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ""}`}>
-                {user.username}
-              </NavLink>
-            ) : (
-              <NavLink to="/login" className={`${styles.link} ${styles.linkCta}`}>
-                Sign in
-              </NavLink>
-            )}
+            <button
+              type="button"
+              className={styles.langBtn}
+              onClick={toggle}
+              aria-label={lang === "en" ? t.switchToNepali : t.switchToEnglish}
+              title={lang === "en" ? t.switchToNepali : t.switchToEnglish}
+            >
+              {lang === "en" ? "ने" : "EN"}
+            </button>
           </nav>
         </div>
       </header>
@@ -94,15 +94,25 @@ export default function Layout({ children }) {
       </main>
 
       <footer className={styles.footer}>
-        <div className="container">
+        <div className={`container ${styles.footInner}`}>
+          <div className={styles.footMain}>
           <p className={styles.footText}>
-            CropSense provides general crop-care guidance and is not a substitute for professional
-            agricultural advice.
+            {t.footerTagline}
           </p>
-          <nav className={styles.footLinks} aria-label="Footer">
-            <Link to="/about">About &amp; disclaimer</Link>
-            <Link to="/library">Disease library</Link>
+
+          <nav className={styles.footLinks} aria-label={t.navFooter}>
+            <Link to="/about">{t.footerAbout}</Link>
+            <Link to="/library">{t.navLibrary}</Link>
           </nav>
+          </div>
+
+          <p className={styles.madeIn}>
+            <NepalFlag size={26} title={t.nepalFlagAlt} />
+            <span className={styles.madeInText}>
+              <strong className={styles.madeInTitle}>{t.productOfNepal}</strong>
+              <span className={styles.madeInSub}>{t.productOfNepalSub}</span>
+            </span>
+          </p>
         </div>
       </footer>
     </>

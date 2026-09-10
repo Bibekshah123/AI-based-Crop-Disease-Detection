@@ -1,10 +1,12 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
+import { useLang } from "../context/LanguageContext";
 import ResultView from "../components/ResultView";
 import { EmptyState } from "../components/ui";
 import { getHistoryItem } from "../lib/history";
 import s from "./pages.module.css";
 
 export default function HistoryDetail() {
+  const { t } = useLang();
   const { id } = useParams();
   const navigate = useNavigate();
   const item = getHistoryItem(id);
@@ -13,10 +15,10 @@ export default function HistoryDetail() {
     return (
       <div className={`container ${s.page}`}>
         <EmptyState
-          title="Check not found"
-          action={<Link to="/history" className="btn btn-primary">Back to history</Link>}
+          title={t.checkNotFound}
+          action={<Link to="/history" className="btn btn-primary">{t.backToHistory}</Link>}
         >
-          This saved check is no longer available on this device.
+          {t.checkNotFoundBody}
         </EmptyState>
       </div>
     );
@@ -25,7 +27,7 @@ export default function HistoryDetail() {
   return (
     <div className={`container ${s.page} ${s.pageNarrow}`}>
       <Link to="/history" className="btn btn-ghost" style={{ marginBottom: "var(--space-4)" }}>
-        ← Back to history
+        {t.backToHistoryLink}
       </Link>
       <ResultView
         data={item.detail}

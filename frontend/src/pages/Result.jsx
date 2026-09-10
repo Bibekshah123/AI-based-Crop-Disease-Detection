@@ -2,11 +2,13 @@ import { useNavigate } from "react-router-dom";
 import ResultView from "../components/ResultView";
 import { EmptyState } from "../components/ui";
 import { useResult } from "../context/ResultContext";
+import { useLang } from "../context/LanguageContext";
 import s from "./pages.module.css";
 
 export default function Result() {
   const navigate = useNavigate();
   const { result, clear } = useResult();
+  const { t } = useLang();
 
   const checkAnother = () => {
     clear();
@@ -17,14 +19,14 @@ export default function Result() {
     return (
       <div className={`container ${s.page}`}>
         <EmptyState
-          title="No result to show"
+          title={t.noResult}
           action={
             <button type="button" className="btn btn-primary" onClick={() => navigate("/diagnose")}>
-              Check a leaf
+              {t.checkALeaf}
             </button>
           }
         >
-          Start a diagnosis to see the possible disease match and guidance here.
+          {t.noResultBody}
         </EmptyState>
       </div>
     );

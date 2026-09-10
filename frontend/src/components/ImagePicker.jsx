@@ -1,15 +1,10 @@
 import { useRef, useId } from "react";
+import { useLang } from "../context/LanguageContext";
 import styles from "./ImagePicker.module.css";
 
-const GUIDANCE = [
-  "Use one visible leaf",
-  "Keep the affected area in focus",
-  "Use even, natural lighting",
-  "Avoid overlapping leaves",
-  "Avoid distant or blurry photos",
-];
-
 export default function ImagePicker({ preview, fileName, onSelect, onClear, error }) {
+  const { t } = useLang();
+  const GUIDANCE = [t.tip1, t.tip2, t.tip3, t.tip4, t.tip5];
   const uploadRef = useRef(null);
   const cameraRef = useRef(null);
   const guidanceId = useId();
@@ -24,7 +19,7 @@ export default function ImagePicker({ preview, fileName, onSelect, onClear, erro
     <div>
       {preview ? (
         <figure className={styles.previewWrap}>
-          <img src={preview} alt={fileName ? `Selected leaf photo: ${fileName}` : "Selected leaf photo"} className={styles.previewImg} />
+          <img src={preview} alt={fileName ? `Selected leaf photo: ${fileName}` : t.selectedPhoto} className={styles.previewImg} />
           <div className={styles.previewActions}>
             <button type="button" className="btn btn-secondary" onClick={() => uploadRef.current?.click()}>
               Replace
@@ -37,10 +32,10 @@ export default function ImagePicker({ preview, fileName, onSelect, onClear, erro
       ) : (
         <div className={styles.picker} aria-describedby={guidanceId}>
           <button type="button" className={`btn btn-primary ${styles.pickBtn}`} onClick={() => cameraRef.current?.click()}>
-            <CameraIcon /> Take photo
+            <CameraIcon /> {t.takePhoto}
           </button>
           <button type="button" className={`btn btn-secondary ${styles.pickBtn}`} onClick={() => uploadRef.current?.click()}>
-            <UploadIcon /> Upload image
+            <UploadIcon /> {t.uploadImage}
           </button>
         </div>
       )}
@@ -53,7 +48,7 @@ export default function ImagePicker({ preview, fileName, onSelect, onClear, erro
       <input ref={cameraRef} type="file" accept="image/*" capture="environment" onChange={handleChange} hidden />
 
       <div className={styles.guidance} id={guidanceId}>
-        <p className={styles.guidanceTitle}>For the clearest result</p>
+        <p className={styles.guidanceTitle}>{t.photoTips}</p>
         <ul className={styles.guidanceList}>
           {GUIDANCE.map((g) => (
             <li key={g}>{g}</li>

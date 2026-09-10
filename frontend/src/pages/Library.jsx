@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
+import { useLang } from "../context/LanguageContext";
 import { Link } from "react-router-dom";
 import diseases from "../data/diseases.json";
-import { CROPS } from "../lib/crops";
+import { CROPS, cropName } from "../lib/crops";
 import s from "./pages.module.css";
 import l from "./Library.module.css";
 
@@ -11,6 +12,7 @@ function shorten(text, max = 120) {
 }
 
 export default function Library() {
+  const { t, lang } = useLang();
   const [crop, setCrop] = useState("all");
   const [query, setQuery] = useState("");
 
@@ -26,7 +28,7 @@ export default function Library() {
   return (
     <div className={`container ${s.page}`}>
       <div className={s.head}>
-        <h1 className={s.title}>Disease library</h1>
+        <h1 className={s.title}>{t.libraryTitle}</h1>
         <p className={s.lead}>
           Reference information for the crops and diseases this tool can recognize.
         </p>
@@ -34,19 +36,19 @@ export default function Library() {
 
       <div className={l.filters}>
         <label className={l.filter}>
-          <span className="sr-only">Search diseases</span>
+          <span className="sr-only">{t.searchDiseases}</span>
           <input
             className="input"
             type="search"
-            placeholder="Search by disease or symptom"
+            placeholder={t.searchDiseasePlaceholder}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
         </label>
         <label className={l.filter}>
-          <span className="sr-only">Filter by crop</span>
+          <span className="sr-only">{t.filterByCrop}</span>
           <select className="select" value={crop} onChange={(e) => setCrop(e.target.value)}>
-            <option value="all">All crops</option>
+            <option value="all">{t.allCrops}</option>
             {CROPS.map((c) => (
               <option key={c.id} value={c.id}>{c.label}</option>
             ))}
@@ -60,10 +62,10 @@ export default function Library() {
         {results.map((d) => (
           <li key={d.id}>
             <Link to={`/library/${d.id}`} className={l.card}>
-              <span className={l.crop}>{d.crop}</span>
-              <span className={l.name}>{d.name}</span>
+              <span className={l.crop}>{cropName(d.crop, lang)}</span>
+              <span className={l.name}>{lang === "np" && d.name_np ? d.name_np : d.name}</span>
               <span className={l.symptoms}>{shorten(d.symptoms)}</span>
-              <span className={l.more}>View details →</span>
+              <span className={l.more}>{t.viewDetails}</span>
             </Link>
           </li>
         ))}

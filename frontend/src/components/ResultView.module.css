@@ -49,6 +49,9 @@
 
 /* Visual comparison */
 .visual { padding: var(--space-5); }
+/* TreatmentCard renders with styles.panel; without this the heading and lead
+   sat flush against the card edge while the inner items were inset. */
+.panel { padding: var(--space-5); }
 .sectionTitle {
   font-size: var(--text-lg);
   margin-bottom: var(--space-3);
@@ -84,6 +87,10 @@
   font-size: var(--text-sm);
   color: var(--color-warning);
   margin-bottom: var(--space-3);
+}
+.guidance {
+  display: grid;
+  gap: var(--space-3);
 }
 .guidanceGrid {
   display: grid;
@@ -169,7 +176,11 @@
 
 @media (min-width: 640px) {
   .compare { grid-template-columns: 1fr 1fr; }
-  .guidanceGrid { grid-template-columns: 1fr 1fr; }
+  .guidance {
+  display: grid;
+  gap: var(--space-3);
+}
+.guidanceGrid { grid-template-columns: 1fr 1fr; }
 }
 
 /* ---- Recommended treatment ---------------------------------------------- */
@@ -199,11 +210,13 @@
 }
 .treatLeaf { font-size: 26px; line-height: 1; }
 .treatName {
+  overflow-wrap: anywhere;
   margin: 0;
   font-weight: 600;
   font-size: var(--text-base, 1rem);
 }
 .treatKind {
+  overflow-wrap: anywhere;
   margin: 2px 0 0;
   font-size: var(--text-sm);
   color: var(--color-text-muted, inherit);
@@ -211,17 +224,27 @@
 }
 .treatSpecs {
   margin: 0 0 var(--space-2);
-  display: grid;
-  gap: 4px;
   font-size: var(--text-sm);
-}
-.treatSpecs > div {
+  /* One grid for the whole list (the row wrappers use display:contents) so every
+     label column lines up, while still sizing to content - Nepali labels run
+     longer than the English ones and a fixed width clipped them. */
   display: grid;
-  grid-template-columns: 9.5rem 1fr;
-  gap: var(--space-2);
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+  column-gap: var(--space-3);
+  row-gap: 4px;
+  align-items: baseline;
+}
+.treatSpecs > div { display: contents; }
+/* min-width:0 lets a long value wrap instead of forcing the grid wider than the
+   card; overflow-wrap catches unbroken strings like chemical names. */
+.treatSpecs dt,
+.treatSpecs dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .treatSpecs dt { color: var(--color-text-muted, inherit); }
 .treatSpecs dd { margin: 0; }
+
 .treatNote {
   margin: 0;
   font-size: var(--text-sm);
@@ -229,7 +252,45 @@
 }
 .treatDisclaimer { margin-top: var(--space-4); }
 
+/* On a narrow phone two columns stop being worth it - stack label over value.
+   The row wrappers are display:contents, so this targets the list itself. */
 @media (max-width: 520px) {
-  .treatSpecs > div { grid-template-columns: 1fr; gap: 0; }
-  .treatSpecs dt { font-weight: 600; }
+  .treatSpecs { grid-template-columns: 1fr; row-gap: 0; }
+  .treatSpecs dt { font-weight: 600; margin-top: var(--space-2); }
+  .treatSpecs dd { margin-bottom: var(--space-1, 4px); }
+}
+
+/* ---- "Buying it at the agrovet" ------------------------------------------
+   A drawn formulation icon plus what to match on the label. Deliberately NOT a
+   brand photo: the same active ingredient ships in different packaging from
+   every manufacturer, so a photo would be both trademarked and misleading. */
+.buying {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  margin: var(--space-3) 0 var(--space-2);
+  padding: var(--space-3);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-page);
+}
+.buyingText { min-width: 0; }
+.buyingTitle {
+  margin: 0 0 2px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.buyingBody,
+.buyingShape {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+.buyingShape { margin-top: var(--space-2); font-style: italic; }
+
+@media (max-width: 520px) {
+  .buying { grid-template-columns: 1fr; justify-items: start; }
 }

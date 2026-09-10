@@ -2,21 +2,20 @@ import { useState } from "react";
 import { StatusBadge, ConfidenceMeter } from "./ui";
 import { Status } from "../lib/normalize";
 import { Feedback, getFeedback, setFeedback } from "../lib/feedback";
+import { useLang } from "../context/LanguageContext";
+import { cropName } from "../lib/crops";
 import TreatmentCard from "./TreatmentCard";
 import styles from "./ResultView.module.css";
 
-const GRADCAM_NOTE =
-  "Highlighted areas show which parts of the image influenced the model most. " +
-  "This visual explanation does not confirm the diagnosis.";
-
 export default function ResultView({ data, image, feedbackId, onCheckAnother }) {
+  const { t, lang } = useLang();
   const uncertain = data.status === Status.UNCERTAIN;
 
   const sections = [
-    { key: "symptoms", label: "Symptoms", value: data.symptoms },
-    { key: "cause", label: "Cause", value: data.cause },
-    { key: "treatment", label: "General management", value: data.treatment },
-    { key: "prevention", label: "Prevention", value: data.prevention },
+    { key: "symptoms", label: t.secSymptoms, value: data.symptoms },
+    { key: "cause", label: t.secCause, value: data.cause },
+    { key: "treatment", label: t.secTreatment, value: data.treatment },
+    { key: "prevention", label: t.secPrevention, value: data.prevention },
   ].filter((s) => s.value);
 
   return (
@@ -24,10 +23,10 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
       {/* Header ---------------------------------------------------------- */}
       <section className={`surface ${styles.header}`} aria-labelledby="result-heading">
         <div className={styles.headTop}>
-          {data.cropType && <span className={styles.crop}>{data.cropType}</span>}
+          {data.cropType && <span className={styles.crop}>{cropName(data.cropType, lang)}</span>}
           <StatusBadge tone={data.tone}>{data.statusLabel}</StatusBadge>
         </div>
-        <p className={styles.kicker}>Possible match</p>
+        <p className={styles.kicker}>{t.possibleMatch}</p>
         <h1 id="result-heading" className={styles.disease}>{data.disease}</h1>
         <ConfidenceMeter value={data.confidence} tone={data.tone} label={data.statusLabel} />
       </section>
@@ -36,11 +35,9 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
       {uncertain && (
         <div className={`note note-warning ${styles.uncertain}`} role="status">
           <div>
-            <strong>This result is uncertain.</strong>
+            <strong>{t.uncertainTitle}</strong>
             <p className={styles.uncertainText}>
-              {data.message || "The model is not confident about this image."} Try uploading another
-              clear, well-lit photo of a single affected leaf. For anything important, confirm with a
-              local agricultural expert before treating the crop.
+              {data.message || t.notConfident} {t.uncertainBody}
             </p>
           </div>
         </div>
@@ -52,22 +49,22 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
 
       {/* Image + Grad-CAM comparison ------------------------------------ */}
       <section className={`surface ${styles.visual}`} aria-labelledby="visual-heading">
-        <h2 id="visual-heading" className={styles.sectionTitle}>Visual explanation</h2>
+        <h2 id="visual-heading" className={styles.sectionTitle}>{t.visualExplanation}</h2>
         <div className={styles.compare}>
           {image && (
             <figure className={styles.figure}>
-              <img src={image} alt="The leaf photo you submitted" className={styles.figImg} />
-              <figcaption className={styles.figCap}>Your photo</figcaption>
+              <img src={image} alt={t.yourPhotoAlt} className={styles.figImg} />
+              <figcaption className={styles.figCap}>{t.yourPhoto}</figcaption>
             </figure>
           )}
           {data.gradcam && (
             <figure className={styles.figure}>
-              <img src={data.gradcam} alt="Heatmap showing the regions that most influenced the model" className={styles.figImg} />
-              <figcaption className={styles.figCap}>Model attention</figcaption>
+              <img src={data.gradcam} alt={t.heatmapAlt} className={styles.figImg} />
+              <figcaption className={styles.figCap}>{t.modelAttention}</figcaption>
             </figure>
           )}
         </div>
-        {data.gradcam && <p className={styles.gradcamNote}>{GRADCAM_NOTE}</p>}
+        {data.gradcam && <p className={styles.gradcamNote}>{t.gradcamNote}</p>}
       </section>
 
       {/* Recommended treatment ------------------------------------------ */}
@@ -81,10 +78,10 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
 
       {/* Guidance sections ---------------------------------------------- */}
       {sections.length > 0 && (
-        <section className={styles.guidance} aria-label="Crop-care guidance">
+        <section className={styles.guidance} aria-label={t.guidance}>
           {uncertain && (
             <p className={styles.refNote}>
-              The guidance below is general reference for this possible match — not a confirmed diagnosis.
+              {t.refNote}
             </p>
           )}
           <div className={styles.guidanceGrid}>
@@ -101,7 +98,7 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
       {/* Alternatives --------------------------------------------------- */}
       {data.alternatives.length > 0 && (
         <section className={`surface ${styles.alts}`} aria-labelledby="alts-heading">
-          <h2 id="alts-heading" className={styles.sectionTitle}>Other possibilities</h2>
+          <h2 id="alts-heading" className={styles.sectionTitle}>{t.otherPossibilities}</h2>
           <ul className={styles.altList}>
             {data.alternatives.map((a, i) => (
               <li key={i} className={styles.altRow}>
@@ -133,6 +130,7 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
 }
 
 function FeedbackControl({ feedbackId }) {
+  const { t } = useLang();
   const [choice, setChoice] = useState(() => getFeedback(feedbackId));
 
   const record = (value) => {
@@ -141,12 +139,12 @@ function FeedbackControl({ feedbackId }) {
   };
 
   return (
-    <section className={`surface ${styles.feedback}`} aria-label="Feedback">
+    <section className={`surface ${styles.feedback}`} aria-label={t.feedbackRegion}>
       {choice ? (
-        <p className={styles.feedbackDone} role="status">Thanks — your feedback was saved on this device.</p>
+        <p className={styles.feedbackDone} role="status">{t.feedbackSaved}</p>
       ) : (
         <>
-          <span className={styles.feedbackQ}>Was this result helpful?</span>
+          <span className={styles.feedbackQ}>{t.helpful}</span>
           <div className={styles.feedbackBtns}>
             <button type="button" className="btn btn-secondary" onClick={() => record(Feedback.HELPFUL)}>
               Yes, helpful

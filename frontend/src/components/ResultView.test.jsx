@@ -2,10 +2,15 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import ResultView from "./ResultView";
 import { normalizePrediction } from "../lib/normalize";
+import { LanguageProvider } from "../context/LanguageContext";
 
 function renderResult(raw, image = "data:image/jpeg;base64,photo") {
   const data = normalizePrediction(raw);
-  return render(<ResultView data={data} image={image} feedbackId="test-1" onCheckAnother={() => {}} />);
+  return render(
+    <LanguageProvider>
+      <ResultView data={data} image={image} feedbackId="test-1" onCheckAnother={() => {}} />
+    </LanguageProvider>
+  );
 }
 
 describe("ResultView", () => {

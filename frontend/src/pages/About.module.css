@@ -1,0 +1,99 @@
+.stack {
+  display: grid;
+  gap: var(--space-3);
+}
+.panel {
+  padding: var(--space-5);
+}
+/* The disclaimer is the one section that must not be skimmed past, so it gets a
+   warning tint rather than another identical white card. */
+/* Two classes so this beats the single-class global .surface, whose
+   background would otherwise win depending on stylesheet order. */
+.panel.panelWarn {
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning);
+}
+.h2 {
+  font-size: var(--text-lg);
+  margin: 0 0 var(--space-2);
+}
+.body {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.bodyMuted {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ---- How it works: numbered steps ---- */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.step {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+.stepNum {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Crops covered ---- */
+.crops {
+  list-style: none;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.cropChip {
+  padding: 4px var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+}
+
+/* ---- Confidence bands ---- */
+.bands {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.band {
+  display: grid;
+  grid-template-columns: 0.7rem 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+.bandDot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  margin-top: 0.45rem;
+}
+.bandHigh { background: var(--color-success); }
+.bandModerate { background: var(--color-warning); }
+.bandUncertain { background: var(--color-error); }
