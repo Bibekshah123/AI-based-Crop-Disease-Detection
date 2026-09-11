@@ -41,14 +41,16 @@ export function normalize(raw, lang = "en") {
     prevention: field(raw, "prevention", lang),
     disclaimer: raw?.disclaimer || "",
 
-    // Structured controls (active ingredient, dose, hazard band) rendered by
-    // TreatmentCard. Only `note` has a Nepali variant from the backend --
-    // active ingredients and doses are deliberately not translated, because a
-    // farmer reads them off the bottle label, which is printed in English.
+    // Structured controls rendered by TreatmentCard. `note` and `dose` both have
+    // Nepali variants from the backend and are swapped here, so the card can
+    // render item.note / item.dose without knowing the language.
+    // The ACTIVE INGREDIENT stays English on purpose: a farmer matches it
+    // against the bottle label, which is printed in Latin script worldwide.
     treatments: Array.isArray(raw?.treatments)
       ? raw.treatments.map((item) => ({
           ...item,
           note: lang === "np" ? item?.note_np || item?.note || "" : item?.note || "",
+          dose: lang === "np" ? item?.dose_np || item?.dose || "" : item?.dose || "",
         }))
       : [],
     treatmentDisclaimer:

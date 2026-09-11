@@ -1,0 +1,180 @@
+/* ---- Hero ---------------------------------------------------------------- */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+.heroCopy { min-width: 0; }
+.eyebrow {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+}
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+/* The art is decorative, so it is the first thing dropped on a narrow screen. */
+.heroArt { display: none; }
+.heroArt svg { display: block; width: 100%; height: auto; }
+
+/* Real counts, read from the crop list - no invented figures. */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5) var(--space-6);
+  margin: var(--space-6) 0 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+.stat { display: flex; align-items: baseline; gap: var(--space-2); }
+.statValue {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  font-variant-numeric: tabular-nums;
+}
+.statLabel {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---- Shared section shell ------------------------------------------------ */
+.section { padding-block: var(--space-7); }
+.sectionAlt {
+  background: var(--color-surface);
+  border-block: 1px solid var(--color-border);
+}
+.sectionTitle {
+  font-size: var(--text-xl);
+  margin: 0 0 var(--space-5);
+}
+
+/* ---- How it works -------------------------------------------------------- */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.step {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.stepNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: var(--space-3);
+}
+.stepTitle {
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-2);
+}
+.stepBody {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ---- What you get back --------------------------------------------------- */
+.outputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* A left rule instead of a full card: these are a list of facts, not four more
+   boxes competing with the step cards above. */
+.output {
+  border-left: 3px solid var(--color-primary);
+  padding-left: var(--space-4);
+}
+.outputTitle {
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-2);
+}
+.outputBody {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ---- Crops covered + honesty note ---------------------------------------- */
+.closing {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+.crops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cropChip {
+  padding: 5px var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+}
+.note {
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+.honest {
+  background: var(--color-green-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+.honestTitle {
+  font-size: var(--text-lg);
+  margin: 0 0 var(--space-3);
+}
+.honestBody {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+.honestLink {
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+/* ---- Wider screens ------------------------------------------------------- */
+@media (min-width: 760px) {
+  .steps { grid-template-columns: repeat(3, 1fr); }
+  .outputs { grid-template-columns: 1fr 1fr; gap: var(--space-5) var(--space-6); }
+  .closing { grid-template-columns: 1.15fr 1fr; gap: var(--space-7); }
+}
+@media (min-width: 960px) {
+  .heroGrid { grid-template-columns: 1.05fr 0.95fr; gap: var(--space-7); }
+  .heroArt { display: block; }
+}

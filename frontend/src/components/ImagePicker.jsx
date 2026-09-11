@@ -2,7 +2,7 @@ import { useRef, useId } from "react";
 import { useLang } from "../context/LanguageContext";
 import styles from "./ImagePicker.module.css";
 
-export default function ImagePicker({ preview, fileName, onSelect, onClear, error }) {
+export default function ImagePicker({ preview, fileName, onSelect, onClear, error, scanning = false }) {
   const { t } = useLang();
   const GUIDANCE = [t.tip1, t.tip2, t.tip3, t.tip4, t.tip5];
   const uploadRef = useRef(null);
@@ -19,13 +19,30 @@ export default function ImagePicker({ preview, fileName, onSelect, onClear, erro
     <div>
       {preview ? (
         <figure className={styles.previewWrap}>
-          <img src={preview} alt={fileName ? `Selected leaf photo: ${fileName}` : t.selectedPhoto} className={styles.previewImg} />
+          <div className={`${styles.previewFrame} ${scanning ? styles.previewScanning : ""}`}>
+            <img src={preview} alt={fileName ? `${t.selectedPhoto}: ${fileName}` : t.selectedPhoto} className={styles.previewImg} />
+
+            {/* Decorative: the button and the live region already announce progress. */}
+            {scanning && (
+              <div className={styles.scan} aria-hidden="true">
+                <span className={styles.scanTint} />
+                <span className={`${styles.corner} ${styles.cornerTL}`} />
+                <span className={`${styles.corner} ${styles.cornerTR}`} />
+                <span className={`${styles.corner} ${styles.cornerBR}`} />
+                <span className={`${styles.corner} ${styles.cornerBL}`} />
+                <span className={styles.scanLine} />
+                <span className={styles.scanLabel}>{t.scanning}</span>
+              </div>
+            )}
+          </div>
+
           <div className={styles.previewActions}>
-            <button type="button" className="btn btn-secondary" onClick={() => uploadRef.current?.click()}>
-              Replace
+            <button type="button" className="btn btn-secondary" disabled={scanning}
+                    onClick={() => uploadRef.current?.click()}>
+              {t.replacePhoto}
             </button>
-            <button type="button" className="btn btn-ghost" onClick={onClear}>
-              Remove
+            <button type="button" className="btn btn-ghost" disabled={scanning} onClick={onClear}>
+              {t.removePhoto}
             </button>
           </div>
         </figure>

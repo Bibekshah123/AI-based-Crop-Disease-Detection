@@ -46,12 +46,12 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 - **Unknown / Out-of-Distribution Detection** — Flags inputs the model shouldn't confidently classify, using **confidence threshold, top-1/top-2 margin, and prediction entropy**.
 - **Crop-Mismatch Check** — Warns when the predicted crop doesn't match the crop you selected.
 - **Top Alternatives** — Shows the runner-up classifications with confidences, plus full raw per-class probabilities in the API.
-- **Bilingual Content** — Every result ships English and Nepali (`*_np`) fields (disease name, description, cause, symptoms, treatment, prevention).
+- **Fully Bilingual (English / नेपाली)** — A language toggle in the header switches the entire interface *and* all disease content. Every result ships `*_np` fields (disease name, description, cause, symptoms, treatment, prevention) for all 51 conditions, and treatment protocols carry `dose_np` / `note_np`. Scientific names, chemical names and formulation codes deliberately stay in Latin so they can be matched against the product label.
 - **Disease Library** — Browsable reference of every crop/disease the model knows, built from the same curated knowledge base.
 - **Local-First History** — Every check is saved in the browser (no login/DB needed), with filters and a detail view.
 - **Mobile App** — React Native (Expo) client with camera capture, crop selector, and an English/Nepali toggle.
 - **Calm, Original UI** — Mobile-first, accessible, agricultural design system (no marketing fluff, no fake stats).
-- **Optional Accounts** — JWT auth + bcrypt + PostgreSQL are implemented; the app works fully **without** signing in.
+- **No Sign-in Required** — JWT auth, bcrypt and the PostgreSQL schema are implemented in the backend, but the web app deliberately ships **no sign-in surface**: diagnosis has no dependency on identity, and history is local-first.
 - **One-Command Deploy** — `docker compose up --build` brings up the whole stack (DB, API, web app, DB admin GUI).
 
 ---
@@ -96,7 +96,7 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
                     └───────────────┬──────────────────┬──────────┘
                                     │                  │
                           model weights (.h5)    PostgreSQL 16 (port 5432)
-                          backend/best_model/     users + predictions
+                       backend/last_final_model/  users + predictions
                                                         ▲
                                               Adminer GUI (port 8080)
 ```
@@ -121,7 +121,7 @@ The web app talks to the backend through relative paths (`/predict`, `/health`, 
 │   ├── disease_info.json               # EN/NP knowledge base for all 52 classes
 │   ├── predict_test.py                 # Standalone offline image tester (no web stack)
 │   ├── requirements.txt
-│   └── best_model/                     # Trained weights (tracked via Git LFS)
+│   └── last_final_model/               # Active weights (tracked via Git LFS)
 │       ├── best_model_phase2_final.weights.h5   # ← active EfficientNetB2 model (52 classes)
 │       ├── best_model_phase1.weights.h5         # Phase-1 (head-only) weights
 │       └── best_model_phase2.weights.h5         # legacy phase-2 weights
@@ -175,7 +175,7 @@ The web app talks to the backend through relative paths (`/predict`, `/health`, 
 ```bash
 git clone https://github.com/Bibekshah123/AI-based-Crop-Disease-Detection.git
 cd AI-based-Crop-Disease-Detection
-git lfs pull                 # ensure backend/best_model/*.h5 are downloaded
+git lfs pull                 # ensure backend/last_final_model/*.h5 are downloaded
 docker compose up --build    # always --build so you get the current frontend
 ```
 
@@ -203,7 +203,7 @@ python -m venv venv && source venv/bin/activate      # Windows: venv\Scripts\act
 pip install -r requirements.txt
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
-> The backend loads weights from `backend/best_model/` at startup. Database init is **non-fatal** — if PostgreSQL isn't reachable it logs a warning and keeps running, because `/predict` doesn't need the DB (only the optional auth/history endpoints do).
+> The backend loads weights from `backend/last_final_model/` at startup (override with `MODEL_PATH`). Database init is **non-fatal** — if PostgreSQL isn't reachable it logs a warning and keeps running, because `/predict` doesn't need the DB (only the optional auth/history endpoints do).
 
 **Web app:**
 ```bash
@@ -224,18 +224,18 @@ The web app is a mobile-first, accessible single-page app organized around a sma
 
 | Page | Route | Purpose |
 |---|---|---|
-| Home | `/` | Intro + the 3-step workflow |
+| Home | `/` | What it does, how it works, what you get back, crops covered |
 | Diagnose | `/diagnose` | Crop selector → camera/upload → analyze, with validation/loading/timeout/error states |
-| Result | `/result` | Possible match, confidence status, Grad-CAM comparison, guidance, alternatives, feedback |
-| History | `/history` · `/history/:id` | Local-first list with filters (crop/status/sort/search) + detail view |
+| Result | `/result` | Possible match, confidence status, Grad-CAM comparison, guidance (symptoms/cause/management/prevention), then recommended treatment, alternatives, feedback |
+| History | `/history` · `/history/:id` | Local-first list with filters (crop/status/sort/search), per-item and **Delete all** (with confirmation), + detail view |
 | Disease Library | `/library` · `/library/:id` | Reference data for every crop/disease |
-| Login / Register / Profile | `/login` `/register` `/profile` | Optional accounts |
 | About & Disclaimer | `/about` | What the tool does and how to use it responsibly |
 
 Design & engineering notes:
 
 - **Design system** — a token-based palette (`src/styles/tokens.css`) and CSS Modules per component; calm agricultural greens on a light ground, no gradients/glow/neon.
 - **Service layer** — all HTTP goes through `src/lib/api.js` (one Axios instance); no component hardcodes a host. Backend responses are normalized in one place (`src/lib/normalize.js`), which also derives the High/Moderate/Uncertain status.
+- **Language** — `context/LanguageContext.jsx` holds the choice (persisted per browser, English by default) and `lib/strings.js` carries ~216 UI strings in both languages at enforced parity. Disease content is **not** frozen at prediction time: the raw API response is stored and re-normalized on every render, so toggling the language re-translates an existing result or a saved history entry.
 - **Local-first history & feedback** — checks and "was this helpful?" responses are stored in `localStorage` (`src/lib/history.js`, `src/lib/feedback.js`); no backend change required.
 - **Accessibility** — semantic landmarks, skip link, keyboard-operable controls, `aria-live` status, `role="alert"` errors, meaningful alt text, visible focus, `prefers-reduced-motion`, 44px touch targets, and status conveyed by text (not colour alone).
 
@@ -373,7 +373,7 @@ Base URL: `http://localhost:8000`
 
 Both phases apply **class weighting** to counter class imbalance across crops.
 
-**Weight-loading priority** (`backend/best_model/`): `best_model_phase2_final.weights.h5` → `best_model_phase2.weights.h5` → `best_model_phase1.weights.h5` → `model.weights.h5`. The active deployed model is **`best_model_phase2_final.weights.h5`** (EfficientNetB2, 52 classes).
+**Weight-loading priority** (`MODEL_PATH`, default `backend/last_final_model/`): `best_model_phase2_final.weights.h5` → `best_model_phase2.weights.h5` → `best_model_phase1.weights.h5` → `model.weights.h5`. The active deployed model is **`last_final_model/best_model_phase2.weights.h5`** (EfficientNetB2, 52 classes).
 
 The model reaches high validation accuracy on the curated dataset split; see the training notebook output for exact per-run metrics. (Real-world/field accuracy is lower than lab accuracy — see [Known Limitations](#known-limitations).)
 
@@ -424,7 +424,7 @@ PostgreSQL 16 runs in a Docker container with a persistent volume (`pgdata`). Ta
 ## Authentication & History
 
 - **Prediction history** in the web app is **local-first**: every check is saved in the browser (`localStorage`) with a thumbnail and summary, so History works with **no login and no database**.
-- **Accounts are optional.** JWT auth (`python-jose`), bcrypt hashing, and the `/auth/*` endpoints are implemented, and the Login/Register/Profile pages are functional. Diagnosis, Result, History, and Library are all usable **without** signing in — only the Profile page requires an account.
+- **The web app has no sign-in.** JWT auth (`python-jose`), bcrypt hashing and the `/auth/*` endpoints are implemented and working, but the Login / Register / Profile routes were **removed from the web UI**: requiring an account to diagnose a leaf would be a barrier for the intended user, and the diagnosis has no dependency on identity. The page components remain on disk (unreferenced) so the work is still demonstrable. Without a database attached, the `/auth/*` endpoints return errors — which is why nothing in the UI points at them.
 - **Server-side history** (`/auth/history`) exists in the backend but is only populated if you re-enable `db_save_prediction(...)` inside `/predict` (it's commented out by default), so the running app relies on local history.
 
 ---
@@ -478,7 +478,7 @@ python predict_test.py ../test.jpg --topk 5  # show top-K
 3. **Runtime → Change runtime type → T4 GPU**.
 4. Point the dataset path in the notebook at your Drive file.
 5. Run all cells. The notebook trains **EfficientNetB2 @ 224×224** with the two-phase schedule (and class weighting) and exports `.weights.h5` + `class_names.json`.
-6. Copy the exported weights into `backend/best_model/` (as `best_model_phase2_final.weights.h5`) and update `backend/class_names.json` if the class set changed.
+6. Copy the exported weights into a folder under `backend/` (e.g. `last_final_model/`) together with the matching `class_names.json` and `ood_stats.npz` — the three are one matched set from the same run. Point `MODEL_PATH` at it if the folder name differs.
 
 `scripts/train_colab_google.ipynb` is a Google-Drive-oriented variant of the same B2 pipeline.
 

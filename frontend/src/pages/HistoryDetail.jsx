@@ -1,17 +1,23 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useLang } from "../context/LanguageContext";
+import { normalizePrediction } from "../lib/normalize";
 import ResultView from "../components/ResultView";
 import { EmptyState } from "../components/ui";
 import { getHistoryItem } from "../lib/history";
 import s from "./pages.module.css";
 
 export default function HistoryDetail() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const { id } = useParams();
   const navigate = useNavigate();
   const item = getHistoryItem(id);
 
-  if (!item?.detail) {
+  // Records saved before this change kept a rendered snapshot in `detail`.
+  const data = item?.raw
+    ? normalizePrediction(item.raw, { cropType: item.crop, lang })
+    : item?.detail;
+
+  if (!data) {
     return (
       <div className={`container ${s.page}`}>
         <EmptyState
@@ -30,7 +36,7 @@ export default function HistoryDetail() {
         {t.backToHistoryLink}
       </Link>
       <ResultView
-        data={item.detail}
+        data={data}
         image={item.thumbnail}
         feedbackId={item.id}
         onCheckAnother={() => navigate("/diagnose")}

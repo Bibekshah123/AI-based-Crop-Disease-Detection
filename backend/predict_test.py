@@ -24,8 +24,9 @@ from tensorflow.keras.applications import EfficientNetB2
 from PIL import Image
 
 # --- must match main.py ---
-MODEL_PATH = "best_model"
-CLASS_NAMES_PATH = "class_names.json"
+# Must track main.py, or this tool tests a different model than the API serves.
+MODEL_PATH = os.getenv("MODEL_PATH", "last_final_model")
+CLASS_NAMES_PATH = os.getenv("CLASS_NAMES_PATH", os.path.join(MODEL_PATH, "class_names.json"))
 IMG_SIZE = (224, 224)
 LOW_CONFIDENCE_THRESHOLD = 0.60
 IMG_EXTS = (".jpg", ".jpeg", ".png", ".bmp", ".webp")

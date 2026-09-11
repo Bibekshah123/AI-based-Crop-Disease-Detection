@@ -1,1 +1,7 @@
+# Model weights are large binaries. They are gitignored for GitHub, but the
+# Hugging Face Space is a separate git repo that ships them - these rules make
+# sure they go up as LFS objects there rather than raw blobs.
 backend/best_model/*.h5 filter=lfs diff=lfs merge=lfs -text
+backend/final_field_Model/*.h5 filter=lfs diff=lfs merge=lfs -text
+backend/last_final_model/*.h5 filter=lfs diff=lfs merge=lfs -text
+backend/*/ood_stats.npz filter=lfs diff=lfs merge=lfs -text

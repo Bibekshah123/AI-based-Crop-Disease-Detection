@@ -3,19 +3,25 @@ import ResultView from "../components/ResultView";
 import { EmptyState } from "../components/ui";
 import { useResult } from "../context/ResultContext";
 import { useLang } from "../context/LanguageContext";
+import { normalizePrediction } from "../lib/normalize";
 import s from "./pages.module.css";
 
 export default function Result() {
   const navigate = useNavigate();
   const { result, clear } = useResult();
-  const { t } = useLang();
+  const { t, lang } = useLang();
 
   const checkAnother = () => {
     clear();
     navigate("/diagnose");
   };
 
-  if (!result?.data) {
+  // Older sessions stored a pre-normalised snapshot; new ones store raw.
+  const data = result?.raw
+    ? normalizePrediction(result.raw, { cropType: result.cropType, lang })
+    : result?.data;
+
+  if (!data) {
     return (
       <div className={`container ${s.page}`}>
         <EmptyState
@@ -35,7 +41,7 @@ export default function Result() {
   return (
     <div className={`container ${s.page} ${s.pageNarrow}`}>
       <ResultView
-        data={result.data}
+        data={data}
         image={result.image}
         feedbackId={result.id}
         onCheckAnother={checkAnother}

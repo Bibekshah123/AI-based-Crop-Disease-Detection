@@ -58,3 +58,93 @@
     flex-direction: row;
   }
 }
+
+/* ---- Scanning animation --------------------------------------------------
+   Runs while /predict is in flight. Purely decorative: the Analyze button and
+   the aria-live region already announce progress, so the overlay is
+   aria-hidden and carries no information a screen reader would miss. */
+.previewFrame {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  /* the image is a block child, so the frame matches its box exactly */
+  display: block;
+  line-height: 0;
+}
+/* A ring on the frame itself, so the "busy" state is still legible if the
+   overlay is clipped on a very short image. */
+.previewScanning {
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+.scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  line-height: normal;
+}
+.scanTint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(15, 61, 34, 0.28) 0%,
+    rgba(15, 61, 34, 0.10) 50%,
+    rgba(15, 61, 34, 0.28) 100%);
+}
+
+/* Sweeping line, with a soft band trailing it so the motion reads as a scan
+   rather than a bar sliding around. */
+.scanLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: var(--color-primary);
+  box-shadow:
+    0 0 12px 3px rgba(47, 122, 74, 0.85),
+    0 -26px 30px -6px rgba(120, 220, 160, 0.45);
+  animation: scanSweep 1.7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes scanSweep {
+  0%   { top: 0%;   opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Corner brackets, echoing the detection frame in the home-page illustration. */
+.corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 3px solid #fff;
+  opacity: 0.95;
+}
+.cornerTL { top: 10px; left: 10px; border-right: 0; border-bottom: 0; border-top-left-radius: 4px; }
+.cornerTR { top: 10px; right: 10px; border-left: 0; border-bottom: 0; border-top-right-radius: 4px; }
+.cornerBR { bottom: 10px; right: 10px; border-left: 0; border-top: 0; border-bottom-right-radius: 4px; }
+.cornerBL { bottom: 10px; left: 10px; border-right: 0; border-top: 0; border-bottom-left-radius: 4px; }
+
+.scanLabel {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  padding: 5px var(--space-3);
+  border-radius: 999px;
+  background: rgba(12, 46, 26, 0.82);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Motion is the whole point here, so with reduced motion the sweep is dropped
+   entirely and the frame simply holds - still clearly "busy", but static. */
+@media (prefers-reduced-motion: reduce) {
+  .scanLine {
+    animation: none;
+    top: 50%;
+    opacity: 0.9;
+  }
+}

@@ -67,15 +67,6 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
         {data.gradcam && <p className={styles.gradcamNote}>{t.gradcamNote}</p>}
       </section>
 
-      {/* Recommended treatment ------------------------------------------ */}
-      {!uncertain && (
-        <TreatmentCard
-          treatments={data.treatments}
-          disclaimer={data.treatmentDisclaimer}
-          styles={styles}
-        />
-      )}
-
       {/* Guidance sections ---------------------------------------------- */}
       {sections.length > 0 && (
         <section className={styles.guidance} aria-label={t.guidance}>
@@ -93,6 +84,15 @@ export default function ResultView({ data, image, feedbackId, onCheckAnother }) 
             ))}
           </div>
         </section>
+      )}
+
+      {/* Recommended treatment ------------------------------------------ */}
+      {!uncertain && (
+        <TreatmentCard
+          treatments={data.treatments}
+          disclaimer={data.treatmentDisclaimer}
+          styles={styles}
+        />
       )}
 
       {/* Alternatives --------------------------------------------------- */}

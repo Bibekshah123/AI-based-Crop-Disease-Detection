@@ -106,13 +106,20 @@ export default function Layout({ children }) {
           </nav>
           </div>
 
-          <p className={styles.madeIn}>
-            <NepalFlag size={26} title={t.nepalFlagAlt} />
-            <span className={styles.madeInText}>
-              <strong className={styles.madeInTitle}>{t.productOfNepal}</strong>
-              <span className={styles.madeInSub}>{t.productOfNepalSub}</span>
-            </span>
-          </p>
+          <div className={styles.footAside}>
+            <p className={styles.madeIn}>
+              <NepalFlag size={26} title={t.nepalFlagAlt} />
+              <span className={styles.madeInText}>
+                <strong className={styles.madeInTitle}>{t.productOfNepal}</strong>
+                <span className={styles.madeInSub}>{t.productOfNepalSub}</span>
+              </span>
+            </p>
+
+            <p className={styles.credit}>
+              <span className={styles.creditLabel}>{t.developedBy}</span>
+              <strong className={styles.creditName}>{t.developerName}</strong>
+            </p>
+          </div>
         </div>
       </footer>
     </>

@@ -78,7 +78,7 @@ export default function Diagnose() {
 
       const id = makeId();
       saveHistory(toHistoryRecord(data, { thumbnail: thumb, id, timestamp: Date.now() }));
-      publish({ id, data, image: medium });
+      publish({ id, raw, cropType: sentCrop ?? "", image: medium });
       navigate("/result");
     } catch (err) {
       setApiError(classifyError(err));
@@ -143,6 +143,7 @@ export default function Diagnose() {
             onSelect={selectFile}
             onClear={clearFile}
             error={validationError}
+            scanning={submitting}
           />
 
           <div className={s.fieldGap} />
@@ -172,13 +173,15 @@ export default function Diagnose() {
             <div style={{ marginTop: "var(--space-4)" }}>
               <ErrorState
                 title={
-                  apiError.kind === "timeout"
+                  apiError.status === 400
+                    ? t.errBadImageTitle
+                    : apiError.kind === "timeout"
                     ? t.errTimeoutTitle
                     : apiError.kind === "network"
                     ? t.errNetworkTitle
                     : t.errFailedTitle
                 }
-                message={apiError.message}
+                message={apiError.status === 400 ? t.errBadImageBody : apiError.message}
                 onRetry={analyze}
               />
             </div>

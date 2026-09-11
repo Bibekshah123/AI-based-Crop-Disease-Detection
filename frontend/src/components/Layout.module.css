@@ -167,7 +167,7 @@
   align-items: center;
   gap: var(--space-3);
   flex: 0 0 auto;
-  margin: 0 0 0 auto;
+  margin: 0;
   padding: var(--space-3) var(--space-4);
   border: 1px solid rgba(220, 20, 60, 0.28);
   border-left: 4px solid #dc143c;
@@ -189,4 +189,32 @@
 .madeInSub {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
+}
+
+/* ---- Footer right column: origin badge + developer credit ---- */
+.footAside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+/* The credit is emphasised through type, not another box - a second bordered
+   panel next to the Nepal badge would fight it for attention. */
+.credit {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin: 0;
+  text-align: right;
+}
+.creditLabel {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.creditName {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.01em;
 }

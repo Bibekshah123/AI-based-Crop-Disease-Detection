@@ -42,6 +42,11 @@ TREATMENTS_PATH = "treatments.json"
 UNKNOWN_CLASS = "Unknown___Unknown"
 IMG_SIZE = (224, 224)
 LOW_CONFIDENCE_THRESHOLD = 0.60
+
+# A small file can decode to gigabytes ("decompression bomb"). Pillow warns above
+# ~89M pixels by default but still decodes; this makes it an error instead. Well
+# above any real phone camera (a 108 MP photo is ~108M pixels, so allow 120M).
+Image.MAX_IMAGE_PIXELS = 120_000_000
 # Isolate the leaf from a busy field photo before classifying, so the model
 # (trained on clean lab leaves) sees a lab-like centred leaf. Set LEAF_CROP=0
 # to disable.
@@ -622,7 +627,27 @@ async def predict(
     # username: str = Depends(get_current_user)  # auth commented out
 ):
     image_bytes = await file.read()
-    img_array, original_image = preprocess_image(image_bytes)
+
+    # Anything that is not a decodable image is a client error. Without this the
+    # PIL exception escaped as a 500 and the web app told the user "the server
+    # had a problem", pointing them at the wrong thing entirely.
+    if not image_bytes:
+        raise HTTPException(status_code=400, detail="No image was uploaded.")
+    try:
+        img_array, original_image = preprocess_image(image_bytes)
+    except HTTPException:
+        raise
+    except Image.DecompressionBombError:
+        raise HTTPException(
+            status_code=400,
+            detail="That image is too large to process. Please upload a smaller photo.",
+        )
+    except Exception:
+        raise HTTPException(
+            status_code=400,
+            detail="That file could not be read as an image. Please upload a JPG, PNG or WEBP photo.",
+        )
+
     thumbnail = make_thumbnail(original_image)
 
     # Pre-check: does the image look like a leaf?
