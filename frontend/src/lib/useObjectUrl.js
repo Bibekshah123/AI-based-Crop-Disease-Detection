@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
 /* Creates object URLs for File/Blob previews and revokes them automatically
-   to avoid memory leaks. Returns [url, setFile, clear]. An optional initial
-   file is previewed from the first render. */
-export function useObjectUrl(initialFile = null) {
-  const [url, setUrl] = useState(() => (initialFile ? URL.createObjectURL(initialFile) : null));
-  const current = useRef(url);
+   to avoid memory leaks. Returns [url, setFile, clear]. */
+export function useObjectUrl() {
+  const [url, setUrl] = useState(null);
+  const current = useRef(null);
 
   const revoke = useCallback(() => {
     if (current.current) {

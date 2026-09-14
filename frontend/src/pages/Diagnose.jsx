@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import ImagePicker from "../components/ImagePicker";
 import { Spinner, ErrorState } from "../components/ui";
 import { CROPS, CROP_ANY, cropLabel } from "../lib/crops";
@@ -14,44 +14,26 @@ import s from "./pages.module.css";
 
 const MAX_BYTES = 12 * 1024 * 1024; // 12 MB
 
-function fileError(f, t) {
-  if (!f.type?.startsWith("image/")) return t.errPickImage;
-  if (f.size > MAX_BYTES) return t.errTooLarge;
-  return "";
-}
-
 export default function Diagnose() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { publish } = useResult();
   const { lang, t } = useLang();
 
-  // A photo chosen on the home page arrives in router state and is loaded as
-  // the starting photo.
-  const [handoff] = useState(() => {
-    const f = location.state?.file;
-    if (!f) return { file: null, error: "" };
-    const error = fileError(f, t);
-    return { file: error ? null : f, error };
-  });
-
   const [cropType, setCropType] = useState("");
-  const [file, setFile] = useState(handoff.file);
-  const [preview, setPreview] = useObjectUrl(handoff.file);
-  const [validationError, setValidationError] = useState(handoff.error);
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useObjectUrl();
+  const [validationError, setValidationError] = useState("");
   const [apiError, setApiError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const submittingRef = useRef(false); // hard guard against duplicate submits
 
-  // Drop the handed-off photo from history so a refresh doesn't bring it back.
-  useEffect(() => {
-    if (location.state?.file) navigate(location.pathname, { replace: true, state: null });
-  }, [location, navigate]);
-
   const selectFile = (f) => {
-    const error = fileError(f, t);
-    if (error) {
-      setValidationError(error);
+    if (!f.type?.startsWith("image/")) {
+      setValidationError(t.errPickImage);
+      return;
+    }
+    if (f.size > MAX_BYTES) {
+      setValidationError(t.errTooLarge);
       return;
     }
     setValidationError("");
