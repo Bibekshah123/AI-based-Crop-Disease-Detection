@@ -23,8 +23,10 @@ const en = {
   switchToEnglish: "View in English",
 
   // home
-  homeTitle: "Is your crop sick? Check a leaf.",
-  homeLead: "Take a photo of one leaf. CropSense shows the likely disease and how to treat it.",
+  homeTitle: "Detect crop diseases early and protect your harvest",
+  homeLead: "Photograph an affected leaf to identify the disease and get treatment advice in English or Nepali.",
+  checkCardBody: "Take a clear photo of one affected leaf, or upload one from your phone.",
+  checkCardHint: "Free · No sign-up · 10 crops supported",
   checkALeaf: "Check a leaf",
   browseLibrary: "Browse disease library",
   howItWorks: "How it works",
@@ -241,8 +243,10 @@ const np = {
   switchToNepali: "नेपालीमा हेर्नुहोस्",
   switchToEnglish: "View in English",
 
-  homeTitle: "बाली बिरामी छ? पात जाँच्नुहोस्।",
-  homeLead: "एउटा पातको तस्बिर खिच्नुहोस्। CropSense ले सम्भावित रोग र उपचार देखाउँछ।",
+  homeTitle: "बालीका रोग समयमै पहिचान गर्नुहोस्, उब्जनी जोगाउनुहोस्",
+  homeLead: "रोग लागेको पातको तस्बिर लिनुहोस् र रोगको पहिचानसँगै उपचारको सल्लाह नेपाली वा अंग्रेजीमा पाउनुहोस्।",
+  checkCardBody: "रोग लागेको एउटा पातको स्पष्ट तस्बिर खिच्नुहोस् वा फोनबाट अपलोड गर्नुहोस्।",
+  checkCardHint: "निःशुल्क · दर्ता आवश्यक छैन · १० बाली समर्थित",
   checkALeaf: "पात जाँच्नुहोस्",
   browseLibrary: "रोग सूची हेर्नुहोस्",
   howItWorks: "यसले कसरी काम गर्छ",

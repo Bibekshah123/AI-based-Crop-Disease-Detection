@@ -1,42 +1,96 @@
-/* ---- Hero: one message, one action --------------------------------------- */
+/* ---- Hero: Nepali farm photo behind a prominent "Check a leaf" card ------ */
 .hero {
-  background: var(--color-green-soft);
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
   padding-block: var(--space-7);
+  background:
+    linear-gradient(100deg, rgba(12, 38, 22, 0.88) 0%, rgba(12, 38, 22, 0.62) 55%, rgba(12, 38, 22, 0.35) 100%),
+    var(--hero-image) center 60% / cover no-repeat,
+    #1f4d30;
+  color: #fff;
 }
-.heroInner {
-  display: flex;
-  flex-direction: column;
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
   align-items: center;
-  text-align: center;
 }
+.heroCopy { min-width: 0; }
 .title {
   font-size: var(--text-3xl);
   line-height: 1.15;
-  max-width: 26ch;
+  max-width: 18ch;
   margin: 0;
+  color: #fff;
 }
 .lead {
-  color: var(--color-text-muted);
   font-size: var(--text-lg);
   line-height: 1.55;
-  max-width: 46ch;
+  max-width: 44ch;
   margin: var(--space-4) 0 0;
+  color: rgba(255, 255, 255, 0.9);
 }
-.cta {
+.libraryLink {
+  display: inline-block;
+  margin-top: var(--space-5);
+  font-weight: 600;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* The main action of the page. */
+.checkCard {
+  background: var(--color-surface, #fff);
+  color: var(--color-text);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-5);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  text-align: center;
+}
+.checkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-green-soft);
+  color: var(--color-primary-dark);
+}
+.checkTitle {
+  font-size: var(--text-2xl, 1.6rem);
+  margin: var(--space-3) 0 var(--space-2);
+}
+.checkBody {
+  margin: 0 auto;
+  max-width: 34ch;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+.checkActions {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+.checkBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  margin-top: var(--space-6);
-  padding: 14px 32px;
-  font-size: var(--text-lg);
-  min-width: min(260px, 100%);
+  padding: 14px var(--space-4);
+  font-size: var(--text-base);
 }
-.secondaryLink {
-  margin-top: var(--space-4);
-  font-weight: 600;
-  color: var(--color-primary-dark);
+.checkHint {
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+.credit {
+  position: absolute;
+  right: var(--space-3);
+  bottom: var(--space-2);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 /* ---- Sections ------------------------------------------------------------ */
@@ -112,6 +166,12 @@
   color: var(--color-primary-dark);
 }
 
+@media (min-width: 900px) {
+  .hero { padding-block: calc(var(--space-7) * 1.6); }
+  .heroGrid { grid-template-columns: 1.2fr 1fr; gap: var(--space-7); }
+  .title { font-size: calc(var(--text-3xl) * 1.2); }
+  .checkCard { padding: var(--space-7) var(--space-6); }
+}
 @media (min-width: 760px) {
   .steps { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
   .step { flex-direction: column; text-align: center; }
