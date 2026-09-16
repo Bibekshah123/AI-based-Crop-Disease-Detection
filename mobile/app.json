@@ -38,6 +38,15 @@
     },
     "plugins": [
       [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 180,
+          "resizeMode": "contain",
+          "backgroundColor": "#EEF5EF"
+        }
+      ],
+      [
         "expo-image-picker",
         {
           "photosPermission": "CropSense needs access to your photos to analyze crop leaf images.",
@@ -52,7 +61,8 @@
           }
         }
       ],
-      "expo-status-bar"
+      "expo-status-bar",
+      "expo-splash-screen"
     ],
     "extra": {
       "eas": {
