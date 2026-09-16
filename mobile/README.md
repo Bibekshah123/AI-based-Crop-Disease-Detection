@@ -13,9 +13,10 @@ treatment guidance (English & Nepali).
    uvicorn main:app --host 0.0.0.0 --port 8000
    ```
 
-2. **Point the app at your computer.** `config.js` defaults to the Tailscale
-   address `http://100.76.133.76:8000`, which works from any network. To use a
-   plain LAN IP instead, create `.env.local` (no code change needed):
+2. **Point the app at your computer.** `config.js` defaults to the live
+   Hugging Face Space (`https://bikkii-cropsense.hf.space`), so the app works
+   with no laptop at all. To test against a local backend instead, create
+   `.env.local` (no code change needed):
    ```
    EXPO_PUBLIC_API_URL=http://192.168.77.106:8000
    ```
@@ -30,7 +31,8 @@ treatment guidance (English & Nepali).
    > browser. If you see JSON, the app will work. If it hangs, it's a firewall
    > or you're on a different Wi-Fi.
 
-3. **Start Expo and open on your phone:**
+3. **Start Expo and open on your phone** (development only — the built APK
+   needs none of this):
    ```bash
    npm start
    ```
@@ -61,22 +63,23 @@ Profiles in `eas.json`:
 | `development` | APK         | Dev client, replaces Expo Go.             |
 | `production`  | AAB         | Play Store upload only (can't sideload).  |
 
-### Making it work off your Wi-Fi
+### Where the built APK points
 
-The backend URL is compiled into the APK. It defaults to the **Tailscale**
-address, so the app works from mobile data or any other network — provided:
+The backend URL is compiled into the APK. It defaults to the public Hugging Face
+Space over **https**, so an installed APK works on any phone, on mobile data,
+with no laptop running and nothing else installed.
 
-1. the phone has the **Tailscale** app, signed into `technical.nifn@`;
-2. this laptop is on with Tailscale up; and
-3. the backend is running (`uvicorn main:app --host 0.0.0.0 --port 8000`).
+That default lives in `config.js` rather than `.env.local` on purpose: **EAS
+cloud builds ignore gitignored files**, so an address kept only in `.env.local`
+never reaches the build. Override it per build with `EXPO_PUBLIC_API_URL`.
 
-To build against a different backend, put `EXPO_PUBLIC_API_URL` in `.env.local`
-before building. For a build that needs no Tailscale app and no laptop running,
-host the backend somewhere public and use its **https** URL.
+> `expo-build-properties` sets `usesCleartextTraffic` in `app.json`, which is
+> only needed for plain `http://` LAN testing. It can be removed once every
+> backend you point at uses `https`.
 
-> The app talks to the backend over plain `http://`, which release Android
-> blocks by default. `expo-build-properties` sets `usesCleartextTraffic` in
-> `app.json` to allow it. If you move to an `https` URL, that can be removed.
+> The free Space sleeps when idle — open
+> `https://bikkii-cropsense.hf.space/health` in the phone's browser a few
+> minutes before a demo to wake it.
 
 ## Files
 
@@ -84,11 +87,12 @@ host the backend somewhere public and use its **https** URL.
 |----------------|---------------------------------------------------------------------|
 | `config.js`    | The backend `API_URL` — the one thing you change.                   |
 | `api.js`       | `predict()` / `health()` — talks to FastAPI.                        |
-| `App.js`       | Diagnose flow: crop selector (required), camera/upload, preview, photo guidance, Analyze, EN/NP toggle. |
+| `App.js`       | Diagnose flow: camera/gallery, preview, **optional** crop chips (default "Any crop"), collapsible photo tips, Analyze pinned to the bottom, EN/NP toggle. |
 | `ResultView.js`| The result screen: possible match, confidence status, Grad-CAM comparison, guidance, alternatives, feedback. |
 | `normalize.js` | Turns the raw `/predict` response into a display shape and derives the High/Moderate/Uncertain status. |
 | `theme.js`     | Design tokens — the calm agricultural palette shared with the web app. |
 | `strings.js`   | Bilingual (EN/NP) UI labels + the crop list.                        |
+| `assets/`      | App icon, Android adaptive icon, splash and header mark — all generated from the web app's leaf logo. |
 
 The design, wording, and result layout mirror the web app
 (`frontend/src/…`): a light agricultural theme, "possible match" framing,
