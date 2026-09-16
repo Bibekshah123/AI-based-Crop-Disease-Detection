@@ -42,17 +42,19 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 - **Disease Detection** — Classifies leaf images into **52 disease / healthy / unknown categories** across **10 crops**.
 - **Responsible Confidence** — Reports softmax confidence and a clear status: **High / Moderate / Uncertain**. Results are always framed as a *possible* match, never a guarantee.
 - **Grad-CAM Heatmap** — Visual explanation overlaying the regions of the leaf the model focused on, shown side-by-side with your photo.
-- **Leaf Pre-check** — Rejects images that don't look like a leaf (HSV colour masking + edge/contrast/aspect heuristics) before wasting a prediction.
-- **Unknown / Out-of-Distribution Detection** — Flags inputs the model shouldn't confidently classify, using **confidence threshold, top-1/top-2 margin, and prediction entropy**.
+- **Leaf Pre-check** — Rejects images that don't look like a leaf (HSV colour masking + edge/contrast/aspect heuristics, 3 of 4 tests must pass) before wasting a prediction.
+- **Leaf Cropping** — `crop_to_leaf` isolates the leaf from a cluttered field scene (excess-green mask + narrow diseased-tissue hue band) with safety rails that fall back to the original image, narrowing the lab→field gap at inference time.
+- **Unknown / Out-of-Distribution Detection** — Five rules flag inputs the model shouldn't confidently classify: the Unknown class itself, **confidence < 30%**, a **near-tie** (confidence < 50% and top-1/top-2 margin < 5 pts), **normalized entropy > 0.90**, and **open-set rejection** — cosine similarity to 51 class centroids below the calibrated threshold **0.5596**. The result distinguishes *Crop Not Supported* from *Not Identified*.
 - **Crop-Mismatch Check** — Warns when the predicted crop doesn't match the crop you selected.
 - **Top Alternatives** — Shows the runner-up classifications with confidences, plus full raw per-class probabilities in the API.
+- **Structured Treatments** — `treatments.json` carries 51 protocols / 122 entries with active ingredient, kind, formulation, dose, pre-harvest interval, re-spray interval and safety band, non-chemical options first, each with a bilingual disclaimer.
 - **Fully Bilingual (English / नेपाली)** — A language toggle in the header switches the entire interface *and* all disease content. Every result ships `*_np` fields (disease name, description, cause, symptoms, treatment, prevention) for all 51 conditions, and treatment protocols carry `dose_np` / `note_np`. Scientific names, chemical names and formulation codes deliberately stay in Latin so they can be matched against the product label.
 - **Disease Library** — Browsable reference of every crop/disease the model knows, built from the same curated knowledge base.
 - **Local-First History** — Every check is saved in the browser (no login/DB needed), with filters and a detail view.
 - **Mobile App** — React Native (Expo) client with camera capture, crop selector, and an English/Nepali toggle.
 - **Calm, Original UI** — Mobile-first, accessible, agricultural design system (no marketing fluff, no fake stats).
 - **No Sign-in Required** — JWT auth, bcrypt and the PostgreSQL schema are implemented in the backend, but the web app deliberately ships **no sign-in surface**: diagnosis has no dependency on identity, and history is local-first.
-- **One-Command Deploy** — `docker compose up --build` brings up the whole stack (DB, API, web app, DB admin GUI).
+- **Deployed and public** — API + model on a Hugging Face Space, web app on Vercel, Android APK from Expo EAS. `docker compose up --build` still brings up the whole stack locally (DB, API, web app, DB admin GUI). See [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ---
 
@@ -61,9 +63,9 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 | Layer | Technology |
 |---|---|
 | Web app | React 19 + Vite 8, React Router 7, Axios, CSS Modules + design tokens (Nginx in production) |
-| Mobile app | React Native + **Expo (SDK 54)**, expo-image-picker, Axios |
+| Mobile app | React Native 0.86 + **Expo (SDK 57)**, React 19.2, expo-image-picker, Axios |
 | Backend | FastAPI (Python 3.10), Uvicorn |
-| Model | **EfficientNetB2** transfer learning (TensorFlow / Keras) |
+| Model | **EfficientNetB2** transfer learning (TensorFlow 2.21 / Keras), ~8.5 M parameters |
 | Image Processing | OpenCV, Pillow, NumPy |
 | Explainability | Grad-CAM (JET colormap overlay) |
 | Auth | JWT (`python-jose`), bcrypt |
@@ -71,6 +73,7 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 | DB Admin | Adminer |
 | Frontend tests | Vitest + React Testing Library |
 | Containerization | Docker, Docker Compose |
+| Hosting | Hugging Face Spaces (Gradio SDK) · Vercel · Expo EAS Build |
 
 ---
 
@@ -121,10 +124,12 @@ The web app talks to the backend through relative paths (`/predict`, `/health`, 
 │   ├── disease_info.json               # EN/NP knowledge base for all 52 classes
 │   ├── predict_test.py                 # Standalone offline image tester (no web stack)
 │   ├── requirements.txt
-│   └── last_final_model/               # Active weights (tracked via Git LFS)
-│       ├── best_model_phase2_final.weights.h5   # ← active EfficientNetB2 model (52 classes)
-│       ├── best_model_phase1.weights.h5         # Phase-1 (head-only) weights
-│       └── best_model_phase2.weights.h5         # legacy phase-2 weights
+│   ├── treatments.json                 # 51 treatment protocols / 122 entries (EN + NP)
+│   └── last_final_model/               # Active model set — the three files below are ONE matched
+│       │                               #   set from the same training run (6 Sep 2026)
+│       ├── best_model_phase2.weights.h5   # ← active EfficientNetB2 weights, 52 classes (Git LFS)
+│       ├── class_names.json               # 52 class names, in output order
+│       └── ood_stats.npz                  # 51 centroids × 512 dims, threshold 0.5596
 ├── frontend/                           # Web app (React + Vite)
 │   ├── Dockerfile                      # node build → nginx:alpine serve
 │   ├── .dockerignore                   # excludes host node_modules/dist from the image
@@ -243,7 +248,9 @@ Design & engineering notes:
 
 ## Mobile App
 
-A React Native (Expo) thin client that reuses the same `/predict` endpoint — take/pick a leaf photo, get the disease, confidence, Grad-CAM, and guidance, with an English/Nepali toggle. It shares the web app's design and responsible wording (possible match, High/Moderate/Uncertain, Grad-CAM comparison, feedback).
+A React Native (Expo SDK 57) thin client that reuses the same `/predict` endpoint — take/pick a leaf photo, get the disease, confidence, Grad-CAM, and guidance, with an English/Nepali toggle. It shares the web app's design and responsible wording (possible match, High/Moderate/Uncertain, Grad-CAM comparison, feedback).
+
+**Crop selection is optional** and defaults to *Any crop*: a photo can be analysed in two taps, and choosing a crop only enables the mismatch warning. The app icon, adaptive icon and splash screen are generated from the web app's leaf mark. The backend URL defaults to the public Space **in code** (`mobile/config.js`), because EAS cloud builds ignore gitignored `.env` files; override with `EXPO_PUBLIC_API_URL` for local testing.
 
 ### Start the dev server (test on a real phone)
 
@@ -279,10 +286,12 @@ The app loads and — because `EXPO_PUBLIC_API_URL` points at the backend on the
 ### Build an installable APK
 
 ```bash
-npx eas-cli build -p android --profile preview
+cd mobile
+npx eas-cli login                                  # free Expo account
+npx eas-cli build -p android --profile preview     # → downloadable, installable .apk
 ```
 
-See `mobile/README.md` for the full networking guide (LAN IP vs. Tailscale) and the EAS build flow.
+The first run creates the EAS project and generates the Android keystore (Expo stores it — future updates must be signed with the same key). The build runs on Expo's servers and prints a download/QR link; the APK needs no Expo Go and no development server. See `mobile/README.md` for the full networking guide.
 
 ---
 
@@ -291,9 +300,9 @@ See `mobile/README.md` for the full networking guide (LAN IP vs. Tailscale) and 
 1. On **Diagnose**, the user selects a crop (required) and adds a leaf photo (camera or upload), then presses **Analyze leaf**.
 2. The client `POST`s the image (and `crop_type`) to `/predict` as multipart form data (with duplicate-submit prevention and a request timeout).
 3. The backend decodes the image, makes a thumbnail, and runs the **leaf pre-check** (`is_leaf_image`). If it fails, a "Not a Leaf" result is returned immediately.
-4. The image is preprocessed — converted to RGB, resized to **224×224**, and passed through EfficientNet's `preprocess_input`.
+4. `crop_to_leaf` isolates the leaf from the background (skipped safely when the mask is implausible), then the image is converted to RGB, resized to **224×224**, and passed through EfficientNet's `preprocess_input`.
 5. **EfficientNetB2** produces a softmax distribution over the **52 classes**.
-6. **Unknown detection** runs: if confidence is very low, the top-1/top-2 margin is tiny, or the distribution's entropy is high, the result is relabeled `Unknown`.
+6. **Unknown detection** runs: the Unknown class, very low confidence, a tiny top-1/top-2 margin, high entropy, or a low cosine similarity to every class centroid relabels the result `Unknown`, as either *Crop Not Supported* or *Not Identified*.
 7. **Crop-mismatch** is checked against the crop the user selected.
 8. A **Grad-CAM heatmap** is generated from the backbone's last convolutional layer and overlaid on the original image.
 9. Treatment/prevention info (EN + NP) is looked up from `disease_info.json`.
@@ -373,9 +382,9 @@ Base URL: `http://localhost:8000`
 
 Both phases apply **class weighting** to counter class imbalance across crops.
 
-**Weight-loading priority** (`MODEL_PATH`, default `backend/last_final_model/`): `best_model_phase2_final.weights.h5` → `best_model_phase2.weights.h5` → `best_model_phase1.weights.h5` → `model.weights.h5`. The active deployed model is **`last_final_model/best_model_phase2.weights.h5`** (EfficientNetB2, 52 classes).
+**Weight-loading priority** (`MODEL_PATH`, default `backend/last_final_model/`): `best_model_phase2_final.weights.h5` → `best_model_phase2.weights.h5` → `best_model_phase1.weights.h5` → `model.weights.h5`. The active deployed model is **`last_final_model/best_model_phase2.weights.h5`** (EfficientNetB2, 52 classes). The weights, `class_names.json` and `ood_stats.npz` in that folder are one matched set from the same run — centroids are meaningless against different weights.
 
-The model reaches high validation accuracy on the curated dataset split; see the training notebook output for exact per-run metrics. (Real-world/field accuracy is lower than lab accuracy — see [Known Limitations](#known-limitations).)
+**Measured performance.** ~98.5–98.9% validation accuracy on the curated lab split (31 Aug 2026 run, 51 classes — the deployed run's notebook outputs were not saved). Measured through the deployed API on 226 independent **PlantDoc** field photographs: **48.0% top-1**, **81.8% top-5**, crop correct 70.9%, and **81.8% accuracy for predictions at ≥ 80% confidence**. Of 74 untrained-crop leaves, 28.4% were declined. Full protocol and caveats in `CropSense_Final_Report.pdf` §6.2.4.
 
 ---
 
@@ -456,7 +465,7 @@ npm test               # run once
 npm run test:watch     # watch mode
 ```
 
-Coverage focuses on the parts most worth protecting: the response **normalization / confidence-status** logic (`src/lib/normalize.test.js`), the **local history** store (`src/lib/history.test.js`), and a **ResultView** smoke test asserting the responsible wording, Grad-CAM note, uncertainty warning, and feedback controls.
+**24 tests across 5 files**, all passing. Coverage focuses on the parts most worth protecting: response **normalization / confidence-status** logic (`src/lib/normalize.test.js`, 10), the **local history** store (`src/lib/history.test.js`, 4), the **ImagePicker** (3), a **ResultView** smoke test asserting the responsible wording, Grad-CAM note, uncertainty warning and feedback controls (4), and the **History page** delete-all flow (3).
 
 For quick backend checks without the web stack, use `backend/predict_test.py` — it runs the exact same model, weight-loading order, preprocessing, and confidence threshold as the API, with no web/auth/DB dependencies:
 
@@ -488,20 +497,27 @@ python predict_test.py ../test.jpg --topk 5  # show top-K
 
 ## Deployment
 
-Because the backend loads TensorFlow + a ~100 MB model, it needs roughly **1.5–2 GB RAM** — most 512 MB free tiers will OOM. A workable free split:
+Because the backend loads TensorFlow + a ~100 MB model, it needs roughly **1.5–2 GB RAM** — most 512 MB free tiers will OOM. The live split, all on free tiers with no card:
 
-- **Backend + model** → a Docker host with enough RAM (e.g. Hugging Face Spaces, Docker SDK — free CPU tier has ample RAM). The model weights ship inside the image via Git LFS.
-- **Database** → a managed Postgres (e.g. Neon/Supabase free tier). Optional — the app runs without it.
-- **Web app** → any static host (e.g. Vercel/Netlify), with `VITE_API_BASE_URL` set to the backend's public URL.
-- **Mobile app** → build an APK with EAS and set `EXPO_PUBLIC_API_URL` to the backend's public URL.
+| Part | Platform | Address |
+|---|---|---|
+| Backend + model | **Hugging Face Space** (Gradio SDK, CPU) — weights via Git LFS | <https://bikkii-cropsense.hf.space> |
+| Web app | **Vercel** — root dir `frontend`, `VITE_API_BASE_URL` set to the Space URL, auto-deploys on push to `main` | Vercel project URL |
+| Mobile app | **Expo EAS Build** — installable `.apk` | download link from the build |
+| Database | Not deployed — optional by design; `/predict` never touches it | — |
 
-The backend already sends permissive CORS (`allow_origins=["*"]`), so the hosted web and mobile clients can call it directly.
+Hugging Face moved Docker Spaces to a paid tier during the project, so the Space runs the free **Gradio SDK**: `app.py` mounts the FastAPI routes on `gr.Server` and starts through Gradio's own launcher (ZeroGPU only marks the app started that way; a self-started uvicorn fails with *address already in use* on port 7860). The model runs on CPU, and the Space sleeps when idle — open `/health` a few minutes before a demo to wake it.
+
+The backend sends permissive CORS (`allow_origins=["*"]`), so the hosted web and mobile clients can call it directly. Full walkthrough, including the two deployment bugs hit and fixed, is in **[DEPLOYMENT.md](DEPLOYMENT.md)**; an end-to-end explanation of the whole system is in **[CROPSENSE_WORKFLOW.md](CROPSENSE_WORKFLOW.md)**.
 
 ---
 
 ## Known Limitations
 
-- **Lab → field domain gap.** The model is trained largely on curated, clean-background leaf images. Real-world photos — with cluttered backgrounds, varied lighting, and multiple leaves — can be misclassified or flagged `Unknown`. Improving field generalization (leaf segmentation, domain-randomization augmentation, adding field datasets like PlantDoc) is future work.
+- **Lab → field domain gap — measured.** ~98% on the curated lab split versus **48.0% top-1 on independent PlantDoc field photographs** (81.8% top-5; 81.8% correct when confidence ≥ 80%). 1,593 real field photos, field-realism augmentation and `crop_to_leaf` narrow the gap but do not close it. Leaf segmentation and expert-verified Nepali field data are the next steps.
+- **Untrained-crop rejection is weak.** Only **28.4%** of 74 untrained-crop leaves were declined; the open-set score distributions for supported and untrained crops overlap almost completely (means 0.701 vs 0.711), and the 5% false-rejection rate targeted at calibration rose to 11.5% on field images.
+- **No saved training metrics for the deployed checkpoint.** Both notebooks have zero cell outputs; the saved curves/confusion matrix come from the earlier 31 Aug 51-class run.
+- **Input-size check is weaker than intended.** Pillow only raises above 2× `MAX_IMAGE_PIXELS`, so a 132 MP image is decoded rather than rejected (it still returns a safe *Not a Leaf*). Fix: check decoded dimensions explicitly and return 400.
 - **Class imbalance.** Crops/classes with more training images can dominate; class weighting helps, but the strongest fix for the weakest classes is more data. Report **macro-F1** alongside accuracy.
 - **Guidance is advisory.** Treatment/prevention text is general reference information, not a substitute for an agronomist. Every result carries a disclaimer to consult an agricultural expert before acting.
 - **Server-side history is off by default.** History is stored locally in the browser; enabling per-account server history requires re-enabling `db_save_prediction(...)` in the backend.

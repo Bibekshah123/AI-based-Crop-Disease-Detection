@@ -656,9 +656,10 @@ locally.
 **Stack:** Expo SDK 57, React Native 0.86, React 19.2, expo-image-picker, Axios.
 Folder: `mobile/`. The app is a **thin client** with no AI inside.
 
-1. **Choose a crop** with chips, the same as the web.
-2. **Take a photo or pick from the gallery.** Permission is asked at that moment,
-   and quality is 0.8.
+1. **Take a photo or pick from the gallery** — the first thing on the screen.
+   Permission is asked at that moment, and quality is 0.8.
+2. **Choose a crop if you want to.** It is **optional** and defaults to "Any
+   crop", which sends no `crop_type` and only disables the mismatch warning.
 3. **Analyze.** It posts to `API_URL/predict` with a duplicate-submit guard and a
    **40 s timeout** (shorter than the web, since mobile users won't wait long).
 4. **See the result:** disease, confidence band, Grad-CAM image, guidance and
@@ -670,6 +671,12 @@ Folder: `mobile/`. The app is a **thin client** with no AI inside.
 - `process.env.EXPO_PUBLIC_API_URL ?? "https://bikkii-cropsense.hf.space"`
 - The live URL is the **default in code** because EAS cloud builds ignore gitignored
   `.env.local` files.
+
+**Design:** the app icon, adaptive icon and splash screen come from the web
+app's leaf mark, so phone and website look like one product. The screen is
+photo-first: a tap-to-photograph area, optional crop chips, photo tips collapsed
+behind a tap, and an Analyze button pinned to the bottom (disabled until a photo
+is added).
 
 **Build checks:**
 - `expo-doctor` passes all **21 checks**.

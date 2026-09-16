@@ -12,7 +12,7 @@ credit card**.
 
 | Part | What it is | Where it runs | Live address |
 |---|---|---|---|
-| **Frontend** (website) | React 19 + Vite single-page app | **Vercel** | Your Vercel link, e.g. `https://ai-based-crop-disease-detection.vercel.app` |
+| **Frontend** (website) | React 19 + Vite single-page app | **Vercel** | Your Vercel project URL (auto-deploys on push to `main`) |
 | **Backend** (API) | FastAPI (Python) | **Hugging Face Space** (Gradio SDK, ZeroGPU hardware) | `https://bikkii-cropsense.hf.space` |
 | **Model** | EfficientNetB2, 52 classes, TensorFlow/Keras | Inside the backend, on the same Space | — |
 | **Mobile app** | Expo / React Native (SDK 57) | Installed on the phone as an APK | Calls the same backend |
@@ -136,16 +136,19 @@ flowchart TD
 - **No login, no database:** login/register were removed on purpose. The farmer
   only needs to take a photo. This avoids storing personal data and needs no
   paid database.
-- **Input safety:** empty files, non-images and "decompression bomb" images
-  (absurdly large pixel counts that would exhaust memory) are rejected with a
-  400 error instead of crashing.
+- **Input safety:** empty files and non-images are rejected with a 400 error and
+  a plain-language message instead of crashing. Known weakness: the
+  decompression-bomb guard is weaker than intended — Pillow only raises above
+  twice `MAX_IMAGE_PIXELS`, so a 132 MP image is decoded (it still returns a safe
+  *Not a Leaf*). The fix is an explicit dimension check returning 400.
 - **Nothing is stored on the server:** photos are processed in memory and discarded.
 
 ### 2.7 Performance
 
-| | Laptop (24 cores) | Live Space (shared free CPU) |
+| | Laptop | Live Space (shared free CPU) |
 |---|---|---|
-| One prediction | ~2 s | ~10 s |
+| One prediction, measured | **0.79 s** average sequential | **6.75 s** average when warm |
+| Three clients at once | 2.18 s median (p90 3.26 s) | — |
 | Memory | ~700 MB | same |
 
 Most of the time goes to **Grad-CAM** (about 87% of compute). The model's own
@@ -239,21 +242,33 @@ folder, and verified a **fresh clone** builds and passes all 24 tests.
 
 ---
 
-## 4. Mobile app — APK
+## 4. Mobile app — APK (built and installed)
 
 - The backend address is in `mobile/config.js`:
   `process.env.EXPO_PUBLIC_API_URL ?? "https://bikkii-cropsense.hf.space"`
 - The live URL is the **default in code** because EAS cloud builds skip
   gitignored files like `.env.local`.
-- Build a standalone APK (free Expo account):
+- Build a standalone APK (free Expo account, no card):
   ```bash
   cd ~/Documents/CropSense/mobile
-  npm install -g eas-cli
-  eas login
-  eas build -p android --profile preview    # produces a downloadable .apk
+  npx eas-cli login
+  npx eas-cli build -p android --profile preview    # → downloadable .apk
   ```
-- The APK installs directly on Android; it doesn't need Expo Go or the laptop.
+  The first run creates the EAS project (adds `extra.eas.projectId` to
+  `app.json`) and generates the Android **keystore**, which Expo stores. Keep
+  access to that Expo account: future versions must be signed with the same key.
+- The build runs on Expo's servers (10–30 min on the free plan) and prints a
+  download link and QR code. **Download links expire**, so keep a copy of the
+  `.apk` (one is saved at `~/Documents/CropSense/cropsense-ai.apk`, gitignored
+  because it is ~66 MB).
+- The APK installs directly on Android; it needs no Expo Go and no laptop.
+  Android asks to allow "install from unknown sources" the first time.
+- The app icon, adaptive icon and splash screen are generated from the web app's
+  leaf mark (`mobile/assets/`). Crop selection is **optional** and defaults to
+  "Any crop".
 - The app waits up to 40 s for a prediction; the website waits up to 60 s.
+- To rebuild after code changes: commit first (EAS uploads the committed git
+  state), then run the same build command.
 
 ---
 
@@ -280,8 +295,9 @@ folder, and verified a **fresh clone** builds and passes all 24 tests.
 | Depends on free-tier policies | Hugging Face already moved Docker Spaces to paid | The backend is portable: the same code runs in Docker anywhere |
 
 **Backup plan for defense day:** the full stack also runs locally with
-`docker compose up -d` (backend, frontend, database). If the internet fails,
-demo from the laptop.
+`docker compose up -d --build` (backend, frontend, database). If the internet
+fails, demo from the laptop. Keep the built APK (`cropsense-ai.apk`) on the
+laptop too — Expo download links expire.
 
 ---
 
@@ -362,4 +378,5 @@ rule and verified with a fresh clone.
 | Model | EfficientNetB2, 52 classes, `last_final_model/best_model_phase2.weights.h5` |
 | Unknown-leaf threshold | 0.5596 (cosine distance on `dense_hidden`) |
 | Mobile API setting | `mobile/config.js` → `EXPO_PUBLIC_API_URL` |
-| Local backup | `docker compose up -d` |
+| Local backup | `docker compose up -d --build` (always `--build`, or you serve a stale image) |
+| Android APK | `~/Documents/CropSense/cropsense-ai.apk` |
