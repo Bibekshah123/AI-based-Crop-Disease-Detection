@@ -594,7 +594,7 @@ Vitest.
 
 **Language:**
 - The EN/NP toggle is in the header, and the choice is saved per browser.
-- About **216 UI strings** exist in both languages (`src/lib/strings.js`).
+- About **200 UI strings** exist in both languages (`src/lib/strings.js`).
 - Disease content is **not frozen:** the raw response is stored, so switching
   language also translates a result that's already on screen or saved in history.
 
@@ -679,8 +679,9 @@ behind a tap, and an Analyze button pinned to the bottom (disabled until a photo
 is added).
 
 **Build checks:**
-- `expo-doctor` passes all **21 checks**.
-- The Android bundle builds with **595 modules**.
+- `expo-doctor` passed all **21 checks** when the APK was built (Expo has since
+  published newer patch versions; the APK is unaffected).
+- The Android bundle builds with **596 modules**.
 - The bundle contains the live URL, and no old laptop or tunnel addresses.
 
 **Making the APK** (free Expo account):
@@ -784,7 +785,7 @@ Full details are in `DEPLOYMENT.md`.
 | Level | What | Result |
 |---|---|---|
 | Unit / component | Vitest + React Testing Library | **24 / 24 pass** |
-| Static + build | ESLint, Vite build, expo-doctor, Android bundle | Clean; **21/21** Expo checks |
+| Static + build | ESLint, Vite build, expo-doctor, Android bundle | Clean; **21/21** Expo checks at build time |
 | API black-box | 9 edge cases against the running API | **8 / 9** as expected, 1 defect |
 | Model (internal) | Training curves + confusion matrix (31 Aug lab run) | Val accuracy 98.5–98.9% (lab) |
 | Model (independent) | Live endpoint on PlantDoc field photos | See V |
