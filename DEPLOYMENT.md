@@ -15,6 +15,7 @@ credit card**.
 | **Frontend** (website) | React 19 + Vite single-page app | **Vercel** | Your Vercel project URL (auto-deploys on push to `main`) |
 | **Backend** (API) | FastAPI (Python) | **Hugging Face Space** (Gradio SDK, ZeroGPU hardware) | `https://bikkii-cropsense.hf.space` |
 | **Model** | EfficientNetB2, 52 classes, TensorFlow/Keras | Inside the backend, on the same Space | — |
+| **Database** | PostgreSQL 18 — accounts + prediction history | **Neon** serverless, free tier, Singapore | via the `DATABASE_URL` secret |
 | **Mobile app** | Expo / React Native (SDK 57) | Installed on the phone as an APK | Calls the same backend |
 
 ```mermaid
@@ -133,15 +134,25 @@ flowchart TD
 - **CORS is open (`*`):** the website (on Vercel's domain) and the mobile app must
   be able to call the API from another origin. There are no user accounts or
   private data, so this is safe.
-- **No login, no database:** login/register were removed on purpose. The farmer
-  only needs to take a photo. This avoids storing personal data and needs no
-  paid database.
+- **Accounts are required:** both clients enforce sign-in, so every check is saved
+  to the right user. The backend still answers an unauthenticated `/predict` on
+  purpose — an expired token must never fail a diagnosis mid-request.
+- **Database:** a free **Neon** serverless PostgreSQL, reached over SSL with the
+  `DATABASE_URL` secret. It sleeps when idle and wakes on the next connection.
+- **Secrets on the Space** (Settings → Variables and secrets): `DATABASE_URL` and
+  `JWT_SECRET`, neither committed to git. Without `JWT_SECRET` the server signs
+  tokens with a random key, so every restart logs users out.
+- **A real bug to remember:** psycopg2 must be imported **before** TensorFlow. Both
+  bundle their own OpenSSL, and with TensorFlow first every TLS connection to the
+  database segfaults the process (exit 139, no traceback).
 - **Input safety:** empty files and non-images are rejected with a 400 error and
   a plain-language message instead of crashing. Known weakness: the
   decompression-bomb guard is weaker than intended — Pillow only raises above
   twice `MAX_IMAGE_PIXELS`, so a 132 MP image is decoded (it still returns a safe
   *Not a Leaf*). The fix is an explicit dimension check returning 400.
-- **Nothing is stored on the server:** photos are processed in memory and discarded.
+- **Photos are never stored:** the uploaded image is processed in memory and
+  discarded. What is saved for a signed-in user is the result — disease,
+  confidence, guidance text, a 160 px thumbnail and the Grad-CAM image.
 
 ### 2.7 Performance
 
@@ -326,7 +337,10 @@ uses `EXPO_PUBLIC_API_URL`, with the Space URL as the default.
 **Q: What is CORS and why did you enable it?**
 Browsers block a page from calling an API on another domain unless the API allows
 it. The site is on `vercel.app` and the API is on `hf.space`, so the API sends
-`Access-Control-Allow-Origin`. It's open because there are no accounts or private data.
+`Access-Control-Allow-Origin`. It is currently open to every origin; now that
+accounts exist it should be narrowed to the Vercel domain before any real
+deployment. Tokens travel in the `Authorization` header, not cookies, so an open
+CORS policy does not by itself expose a session.
 
 **Q: How are the large model weights deployed?**
 With Git LFS in the Space repository (~102 MB weights plus `ood_stats.npz`).
