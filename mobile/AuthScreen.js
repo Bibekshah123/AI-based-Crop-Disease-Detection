@@ -5,7 +5,7 @@ import { colors, radius } from "./theme";
 
 /* Sign in / create account. Reachable from the account button, never forced:
    the diagnose screen works without ever opening this. */
-export default function AuthScreen({ t, onClose }) {
+export default function AuthScreen({ t }) {
   const { login, signup } = useAuth();
   const [mode, setMode] = useState("login"); // "login" | "register"
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -28,7 +28,6 @@ export default function AuthScreen({ t, onClose }) {
         setNotice(t.accountCreated);
       } else {
         await login(form.username, form.password);
-        onClose();
       }
     } catch (e) {
       const detail = e?.response?.data?.detail;
@@ -111,9 +110,6 @@ export default function AuthScreen({ t, onClose }) {
         </Pressable>
       </View>
 
-      <Pressable style={styles.linkBtn} onPress={onClose} accessibilityRole="button">
-        <Text style={styles.mutedLink}>{t.continueWithout}</Text>
-      </Pressable>
     </ScrollView>
   );
 }

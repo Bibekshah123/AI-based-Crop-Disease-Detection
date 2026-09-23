@@ -1,15 +1,19 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-/* Guards routes that need a signed-in user. Diagnosis stays public — only
-   account pages use this. */
+/* Guards the whole app. Signing in is compulsory: a visitor without a session
+   is sent to the sign-in screen, which is also where the project introduces
+   itself. Used as a layout route, so every child route inherits the guard. */
 export default function RequireAuth({ children }) {
   const { user, loading } = useAuth();
   const location = useLocation();
 
   if (loading) {
     return (
-      <div className="container" style={{ padding: "var(--space-7)", textAlign: "center", color: "var(--color-text-muted)" }}>
+      <div
+        className="container"
+        style={{ padding: "var(--space-7)", textAlign: "center", color: "var(--color-text-muted)" }}
+      >
         Loading…
       </div>
     );
@@ -17,5 +21,5 @@ export default function RequireAuth({ children }) {
   if (!user) {
     return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   }
-  return children;
+  return children ?? <Outlet />;
 }

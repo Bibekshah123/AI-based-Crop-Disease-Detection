@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useLang } from "../context/LanguageContext";
 import { classifyError } from "../lib/api";
-import s from "./pages.module.css";
+import AuthShowcase from "../components/AuthShowcase";
 import a from "./auth.module.css";
 
 export default function Login() {
@@ -34,8 +34,12 @@ export default function Login() {
   };
 
   return (
-    <div className={`container ${s.page} ${a.wrap}`}>
-      <div className={a.card}>
+    <div className={a.split}>
+      <AuthShowcase />
+
+      <div className={a.formSide}>
+        <div className={a.wrap}>
+          <div className={a.card}>
         <h1 className={a.title}>{t.signInTitle}</h1>
         <p className={a.subtitle}>{t.signInLead}</p>
 
@@ -78,9 +82,11 @@ export default function Login() {
           </button>
         </form>
 
-        <p className={a.alt}>
-          {t.noAccountYet} <Link to="/register">{t.createAccount}</Link>
-        </p>
+            <p className={a.alt}>
+              {t.noAccountYet} <Link to="/register">{t.createAccount}</Link>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

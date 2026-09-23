@@ -31,11 +31,13 @@ describe("sign in / sign out", () => {
     vi.restoreAllMocks();
   });
 
-  it("shows a sign-in link while signed out", () => {
+  it("shows no app navigation at all while signed out", () => {
     renderApp("/");
-    // The nav collapses behind the menu button at phone width, which is what
-    // jsdom reports, so query it as a phone user would see it.
-    expect(screen.getByRole("link", { name: "Sign in", hidden: true })).toBeInTheDocument();
+    // Signing in is compulsory, so a signed-out visitor gets the sign-in screen
+    // and no way to wander into the app behind it.
+    expect(screen.queryByRole("link", { name: "Diagnose", hidden: true })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "History", hidden: true })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Sign out", hidden: true })).not.toBeInTheDocument();
   });
 
   it("signs in, stores the token and shows the username", async () => {
@@ -67,7 +69,9 @@ describe("sign in / sign out", () => {
 
     await userEvent.click(screen.getByRole("button", { name: "Sign out", hidden: true }));
     await waitFor(() => expect(localStorage.getItem("token")).toBeNull());
-    expect(screen.getByRole("link", { name: "Sign in", hidden: true })).toBeInTheDocument();
+    // Back to a signed-out shell: the username and the app links are gone.
+    expect(screen.queryByRole("link", { name: "bibek", hidden: true })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Diagnose", hidden: true })).not.toBeInTheDocument();
   });
 
   it("shows an error message when the credentials are wrong", async () => {

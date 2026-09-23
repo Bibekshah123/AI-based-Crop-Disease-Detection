@@ -34,8 +34,8 @@ export default function App() {
 }
 
 function CropSense() {
-  const { user, token, logout } = useAuth();
-  const [screen, setScreen] = useState("diagnose"); // diagnose | auth | history
+  const { user, token, logout, ready } = useAuth();
+  const [screen, setScreen] = useState("diagnose"); // diagnose | history
   const [lang, setLang] = useState("en");
   const [crop, setCrop] = useState(ANY_CROP);
   const [imageUri, setImageUri] = useState(null);
@@ -124,13 +124,11 @@ function CropSense() {
               </Text>
             </Pressable>
           )}
-          <Pressable
-            style={styles.headerBtn}
-            onPress={() => (user ? logout() : setScreen("auth"))}
-            accessibilityRole="button"
-          >
-            <Text style={styles.headerBtnText}>{user ? t.signOut : t.signIn}</Text>
-          </Pressable>
+          {user && (
+            <Pressable style={styles.headerBtn} onPress={logout} accessibilityRole="button">
+              <Text style={styles.headerBtnText}>{t.signOut}</Text>
+            </Pressable>
+          )}
           <Pressable
             style={styles.langBtn}
             onPress={() => setLang(lang === "en" ? "np" : "en")}
@@ -142,8 +140,16 @@ function CropSense() {
         </View>
       </View>
 
-      {screen === "auth" ? (
-        <AuthScreen t={t} onClose={() => setScreen("diagnose")} />
+      {!user ? (
+        // Signing in is compulsory, so this is the whole app until there is a
+        // session. `ready` is false only while a stored token is being checked.
+        ready ? (
+          <AuthScreen t={t} />
+        ) : (
+          <View style={styles.splash}>
+            <ActivityIndicator color={colors.primary} />
+          </View>
+        )
       ) : screen === "history" ? (
         <HistoryScreen t={t} lang={lang} onOpen={openSaved} />
       ) : (
@@ -155,7 +161,7 @@ function CropSense() {
             <Text style={styles.title}>{t.heroTitle}</Text>
             <Text style={styles.lead}>{t.heroLead}</Text>
             <Text style={styles.savedNote}>
-              {user ? t.savedToAccount.replace("{user}", user.username) : t.notSavedNote}
+              {t.savedToAccount.replace("{user}", user?.username ?? "")}
             </Text>
 
             {/* Photo — the main action of the screen */}
@@ -251,7 +257,7 @@ function CropSense() {
       )}
 
       {/* Analyze stays reachable at the bottom of the screen */}
-      {screen === "diagnose" && !data && (
+      {user && screen === "diagnose" && !data && (
         <View style={styles.footer}>
           <Pressable
             style={[styles.analyzeBtn, (loading || !imageUri) && styles.analyzeBtnDisabled]}
@@ -276,6 +282,7 @@ function CropSense() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.page },
+  splash: { flex: 1, alignItems: "center", justifyContent: "center" },
   container: { padding: 16, paddingBottom: 32 },
 
   header: {

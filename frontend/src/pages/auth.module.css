@@ -1,6 +1,80 @@
+/* ---- Sign in / create account -------------------------------------------
+   Signing in is compulsory, so this screen is also the project's front door:
+   a Nepali terraced-field photo on one side, the form on the other. */
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100vh - 64px);
+  align-items: stretch;
+}
+
+.showcase {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-6);
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(12, 38, 22, 0.72) 0%, rgba(12, 38, 22, 0.58) 35%, rgba(12, 38, 22, 0.93) 100%),
+    var(--auth-image) center 70% / cover no-repeat,
+    #1f4d30;
+  min-height: 210px;
+}
+.showcaseBody { margin-top: auto; }
+.showcaseTitle {
+  font-size: var(--text-2xl);
+  line-height: 1.2;
+  margin: 0;
+  max-width: 22ch;
+  color: #fff;
+}
+.showcaseText {
+  margin: var(--space-3) 0 0;
+  max-width: 40ch;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+.points {
+  list-style: none;
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.point {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.92);
+}
+.pointDot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.8;
+}
+.credit {
+  margin: var(--space-5) 0 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+}
+.credit a { color: inherit; }
+
+.formSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+  background: var(--color-page);
+}
+
 .wrap {
+  width: 100%;
   max-width: 420px;
-  margin-inline: auto;
 }
 .card {
   background: var(--color-surface);
@@ -15,6 +89,7 @@
 .subtitle {
   color: var(--color-text-muted);
   font-size: var(--text-sm);
+  line-height: 1.5;
   margin-bottom: var(--space-5);
 }
 .form {
@@ -25,17 +100,19 @@
   display: grid;
   gap: var(--space-2);
 }
-.error {
-  margin: 0;
-}
+.error { margin: 0; }
 .alt {
   margin-top: var(--space-4);
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   text-align: center;
 }
-.success {
-  margin-bottom: var(--space-4);
+.success { margin-bottom: var(--space-4); }
+
+@media (min-width: 900px) {
+  .split { grid-template-columns: 1.05fr 0.95fr; }
+  .showcase { padding: var(--space-7); }
+  .showcaseTitle { font-size: calc(var(--text-2xl) * 1.15); }
 }
 
 /* Profile */
@@ -46,7 +123,7 @@
 }
 .row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: var(--space-4);
   padding: var(--space-3) 0;
   border-bottom: 1px solid var(--color-border);

@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useLang } from "../context/LanguageContext";
 import { classifyError } from "../lib/api";
-import s from "./pages.module.css";
+import AuthShowcase from "../components/AuthShowcase";
 import a from "./auth.module.css";
 
 export default function Register() {
@@ -31,8 +31,12 @@ export default function Register() {
   };
 
   return (
-    <div className={`container ${s.page} ${a.wrap}`}>
-      <div className={a.card}>
+    <div className={a.split}>
+      <AuthShowcase />
+
+      <div className={a.formSide}>
+        <div className={a.wrap}>
+          <div className={a.card}>
         <h1 className={a.title}>{t.createAccountTitle}</h1>
         <p className={a.subtitle}>{t.createAccountLead}</p>
 
@@ -83,9 +87,11 @@ export default function Register() {
           </button>
         </form>
 
-        <p className={a.alt}>
-          {t.haveAccount} <Link to="/login">{t.signIn}</Link>
-        </p>
+            <p className={a.alt}>
+              {t.haveAccount} <Link to="/login">{t.signIn}</Link>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

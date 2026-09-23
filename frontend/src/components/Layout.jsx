@@ -46,6 +46,7 @@ export default function Layout({ children }) {
             <span className={styles.brandName}>{t.brand}</span>
           </Link>
 
+          {user && (
           <button
             className={styles.menuBtn}
             aria-expanded={open}
@@ -61,6 +62,7 @@ export default function Layout({ children }) {
               )}
             </svg>
           </button>
+          )}
 
           <nav
             id="primary-nav"
@@ -68,7 +70,8 @@ export default function Layout({ children }) {
             aria-label={t.navPrimary}
             onClick={closeOnNavigate}
           >
-            {NAV.map((item) => (
+            {user &&
+              NAV.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
@@ -90,14 +93,7 @@ export default function Layout({ children }) {
                   {t.signOut}
                 </button>
               </>
-            ) : (
-              <NavLink
-                to="/login"
-                className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ""}`}
-              >
-                {t.signIn}
-              </NavLink>
-            )}
+            ) : null}
             <button
               type="button"
               className={styles.langBtn}

@@ -28,27 +28,23 @@ export default function App() {
     <Layout>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/diagnose" element={<Diagnose />} />
-        <Route path="/result" element={<Result />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/history/:id" element={<HistoryDetail />} />
-        <Route path="/library" element={<Library />} />
-        <Route path="/library/:id" element={<LibraryDetail />} />
-        <Route path="/about" element={<About />} />
-        {/* Accounts are optional: diagnosis never requires one. Only the
-            profile page is gated. */}
+        {/* Accounts are compulsory: everything except the sign-in and
+            create-account screens requires a signed-in user. */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route
-          path="/profile"
-          element={
-            <RequireAuth>
-              <Profile />
-            </RequireAuth>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
+
+        <Route element={<RequireAuth />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/diagnose" element={<Diagnose />} />
+          <Route path="/result" element={<Result />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/history/:id" element={<HistoryDetail />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/library/:id" element={<LibraryDetail />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </Layout>
   );
