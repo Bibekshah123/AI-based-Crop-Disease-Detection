@@ -3,6 +3,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from PIL import Image
+
+# psycopg2 MUST be imported before TensorFlow. Both ship their own OpenSSL, and
+# when TensorFlow's is loaded first every TLS connection to a hosted Postgres
+# (Neon, Supabase) segfaults the whole process at connect time — a silent exit
+# 139 with no traceback. Importing the driver first pins the working symbols.
+# Do not move this below the tensorflow import.
+import psycopg2  # noqa: F401  - imported for its side effect, see above
+
 import tensorflow as tf
 from tensorflow.keras.applications import EfficientNetB2
 import numpy as np
