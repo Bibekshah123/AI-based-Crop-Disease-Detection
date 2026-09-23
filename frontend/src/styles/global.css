@@ -167,6 +167,11 @@ button {
 }
 
 /* Form controls ---------------------------------------------------------- */
+.field-hint {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
 .field-label {
   display: block;
   font-size: var(--text-sm);

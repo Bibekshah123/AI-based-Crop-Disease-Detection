@@ -9,6 +9,10 @@ import HistoryDetail from "./pages/HistoryDetail";
 import Library from "./pages/Library";
 import LibraryDetail from "./pages/LibraryDetail";
 import About from "./pages/About";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import RequireAuth from "./components/RequireAuth";
 import NotFound from "./pages/NotFound";
 
 function ScrollToTop() {
@@ -32,6 +36,18 @@ export default function App() {
         <Route path="/library" element={<Library />} />
         <Route path="/library/:id" element={<LibraryDetail />} />
         <Route path="/about" element={<About />} />
+        {/* Accounts are optional: diagnosis never requires one. Only the
+            profile page is gated. */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>

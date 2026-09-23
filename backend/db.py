@@ -11,14 +11,31 @@ DB_NAME = os.getenv("DB_NAME", "crop_disease")
 DB_USER = os.getenv("DB_USER", "app")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "app_password")
 
+# Hosted Postgres (Neon, Supabase, Render) hands out one connection string and
+# refuses plain connections, so DATABASE_URL wins when present and SSL is
+# required by default for it. Local Docker Postgres has no TLS, hence "prefer"
+# as the default for the host/port form.
+DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
+DB_SSLMODE = os.getenv("DB_SSLMODE", "require" if DATABASE_URL else "prefer")
+
+# A serverless database sleeps when idle; the first connection after that wakes
+# it, which takes a few seconds. Fail slowly rather than reporting it as down.
+CONNECT_TIMEOUT = int(os.getenv("DB_CONNECT_TIMEOUT", "15"))
+
 
 def get_conn():
+    if DATABASE_URL:
+        return psycopg2.connect(
+            DATABASE_URL, sslmode=DB_SSLMODE, connect_timeout=CONNECT_TIMEOUT
+        )
     return psycopg2.connect(
         host=DB_HOST,
         port=DB_PORT,
         dbname=DB_NAME,
         user=DB_USER,
         password=DB_PASSWORD,
+        sslmode=DB_SSLMODE,
+        connect_timeout=CONNECT_TIMEOUT,
     )
 
 

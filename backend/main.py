@@ -269,12 +269,38 @@ class LoginRequest(BaseModel):
     password: str
 
 security = HTTPBearer()
+# auto_error=False so a missing/!invalid token is None rather than a 401: /predict
+# stays open to anyone, and a signed-in user simply gets their result saved.
+optional_security = HTTPBearer(auto_error=False)
 
 def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
     payload = verify_token(credentials.credentials)
     if payload is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired token")
     return payload.get("sub")
+
+
+def get_optional_user(
+    credentials: HTTPAuthorizationCredentials = Depends(optional_security),
+) -> str | None:
+    """Username when a valid token is presented, None otherwise. Never raises —
+    an expired token must not stop a farmer from diagnosing a leaf."""
+    if credentials is None:
+        return None
+    payload = verify_token(credentials.credentials)
+    return payload.get("sub") if payload else None
+
+
+def save_history_safely(username, result, thumbnail):
+    """Persist a prediction for a signed-in user. A database problem is logged
+    and swallowed: the diagnosis has already been produced and is what the user
+    actually asked for."""
+    if not username:
+        return
+    try:
+        db_save_prediction(username, result, thumbnail)
+    except Exception as e:  # noqa: BLE001 - history is a bonus, never a blocker
+        print(f"WARNING: could not save history for {username}: {e}")
 
 
 # ============================
@@ -288,6 +314,12 @@ def signup(req: SignupRequest):
 
     if not username or not email or not password:
         raise HTTPException(status_code=400, detail="Username, email, and password are required")
+    if len(username) < 3:
+        raise HTTPException(status_code=400, detail="Username must be at least 3 characters.")
+    if "@" not in email or "." not in email.split("@")[-1]:
+        raise HTTPException(status_code=400, detail="Please enter a valid email address.")
+    if len(password) < 8:
+        raise HTTPException(status_code=400, detail="Password must be at least 8 characters.")
 
     users = load_users()
     if username in users:
@@ -624,7 +656,7 @@ def _to_native(obj):
 async def predict(
     file: UploadFile = File(...),
     crop_type: str = Form(None),
-    # username: str = Depends(get_current_user)  # auth commented out
+    username: str | None = Depends(get_optional_user),
 ):
     image_bytes = await file.read()
 
@@ -675,7 +707,7 @@ async def predict(
             "gradcam_image": None
         }
         result = _to_native(result)
-        # db_save_prediction(username, result, thumbnail)  # auth commented out
+        save_history_safely(username, result, thumbnail)
         return result
 
     # One forward pass yields both the class probabilities and the penultimate
@@ -836,5 +868,5 @@ async def predict(
         "gradcam_image": gradcam_image
     }
     result = _to_native(result)
-    # db_save_prediction(username, result, thumbnail)  # auth commented out
+    save_history_safely(username, result, thumbnail)
     return result

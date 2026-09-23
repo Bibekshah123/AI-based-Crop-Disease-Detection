@@ -16,6 +16,9 @@ import { normalize } from "./normalize";
 import { STRINGS, CROPS } from "./strings";
 import { colors, radius } from "./theme";
 import ResultView from "./ResultView";
+import { AuthProvider, useAuth } from "./auth";
+import AuthScreen from "./AuthScreen";
+import HistoryScreen from "./HistoryScreen";
 
 // "" means "any crop": no crop_type is sent, so the backend skips the
 // crop-mismatch warning and nothing else changes. Choosing a crop is optional
@@ -23,6 +26,16 @@ import ResultView from "./ResultView";
 const ANY_CROP = "";
 
 export default function App() {
+  return (
+    <AuthProvider>
+      <CropSense />
+    </AuthProvider>
+  );
+}
+
+function CropSense() {
+  const { user, token, logout } = useAuth();
+  const [screen, setScreen] = useState("diagnose"); // diagnose | auth | history
   const [lang, setLang] = useState("en");
   const [crop, setCrop] = useState(ANY_CROP);
   const [imageUri, setImageUri] = useState(null);
@@ -60,7 +73,9 @@ export default function App() {
     setValidation("");
     setApiError("");
     try {
-      const data = await predict(imageUri, crop);
+      // The token is optional: with one the backend saves this check to the
+      // user's history, without one nothing is stored anywhere.
+      const data = await predict(imageUri, crop, token);
       setRaw(data);
     } catch (e) {
       setApiError(e?.response ? `Server error (${e.response.status})` : t.connErr);
@@ -75,6 +90,15 @@ export default function App() {
     setImageUri(null);
     setApiError("");
     setValidation("");
+    setScreen("diagnose");
+  }
+
+  // Opening a saved check reuses the result screen: a stored row carries the
+  // same fields the /predict response does.
+  function openSaved(item) {
+    setRaw(item);
+    setImageUri(item.thumbnail || null);
+    setScreen("diagnose");
   }
 
   const data = raw ? normalize(raw, lang) : null;
@@ -88,16 +112,41 @@ export default function App() {
           <Image source={require("./assets/logo-leaf.png")} style={styles.logo} />
           <Text style={styles.brand}>{t.brand}</Text>
         </View>
-        <Pressable
-          style={styles.langBtn}
-          onPress={() => setLang(lang === "en" ? "np" : "en")}
-          accessibilityRole="button"
-          accessibilityLabel={lang === "en" ? "Switch to Nepali" : "Switch to English"}
-        >
-          <Text style={styles.langText}>{lang === "en" ? "ने" : "EN"}</Text>
-        </Pressable>
+        <View style={styles.headerActions}>
+          {user && (
+            <Pressable
+              style={styles.headerBtn}
+              onPress={() => setScreen(screen === "history" ? "diagnose" : "history")}
+              accessibilityRole="button"
+            >
+              <Text style={styles.headerBtnText}>
+                {screen === "history" ? t.back : t.navHistory}
+              </Text>
+            </Pressable>
+          )}
+          <Pressable
+            style={styles.headerBtn}
+            onPress={() => (user ? logout() : setScreen("auth"))}
+            accessibilityRole="button"
+          >
+            <Text style={styles.headerBtnText}>{user ? t.signOut : t.signIn}</Text>
+          </Pressable>
+          <Pressable
+            style={styles.langBtn}
+            onPress={() => setLang(lang === "en" ? "np" : "en")}
+            accessibilityRole="button"
+            accessibilityLabel={lang === "en" ? "Switch to Nepali" : "Switch to English"}
+          >
+            <Text style={styles.langText}>{lang === "en" ? "ने" : "EN"}</Text>
+          </Pressable>
+        </View>
       </View>
 
+      {screen === "auth" ? (
+        <AuthScreen t={t} onClose={() => setScreen("diagnose")} />
+      ) : screen === "history" ? (
+        <HistoryScreen t={t} lang={lang} onOpen={openSaved} />
+      ) : (
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         {data ? (
           <ResultView data={data} image={imageUri} t={t} onCheckAnother={checkAnother} />
@@ -105,6 +154,9 @@ export default function App() {
           <>
             <Text style={styles.title}>{t.heroTitle}</Text>
             <Text style={styles.lead}>{t.heroLead}</Text>
+            <Text style={styles.savedNote}>
+              {user ? t.savedToAccount.replace("{user}", user.username) : t.notSavedNote}
+            </Text>
 
             {/* Photo — the main action of the screen */}
             <View style={styles.card}>
@@ -196,9 +248,10 @@ export default function App() {
           </>
         )}
       </ScrollView>
+      )}
 
       {/* Analyze stays reachable at the bottom of the screen */}
-      {!data && (
+      {screen === "diagnose" && !data && (
         <View style={styles.footer}>
           <Pressable
             style={[styles.analyzeBtn, (loading || !imageUri) && styles.analyzeBtnDisabled]}
@@ -236,6 +289,16 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   brandRow: { flexDirection: "row", alignItems: "center", gap: 8 },
+  headerActions: { flexDirection: "row", alignItems: "center", gap: 8 },
+  headerBtn: {
+    borderColor: colors.border,
+    borderWidth: 1,
+    borderRadius: radius.pill,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+  },
+  headerBtnText: { color: colors.primaryDark, fontWeight: "700", fontSize: 13 },
+  savedNote: { fontSize: 12, color: colors.textMuted, marginTop: -8, marginBottom: 14 },
   logo: { width: 26, height: 26, resizeMode: "contain" },
   brand: { color: colors.text, fontSize: 19, fontWeight: "800", letterSpacing: 0.2 },
   langBtn: {

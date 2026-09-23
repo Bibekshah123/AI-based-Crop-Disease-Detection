@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import History from "./History";
 import { LanguageProvider } from "../context/LanguageContext";
+import { AuthProvider } from "../context/AuthContext";
 import { saveHistory } from "../lib/history";
 
 function seed(n) {
@@ -27,7 +28,9 @@ function renderHistory() {
   return render(
     <MemoryRouter>
       <LanguageProvider>
-        <History />
+        <AuthProvider>
+          <History />
+        </AuthProvider>
       </LanguageProvider>
     </MemoryRouter>
   );

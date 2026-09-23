@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useLang } from "../context/LanguageContext";
 import { classifyError } from "../lib/api";
 import s from "./pages.module.css";
 import a from "./auth.module.css";
 
 export default function Register() {
   const { signup } = useAuth();
+  const { t } = useLang();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -22,7 +24,7 @@ export default function Register() {
       await signup(form.username.trim(), form.email.trim(), form.password);
       navigate("/login", { state: { registered: true } });
     } catch (err) {
-      setError(classifyError(err).message || "Sign up failed.");
+      setError(classifyError(err).message || t.signupFailed);
     } finally {
       setBusy(false);
     }
@@ -31,12 +33,12 @@ export default function Register() {
   return (
     <div className={`container ${s.page} ${a.wrap}`}>
       <div className={a.card}>
-        <h1 className={a.title}>Create an account</h1>
-        <p className={a.subtitle}>Optional — diagnosis works without an account.</p>
+        <h1 className={a.title}>{t.createAccountTitle}</h1>
+        <p className={a.subtitle}>{t.createAccountLead}</p>
 
         <form className={a.form} onSubmit={submit} noValidate>
           <div className={a.field}>
-            <label className="field-label" htmlFor="reg-username">Username</label>
+            <label className="field-label" htmlFor="reg-username">{t.username}</label>
             <input
               id="reg-username"
               className="input"
@@ -48,7 +50,7 @@ export default function Register() {
             />
           </div>
           <div className={a.field}>
-            <label className="field-label" htmlFor="reg-email">Email</label>
+            <label className="field-label" htmlFor="reg-email">{t.email}</label>
             <input
               id="reg-email"
               type="email"
@@ -60,7 +62,7 @@ export default function Register() {
             />
           </div>
           <div className={a.field}>
-            <label className="field-label" htmlFor="reg-password">Password</label>
+            <label className="field-label" htmlFor="reg-password">{t.password}</label>
             <input
               id="reg-password"
               type="password"
@@ -69,19 +71,20 @@ export default function Register() {
               autoComplete="new-password"
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               required
-              minLength={6}
+              minLength={8}
             />
+            <p className="field-hint">{t.passwordHint}</p>
           </div>
 
           {error && <p className={`note note-error ${a.error}`} role="alert">{error}</p>}
 
           <button type="submit" className="btn btn-primary btn-block" disabled={busy}>
-            {busy ? "Creating account…" : "Create account"}
+            {busy ? t.creatingAccount : t.createAccount}
           </button>
         </form>
 
         <p className={a.alt}>
-          Already have an account? <Link to="/login">Sign in</Link>
+          {t.haveAccount} <Link to="/login">{t.signIn}</Link>
         </p>
       </div>
     </div>

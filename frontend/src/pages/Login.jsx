@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useLang } from "../context/LanguageContext";
 import { classifyError } from "../lib/api";
 import s from "./pages.module.css";
 import a from "./auth.module.css";
 
 export default function Login() {
   const { login } = useAuth();
+  const { t } = useLang();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || "/";
@@ -25,7 +27,7 @@ export default function Login() {
       await login(form.username.trim(), form.password);
       navigate(from, { replace: true });
     } catch (err) {
-      setError(classifyError(err).message || "Login failed.");
+      setError(classifyError(err).message || t.loginFailed);
     } finally {
       setBusy(false);
     }
@@ -34,18 +36,18 @@ export default function Login() {
   return (
     <div className={`container ${s.page} ${a.wrap}`}>
       <div className={a.card}>
-        <h1 className={a.title}>Sign in</h1>
-        <p className={a.subtitle}>Access your account and saved profile.</p>
+        <h1 className={a.title}>{t.signInTitle}</h1>
+        <p className={a.subtitle}>{t.signInLead}</p>
 
         {registered && (
           <p className={`note note-info ${a.success}`} role="status">
-            Account created. Please sign in.
+            {t.accountCreated}
           </p>
         )}
 
         <form className={a.form} onSubmit={submit} noValidate>
           <div className={a.field}>
-            <label className="field-label" htmlFor="login-username">Username</label>
+            <label className="field-label" htmlFor="login-username">{t.username}</label>
             <input
               id="login-username"
               className="input"
@@ -57,7 +59,7 @@ export default function Login() {
             />
           </div>
           <div className={a.field}>
-            <label className="field-label" htmlFor="login-password">Password</label>
+            <label className="field-label" htmlFor="login-password">{t.password}</label>
             <input
               id="login-password"
               type="password"
@@ -72,12 +74,12 @@ export default function Login() {
           {error && <p className={`note note-error ${a.error}`} role="alert">{error}</p>}
 
           <button type="submit" className="btn btn-primary btn-block" disabled={busy}>
-            {busy ? "Signing in…" : "Sign in"}
+            {busy ? t.signingIn : t.signIn}
           </button>
         </form>
 
         <p className={a.alt}>
-          Don&apos;t have an account? <Link to="/register">Create one</Link>
+          {t.noAccountYet} <Link to="/register">{t.createAccount}</Link>
         </p>
       </div>
     </div>

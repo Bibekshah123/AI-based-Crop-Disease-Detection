@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useLang } from "../context/LanguageContext";
+import { useAuth } from "../context/AuthContext";
 import NepalFlag from "./NepalFlag";
 import styles from "./Layout.module.css";
 
@@ -27,6 +28,7 @@ function LeafMark() {
 export default function Layout({ children }) {
   const [open, setOpen] = useState(false);
   const { lang, toggle, t } = useLang();
+  const { user, logout } = useAuth();
 
   // Close the mobile menu whenever a link inside the nav is activated.
   const closeOnNavigate = (e) => {
@@ -76,6 +78,26 @@ export default function Layout({ children }) {
                 {t[item.key]}
               </NavLink>
             ))}
+            {user ? (
+              <>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ""}`}
+                >
+                  {user.username}
+                </NavLink>
+                <button type="button" className={styles.langBtn} onClick={logout}>
+                  {t.signOut}
+                </button>
+              </>
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ""}`}
+              >
+                {t.signIn}
+              </NavLink>
+            )}
             <button
               type="button"
               className={styles.langBtn}
