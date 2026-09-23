@@ -76,7 +76,7 @@ The Space is its **own git repository**, separate from GitHub:
 |---|---|
 | `app.py` | Entry point: imports `spaces`, adds the ZeroGPU placeholder, copies routes from `main.py` onto `gr.Server`, adds CORS, launches on port 7860 |
 | `main.py` | The FastAPI backend (identical to `backend/main.py`) |
-| `auth.py`, `db.py` | Login/database code (turned off; see 2.6) |
+| `auth.py`, `db.py` | Accounts: bcrypt hashing, JWT tokens, and the PostgreSQL access layer |
 | `requirements.txt` | Python packages: `tensorflow==2.21.0`, `numpy==2.2.6`, `opencv-python-headless`, `pillow`, `python-multipart`, `spaces`, … |
 | `README.md` | Space settings in its header: `sdk: gradio`, `sdk_version: 6.27.0`, `python_version: "3.10"`, `app_file: app.py` |
 | `class_names.json` | The 52 class names |
@@ -102,8 +102,10 @@ is for code; the Space holds the deployable backend + model.
 
 Harmless warnings you'll see in the logs:
 - `CUDA ... no CUDA-capable device`: expected, because it runs on CPU.
-- `database unavailable`: login/history are turned off, and `/predict` doesn't need a database.
-- `JWT_SECRET is not set`: only used by the (turned-off) login feature.
+- `database unavailable`: only if the Neon database cannot be reached — `/predict`
+  still works, but sign-in and history do not. Check the `DATABASE_URL` secret.
+- `JWT_SECRET is not set`: the secret is missing, so tokens are signed with a
+  random key and every restart signs users out. Set it in the Space settings.
 
 ### 2.5 API endpoints
 
@@ -132,8 +134,10 @@ flowchart TD
 ### 2.6 Security and design decisions
 
 - **CORS is open (`*`):** the website (on Vercel's domain) and the mobile app must
-  be able to call the API from another origin. There are no user accounts or
-  private data, so this is safe.
+  be able to call the API from another origin. Sessions travel as bearer tokens in
+  the `Authorization` header rather than cookies, so an open policy does not by
+  itself expose an account — but it should be narrowed to the Vercel domain for a
+  real deployment.
 - **Accounts are required:** both clients enforce sign-in, so every check is saved
   to the right user. The backend still answers an unauthenticated `/predict` on
   purpose — an expired token must never fail a diagnosis mid-request.
