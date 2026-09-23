@@ -305,7 +305,7 @@ folder, and verified a **fresh clone** builds and passes all 24 tests.
 |---|---|---|
 | Shared CPU on the free Space | ~10 s per prediction | Paid CPU/GPU Space, or skip Grad-CAM unless requested |
 | Space sleeps when idle | First request after idle is slow | Paid always-on hardware, or a scheduled health ping |
-| No database | History is per-browser, not per-user | Add Postgres (the code for auth/history already exists, turned off) |
+| Free database sleeps | The first sign-in after an idle spell is slow | Paid always-on Postgres |
 | Needs internet | Won't work in fields with no signal | Convert the model to **TFLite** and run it on the phone (future work) |
 | Depends on free-tier policies | Hugging Face already moved Docker Spaces to paid | The backend is portable: the same code runs in Docker anywhere |
 
