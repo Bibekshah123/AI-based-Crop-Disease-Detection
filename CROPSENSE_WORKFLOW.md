@@ -32,7 +32,7 @@ the deployed model, it says so.
 - [P. From response to screen: confidence bands](#p-from-response-to-screen-confidence-bands)
 - [Q. History and feedback](#q-history-and-feedback)
 - [R. The mobile app](#r-the-mobile-app)
-- [S. Accounts and the database (built, but switched off)](#s-accounts-and-the-database-built-but-switched-off)
+- [S. Accounts and the database](#s-accounts-and-the-database)
 - [T. Deployment](#t-deployment)
 - [U. Testing](#u-testing)
 - [V. Results: how good is it really?](#v-results-how-good-is-it-really)
@@ -72,7 +72,9 @@ supported.
   disclaimer to confirm with an agrovet.
 - **Honest about doubt.** Unclear results are shown as Uncertain, never dressed up
   as High.
-- **No barriers.** Free, no sign-up, bilingual.
+- **Free and bilingual.** No payment, English and Nepali throughout. An account
+  is required so that a farmer's checks follow them to any device — the honest
+  cost is a sign-up step before the first photo.
 
 ---
 
@@ -565,13 +567,20 @@ Vitest.
 
 | Page | Route | What the user does |
 |---|---|---|
+| Sign in | `/login` | The front door: Nepali terraced-field photo, what the tool does, and the form |
+| Create account | `/register` | Username, email, password (8+ characters) |
 | Home | `/` | Nepali farm photo, headline, **Check a leaf** button, 3 steps, supported crops |
 | Diagnose | `/diagnose` | Choose crop (or "Any crop — I'm not sure") → take/upload photo → **Analyze leaf** |
 | Result | `/result` | Possible match, confidence band, photo vs Grad-CAM, guidance, treatments, alternatives, feedback |
 | History | `/history`, `/history/:id` | Past checks with filters (crop, status, sort, search), delete one or all |
 | Disease library | `/library`, `/library/:id` | Browse all conditions |
 | About | `/about` | What the tool does, responsible use, disclaimer |
+| Account | `/profile` | Username, email, member since, sign out |
 | Not found | `*` | Friendly 404 |
+
+Every route except `/login` and `/register` sits behind `RequireAuth`, used as a
+layout route. A signed-out visitor is redirected to the sign-in screen and the
+navigation is hidden, so there is nothing to wander into.
 
 **The diagnose flow in the browser:**
 1. Pick a crop. **"Any crop"** sends no `crop_type`, which only turns off the
@@ -632,22 +641,34 @@ of the time.
 
 ## Q. History and feedback
 
-**History** (`src/lib/history.js`):
-- Stored in the browser's **localStorage** under `cropsense.history`.
-- **No login, no database, and nothing about the user stored on the server.**
-- **Each entry holds:** id, time, crop, disease name (EN + NP), confidence, status,
-  a 160 px thumbnail, and the text guidance.
-- **Not stored:** the Grad-CAM image and raw probabilities, which would fill storage
-  quickly.
-- **Limits:** up to **100 entries**. If storage is full, it trims to the newest 50
-  and retries.
-- **Trade-offs:**
-  - ✅ private, free, works offline for viewing
-  - ❌ not synced between devices or browsers
-  - ❌ lost if browser data is cleared
+Signing in is required, so every check belongs to an account.
 
-**Feedback** (`src/lib/feedback.js`): "Was this helpful?" answers are also stored
-locally.
+**Where a check is stored**
+1. **On the server** (`predictions` table in the hosted PostgreSQL), saved by
+   `/predict` when the request carries the user's token. This is what makes the
+   history follow the farmer to another phone or computer.
+2. **In the browser** (`localStorage`, key `cropsense.history`, up to 100
+   entries). The website keeps this as its working copy: the History page pulls
+   the account's checks down and folds in any it has not seen, so filters, search
+   and the detail view need no special case for where a record came from.
+
+**Each entry holds:** id, time, crop, disease name (EN + NP), confidence, status,
+a 160 px thumbnail, and the text guidance. The server row also keeps the Grad-CAM
+image; the browser copy drops it, because base64 heatmaps would fill the storage
+quota within a handful of records.
+
+**Deleting:** removing an entry deletes it in the browser *and* on the server, so
+it does not reappear on the next visit.
+
+**Privacy:** a user only ever sees their own rows — `/auth/history` filters by the
+username inside the token, and deleting someone else's row returns **403**. Both
+were tested against the live database.
+
+**Mobile:** the app has its own History screen that reads the account's checks
+straight from the server, with no local copy.
+
+**Feedback** (`src/lib/feedback.js`): "Was this helpful?" answers stay in the
+browser only.
 
 ---
 
@@ -656,15 +677,21 @@ locally.
 **Stack:** Expo SDK 57, React Native 0.86, React 19.2, expo-image-picker, Axios.
 Folder: `mobile/`. The app is a **thin client** with no AI inside.
 
-1. **Take a photo or pick from the gallery** — the first thing on the screen.
-   Permission is asked at that moment, and quality is 0.8.
-2. **Choose a crop if you want to.** It is **optional** and defaults to "Any
+1. **Sign in or create an account** — the app opens on this screen and nothing
+   else is reachable until there is a session.
+2. **Take a photo or pick from the gallery.** Permission is asked at that moment,
+   and quality is 0.8.
+3. **Choose a crop if you want to.** It is **optional** and defaults to "Any
    crop", which sends no `crop_type` and only disables the mismatch warning.
-3. **Analyze.** It posts to `API_URL/predict` with a duplicate-submit guard and a
-   **40 s timeout** (shorter than the web, since mobile users won't wait long).
-4. **See the result:** disease, confidence band, Grad-CAM image, guidance and
+4. **Analyze.** It posts to `API_URL/predict` with the user's token, a
+   duplicate-submit guard and a **40 s timeout** (shorter than the web, since
+   mobile users won't wait long).
+5. **See the result:** disease, confidence band, Grad-CAM image, guidance and
    treatment cards.
-5. **Switch EN ↔ NP** in the header. This re-renders the result **without a new
+6. **History** in the header lists that account's saved checks (thumbnail,
+   disease, date, confidence, status), opens any of them in the result view, and
+   can delete one. **Sign out** is next to it.
+7. **Switch EN ↔ NP** in the header. This re-renders the result **without a new
    request**.
 
 **Backend address** (`mobile/config.js`):
@@ -691,28 +718,49 @@ npx eas-cli login
 npx eas-cli build -p android --profile preview   # → downloadable .apk
 ```
 - The APK installs directly on Android, with no Expo Go and no laptop needed.
-- The mobile app **has no history screen**.
+- The token is kept in **expo-secure-store**, not plain storage.
 
 ---
 
-## S. Accounts and the database (built, but switched off)
+## S. Accounts and the database
 
-**What exists in code:**
-- **PostgreSQL schema** (`database/schema.sql`, created by `init_db()`):
-  - `users`: id, username (unique), email (unique), bcrypt password hash, created_at
-  - `predictions`: id, username, time, disease (EN/NP), confidence, flags, guidance, top-5, Grad-CAM, thumbnail
-- **Auth:** bcrypt hashing and JWT (HS256), valid 24 hours.
-  - The password is cut to 72 bytes before hashing. That's bcrypt's hard limit, not a bug.
-- **Endpoints:** `/auth/signup`, `/auth/login`, `/auth/me`, `/auth/history`, `DELETE /auth/history/{id}`.
+Signing in is **compulsory** on both the website and the Android app: the
+diagnose screen is not reachable without a session.
 
-**Why it's switched off:**
-- Diagnosing a leaf has **nothing to do with who you are**, and requiring an
-  account adds friction for farmers.
-- `/predict` needs no login. The line saving predictions to the database is
-  commented out, and the login pages were removed from the web app.
-- **Result:** the live system needs **no database at all**. If Postgres is missing,
-  the backend logs a warning and keeps predicting.
-- Re-enabling server history is two lines of code.
+**What a user does**
+1. **Create an account:** username (3+ characters), email, password (8+
+   characters). The password is hashed with **bcrypt** and never stored as text.
+2. **Sign in:** the server returns a **JWT** (HS256, valid 24 hours) signed with
+   `JWT_SECRET`. Without that secret set, the server generates a random key at
+   startup and every restart would sign people out.
+3. **Stay signed in:** the website keeps the token in `localStorage`; the Android
+   app keeps it in **expo-secure-store** (Android Keystore), because a bearer
+   token is a credential.
+4. **Sign out:** the token is deleted from the device. Nothing else changes.
+
+**How the backend enforces it**
+- `/auth/*` endpoints use a strict dependency: no valid token → **401**.
+- `/predict` uses an *optional* one (`HTTPBearer(auto_error=False)`): with a valid
+  token the result is saved to that user's history, without one it still answers.
+  The gate that requires an account lives in the clients, so an expired token can
+  never stop a diagnosis mid-request.
+- Saving history is wrapped in try/except: a database problem is logged, never
+  returned to the user, because the diagnosis is what they asked for.
+
+**The database**
+- **Neon** (serverless PostgreSQL 18, Singapore region, free tier, no card).
+- Connected with a single `DATABASE_URL` over **SSL**; it sleeps when idle and
+  wakes on the next connection.
+- Two tables, created automatically at startup: `users` and `predictions`.
+
+**One real bug worth telling the panel about.** The backend crashed instantly
+(exit 139, no traceback) the first time it talked to the hosted database.
+TensorFlow and psycopg2 each bundle their own OpenSSL, and when TensorFlow's
+loaded first every TLS connection segfaulted the process. The fix is one line —
+import psycopg2 **before** TensorFlow — found by bisecting the import order.
+
+**Password limit:** `auth.py` truncates passwords to 72 bytes before hashing.
+That is bcrypt's algorithmic limit, not a bug.
 
 ---
 
@@ -736,6 +784,7 @@ flowchart LR
 | API + model | Hugging Face Space (Gradio SDK 6.27, ZeroGPU hardware, runs on CPU) | `https://bikkii-cropsense.hf.space` |
 | Website | Vercel (static Vite build on a CDN) | Vercel project URL |
 | Android app | Expo EAS Build | `.apk` file |
+| Database | **Neon** serverless PostgreSQL (free tier, Singapore) | reached over SSL with `DATABASE_URL` |
 | Offline backup | Docker Compose on the laptop | `localhost:3000` (web), `:8000` (API) |
 
 **Backend on Hugging Face:**
@@ -755,6 +804,8 @@ flowchart LR
 - **CORS is open** (`*`), so the Vercel site and the app can call the API. That's
   acceptable because there are no accounts or private data.
 - **Sleeps when idle.** The first request after sleeping is slow.
+- **Two secrets** are set in the Space settings: `DATABASE_URL` (the Neon
+  connection string) and `JWT_SECRET` (the token signing key). Neither is in git.
 
 **Website on Vercel:**
 - Root directory `frontend`, preset Vite, env var
@@ -784,7 +835,7 @@ Full details are in `DEPLOYMENT.md`.
 
 | Level | What | Result |
 |---|---|---|
-| Unit / component | Vitest + React Testing Library | **24 / 24 pass** |
+| Unit / component | Vitest + React Testing Library | **28 / 28 pass** |
 | Static + build | ESLint, Vite build, expo-doctor, Android bundle | Clean; **21/21** Expo checks at build time |
 | API black-box | 9 edge cases against the running API | **8 / 9** as expected, 1 defect |
 | Model (internal) | Training curves + confusion matrix (31 Aug lab run) | Val accuracy 98.5–98.9% (lab) |
@@ -800,6 +851,7 @@ Full details are in `DEPLOYMENT.md`.
 | `components/ImagePicker.test.jsx` | 3 | Photo selection, preview, guidance |
 | `components/ResultView.test.jsx` | 4 | Responsible wording, Grad-CAM caveat, uncertainty warning, feedback |
 | `pages/History.test.jsx` | 3 | Delete-all visibility, confirmation, clearing |
+| `pages/Auth.test.jsx` | 4 | Nothing reachable while signed out, sign in stores the token and shows the user, sign out clears it, wrong password shows an error |
 
 **The 9 API edge cases:**
 | Test | Result |
@@ -813,6 +865,13 @@ Full details are in `DEPLOYMENT.md`.
 | Wide farm landscape | Crop Not Supported ✅ |
 | Rice leaf, crop = Rice | Rice Bacterial Leaf Blight 94.93% ✅ |
 | Same rice leaf, crop = Tomato | Same disease + mismatch warning ✅ |
+
+**Accounts, tested against the live system and the real Neon database:** create
+account, weak password refused, duplicate username refused, wrong password
+refused, sign in, `/auth/me`, prediction saved while signed in, prediction still
+served without a token, history listed, history refused without a token (401),
+delete one entry, and **one user cannot read or delete another user's rows
+(403)**.
 
 **Backend tester without the web stack:** `python backend/predict_test.py image.jpg`
 uses the same model, preprocessing and threshold as the API.
@@ -926,7 +985,10 @@ is the main open problem."
 8. **Decompression-bomb check is weaker than intended** (132 MP image decoded).
 9. **Development-grade security:** open CORS, and a default JWT secret in code (auth
    is unused on the live site).
-10. **History is per browser,** with no sync. Server history exists but is switched off.
+10. **An account is now required**, which is a barrier before the first photo —
+    the opposite trade-off from the earlier local-only design. It buys history
+    that follows the farmer across devices.
+11. **Free database sleeps.** The first sign-in after an idle period is slow.
 
 ---
 
@@ -1056,11 +1118,20 @@ Browsers block a page from calling an API on another domain unless the API allow
 Our site is on vercel.app and the API on hf.space. It's open because there are no
 accounts or private data; in production I'd restrict it to our domains.
 
-**Q: Why no login? How does history work?**
-Diagnosing a leaf doesn't depend on identity, and a sign-up step is a barrier for
-farmers. History is saved in the browser's localStorage (up to 100 entries), which is
-private and needs no database. The trade-off is no sync between devices. Accounts,
-bcrypt, JWT and Postgres history are implemented in the backend but switched off.
+**Q: Why require an account, and how does history work?**
+Every check is saved to the signed-in user's account, so a farmer who changes
+phone, or uses the website and the app, still has the same history. The cost is
+honest: a sign-up step before the first photo, which is a real barrier for the
+intended user. Technically: bcrypt password hashes, a 24-hour JWT, rows filtered
+by the username inside the token, and a 403 if anyone asks for someone else's
+row. `/predict` itself still accepts a request without a token — the requirement
+lives in the apps — so an expired token can never fail a diagnosis mid-request.
+
+**Q: Where is the database and what does it store?**
+Neon, a free serverless PostgreSQL in Singapore, reached over SSL. Two tables:
+`users` (username, email, bcrypt hash) and `predictions` (the diagnosis, the
+guidance text, a 160 px thumbnail and the Grad-CAM image). Photos themselves are
+never stored — only the thumbnail saved with the result.
 
 **Q: How does the Nepali translation work?**
 - The backend returns every text field twice, e.g. `symptoms` and `symptoms_np`.
@@ -1128,10 +1199,12 @@ It's a working public prototype. For production it needs:
 | Treatments | **51** protocols, **122** entries, EN + NP |
 | Web limits | 12 MB, 60 s timeout, history 100 entries |
 | Mobile | Expo SDK 57, 40 s timeout, 21/21 expo-doctor |
-| Tests | **24/24** frontend, **8/9** API edge cases |
+| Tests | **28/28** frontend, **8/9** API edge cases |
 | Lab val accuracy (31 Aug run) | **98.5–98.9%** |
 | PlantDoc field (deployed model) | top-1 **48.0%**, top-5 **81.8%**, crop **70.9%**, ≥80% conf → **81.8%** |
 | Untrained crops declined | **28.4%** (21/74) |
 | Speed | **0.79 s** laptop · **6.75 s** live |
 | Live API | `https://bikkii-cropsense.hf.space` |
+| Database | Neon serverless PostgreSQL 18 (free, Singapore) |
+| Auth | bcrypt + JWT HS256, 24 h; sign-in required on web and mobile |
 | Weights file | `last_final_model/best_model_phase2.weights.h5` (~102 MB, Git LFS) |

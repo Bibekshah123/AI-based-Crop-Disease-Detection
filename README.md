@@ -50,10 +50,10 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 - **Structured Treatments** — `treatments.json` carries 51 protocols / 122 entries with active ingredient, kind, formulation, dose, pre-harvest interval, re-spray interval and safety band, non-chemical options first, each with a bilingual disclaimer.
 - **Fully Bilingual (English / नेपाली)** — A language toggle in the header switches the entire interface *and* all disease content. Every result ships `*_np` fields (disease name, description, cause, symptoms, treatment, prevention) for all 51 conditions, and treatment protocols carry `dose_np` / `note_np`. Scientific names, chemical names and formulation codes deliberately stay in Latin so they can be matched against the product label.
 - **Disease Library** — Browsable reference of every crop/disease the model knows, built from the same curated knowledge base.
-- **Local-First History** — Every check is saved in the browser (no login/DB needed), with filters and a detail view.
+- **Per-account History** — Every check is saved to the signed-in user's account (hosted PostgreSQL) and mirrored into the browser for filters, search and the detail view. A user only ever sees their own rows.
 - **Mobile App** — React Native (Expo) client with camera capture, crop selector, and an English/Nepali toggle.
 - **Calm, Original UI** — Mobile-first, accessible, agricultural design system (no marketing fluff, no fake stats).
-- **No Sign-in Required** — JWT auth, bcrypt and the PostgreSQL schema are implemented in the backend, but the web app deliberately ships **no sign-in surface**: diagnosis has no dependency on identity, and history is local-first.
+- **Accounts (required)** — bcrypt password hashing and 24-hour JWTs. Signing in is compulsory on the web app and the Android app; the sign-in screen doubles as the project's front door. `/predict` itself still accepts an anonymous request, so an expired token can never fail a diagnosis mid-request — the requirement is enforced by the clients.
 - **Deployed and public** — API + model on a Hugging Face Space, web app on Vercel, Android APK from Expo EAS. `docker compose up --build` still brings up the whole stack locally (DB, API, web app, DB admin GUI). See [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ---
@@ -432,11 +432,23 @@ PostgreSQL 16 runs in a Docker container with a persistent volume (`pgdata`). Ta
 
 ## Authentication & History
 
-- **Prediction history** in the web app is **local-first**: every check is saved in the browser (`localStorage`) with a thumbnail and summary, so History works with **no login and no database**.
-- **The web app has no sign-in.** JWT auth (`python-jose`), bcrypt hashing and the `/auth/*` endpoints are implemented and working, but the Login / Register / Profile routes were **removed from the web UI**: requiring an account to diagnose a leaf would be a barrier for the intended user, and the diagnosis has no dependency on identity. The page components remain on disk (unreferenced) so the work is still demonstrable. Without a database attached, the `/auth/*` endpoints return errors — which is why nothing in the UI points at them.
-- **Server-side history** (`/auth/history`) exists in the backend but is only populated if you re-enable `db_save_prediction(...)` inside `/predict` (it's commented out by default), so the running app relies on local history.
-
----
+- **Signing in is compulsory** on both clients. On the web every route except
+  `/login` and `/register` sits behind `RequireAuth` (a layout route); the Android
+  app opens on the same gate.
+- **Passwords** are hashed with bcrypt (truncated to bcrypt's 72-byte limit).
+  **Sessions** are JWT HS256, valid 24 hours, signed with `JWT_SECRET` — set it in
+  the deployment or a restart signs everybody out.
+- **Token storage:** `localStorage` on the web, **expo-secure-store** (Android
+  Keystore) in the app.
+- **History** lives in the `predictions` table, written by `/predict` when the
+  request carries a token. `/auth/history` filters by the username inside the
+  token; deleting someone else's row returns **403**. The web app mirrors the
+  account's rows into `localStorage` so filters, search and the detail view work
+  offline and survive a refresh; deleting removes both copies.
+- **`/predict` takes an optional bearer token** (`HTTPBearer(auto_error=False)`):
+  with one the result is saved, without one it is simply not stored. Saving is
+  wrapped in try/except so a database problem can never turn a successful
+  diagnosis into an error.
 
 ## Environment Variables
 
@@ -450,7 +462,9 @@ PostgreSQL 16 runs in a Docker container with a persistent volume (`pgdata`). Ta
 | `DB_NAME` | `crop_disease` | backend | Database name |
 | `DB_USER` | `app` | backend | Database user |
 | `DB_PASSWORD` | `app_password` | backend | Database password |
-| `JWT_SECRET` | `crop-disease-detection-secret-key-2024` | backend | JWT signing key — **override in production** |
+| `DATABASE_URL` | — | backend | Full connection string for a hosted Postgres (Neon/Supabase). Wins over the `DB_*` variables and defaults to `sslmode=require`. |
+| `DB_SSLMODE` | `require` with `DATABASE_URL`, else `prefer` | backend | TLS mode; local Docker Postgres has no TLS. |
+| `JWT_SECRET` | random per process (with a warning) | backend | JWT signing key — **must be set**, or every restart signs users out |
 | `TF_CPP_MIN_LOG_LEVEL` | `2` | backend | TensorFlow log verbosity |
 
 ---
@@ -465,7 +479,7 @@ npm test               # run once
 npm run test:watch     # watch mode
 ```
 
-**24 tests across 5 files**, all passing. Coverage focuses on the parts most worth protecting: response **normalization / confidence-status** logic (`src/lib/normalize.test.js`, 10), the **local history** store (`src/lib/history.test.js`, 4), the **ImagePicker** (3), a **ResultView** smoke test asserting the responsible wording, Grad-CAM note, uncertainty warning and feedback controls (4), and the **History page** delete-all flow (3).
+**28 tests across 6 files**, all passing. Coverage focuses on the parts most worth protecting: response **normalization / confidence-status** logic (`src/lib/normalize.test.js`, 10), the **local history** store (`src/lib/history.test.js`, 4), the **ImagePicker** (3), a **ResultView** smoke test asserting the responsible wording, Grad-CAM note, uncertainty warning and feedback controls (4), the **History page** delete-all flow (3), and the **sign-in flow** (4: nothing reachable while signed out, signing in stores the token and shows the user, signing out clears it, a wrong password shows an error).
 
 For quick backend checks without the web stack, use `backend/predict_test.py` — it runs the exact same model, weight-loading order, preprocessing, and confidence threshold as the API, with no web/auth/DB dependencies:
 
@@ -504,7 +518,7 @@ Because the backend loads TensorFlow + a ~100 MB model, it needs roughly **1.5�
 | Backend + model | **Hugging Face Space** (Gradio SDK, CPU) — weights via Git LFS | <https://bikkii-cropsense.hf.space> |
 | Web app | **Vercel** — root dir `frontend`, `VITE_API_BASE_URL` set to the Space URL, auto-deploys on push to `main` | Vercel project URL |
 | Mobile app | **Expo EAS Build** — installable `.apk` | download link from the build |
-| Database | Not deployed — optional by design; `/predict` never touches it | — |
+| Database | **Neon** serverless PostgreSQL (free tier, Singapore), over SSL | set as the `DATABASE_URL` secret on the Space |
 
 Hugging Face moved Docker Spaces to a paid tier during the project, so the Space runs the free **Gradio SDK**: `app.py` mounts the FastAPI routes on `gr.Server` and starts through Gradio's own launcher (ZeroGPU only marks the app started that way; a self-started uvicorn fails with *address already in use* on port 7860). The model runs on CPU, and the Space sleeps when idle — open `/health` a few minutes before a demo to wake it.
 
