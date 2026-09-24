@@ -76,11 +76,6 @@ export default function UserMenu() {
             <PersonIcon />
             {t.profileTitle}
           </button>
-          <button type="button" role="menuitem" className={styles.item} onClick={() => go("/history")}>
-            <ClockIcon />
-            {t.navHistory}
-          </button>
-
           <hr className={styles.divider} />
 
           <button
@@ -106,14 +101,6 @@ function PersonIcon() {
     <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7">
       <circle cx="12" cy="8" r="3.4" />
       <path d="M5 20c0-3.6 3.1-5.6 7-5.6s7 2 7 5.6" strokeLinecap="round" />
-    </svg>
-  );
-}
-function ClockIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7">
-      <circle cx="12" cy="12" r="8.2" />
-      <path d="M12 7.6V12l3 1.8" strokeLinecap="round" />
     </svg>
   );
 }
