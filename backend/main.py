@@ -21,7 +21,8 @@ import datetime
 import cv2
 import base64
 from auth import verify_password, get_password_hash, load_users, save_user, create_access_token, verify_token
-from db import init_db, save_prediction as db_save_prediction, load_history, delete_prediction as db_delete_prediction
+from db import (init_db, save_prediction as db_save_prediction, load_history,
+                load_prediction as db_load_prediction, delete_prediction as db_delete_prediction)
 
 # ============================
 # Configuration
@@ -370,6 +371,17 @@ def get_me(current_user: str = Depends(get_current_user)):
 def get_history(limit: int = 50, username: str = Depends(get_current_user)):
     history = load_history(username, limit)
     return {"history": history, "count": len(history)}
+
+
+@app.get("/auth/history/{prediction_id}")
+def get_history_entry(prediction_id: str, username: str = Depends(get_current_user)):
+    """One saved check in full, including the Grad-CAM heatmap the list omits."""
+    try:
+        return db_load_prediction(prediction_id, username)
+    except ValueError:
+        raise HTTPException(status_code=404, detail="Prediction not found")
+    except PermissionError:
+        raise HTTPException(status_code=403, detail="Not authorized to view this prediction")
 
 
 @app.delete("/auth/history/{prediction_id}")

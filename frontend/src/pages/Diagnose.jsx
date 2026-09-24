@@ -4,9 +4,8 @@ import ImagePicker from "../components/ImagePicker";
 import { Spinner, ErrorState } from "../components/ui";
 import { CROPS, CROP_ANY, cropLabel } from "../lib/crops";
 import { predict, classifyError } from "../lib/api";
-import { normalizePrediction, toHistoryRecord } from "../lib/normalize";
 import { fileToDataUrl } from "../lib/image";
-import { saveHistory, makeId } from "../lib/history";
+import { makeId } from "../lib/history";
 import { useObjectUrl } from "../lib/useObjectUrl";
 import { useResult } from "../context/ResultContext";
 import { useLang } from "../context/LanguageContext";
@@ -70,15 +69,12 @@ export default function Diagnose() {
 
     try {
       const raw = await predict(file, sentCrop);
-      const data = normalizePrediction(raw, { cropType: sentCrop ?? "", lang });
-      const [thumb, medium] = await Promise.all([
-        fileToDataUrl(file, 160, 0.7).catch(() => null),
-        fileToDataUrl(file, 720, 0.8).catch(() => null),
-      ]);
+      const medium = await fileToDataUrl(file, 720, 0.8).catch(() => null);
 
-      const id = makeId();
-      saveHistory(toHistoryRecord(data, { thumbnail: thumb, id, timestamp: Date.now() }));
-      publish({ id, raw, cropType: sentCrop ?? "", image: medium });
+      // The backend already stored this check against the signed-in account, so
+      // the client keeps no second copy: saving one here too produced the same
+      // check twice in History, under two different ids.
+      publish({ id: makeId(), raw, cropType: sentCrop ?? "", image: medium });
       navigate("/result");
     } catch (err) {
       setApiError(classifyError(err));

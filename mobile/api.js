@@ -60,6 +60,14 @@ export async function history(token, limit = 50) {
   return res.data?.history ?? [];
 }
 
+export async function historyEntry(token, id) {
+  const res = await axios.get(`${API_URL}/auth/history/${id}`, {
+    headers: auth(token),
+    timeout: 30000,
+  });
+  return res.data;
+}
+
 export async function deleteHistoryEntry(token, id) {
   const res = await axios.delete(`${API_URL}/auth/history/${id}`, {
     headers: auth(token),

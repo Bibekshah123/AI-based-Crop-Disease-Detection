@@ -3,7 +3,7 @@ import json
 import numpy as np
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from datetime import datetime
+from datetime import datetime, timezone
 
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "5432")
@@ -21,6 +21,17 @@ DB_SSLMODE = os.getenv("DB_SSLMODE", "require" if DATABASE_URL else "prefer")
 # A serverless database sleeps when idle; the first connection after that wakes
 # it, which takes a few seconds. Fail slowly rather than reporting it as down.
 CONNECT_TIMEOUT = int(os.getenv("DB_CONNECT_TIMEOUT", "15"))
+
+
+def _as_utc_iso(value):
+    """Postgres TIMESTAMP columns come back naive, and NOW() records UTC. Sending
+    "2026-09-24T07:28:10" makes every client read it as *local* time, which put
+    each check 5h45m early in Nepal. Stamp the zone the value actually has."""
+    if value is None:
+        return ""
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=timezone.utc)
+    return value.isoformat()
 
 
 def get_conn():
@@ -110,7 +121,7 @@ def get_all_users():
     try:
         cur = conn.cursor(cursor_factory=RealDictCursor)
         cur.execute("SELECT * FROM users")
-        return {row["username"]: {"email": row["email"], "password": row["password"], "created_at": row["created_at"].isoformat() if row["created_at"] else ""} for row in cur.fetchall()}
+        return {row["username"]: {"email": row["email"], "password": row["password"], "created_at": _as_utc_iso(row["created_at"])} for row in cur.fetchall()}
     finally:
         conn.close()
 
@@ -163,23 +174,51 @@ def save_prediction(username, data, thumbnail_b64):
         conn.close()
 
 
+def _shape_row(row):
+    entry = dict(row)
+    entry["timestamp"] = _as_utc_iso(entry["timestamp"])
+    entry["top_5_predictions"] = (
+        json.loads(entry["top_5_predictions"])
+        if isinstance(entry["top_5_predictions"], str)
+        else entry["top_5_predictions"]
+    )
+    entry["id"] = str(entry["id"])
+    return entry
+
+
 def load_history(username, limit=50):
+    """History list WITHOUT the Grad-CAM image. Each heatmap is ~380 KB of
+    base64, so 50 rows would be a ~19 MB response: the phone timed out before it
+    arrived. The list only needs the 5 KB thumbnail; the heatmap is fetched per
+    entry by load_prediction()."""
     conn = get_conn()
     try:
         cur = conn.cursor(cursor_factory=RealDictCursor)
         cur.execute(
-            "SELECT * FROM predictions WHERE username = %s ORDER BY timestamp DESC LIMIT %s",
+            """SELECT id, username, timestamp, disease, disease_np, confidence, crop_type,
+                      is_unknown, not_leaf, message, cause, cause_np, symptoms, symptoms_np,
+                      treatment, treatment_np, prevention, prevention_np, top_5_predictions,
+                      thumbnail
+               FROM predictions WHERE username = %s ORDER BY timestamp DESC LIMIT %s""",
             (username, limit),
         )
-        rows = cur.fetchall()
-        result = []
-        for row in rows:
-            entry = dict(row)
-            entry["timestamp"] = entry["timestamp"].isoformat()
-            entry["top_5_predictions"] = json.loads(entry["top_5_predictions"]) if isinstance(entry["top_5_predictions"], str) else entry["top_5_predictions"]
-            entry["id"] = str(entry["id"])
-            result.append(entry)
-        return result
+        return [_shape_row(row) for row in cur.fetchall()]
+    finally:
+        conn.close()
+
+
+def load_prediction(prediction_id, username):
+    """One full row, heatmap included. Raises like delete_prediction does."""
+    conn = get_conn()
+    try:
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur.execute("SELECT * FROM predictions WHERE id = %s::uuid", (prediction_id,))
+        row = cur.fetchone()
+        if not row:
+            raise ValueError("Prediction not found")
+        if row["username"] != username:
+            raise PermissionError("Not authorized to read this prediction")
+        return _shape_row(row)
     finally:
         conn.close()
 

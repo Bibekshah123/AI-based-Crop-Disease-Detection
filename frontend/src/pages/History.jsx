@@ -3,7 +3,7 @@ import { useLang } from "../context/LanguageContext";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { StatusBadge } from "../components/ui";
-import { listHistory, removeHistory, clearHistory, saveHistory, getHistoryItem } from "../lib/history";
+import { listHistory, removeHistory, clearHistory, saveHistory } from "../lib/history";
 import { getServerHistory, deleteServerHistory } from "../lib/api";
 import { fromServerRow } from "../lib/serverHistory";
 import { statusMeta } from "../lib/normalize";
@@ -42,26 +42,22 @@ export default function History() {
   const [confirmingClear, setConfirmingClear] = useState(false);
   const [announcement, setAnnouncement] = useState("");
 
-  // Signed in: pull the account's checks down and fold any that this device has
-  // not seen into the same local store, so filters and the detail view need no
-  // special case for where a record came from.
+  // The account is the single source of truth: the browser copy is only a cache
+  // of it, rebuilt on every visit. Mirroring rather than merging is what stops a
+  // check appearing twice, once under a local id and once under the server's.
   useEffect(() => {
     if (!user) return;
     let active = true;
     getServerHistory()
       .then((rows) => {
         if (!active) return;
-        let added = 0;
-        rows.forEach((row) => {
-          if (getHistoryItem(row.id)) return;
-          saveHistory(fromServerRow(row, lang));
-          added += 1;
-        });
-        if (added) setItems(listHistory());
+        clearHistory();
+        rows.forEach((row) => saveHistory(fromServerRow(row, lang)));
+        setItems(listHistory());
       })
       .catch(() => {
-        /* Offline or the account is unreachable — the device's own history is
-           already on screen, so there is nothing useful to say here. */
+        /* Offline or the account is unreachable — whatever is cached stays on
+           screen, which is better than an empty page. */
       });
     return () => {
       active = false;
@@ -90,18 +86,14 @@ export default function History() {
   }, [items, crop, status, sort, query]);
 
   const remove = (id) => {
-    const record = getHistoryItem(id);
     removeHistory(id);
     setItems(listHistory());
-    // Deleting a check the account holds must delete it there too, or the next
-    // visit pulls it straight back down.
-    if (user && record?.fromAccount) deleteServerHistory(id).catch(() => {});
+    // Delete it in the account too, or the next visit pulls it straight back.
+    deleteServerHistory(id).catch(() => {});
   };
 
   const clearAll = () => {
-    if (user) {
-      items.filter((i) => i.fromAccount).forEach((i) => deleteServerHistory(i.id).catch(() => {}));
-    }
+    items.forEach((i) => deleteServerHistory(i.id).catch(() => {}));
     clearHistory();
     setItems([]);
     setConfirmingClear(false);

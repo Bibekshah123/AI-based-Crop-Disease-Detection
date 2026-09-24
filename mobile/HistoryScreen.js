@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { View, Text, Image, Pressable, ScrollView, ActivityIndicator, StyleSheet } from "react-native";
 import { useAuth } from "./auth";
-import { history as fetchHistory, deleteHistoryEntry } from "./api";
+import { history as fetchHistory, historyEntry, deleteHistoryEntry } from "./api";
 import { deriveStatus } from "./normalize";
 import { colors, tones, radius } from "./theme";
 
@@ -29,6 +29,21 @@ export default function HistoryScreen({ t, lang, onOpen }) {
   useEffect(() => {
     load();
   }, [load]);
+
+  // The list carries no heatmap (too large to send 50 of them), so fetch the
+  // full row when a check is opened.
+  const [opening, setOpening] = useState(null);
+  async function open(item) {
+    if (opening) return;
+    setOpening(item.id);
+    try {
+      onOpen(await historyEntry(token, item.id));
+    } catch {
+      onOpen(item); // still useful without the heatmap
+    } finally {
+      setOpening(null);
+    }
+  }
 
   async function remove(id) {
     setItems((list) => list.filter((i) => i.id !== id));
@@ -70,7 +85,7 @@ export default function HistoryScreen({ t, lang, onOpen }) {
           });
           const tone = tones[status === "high" ? "success" : status === "moderate" ? "warning" : "error"];
           return (
-            <Pressable key={item.id} style={styles.row} onPress={() => onOpen(item)}>
+            <Pressable key={item.id} style={styles.row} onPress={() => open(item)}>
               {item.thumbnail ? (
                 <Image source={{ uri: item.thumbnail }} style={styles.thumb} />
               ) : (
@@ -82,7 +97,9 @@ export default function HistoryScreen({ t, lang, onOpen }) {
                   {new Date(item.timestamp).toLocaleDateString()} · {item.confidence}%
                 </Text>
                 <View style={[styles.pill, { backgroundColor: tone.bg, borderColor: tone.border }]}>
-                  <Text style={[styles.pillText, { color: tone.fg }]}>{t.statusLabel[status]}</Text>
+                  <Text style={[styles.pillText, { color: tone.fg }]}>
+                    {opening === item.id ? t.loading : t.statusLabel[status]}
+                  </Text>
                 </View>
               </View>
               <Pressable
