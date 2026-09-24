@@ -1,75 +1,80 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useLang } from "../context/LanguageContext";
-import { me as fetchMe } from "../lib/api";
-import { listHistory, clearHistory } from "../lib/history";
+import { me as fetchMe, getServerHistory } from "../lib/api";
+import { listHistory } from "../lib/history";
 import s from "./pages.module.css";
-import a from "./auth.module.css";
+import p from "./Profile.module.css";
 
 export default function Profile() {
   const { user, logout } = useAuth();
-  const { t } = useLang();
-  const navigate = useNavigate();
+  const { t, lang } = useLang();
   const [created, setCreated] = useState("");
-  const [historyCount, setHistoryCount] = useState(() => listHistory().length);
+  const [savedCount, setSavedCount] = useState(() => listHistory().length);
 
   useEffect(() => {
     let active = true;
     fetchMe()
       .then((data) => active && setCreated(data.created_at || ""))
       .catch(() => {});
-    return () => { active = false; };
+    getServerHistory()
+      .then((rows) => active && setSavedCount(rows.length))
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
   }, []);
 
-  const signOut = () => {
-    logout();
-    navigate("/");
-  };
-
-  const clearLocal = () => {
-    clearHistory();
-    setHistoryCount(0);
-  };
+  const initial = (user?.username || "?").trim().charAt(0).toUpperCase();
+  const memberSince = created
+    ? new Intl.DateTimeFormat(lang === "np" ? "ne-NP" : "en", { dateStyle: "long" }).format(new Date(created))
+    : "—";
 
   return (
-    <div className={`container ${s.page} ${a.wrap}`}>
-      <div className={a.card}>
-        <h1 className={a.title}>{t.profileTitle}</h1>
-        <p className={a.subtitle}>{t.savedOnServer}</p>
+    <div className={`container ${s.page} ${p.wrap}`}>
+      <header className={p.identity}>
+        <span className={p.avatar} aria-hidden="true">{initial}</span>
+        <div>
+          <h1 className={p.name}>{user?.username}</h1>
+          {user?.email && <p className={p.email}>{user.email}</p>}
+        </div>
+      </header>
 
-        <div className={a.rows}>
-          <div className={a.row}>
-            <span className={a.rowLabel}>{t.username}</span>
-            <span className={a.rowValue}>{user?.username}</span>
+      <dl className={p.stats}>
+        <div className={p.stat}>
+          <dt className={p.statLabel}>{t.savedChecks}</dt>
+          <dd className={p.statValue}>{savedCount}</dd>
+        </div>
+        <div className={p.stat}>
+          <dt className={p.statLabel}>{t.memberSince}</dt>
+          <dd className={p.statValue}>{memberSince}</dd>
+        </div>
+      </dl>
+
+      <section className={p.card}>
+        <h2 className={p.cardTitle}>{t.accountDetails}</h2>
+        <div className={p.rows}>
+          <div className={p.row}>
+            <span className={p.rowLabel}>{t.username}</span>
+            <span className={p.rowValue}>{user?.username}</span>
           </div>
           {user?.email && (
-            <div className={a.row}>
-              <span className={a.rowLabel}>{t.email}</span>
-              <span className={a.rowValue}>{user.email}</span>
+            <div className={p.row}>
+              <span className={p.rowLabel}>{t.email}</span>
+              <span className={p.rowValue}>{user.email}</span>
             </div>
           )}
-          {created && (
-            <div className={a.row}>
-              <span className={a.rowLabel}>{t.memberSince}</span>
-              <span className={a.rowValue}>{new Date(created).toLocaleDateString()}</span>
-            </div>
-          )}
-          <div className={a.row}>
-            <span className={a.rowLabel}>{t.savedChecks}</span>
-            <span className={a.rowValue}>{historyCount}</span>
+          <div className={p.row}>
+            <span className={p.rowLabel}>{t.password}</span>
+            <span className={p.rowValue}>••••••••</span>
           </div>
         </div>
+        <p className={p.note}>{t.accountNote}</p>
+      </section>
 
-        <div className={a.actions}>
-          <button type="button" className="btn btn-secondary" onClick={clearLocal} disabled={historyCount === 0}>
-            {t.deleteAll}
-          </button>
-          <button type="button" className="btn btn-primary" onClick={signOut}>
-            {t.signOut}
-          </button>
-        </div>
-      </div>
+      <button type="button" className={`btn btn-secondary ${p.signOut}`} onClick={logout}>
+        {t.signOut}
+      </button>
     </div>
   );
 }

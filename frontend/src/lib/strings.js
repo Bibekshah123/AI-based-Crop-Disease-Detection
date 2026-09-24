@@ -36,6 +36,9 @@ const en = {
   step3: "See the disease and treatment",
 
   // accounts (optional — diagnosis never requires one)
+  accountMenu: "Account menu",
+  accountDetails: "Account details",
+  accountNote: "Your leaf checks are saved to this account, so they appear on any device you sign in on.",
   signIn: "Sign in",
   signOut: "Sign out",
   signInTitle: "Sign in",
@@ -278,6 +281,9 @@ const np = {
   step3: "रोग र उपचार हेर्नुहोस्",
 
   // accounts
+  accountMenu: "खाता मेनु",
+  accountDetails: "खाताको विवरण",
+  accountNote: "तपाईंका पात जाँचहरू यही खातामा सुरक्षित हुन्छन्, त्यसैले साइन इन गरेको जुनसुकै यन्त्रबाट देखिन्छन्।",
   signIn: "साइन इन",
   signOut: "साइन आउट",
   signInTitle: "साइन इन गर्नुहोस्",

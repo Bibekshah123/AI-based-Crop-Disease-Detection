@@ -19,6 +19,9 @@ import ResultView from "./ResultView";
 import { AuthProvider, useAuth } from "./auth";
 import AuthScreen from "./AuthScreen";
 import HistoryScreen from "./HistoryScreen";
+import ProfileScreen from "./ProfileScreen";
+import Sidebar from "./Sidebar";
+import { MenuIcon } from "./icons";
 
 // "" means "any crop": no crop_type is sent, so the backend skips the
 // crop-mismatch warning and nothing else changes. Choosing a crop is optional
@@ -35,7 +38,8 @@ export default function App() {
 
 function CropSense() {
   const { user, token, logout, ready } = useAuth();
-  const [screen, setScreen] = useState("diagnose"); // diagnose | history
+  const [screen, setScreen] = useState("diagnose"); // diagnose | history | profile
+  const [menuOpen, setMenuOpen] = useState(false);
   const [lang, setLang] = useState("en");
   const [crop, setCrop] = useState(ANY_CROP);
   const [imageUri, setImageUri] = useState(null);
@@ -129,18 +133,6 @@ function CropSense() {
         </View>
         <View style={styles.headerActions}>
           <Pressable
-            style={styles.headerBtn}
-            onPress={() => setScreen(screen === "history" ? "diagnose" : "history")}
-            accessibilityRole="button"
-          >
-            <Text style={styles.headerBtnText}>
-              {screen === "history" ? t.back : t.navHistory}
-            </Text>
-          </Pressable>
-          <Pressable style={styles.headerBtn} onPress={logout} accessibilityRole="button">
-            <Text style={styles.headerBtnText}>{t.signOut}</Text>
-          </Pressable>
-          <Pressable
             style={styles.langBtn}
             onPress={() => setLang(lang === "en" ? "np" : "en")}
             accessibilityRole="button"
@@ -148,11 +140,21 @@ function CropSense() {
           >
             <Text style={styles.langText}>{lang === "en" ? "ने" : "EN"}</Text>
           </Pressable>
+          <Pressable
+            style={styles.menuBtn}
+            onPress={() => setMenuOpen(true)}
+            accessibilityRole="button"
+            accessibilityLabel={t.accountMenu}
+          >
+            <MenuIcon color={colors.primaryDark} />
+          </Pressable>
         </View>
       </View>
 
       {screen === "history" ? (
         <HistoryScreen t={t} lang={lang} onOpen={openSaved} />
+      ) : screen === "profile" ? (
+        <ProfileScreen t={t} lang={lang} />
       ) : (
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         {data ? (
@@ -257,6 +259,23 @@ function CropSense() {
       </ScrollView>
       )}
 
+      <Sidebar
+        visible={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        user={user}
+        t={t}
+        current={screen}
+        onNavigate={(key) => {
+          setMenuOpen(false);
+          setScreen(key);
+          if (key === "diagnose") setRaw(null);
+        }}
+        onSignOut={() => {
+          setMenuOpen(false);
+          logout();
+        }}
+      />
+
       {/* Analyze stays reachable at the bottom of the screen */}
       {screen === "diagnose" && !data && (
         <View style={styles.footer}>
@@ -298,14 +317,16 @@ const styles = StyleSheet.create({
   },
   brandRow: { flexDirection: "row", alignItems: "center", gap: 8 },
   headerActions: { flexDirection: "row", alignItems: "center", gap: 8 },
-  headerBtn: {
+  menuBtn: {
     borderColor: colors.border,
     borderWidth: 1,
     borderRadius: radius.pill,
     paddingHorizontal: 12,
-    paddingVertical: 7,
+    paddingVertical: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 40,
   },
-  headerBtnText: { color: colors.primaryDark, fontWeight: "700", fontSize: 13 },
   savedNote: { fontSize: 12, color: colors.textMuted, marginTop: -8, marginBottom: 14 },
   logo: { width: 26, height: 26, resizeMode: "contain" },
   brand: { color: colors.text, fontSize: 19, fontWeight: "800", letterSpacing: 0.2 },

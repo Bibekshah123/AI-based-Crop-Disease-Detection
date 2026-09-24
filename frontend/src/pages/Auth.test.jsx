@@ -66,7 +66,10 @@ describe("sign in / sign out", () => {
     await userEvent.click(screen.getByRole("button", { name: "Sign in" }));
 
     await waitFor(() => expect(localStorage.getItem("token")).toBe("tok-123"));
-    expect(await screen.findByRole("link", { name: "bibek", hidden: true })).toBeInTheDocument();
+    // The header carries an avatar button, not a bare username link.
+    const account = await screen.findByRole("button", { name: "Account menu", hidden: true });
+    await userEvent.click(account);
+    expect(screen.getByText("bibek")).toBeInTheDocument();
   });
 
   it("signs out again, clearing the token", async () => {
@@ -77,9 +80,8 @@ describe("sign in / sign out", () => {
     await userEvent.type(screen.getByLabelText("Username"), "bibek");
     await userEvent.type(screen.getByLabelText("Password"), "farmer12345");
     await userEvent.click(screen.getByRole("button", { name: "Sign in" }));
-    await screen.findByRole("link", { name: "bibek", hidden: true });
-
-    await userEvent.click(screen.getByRole("button", { name: "Sign out", hidden: true }));
+    await userEvent.click(await screen.findByRole("button", { name: "Account menu", hidden: true }));
+    await userEvent.click(screen.getByRole("menuitem", { name: "Sign out", hidden: true }));
     await waitFor(() => expect(localStorage.getItem("token")).toBeNull());
     // Back to the bare sign-in screen.
     expect(await screen.findByRole("heading", { name: "Sign in" })).toBeInTheDocument();
