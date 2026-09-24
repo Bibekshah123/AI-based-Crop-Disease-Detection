@@ -5,7 +5,7 @@ import { colors, radius } from "./theme";
 
 /* Sign in / create account. Reachable from the account button, never forced:
    the diagnose screen works without ever opening this. */
-export default function AuthScreen({ t }) {
+export default function AuthScreen({ t, lang, onToggleLang }) {
   const { login, signup } = useAuth();
   const [mode, setMode] = useState("login"); // "login" | "register"
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -39,10 +39,17 @@ export default function AuthScreen({ t }) {
 
   return (
     <ScrollView contentContainerStyle={styles.wrap} keyboardShouldPersistTaps="handled">
-      <Text style={styles.title}>{registering ? t.createAccountTitle : t.signInTitle}</Text>
-      <Text style={styles.lead}>{registering ? t.createAccountLead : t.signInLead}</Text>
+      <Pressable
+        style={styles.langBtn}
+        onPress={onToggleLang}
+        accessibilityRole="button"
+        accessibilityLabel={lang === "en" ? "Switch to Nepali" : "Switch to English"}
+      >
+        <Text style={styles.langText}>{lang === "en" ? "ने" : "EN"}</Text>
+      </Pressable>
 
       <View style={styles.card}>
+        <Text style={styles.title}>{registering ? t.createAccountTitle : t.signInTitle}</Text>
         <Text style={styles.label}>{t.username}</Text>
         <TextInput
           style={styles.input}
@@ -115,9 +122,19 @@ export default function AuthScreen({ t }) {
 }
 
 const styles = StyleSheet.create({
-  wrap: { padding: 16, paddingBottom: 40 },
-  title: { fontSize: 22, fontWeight: "800", color: colors.text, marginTop: 4 },
-  lead: { fontSize: 14, color: colors.textMuted, lineHeight: 20, marginTop: 6, marginBottom: 16 },
+  wrap: { padding: 16, paddingBottom: 40, flexGrow: 1, justifyContent: "center" },
+  langBtn: {
+    alignSelf: "flex-end",
+    borderColor: colors.border,
+    borderWidth: 1,
+    borderRadius: radius.pill,
+    backgroundColor: colors.surface,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginBottom: 16,
+  },
+  langText: { color: colors.primaryDark, fontWeight: "700", fontSize: 13 },
+  title: { fontSize: 22, fontWeight: "800", color: colors.text, marginBottom: 4 },
   card: {
     backgroundColor: colors.surface,
     borderRadius: radius.lg,
@@ -125,7 +142,7 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     padding: 16,
   },
-  label: { fontSize: 14, fontWeight: "700", color: colors.text, marginTop: 12, marginBottom: 6 },
+  label: { fontSize: 14, fontWeight: "700", color: colors.text, marginTop: 14, marginBottom: 6 },
   input: {
     borderWidth: 1,
     borderColor: colors.border,

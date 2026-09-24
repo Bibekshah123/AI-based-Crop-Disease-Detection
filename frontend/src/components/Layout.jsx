@@ -46,7 +46,6 @@ export default function Layout({ children }) {
             <span className={styles.brandName}>{t.brand}</span>
           </Link>
 
-          {user && (
           <button
             className={styles.menuBtn}
             aria-expanded={open}
@@ -62,7 +61,6 @@ export default function Layout({ children }) {
               )}
             </svg>
           </button>
-          )}
 
           <nav
             id="primary-nav"
@@ -70,8 +68,7 @@ export default function Layout({ children }) {
             aria-label={t.navPrimary}
             onClick={closeOnNavigate}
           >
-            {user &&
-              NAV.map((item) => (
+            {NAV.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}

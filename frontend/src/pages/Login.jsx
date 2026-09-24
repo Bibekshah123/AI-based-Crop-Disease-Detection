@@ -3,7 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useLang } from "../context/LanguageContext";
 import { classifyError } from "../lib/api";
-import AuthShowcase from "../components/AuthShowcase";
+import LangToggle from "../components/LangToggle";
 import a from "./auth.module.css";
 
 export default function Login() {
@@ -34,58 +34,56 @@ export default function Login() {
   };
 
   return (
-    <div className={a.split}>
-      <AuthShowcase />
+    <div className={a.page}>
+      <LangToggle />
 
-      <div className={a.formSide}>
-        <div className={a.wrap}>
-          <div className={a.card}>
-        <h1 className={a.title}>{t.signInTitle}</h1>
-        <p className={a.subtitle}>{t.signInLead}</p>
+      <div className={a.wrap}>
+        <div className={a.card}>
+          <h1 className={a.title}>{t.signInTitle}</h1>
 
-        {registered && (
-          <p className={`note note-info ${a.success}`} role="status">
-            {t.accountCreated}
-          </p>
-        )}
-
-        <form className={a.form} onSubmit={submit} noValidate>
-          <div className={a.field}>
-            <label className="field-label" htmlFor="login-username">{t.username}</label>
-            <input
-              id="login-username"
-              className="input"
-              value={form.username}
-              autoComplete="username"
-              onChange={(e) => setForm({ ...form, username: e.target.value })}
-              required
-              autoFocus
-            />
-          </div>
-          <div className={a.field}>
-            <label className="field-label" htmlFor="login-password">{t.password}</label>
-            <input
-              id="login-password"
-              type="password"
-              className="input"
-              value={form.password}
-              autoComplete="current-password"
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              required
-            />
-          </div>
-
-          {error && <p className={`note note-error ${a.error}`} role="alert">{error}</p>}
-
-          <button type="submit" className="btn btn-primary btn-block" disabled={busy}>
-            {busy ? t.signingIn : t.signIn}
-          </button>
-        </form>
-
-            <p className={a.alt}>
-              {t.noAccountYet} <Link to="/register">{t.createAccount}</Link>
+          {registered && (
+            <p className={`note note-info ${a.success}`} role="status">
+              {t.accountCreated}
             </p>
-          </div>
+          )}
+
+          <form className={a.form} onSubmit={submit} noValidate>
+            <div className={a.field}>
+              <label className="field-label" htmlFor="login-username">{t.username}</label>
+              <input
+                id="login-username"
+                className="input"
+                value={form.username}
+                autoComplete="username"
+                onChange={(e) => setForm({ ...form, username: e.target.value })}
+                required
+                autoFocus
+              />
+            </div>
+
+            <div className={a.field}>
+              <label className="field-label" htmlFor="login-password">{t.password}</label>
+              <input
+                id="login-password"
+                type="password"
+                className="input"
+                value={form.password}
+                autoComplete="current-password"
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                required
+              />
+            </div>
+
+            {error && <p className={`note note-error ${a.error}`} role="alert">{error}</p>}
+
+            <button type="submit" className="btn btn-primary btn-block" disabled={busy}>
+              {busy ? t.signingIn : t.signIn}
+            </button>
+          </form>
+
+          <p className={a.alt}>
+            {t.noAccountYet} <Link to="/register">{t.createAccount}</Link>
+          </p>
         </div>
       </div>
     </div>

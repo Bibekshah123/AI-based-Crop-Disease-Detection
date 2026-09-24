@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Outlet } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Diagnose from "./pages/Diagnose";
@@ -23,29 +23,40 @@ function ScrollToTop() {
   return null;
 }
 
-export default function App() {
+function AppShell() {
   return (
     <Layout>
+      <Outlet />
+    </Layout>
+  );
+}
+
+export default function App() {
+  return (
+    <>
       <ScrollToTop />
       <Routes>
-        {/* Accounts are compulsory: everything except the sign-in and
-            create-account screens requires a signed-in user. */}
+        {/* The sign-in and create-account screens render on their own, with no
+            header or footer: nothing to navigate to until there is a session. */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
+        {/* Everything else needs a signed-in user and gets the app shell. */}
         <Route element={<RequireAuth />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/diagnose" element={<Diagnose />} />
-          <Route path="/result" element={<Result />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/history/:id" element={<HistoryDetail />} />
-          <Route path="/library" element={<Library />} />
-          <Route path="/library/:id" element={<LibraryDetail />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<NotFound />} />
+          <Route element={<AppShell />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/diagnose" element={<Diagnose />} />
+            <Route path="/result" element={<Result />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/history/:id" element={<HistoryDetail />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/library/:id" element={<LibraryDetail />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Route>
       </Routes>
-    </Layout>
+    </>
   );
 }

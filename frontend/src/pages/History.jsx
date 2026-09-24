@@ -115,9 +115,7 @@ export default function History() {
           <h1 className={s.title}>{t.historyTitle}</h1>
           <p className={s.lead}>{t.historyLead}</p>
           <p className={s.lead} style={{ fontSize: "var(--text-sm)" }}>
-            {user
-              ? t.historyServerNote.replace("{user}", user.username)
-              : t.historySignedOutNote}
+            {t.historyServerNote.replace("{user}", user?.username ?? "")}
           </p>
         </div>
 

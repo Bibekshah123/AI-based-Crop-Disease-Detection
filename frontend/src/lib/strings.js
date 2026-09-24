@@ -36,20 +36,11 @@ const en = {
   step3: "See the disease and treatment",
 
   // accounts (optional — diagnosis never requires one)
-  authHeadline: "Crop disease detection for Nepali farmers",
-  authSubhead: "Photograph one affected leaf and get the likely disease, how confident the model is, and what to do about it — in English or Nepali.",
-  authPoint1: "10 crops · 51 diseases and healthy states",
-  authPoint2: "A confidence band, never a guaranteed diagnosis",
-  authPoint3: "Shows which part of the leaf the model looked at",
-  authPoint4: "Your checks are saved to your account, on every device",
-  signInRequiredNote: "An account keeps your leaf checks together and available on any device you sign in on.",
   signIn: "Sign in",
   signOut: "Sign out",
   signInTitle: "Sign in",
-  signInLead: "Sign in to check a leaf and to keep every check in your account.",
   createAccount: "Create account",
   createAccountTitle: "Create an account",
-  createAccountLead: "One account gives you disease checks and a history you can open on any phone or computer.",
   username: "Username",
   email: "Email",
   password: "Password",
@@ -66,7 +57,6 @@ const en = {
   savedChecks: "Saved leaf checks",
   savedOnServer: "Saved to your account",
   savedOnThisDevice: "Saved on this device only",
-  historySignedOutNote: "",
   historyServerNote: "Signed in as {user}. These checks are saved to your account and appear on every device.",
 
   // diagnose
@@ -288,20 +278,11 @@ const np = {
   step3: "रोग र उपचार हेर्नुहोस्",
 
   // accounts
-  authHeadline: "नेपाली किसानका लागि बाली रोग पहिचान",
-  authSubhead: "रोग लागेको एउटा पातको तस्बिर खिच्नुहोस् — सम्भावित रोग, मोडेल कति विश्वस्त छ र के गर्ने भन्ने नेपाली वा अंग्रेजीमा पाउनुहोस्।",
-  authPoint1: "१० बाली · ५१ रोग तथा स्वस्थ अवस्था",
-  authPoint2: "विश्वसनीयताको स्तर — पक्का निदान होइन",
-  authPoint3: "पातको कुन भाग हेरियो भन्ने देखाउँछ",
-  authPoint4: "तपाईंका जाँचहरू खातामा सुरक्षित, जुनसुकै यन्त्रबाट हेर्न मिल्ने",
-  signInRequiredNote: "खाताले तपाईंका जाँचहरू एकै ठाउँमा राख्छ र साइन इन गरेको जुनसुकै यन्त्रबाट हेर्न मिल्छ।",
   signIn: "साइन इन",
   signOut: "साइन आउट",
   signInTitle: "साइन इन गर्नुहोस्",
-  signInLead: "पात जाँच्न र आफ्ना जाँचहरू खातामा राख्न साइन इन गर्नुहोस्।",
   createAccount: "खाता खोल्नुहोस्",
   createAccountTitle: "नयाँ खाता खोल्नुहोस्",
-  createAccountLead: "एउटै खाताबाट रोग जाँच्नुहोस् र इतिहास जुनसुकै फोन वा कम्प्युटरबाट हेर्नुहोस्।",
   username: "प्रयोगकर्ता नाम",
   email: "इमेल",
   password: "पासवर्ड",
@@ -318,7 +299,6 @@ const np = {
   savedChecks: "सुरक्षित जाँचहरू",
   savedOnServer: "तपाईंको खातामा सुरक्षित",
   savedOnThisDevice: "यही यन्त्रमा मात्र सुरक्षित",
-  historySignedOutNote: "",
   historyServerNote: "{user} को रूपमा साइन इन। यी जाँचहरू तपाईंको खातामा सुरक्षित छन् र हरेक यन्त्रबाट देखिन्छन्।",
 
   diagnoseTitle: "पातको रोग पहिचान",

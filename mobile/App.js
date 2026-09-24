@@ -103,6 +103,21 @@ function CropSense() {
 
   const data = raw ? normalize(raw, lang) : null;
 
+  if (!user) {
+    return (
+      <SafeAreaView style={styles.screen}>
+        <StatusBar barStyle="dark-content" backgroundColor={colors.page} />
+        {ready ? (
+          <AuthScreen t={t} lang={lang} onToggleLang={() => setLang(lang === "en" ? "np" : "en")} />
+        ) : (
+          <View style={styles.splash}>
+            <ActivityIndicator color={colors.primary} />
+          </View>
+        )}
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.screen}>
       <StatusBar barStyle="dark-content" backgroundColor={colors.surface} />
@@ -113,22 +128,18 @@ function CropSense() {
           <Text style={styles.brand}>{t.brand}</Text>
         </View>
         <View style={styles.headerActions}>
-          {user && (
-            <Pressable
-              style={styles.headerBtn}
-              onPress={() => setScreen(screen === "history" ? "diagnose" : "history")}
-              accessibilityRole="button"
-            >
-              <Text style={styles.headerBtnText}>
-                {screen === "history" ? t.back : t.navHistory}
-              </Text>
-            </Pressable>
-          )}
-          {user && (
-            <Pressable style={styles.headerBtn} onPress={logout} accessibilityRole="button">
-              <Text style={styles.headerBtnText}>{t.signOut}</Text>
-            </Pressable>
-          )}
+          <Pressable
+            style={styles.headerBtn}
+            onPress={() => setScreen(screen === "history" ? "diagnose" : "history")}
+            accessibilityRole="button"
+          >
+            <Text style={styles.headerBtnText}>
+              {screen === "history" ? t.back : t.navHistory}
+            </Text>
+          </Pressable>
+          <Pressable style={styles.headerBtn} onPress={logout} accessibilityRole="button">
+            <Text style={styles.headerBtnText}>{t.signOut}</Text>
+          </Pressable>
           <Pressable
             style={styles.langBtn}
             onPress={() => setLang(lang === "en" ? "np" : "en")}
@@ -140,17 +151,7 @@ function CropSense() {
         </View>
       </View>
 
-      {!user ? (
-        // Signing in is compulsory, so this is the whole app until there is a
-        // session. `ready` is false only while a stored token is being checked.
-        ready ? (
-          <AuthScreen t={t} />
-        ) : (
-          <View style={styles.splash}>
-            <ActivityIndicator color={colors.primary} />
-          </View>
-        )
-      ) : screen === "history" ? (
+      {screen === "history" ? (
         <HistoryScreen t={t} lang={lang} onOpen={openSaved} />
       ) : (
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
@@ -161,7 +162,7 @@ function CropSense() {
             <Text style={styles.title}>{t.heroTitle}</Text>
             <Text style={styles.lead}>{t.heroLead}</Text>
             <Text style={styles.savedNote}>
-              {t.savedToAccount.replace("{user}", user?.username ?? "")}
+              {t.savedToAccount.replace("{user}", user.username)}
             </Text>
 
             {/* Photo — the main action of the screen */}
@@ -257,7 +258,7 @@ function CropSense() {
       )}
 
       {/* Analyze stays reachable at the bottom of the screen */}
-      {user && screen === "diagnose" && !data && (
+      {screen === "diagnose" && !data && (
         <View style={styles.footer}>
           <Pressable
             style={[styles.analyzeBtn, (loading || !imageUri) && styles.analyzeBtnDisabled]}

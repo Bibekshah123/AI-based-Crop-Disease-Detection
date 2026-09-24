@@ -4,21 +4,31 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login";
 import Layout from "../components/Layout";
+import RequireAuth from "../components/RequireAuth";
 import { LanguageProvider } from "../context/LanguageContext";
 import { AuthProvider } from "../context/AuthContext";
 import * as api from "../lib/api";
 
 function renderApp(initial = "/login") {
+  // Mirrors App.jsx: the sign-in screen renders bare, everything else sits
+  // behind RequireAuth inside the app shell.
   return render(
     <MemoryRouter initialEntries={[initial]}>
       <LanguageProvider>
         <AuthProvider>
-          <Layout>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/" element={<p>home</p>} />
-            </Routes>
-          </Layout>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route element={<RequireAuth />}>
+              <Route
+                path="/"
+                element={
+                  <Layout>
+                    <p>home</p>
+                  </Layout>
+                }
+              />
+            </Route>
+          </Routes>
         </AuthProvider>
       </LanguageProvider>
     </MemoryRouter>
@@ -31,13 +41,15 @@ describe("sign in / sign out", () => {
     vi.restoreAllMocks();
   });
 
-  it("shows no app navigation at all while signed out", () => {
+  it("sends a signed-out visitor to a bare sign-in screen", () => {
     renderApp("/");
-    // Signing in is compulsory, so a signed-out visitor gets the sign-in screen
-    // and no way to wander into the app behind it.
+    // Compulsory sign-in: the app shell never renders, so there is no header,
+    // no footer and nothing to navigate to — only the form and the toggle.
+    expect(screen.getByRole("heading", { name: "Sign in" })).toBeInTheDocument();
+    expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
+    expect(screen.queryByRole("banner")).not.toBeInTheDocument();
+    expect(screen.queryByRole("contentinfo")).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Diagnose", hidden: true })).not.toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: "History", hidden: true })).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "Sign out", hidden: true })).not.toBeInTheDocument();
   });
 
   it("signs in, stores the token and shows the username", async () => {
@@ -69,9 +81,9 @@ describe("sign in / sign out", () => {
 
     await userEvent.click(screen.getByRole("button", { name: "Sign out", hidden: true }));
     await waitFor(() => expect(localStorage.getItem("token")).toBeNull());
-    // Back to a signed-out shell: the username and the app links are gone.
-    expect(screen.queryByRole("link", { name: "bibek", hidden: true })).not.toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: "Diagnose", hidden: true })).not.toBeInTheDocument();
+    // Back to the bare sign-in screen.
+    expect(await screen.findByRole("heading", { name: "Sign in" })).toBeInTheDocument();
+    expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
   });
 
   it("shows an error message when the credentials are wrong", async () => {
