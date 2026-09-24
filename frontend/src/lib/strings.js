@@ -181,7 +181,7 @@ const en = {
 
   // history
   historyTitle: "Prediction history",
-  historyLead: "Your recent checks are saved on this device.",
+  historyLead: "Every leaf you have checked with this account.",
   historyEmpty: "No checks yet.",
   countShown: (n, total) => `${n} of ${total} shown`,
   search: "Search",
@@ -421,7 +421,7 @@ const np = {
   formOL: "तेल आधारित (OL) — साँझमा छर्नुहोस्",
 
   historyTitle: "जाँचको इतिहास",
-  historyLead: "तपाईंले हालै गर्नुभएका जाँचहरू यही यन्त्रमा सुरक्षित छन्।",
+  historyLead: "यही खाताबाट जाँच गरिएका सबै पातहरू।",
   historyEmpty: "अहिलेसम्म कुनै जाँच गरिएको छैन।",
   countShown: (n, total) => `${total} मध्ये ${n} देखाइएको`,
   search: "खोज्नुहोस्",
