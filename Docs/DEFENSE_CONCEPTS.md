@@ -183,7 +183,7 @@ checkpoint can't win by ignoring them.
 
 | Concept | What it means | In CropSense |
 |---|---|---|
-| **Grad-CAM** | Weight each feature map of the last convolution layer by the average gradient of the class score, sum them, apply ReLU, and overlay the result on the photo as a heatmap. | On every result; blended 60% photo / 40% heatmap, JET colour map. |
+| **Grad-CAM** | Weight each feature map of the last convolution layer by the average gradient of the class score, sum them, apply ReLU, and overlay the result on the photo as a heatmap. | On every result, from the 7×7 last layer, using the pre-softmax class score (logit). Drawn two-tone: red where the value is ≥ 50% of the peak (the model's attention), blue elsewhere. |
 | **Saliency limits** | A heatmap can look convincing even when the model is wrong (Adebayo et al., 2018). | A Septoria leaf called early blight at 88% confidence still had a heatmap on real lesions, so the app says the heatmap "does not confirm the diagnosis". |
 | **LIME / SHAP** | Other explanation methods that need many forward passes per image. | Rejected as too slow on free CPU hosting. |
 

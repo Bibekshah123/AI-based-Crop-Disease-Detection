@@ -510,14 +510,44 @@ are different instructions for a farmer.
 **How it's computed:**
 1. Find the **last convolutional layer** in the backbone: the last layer with a
    4-D output (a spatial feature map).
-2. Run the image and record that layer's activations, plus the score for the
-   predicted class.
-3. Compute the **gradients** of the class score with respect to those activations
+2. Run the image and record that layer's activations (`top_activation`, a
+   **7×7** grid for a 224 px input), plus the **raw class score before softmax**
+   (the logit) for the predicted class.
+3. Compute the **gradients** of that score with respect to those activations
    (how much each feature-map location pushes the answer).
 4. Average the gradients per channel → one weight per channel. The weighted sum of
    the feature maps gives the heatmap.
-5. ReLU, scale to 0–1, resize to the photo, colour with **JET** (blue → red), and
-   blend **60% photo / 40% heatmap**.
+5. ReLU, scale to 0–1, resize to the photo, and draw it in **two tones**: pixels
+   at **≥ 50% of the peak** are tinted **red** (the model's attention), everything
+   else **blue**, with a short blend at the edge. Only the heatmap decides the
+   colour, so red always means "the model relied on this", never a separate
+   guess at where the spots are.
+
+**Why the heatmap is a soft blob, not a lesion outline.** It comes from a 7×7
+grid, so each cell covers about 32×32 px of the 224 px image. It can show which
+*area* drove the answer, but it can't trace individual small spots. A
+14×14 layer was tried: sharper, but it lit up a flower bud and a spot on a
+neighbouring leaf, so it was less faithful to this leaf's lesions.
+
+**Heatmap fix (1 Oct 2026).** Users saw "attention" spread over healthy tissue.
+Three causes, all fixed in `generate_gradcam` / `overlay_gradcam`:
+- **Softmax instead of the logit.** At high confidence the softmax gradient
+  saturates and mixes in every competing class, which spreads the map. Grad-CAM
+  is defined on the pre-softmax score, so the backend now computes the logit from
+  `dense_output`'s weights.
+- **Red and blue swapped.** The photo was RGB but OpenCV's colour map and JPEG
+  encoder use BGR, so the overlay showed a beige background as lavender and a
+  yellow leaf as blue. Colour order is now converted explicitly.
+- **Everything painted in rainbow colours.** A fixed 60/40 JET blend coloured
+  near-zero areas green and yellow, which looked like attention on healthy leaf.
+  The map is now two-tone: red for strong evidence (≥ 50% of the peak), blue for
+  the rest. The cut-off is `GRADCAM_RED_FROM` in `main.py`; raise it to shrink
+  the red area.
+
+What the heatmap shows is still what the **model** uses; the fix makes it
+faithful and readable, it does not make the model look at disease. Painting the
+lesions with a colour mask would only fake it. Making the model itself rely more
+on lesions needs more, better field data (or lesion annotations).
 
 **Two silent bugs fixed (good engineering examples):**
 - **Keras 3 removed `Layer.output_shape`,** so the layer search failed quietly and
@@ -1368,7 +1398,7 @@ It's a working public prototype. For production it needs:
 | Unknown rules | Unknown class · conf < **30%** · conf < 50% & margin < **5 pts** · entropy > **0.90** · centroid sim < **0.5596** |
 | Low confidence | < **60%** |
 | Bands | ≥ **80** High · ≥ **60** Moderate · else / any flag Uncertain |
-| Grad-CAM blend | 60% photo / 40% heatmap, JET |
+| Grad-CAM | logit-based, 7×7 `top_activation`; two-tone: red ≥ 50% of peak, blue elsewhere |
 | Treatments | **51** protocols, **122** entries, EN + NP |
 | Web limits | 12 MB, 60 s timeout, history 100 entries |
 | Mobile | Expo SDK 57, 40 s timeout, expo-doctor **20/21**, bundle 717 modules, APK 75 MB (24 Sep) |

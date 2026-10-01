@@ -583,19 +583,30 @@ def generate_gradcam(img_array, model, class_index):
             [target_layer.output, base_model.output]
         )
         
+        # Grad-CAM is defined on the class score BEFORE softmax. Differentiating
+        # the softmax probability instead saturates when the model is confident
+        # (the gradient shrinks towards zero) and mixes in every competing class,
+        # which spreads the heatmap over healthy tissue and background.
+        start_idx = list(model.layers).index(base_model) + 1
+        head = model.layers[start_idx:]
+        output_layer = head[-1]
+        has_logit = isinstance(output_layer, tf.keras.layers.Dense)
+
         with tf.GradientTape() as tape:
             # 1. Get conv output and base output
-            conv_outputs, base_outputs = base_grad_model(img_array)
-            
+            conv_outputs, base_outputs = base_grad_model(img_array, training=False)
+
             # 2. Pass base_outputs through the remaining top layers of the main model
             x = base_outputs
-            # Skip InputLayer (0) and base_model (find its index)
-            start_idx = list(model.layers).index(base_model) + 1
-            for layer in model.layers[start_idx:]:
-                x = layer(x)
-            
-            predictions = x
-            loss = predictions[:, class_index]
+            for layer in (head[:-1] if has_logit else head):
+                x = layer(x, training=False)
+
+            if has_logit:
+                kernel = tf.cast(output_layer.kernel[:, class_index], x.dtype)
+                bias = tf.cast(output_layer.bias[class_index], x.dtype)
+                loss = tf.linalg.matvec(x, kernel) + bias
+            else:
+                loss = x[:, class_index]
         
         # Calculate gradients of the loss w.r.t. the conv output
         grads = tape.gradient(loss, conv_outputs)
@@ -621,17 +632,39 @@ def generate_gradcam(img_array, model, class_index):
 
 
 
+# Two-tone attention map: red where the model's evidence is strong, blue
+# everywhere else, with a short blend between them so the edge isn't jagged.
+GRADCAM_RED_FROM = 0.5     # share of the peak at which a pixel counts as "attended"
+GRADCAM_BLEND = 0.15       # width of the blue-to-red transition around that point
+GRADCAM_ALPHA_BLUE = 0.40  # tint strength on the rest of the image
+GRADCAM_ALPHA_RED = 0.55   # tint strength on the attended area
+GRADCAM_BLUE = np.array([40, 90, 230], dtype=np.float32)   # RGB
+GRADCAM_RED = np.array([230, 30, 30], dtype=np.float32)    # RGB
+
+
 def overlay_gradcam(original_image, heatmap):
-    """Overlay Grad-CAM heatmap on original image and return base64."""
-    original_image = np.array(original_image)
+    """Overlay the Grad-CAM heatmap as two tones and return a base64 JPEG.
 
-    heatmap = cv2.resize(heatmap, (original_image.shape[1], original_image.shape[0]))
-    heatmap = np.uint8(255 * heatmap)
+    Pixels whose Grad-CAM value is at least GRADCAM_RED_FROM of the peak are
+    tinted red (where the model's evidence for the predicted class is strong);
+    everything else is tinted blue. Only the heatmap decides the colour, so the
+    red area is the model's attention, never a separate guess at where the
+    lesions are. The photo stays visible under the tint.
 
-    heatmap_color = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
-    overlay = cv2.addWeighted(original_image, 0.6, heatmap_color, 0.4, 0)
+    Colour order is explicit: PIL gives RGB and OpenCV's encoder expects BGR;
+    mixing them used to swap the photo's red and blue channels."""
+    rgb = np.array(original_image.convert("RGB")).astype(np.float32)
 
-    _, buffer = cv2.imencode(".jpg", overlay)
+    heatmap = cv2.resize(heatmap, (rgb.shape[1], rgb.shape[0]), interpolation=cv2.INTER_CUBIC)
+    heatmap = np.clip(heatmap, 0.0, 1.0)
+
+    lo = GRADCAM_RED_FROM - GRADCAM_BLEND / 2
+    t = np.clip((heatmap - lo) / GRADCAM_BLEND, 0.0, 1.0)[..., None]  # 0 = blue, 1 = red
+    color = GRADCAM_BLUE * (1.0 - t) + GRADCAM_RED * t
+    alpha = GRADCAM_ALPHA_BLUE * (1.0 - t) + GRADCAM_ALPHA_RED * t
+    overlay = np.clip(rgb * (1.0 - alpha) + color * alpha, 0, 255).astype(np.uint8)
+
+    _, buffer = cv2.imencode(".jpg", cv2.cvtColor(overlay, cv2.COLOR_RGB2BGR))
     encoded = base64.b64encode(buffer).decode("utf-8")
 
     return f"data:image/jpeg;base64,{encoded}"
