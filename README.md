@@ -54,7 +54,7 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 - **Mobile App** — React Native (Expo) client with camera capture, crop selector, and an English/Nepali toggle.
 - **Calm, Original UI** — Mobile-first, accessible, agricultural design system (no marketing fluff, no fake stats).
 - **Accounts (required)** — bcrypt password hashing and 24-hour JWTs. Signing in is compulsory on the web app and the Android app; the sign-in screen doubles as the project's front door. `/predict` itself still accepts an anonymous request, so an expired token can never fail a diagnosis mid-request — the requirement is enforced by the clients.
-- **Deployed and public** — API + model on a Hugging Face Space, web app on Vercel, Android APK from Expo EAS. `docker compose up --build` still brings up the whole stack locally (DB, API, web app, DB admin GUI). See [DEPLOYMENT.md](DEPLOYMENT.md).
+- **Deployed and public** — API + model on a Hugging Face Space, web app on Vercel, Android APK from Expo EAS. `docker compose up --build` still brings up the whole stack locally (DB, API, web app, DB admin GUI). See [Docs/DEPLOYMENT.md](Docs/DEPLOYMENT.md).
 
 ---
 
@@ -67,7 +67,7 @@ Built as a Final Year Project (FYP). Repository: <https://github.com/Bibekshah12
 | Backend | FastAPI (Python 3.10), Uvicorn |
 | Model | **EfficientNetB2** transfer learning (TensorFlow 2.21 / Keras), ~8.5 M parameters |
 | Image Processing | OpenCV, Pillow, NumPy |
-| Explainability | Grad-CAM (JET colormap overlay) |
+| Explainability | Grad-CAM on the pre-softmax class score, drawn two-tone (red ≥ 50% of the peak, blue elsewhere) |
 | Auth | JWT (`python-jose`), bcrypt |
 | Database | PostgreSQL 16 |
 | DB Admin | Adminer |
@@ -208,7 +208,7 @@ python -m venv venv && source venv/bin/activate      # Windows: venv\Scripts\act
 pip install -r requirements.txt
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
-> The backend loads weights from `backend/last_final_model/` at startup (override with `MODEL_PATH`). Database init is **non-fatal** — if PostgreSQL isn't reachable it logs a warning and keeps running, because `/predict` doesn't need the DB (only the optional auth/history endpoints do).
+> The backend loads weights from `backend/last_final_model/` at startup (override with `MODEL_PATH`). Database init is **non-fatal** — if PostgreSQL isn't reachable it logs a warning and keeps running, because `/predict` doesn't need the DB (only sign-in and history do).
 
 **Web app:**
 ```bash
@@ -232,7 +232,7 @@ The web app is a mobile-first, accessible single-page app organized around a sma
 | Home | `/` | What it does, how it works, what you get back, crops covered |
 | Diagnose | `/diagnose` | Crop selector → camera/upload → analyze, with validation/loading/timeout/error states |
 | Result | `/result` | Possible match, confidence status, Grad-CAM comparison, guidance (symptoms/cause/management/prevention), then recommended treatment, alternatives, feedback |
-| History | `/history` · `/history/:id` | Local-first list with filters (crop/status/sort/search), per-item and **Delete all** (with confirmation), + detail view |
+| History | `/history` · `/history/:id` | The account's saved checks (cached in the browser), with filters (crop/status/sort/search), per-item and **Delete all** (with confirmation), + detail view |
 | Disease Library | `/library` · `/library/:id` | Reference data for every crop/disease |
 | About & Disclaimer | `/about` | What the tool does and how to use it responsibly |
 
@@ -241,7 +241,7 @@ Design & engineering notes:
 - **Design system** — a token-based palette (`src/styles/tokens.css`) and CSS Modules per component; calm agricultural greens on a light ground, no gradients/glow/neon.
 - **Service layer** — all HTTP goes through `src/lib/api.js` (one Axios instance); no component hardcodes a host. Backend responses are normalized in one place (`src/lib/normalize.js`), which also derives the High/Moderate/Uncertain status.
 - **Language** — `context/LanguageContext.jsx` holds the choice (persisted per browser, English by default) and `lib/strings.js` carries ~216 UI strings in both languages at enforced parity. Disease content is **not** frozen at prediction time: the raw API response is stored and re-normalized on every render, so toggling the language re-translates an existing result or a saved history entry.
-- **Local-first history & feedback** — checks and "was this helpful?" responses are stored in `localStorage` (`src/lib/history.js`, `src/lib/feedback.js`); no backend change required.
+- **Account history & local feedback** — checks are saved to the account on the server; on every visit the History page downloads them and mirrors them into `localStorage` (`src/lib/history.js`) as a cache. "Was this helpful?" answers stay in the browser only (`src/lib/feedback.js`).
 - **Accessibility** — semantic landmarks, skip link, keyboard-operable controls, `aria-live` status, `role="alert"` errors, meaningful alt text, visible focus, `prefers-reduced-motion`, 44px touch targets, and status conveyed by text (not colour alone).
 
 ---
@@ -297,16 +297,16 @@ The first run creates the EAS project and generates the Android keystore (Expo s
 
 ## How a Prediction Works
 
-1. On **Diagnose**, the user selects a crop (required) and adds a leaf photo (camera or upload), then presses **Analyze leaf**.
+1. On **Diagnose**, the user selects a crop (or **Any crop** if unsure) and adds a leaf photo (camera or upload), then presses **Analyze leaf**.
 2. The client `POST`s the image (and `crop_type`) to `/predict` as multipart form data (with duplicate-submit prevention and a request timeout).
 3. The backend decodes the image, makes a thumbnail, and runs the **leaf pre-check** (`is_leaf_image`). If it fails, a "Not a Leaf" result is returned immediately.
 4. `crop_to_leaf` isolates the leaf from the background (skipped safely when the mask is implausible), then the image is converted to RGB, resized to **224×224**, and passed through EfficientNet's `preprocess_input`.
 5. **EfficientNetB2** produces a softmax distribution over the **52 classes**.
 6. **Unknown detection** runs: the Unknown class, very low confidence, a tiny top-1/top-2 margin, high entropy, or a low cosine similarity to every class centroid relabels the result `Unknown`, as either *Crop Not Supported* or *Not Identified*.
 7. **Crop-mismatch** is checked against the crop the user selected.
-8. A **Grad-CAM heatmap** is generated from the backbone's last convolutional layer and overlaid on the original image.
+8. A **Grad-CAM heatmap** is generated from the backbone's last convolutional layer (7×7), using the class score before softmax, and overlaid in two tones: red where the evidence is at least 50% of the peak, blue elsewhere (`GRADCAM_RED_FROM` in `main.py`).
 9. Treatment/prevention info (EN + NP) is looked up from `disease_info.json`.
-10. The client normalizes the payload, derives a **High / Moderate / Uncertain** status, saves it to local history, and renders the **Result** page.
+10. The client normalizes the payload, derives a **High / Moderate / Uncertain** status and renders the **Result** page. The server has already saved the check to the signed-in user's account; the web app keeps a cached copy.
 
 ---
 
@@ -384,7 +384,7 @@ Both phases apply **class weighting** to counter class imbalance across crops.
 
 **Weight-loading priority** (`MODEL_PATH`, default `backend/last_final_model/`): `best_model_phase2_final.weights.h5` → `best_model_phase2.weights.h5` → `best_model_phase1.weights.h5` → `model.weights.h5`. The active deployed model is **`last_final_model/best_model_phase2.weights.h5`** (EfficientNetB2, 52 classes). The weights, `class_names.json` and `ood_stats.npz` in that folder are one matched set from the same run — centroids are meaningless against different weights.
 
-**Measured performance.** ~98.5–98.9% validation accuracy on the curated lab split (31 Aug 2026 run, 51 classes — the deployed run's notebook outputs were not saved). Measured through the deployed API on 226 independent **PlantDoc** field photographs: **48.0% top-1**, **81.8% top-5**, crop correct 70.9%, and **81.8% accuracy for predictions at ≥ 80% confidence**. Of 74 untrained-crop leaves, 28.4% were declined. Full protocol and caveats in `CropSense_Final_Report.pdf` §6.2.4.
+**Measured performance.** ~98.5–98.9% validation accuracy on the curated lab split (31 Aug 2026 run, 51 classes — the deployed run's notebook outputs were not saved). Measured through the deployed API on 226 independent **PlantDoc** field photographs: **48.0% top-1**, **81.8% top-5**, crop correct 70.9%, and **81.8% accuracy for predictions at ≥ 80% confidence**. Of 74 untrained-crop leaves, 28.4% were declined. Full protocol and caveats in `Docs/CropSense_Final_Report_Final_Draft.pdf` §6.2.4.
 
 ---
 
@@ -485,9 +485,9 @@ For quick backend checks without the web stack, use `backend/predict_test.py` �
 
 ```bash
 cd backend
-python predict_test.py ../test.jpg          # single image
+python predict_test.py ../field_data/Tomato__Early_blight/000004.jpg          # single image
 python predict_test.py /path/to/folder       # a whole folder
-python predict_test.py ../test.jpg --topk 5  # show top-K
+python predict_test.py ../field_data/Tomato__Early_blight/000004.jpg --topk 5  # show top-K
 ```
 
 ---
@@ -522,7 +522,7 @@ Because the backend loads TensorFlow + a ~100 MB model, it needs roughly **1.5�
 
 Hugging Face moved Docker Spaces to a paid tier during the project, so the Space runs the free **Gradio SDK**: `app.py` mounts the FastAPI routes on `gr.Server` and starts through Gradio's own launcher (ZeroGPU only marks the app started that way; a self-started uvicorn fails with *address already in use* on port 7860). The model runs on CPU, and the Space sleeps when idle — open `/health` a few minutes before a demo to wake it.
 
-The backend sends permissive CORS (`allow_origins=["*"]`), so the hosted web and mobile clients can call it directly. Full walkthrough, including the two deployment bugs hit and fixed, is in **[DEPLOYMENT.md](DEPLOYMENT.md)**; an end-to-end explanation of the whole system is in **[CROPSENSE_WORKFLOW.md](CROPSENSE_WORKFLOW.md)**.
+The backend sends permissive CORS (`allow_origins=["*"]`), so the hosted web and mobile clients can call it directly. Full walkthrough, including the four deployment problems hit and fixed, is in **[Docs/DEPLOYMENT.md](Docs/DEPLOYMENT.md)**; an end-to-end explanation of the whole system is in **[Docs/CROPSENSE_WORKFLOW.md](Docs/CROPSENSE_WORKFLOW.md)**, and the final report is `Docs/CropSense_Final_Report_Final_Draft.pdf`.
 
 ---
 
@@ -534,7 +534,7 @@ The backend sends permissive CORS (`allow_origins=["*"]`), so the hosted web and
 - **Input-size check is weaker than intended.** Pillow only raises above 2× `MAX_IMAGE_PIXELS`, so a 132 MP image is decoded rather than rejected (it still returns a safe *Not a Leaf*). Fix: check decoded dimensions explicitly and return 400.
 - **Class imbalance.** Crops/classes with more training images can dominate; class weighting helps, but the strongest fix for the weakest classes is more data. Report **macro-F1** alongside accuracy.
 - **Guidance is advisory.** Treatment/prevention text is general reference information, not a substitute for an agronomist. Every result carries a disclaimer to consult an agricultural expert before acting.
-- **Server-side history is off by default.** History is stored locally in the browser; enabling per-account server history requires re-enabling `db_save_prediction(...)` in the backend.
+- **Accounts are prototype-grade.** No rate limiting or lockout on sign-in, no password reset, email verification or account deletion, CORS open to all origins, and the web token is kept in `localStorage`. Passwords are bcrypt-hashed and there is no hard-coded signing key.
 
 ---
 

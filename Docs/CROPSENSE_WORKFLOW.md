@@ -54,6 +54,7 @@ report, slides, poster and diagrams made for the defense are listed in
 | **Final report (final draft)** | `CropSense_Final_Report_Final_Draft.docx` / `.pdf` | 69 pages, 36 figures, 30 tables; updated for accounts, the hosted database and the 29 Sep test runs |
 | **Presentation** | Claude artifact "CropSense AI Final Presentation" | 30 slides with speaker notes on every slide; downloads as PowerPoint or PDF |
 | **Poster** | Claude artifact "CropSense AI Project Poster" | One A3 portrait page (scales to A1/A0); export to PDF for printing |
+| **System overview diagram** | `CropSense_System_Overview.png` / `.pdf` | The whole system on one page: build time, run time (apps → backend pipeline → database, path of a photo ① → ⑨) and delivery (deployment, testing, evaluation) |
 | **Concepts to revise** | `DEFENSE_CONCEPTS.md` | Every deep-learning concept the project uses (metrics, transfer learning, regularisation, open-set, Grad-CAM), with formulas and the project's numbers |
 | Deployment guide | `DEPLOYMENT.md` | Hosting, secrets and how to redeploy |
 | Older defense dossier | `CropSense_Defense_Report.docx` / `.pdf` (23 Sep) | Code walkthrough; superseded by the final draft |

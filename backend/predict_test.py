@@ -6,10 +6,10 @@ list and confidence threshold as the API (main.py) — but with no web/auth/db
 deps, so it runs with just tensorflow + pillow + numpy. Results match /predict.
 
 Usage (run from the backend/ directory):
-    python predict_test.py ../test.jpg
+    python predict_test.py ../field_data/Tomato__Early_blight/000004.jpg
     python predict_test.py /path/to/leaf1.jpg /path/to/leaf2.png
     python predict_test.py /path/to/folder_of_images
-    python predict_test.py ../test.jpg --topk 5
+    python predict_test.py ../field_data/Tomato__Early_blight/000004.jpg --topk 5
 """
 import os
 import sys

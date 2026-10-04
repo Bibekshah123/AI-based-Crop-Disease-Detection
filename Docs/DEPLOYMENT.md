@@ -252,7 +252,7 @@ The first Vercel build failed with `Could not resolve '../lib/strings'` and 16 s
 **Cause:** the root `.gitignore` had a Python template rule `lib/`, which also
 matched `frontend/src/lib/`. Those 11 files built fine locally but were never
 committed. **Fix:** changed the rule to `/lib/` (top level only), committed the
-folder, and verified a **fresh clone** builds and passes all 24 tests.
+folder, and verified a **fresh clone** builds and passes all its tests (24 at the time; the suite has 28 now).
 **Lesson:** "works on my machine" isn't enough; test from a clean clone.
 
 ---
@@ -366,13 +366,14 @@ Frontend: `git push` to GitHub, and Vercel rebuilds automatically. Backend/model
 push to the Hugging Face Space repo, and it rebuilds automatically.
 
 **Q: Why is the live version slower than local?**
-The free Space uses a shared, slower CPU (~10 s vs ~2 s locally), and it sleeps
-when idle. Paid hardware or on-device inference would fix this.
+The free Space uses a shared, slower CPU (6.75 s per photo measured, vs 0.79 s
+locally), and it sleeps when idle. Paid hardware or on-device inference would fix this.
 
 **Q: Is it production-ready?**
 It's a working public prototype. For production I'd add paid always-on hosting,
-monitoring, rate limiting, a database for optional accounts, and an offline
-TFLite version for areas without internet.
+monitoring, rate limiting and lockout on sign-in, password reset and account
+deletion, CORS restricted to our domain, and an offline TFLite version for areas
+without internet.
 
 **Q: What deployment problems did you face?**
 (1) Hugging Face Docker Spaces became paid, so I moved to the free Gradio SDK on ZeroGPU.
@@ -380,6 +381,8 @@ TFLite version for areas without internet.
 through Gradio's own launcher (`gr.Server`).
 (3) The Vercel build failed because `.gitignore` hid `frontend/src/lib/`; I fixed the
 rule and verified with a fresh clone.
+(4) The backend crashed on its first TLS connection to Neon (exit 139): psycopg2 and
+TensorFlow ship different OpenSSL builds. Importing psycopg2 first fixed it.
 
 ---
 

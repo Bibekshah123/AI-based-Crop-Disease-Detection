@@ -189,10 +189,12 @@ checkpoint can't win by ignoring them.
 
 **Grad-CAM in four steps:**
 1. Find the last convolution layer (the last one with a 4-D spatial output).
-2. Compute the gradient of the predicted class's score with respect to that
-   layer's feature maps.
+2. Compute the gradient of the predicted class's score **before softmax** (the
+   logit) with respect to that layer's feature maps. The softmax probability
+   saturates when the model is confident and spreads the map.
 3. Average the gradients per channel → one importance weight per feature map.
-4. Weighted sum of the feature maps → ReLU → scale to 0–1 → resize to the photo.
+4. Weighted sum of the feature maps → ReLU → scale to 0–1 → resize to the photo,
+   then draw two tones: red where the value is ≥ 50% of the peak, blue elsewhere.
 
 ---
 
